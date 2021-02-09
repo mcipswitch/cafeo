@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var ratio = 16
-    @State private var coffee: Double = 15.0
-    @State private var water: Double = 250.0
-
+    @State private var ratioDenominator: Double = 16
+    @State private var coffeeAmount = Measurement(value: 0, unit: UnitMass.grams)
+    @State private var waterAmount = Measurement(value: 250, unit: UnitMass.grams)
+    @State private var index = 0
     @State private var coffeeIsLocked = true
     @State private var waterIsLocked = false
 
@@ -35,19 +35,26 @@ struct ContentView: View {
 
     var body: some View {
         Form {
-            Section(header: Text("Ratio")) {
-                Stepper(value: self.$ratio, in: 0...1000, step: 1) { editingChanged in
-
-                    let ratio = 1 / Double(self.ratio)
-
-                    if self.waterIsLocked {
-                        self.coffee = ratio * self.water
-                    } else if self.coffeeIsLocked {
-                        self.water = self.coffee / ratio
+            Section(header: Text("Unit of Measurement")) {
+                Picker(selection: self.$index, label: Text(""), content: {
+                    ForEach(0 ..< UnitOfMeasurement.allCases.count) {
+                        let rawValue = UnitOfMeasurement.allCases[$0].rawValue
+                        Text("\(rawValue)").tag(rawValue)
                     }
+                })
+                .pickerStyle(SegmentedPickerStyle())
+            }
 
+            Section(header: Text("Ratio")) {
+                Stepper(value: self.$ratioDenominator, in: 1...1000, step: 1) { _ in
+                    if self.waterIsLocked {
+                        self.coffeeAmount = self.ratio * self.waterAmount
+                    } else if self.coffeeIsLocked {
+                        self.waterAmount = self.coffeeAmount / self.ratio
+                    }
                 } label: {
-                    Text("1 / \(self.ratio)")
+                    Text("1 / \(self.ratioDenominator, specifier: "%.0f")")
+                        .font(.largeTitle)
                 }
             }
 
@@ -55,42 +62,74 @@ struct ContentView: View {
                 Toggle("Keep locked while changing ratio", isOn: self.coffeeIsLockedBinding)
                     .toggleStyle(LockToggleStyle())
 
-                Stepper(value: self.$coffee, in: 0...1000000, step: 0.1) { editingChanged in
-                    // do something here
-                } label: {
-                    Text("\(self.coffee, specifier: "%.1f") g")
-                }
+                Stepper(
+                    onIncrement: {
+                        let newAmount = self.coffeeAmount.converted(to: self.unitOfMeasurement).value + 0.1
+                        self.coffeeAmount = Measurement(value: newAmount, unit: self.unitOfMeasurement)
+                    },
+                    onDecrement: {
+                        let amount = self.coffeeAmount.converted(to: self.unitOfMeasurement).value - 0.1
+                        self.coffeeAmount = Measurement(value: amount, unit: self.unitOfMeasurement)
+                    },
+                    onEditingChanged: { _ in
+                        self.updateWaterAmount()
+                    },
+                    label: {
+                        Text("\(self.coffeeAmount.converted(to: self.unitOfMeasurement).value, specifier: "%.1f") \(self.unitOfMeasurement.symbol)")
+                    }
+                )
+
+//                Stepper(value: self.$coffeeAmount.value, in: 0...999999999, step: 0.1) { _ in
+//                    self.updateWaterAmount()
+//                } label: {
+//                    Text("\(self.coffeeAmount.converted(to: self.selectedUnit).value, specifier: "%.4f") \(self.selectedUnit.symbol)")
+//                }
             }
 
             Section(header: Text("Water:")) {
                 Toggle("Keep locked while changing ratio", isOn: self.waterIsLockedBinding)
                     .toggleStyle(LockToggleStyle())
-
-                Stepper(value: self.$water, in: 0...1000000, step: 1) { editingChanged in
-                    // do something here
+                Stepper(value: self.$waterAmount.value, in: 0...999999999, step: 1) { _ in
+                    self.updateCoffeeAmount()
                 } label: {
-                    Text("\(self.water, specifier: "%.0f") g")
+                    Text("\(self.waterAmount.converted(to: self.unitOfMeasurement).value, specifier: "%.0f") \(self.unitOfMeasurement.symbol)")
                 }
             }
         }
+        .onAppear {
+            self.coffeeAmount = self.ratio * self.waterAmount
+        }
+    }
+
+    private func updateWaterAmount() {
+        self.waterAmount = self.coffeeAmount / self.ratio
+    }
+
+    private func updateCoffeeAmount() {
+        self.coffeeAmount = self.waterAmount * ratio
     }
 }
 
-// MARK: - LockToggleStyle
+// MARK: - Helper vars
 
-struct LockToggleStyle: ToggleStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        return HStack {
-            configuration.label
-                .font(.caption)
-            Spacer()
-            Image(systemName: configuration.isOn ? "lock.fill" : "lock.open")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 15, height: 15)
-                .onTapGesture { configuration.isOn.toggle() }
+extension ContentView {
+    private var ratio: Double {
+        1 / self.ratioDenominator
+    }
+
+    private var unitOfMeasurement: UnitMass {
+        return UnitOfMeasurement.allCases[self.index].mass
+    }
+
+    enum UnitOfMeasurement: String, CaseIterable {
+        case grams = "g"
+        case ounces = "oz"
+        var mass: UnitMass {
+            switch self {
+            case .grams: return .grams
+            case .ounces: return .ounces
+            }
         }
-        .foregroundColor(configuration.isOn ? .black : .gray)
     }
 }
 

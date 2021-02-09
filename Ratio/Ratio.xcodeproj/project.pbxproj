@@ -11,6 +11,8 @@
 		9375EEEA25D1B3900003A323 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9375EEE925D1B3900003A323 /* ContentView.swift */; };
 		9375EEEC25D1B3910003A323 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9375EEEB25D1B3910003A323 /* Assets.xcassets */; };
 		9375EEEF25D1B3910003A323 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9375EEEE25D1B3910003A323 /* Preview Assets.xcassets */; };
+		937FD32025D1EC9C0048C406 /* Binding+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937FD31F25D1EC9C0048C406 /* Binding+Extension.swift */; };
+		937FD32525D2115E0048C406 /* LockToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937FD32425D2115E0048C406 /* LockToggleStyle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +22,8 @@
 		9375EEEB25D1B3910003A323 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9375EEEE25D1B3910003A323 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9375EEF025D1B3910003A323 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		937FD31F25D1EC9C0048C406 /* Binding+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Extension.swift"; sourceTree = "<group>"; };
+		937FD32425D2115E0048C406 /* LockToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockToggleStyle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +58,8 @@
 			children = (
 				9375EEE725D1B3900003A323 /* RatioApp.swift */,
 				9375EEE925D1B3900003A323 /* ContentView.swift */,
+				937FD32725D211670048C406 /* Styles */,
+				937FD32225D211440048C406 /* Extensions */,
 				9375EEEB25D1B3910003A323 /* Assets.xcassets */,
 				9375EEF025D1B3910003A323 /* Info.plist */,
 				9375EEED25D1B3910003A323 /* Preview Content */,
@@ -67,6 +73,22 @@
 				9375EEEE25D1B3910003A323 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		937FD32225D211440048C406 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				937FD31F25D1EC9C0048C406 /* Binding+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		937FD32725D211670048C406 /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				937FD32425D2115E0048C406 /* LockToggleStyle.swift */,
+			);
+			path = Styles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,7 +160,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				937FD32525D2115E0048C406 /* LockToggleStyle.swift in Sources */,
 				9375EEEA25D1B3900003A323 /* ContentView.swift in Sources */,
+				937FD32025D1EC9C0048C406 /* Binding+Extension.swift in Sources */,
 				9375EEE825D1B3900003A323 /* RatioApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
