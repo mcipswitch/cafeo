@@ -3,19 +3,27 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9364AD5F25D37BCF00149F49 /* UnitOfMeasurementToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9364AD5E25D37BCF00149F49 /* UnitOfMeasurementToggleStyle.swift */; };
 		9375EEE825D1B3900003A323 /* RatioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9375EEE725D1B3900003A323 /* RatioApp.swift */; };
 		9375EEEA25D1B3900003A323 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9375EEE925D1B3900003A323 /* ContentView.swift */; };
 		9375EEEC25D1B3910003A323 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9375EEEB25D1B3910003A323 /* Assets.xcassets */; };
 		9375EEEF25D1B3910003A323 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9375EEEE25D1B3910003A323 /* Preview Assets.xcassets */; };
 		937FD32025D1EC9C0048C406 /* Binding+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937FD31F25D1EC9C0048C406 /* Binding+Extension.swift */; };
 		937FD32525D2115E0048C406 /* LockToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937FD32425D2115E0048C406 /* LockToggleStyle.swift */; };
+		937FD32B25D216160048C406 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 937FD32A25D216160048C406 /* ComposableArchitecture */; };
+		937FD32E25D216830048C406 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937FD32D25D216830048C406 /* AppState.swift */; };
+		93A9FDEA25F6911D006D5428 /* Coffio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A9FDE925F6911D006D5428 /* Coffio.swift */; };
+		93C8399625F6979F00C66710 /* Orbitron-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 93C8399325F6979F00C66710 /* Orbitron-Medium.ttf */; };
+		93C8399725F6979F00C66710 /* Exo2-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 93C8399425F6979F00C66710 /* Exo2-SemiBold.ttf */; };
+		93C8399825F6979F00C66710 /* Exo2-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 93C8399525F6979F00C66710 /* Exo2-MediumItalic.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9364AD5E25D37BCF00149F49 /* UnitOfMeasurementToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitOfMeasurementToggleStyle.swift; sourceTree = "<group>"; };
 		9375EEE425D1B3900003A323 /* Ratio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ratio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9375EEE725D1B3900003A323 /* RatioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatioApp.swift; sourceTree = "<group>"; };
 		9375EEE925D1B3900003A323 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -24,6 +32,11 @@
 		9375EEF025D1B3910003A323 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		937FD31F25D1EC9C0048C406 /* Binding+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Extension.swift"; sourceTree = "<group>"; };
 		937FD32425D2115E0048C406 /* LockToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockToggleStyle.swift; sourceTree = "<group>"; };
+		937FD32D25D216830048C406 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		93A9FDE925F6911D006D5428 /* Coffio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coffio.swift; sourceTree = "<group>"; };
+		93C8399325F6979F00C66710 /* Orbitron-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Orbitron-Medium.ttf"; sourceTree = "<group>"; };
+		93C8399425F6979F00C66710 /* Exo2-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo2-SemiBold.ttf"; sourceTree = "<group>"; };
+		93C8399525F6979F00C66710 /* Exo2-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo2-MediumItalic.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				937FD32B25D216160048C406 /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,11 +70,12 @@
 		9375EEE625D1B3900003A323 /* Ratio */ = {
 			isa = PBXGroup;
 			children = (
-				9375EEE725D1B3900003A323 /* RatioApp.swift */,
-				9375EEE925D1B3900003A323 /* ContentView.swift */,
+				937FD33025D216C00048C406 /* Main */,
+				937FD32D25D216830048C406 /* AppState.swift */,
 				937FD32725D211670048C406 /* Styles */,
 				937FD32225D211440048C406 /* Extensions */,
 				9375EEEB25D1B3910003A323 /* Assets.xcassets */,
+				93C8399A25F697A400C66710 /* Resources */,
 				9375EEF025D1B3910003A323 /* Info.plist */,
 				9375EEED25D1B3910003A323 /* Preview Content */,
 			);
@@ -87,8 +102,37 @@
 			isa = PBXGroup;
 			children = (
 				937FD32425D2115E0048C406 /* LockToggleStyle.swift */,
+				9364AD5E25D37BCF00149F49 /* UnitOfMeasurementToggleStyle.swift */,
 			);
 			path = Styles;
+			sourceTree = "<group>";
+		};
+		937FD33025D216C00048C406 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				9375EEE725D1B3900003A323 /* RatioApp.swift */,
+				9375EEE925D1B3900003A323 /* ContentView.swift */,
+				93A9FDE925F6911D006D5428 /* Coffio.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		93C8399225F6979F00C66710 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				93C8399325F6979F00C66710 /* Orbitron-Medium.ttf */,
+				93C8399425F6979F00C66710 /* Exo2-SemiBold.ttf */,
+				93C8399525F6979F00C66710 /* Exo2-MediumItalic.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		93C8399A25F697A400C66710 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				93C8399225F6979F00C66710 /* Fonts */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -107,6 +151,9 @@
 			dependencies = (
 			);
 			name = Ratio;
+			packageProductDependencies = (
+				937FD32A25D216160048C406 /* ComposableArchitecture */,
+			);
 			productName = Ratio;
 			productReference = 9375EEE425D1B3900003A323 /* Ratio.app */;
 			productType = "com.apple.product-type.application";
@@ -134,6 +181,9 @@
 				Base,
 			);
 			mainGroup = 9375EEDB25D1B3900003A323;
+			packageReferences = (
+				937FD32925D216160048C406 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+			);
 			productRefGroup = 9375EEE525D1B3900003A323 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -150,6 +200,9 @@
 			files = (
 				9375EEEF25D1B3910003A323 /* Preview Assets.xcassets in Resources */,
 				9375EEEC25D1B3910003A323 /* Assets.xcassets in Resources */,
+				93C8399625F6979F00C66710 /* Orbitron-Medium.ttf in Resources */,
+				93C8399825F6979F00C66710 /* Exo2-MediumItalic.ttf in Resources */,
+				93C8399725F6979F00C66710 /* Exo2-SemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,10 +213,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93A9FDEA25F6911D006D5428 /* Coffio.swift in Sources */,
 				937FD32525D2115E0048C406 /* LockToggleStyle.swift in Sources */,
+				937FD32E25D216830048C406 /* AppState.swift in Sources */,
 				9375EEEA25D1B3900003A323 /* ContentView.swift in Sources */,
 				937FD32025D1EC9C0048C406 /* Binding+Extension.swift in Sources */,
 				9375EEE825D1B3900003A323 /* RatioApp.swift in Sources */,
+				9364AD5F25D37BCF00149F49 /* UnitOfMeasurementToggleStyle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,6 +408,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		937FD32925D216160048C406 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.16.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		937FD32A25D216160048C406 /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 937FD32925D216160048C406 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9375EEDC25D1B3900003A323 /* Project object */;
 }
