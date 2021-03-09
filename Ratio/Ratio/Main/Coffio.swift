@@ -8,249 +8,238 @@
 import ComposableArchitecture
 import SwiftUI
 
-struct Coffio: View {
-    let store: Store<AppState, AppAction>
-
+struct WaterAmountView: View {
+    @ObservedObject var viewStore: ViewStore<AppState, AppAction>
+    
+    private func waterIncrementButtonTapped() {
+        self.viewStore.send(.waterIncrementButtonTapped)
+    }
+    
+    private func waterDecrementButtonTapped() {
+        self.viewStore.send(.waterDecrementButtonTapped)
+    }
+    
     var body: some View {
-        WithViewStore(self.store) { viewStore in
-            VStack(spacing: 0) {
-
-                // START: - RatioView
-                VStack(spacing: 24) {
-                    // Ratio Screen
-                    HStack(spacing: 0) {
-                        ZStack {
-                            GeometryReader { geo in
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color(#colorLiteral(red: 0.09411764706, green: 0.09803921569, blue: 0.1019607843, alpha: 1)), style: StrokeStyle(lineWidth: 2))
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 8)
-                                            .fill(
-                                                LinearGradient(
-                                                    gradient: Gradient(colors: [Color(#colorLiteral(red: 0.137254902, green: 0.1490196078, blue: 0.168627451, alpha: 1)), Color(#colorLiteral(red: 0.2431372549, green: 0.262745098, blue: 0.2941176471, alpha: 1)), Color(#colorLiteral(red: 0.137254902, green: 0.1490196078, blue: 0.168627451, alpha: 1))]),
-                                                    startPoint: .top,
-                                                    endPoint: .bottom
-                                                )
-                                            )
-                                    )
-                                HStack {
-                                    Spacer()
-                                    Rectangle()
-                                        .frame(width: 2)
-                                        .foregroundColor(Color(#colorLiteral(red: 0.09411764706, green: 0.09803921569, blue: 0.1019607843, alpha: 1)))
-                                    Spacer()
-                                }
-
-                                HStack(spacing: 0) {
-                                    Text("1")
-                                        .font(Font.custom("Orbitron-Medium", fixedSize: 56))
-                                        .foregroundColor(.coffioBeige)
-                                        .frame(
-                                            width: geo.size.width/2,
-                                            height: geo.size.height
-                                        )
-
-                                    ZStack {
-                                        Text("\(viewStore.ratioDenominator, specifier: "%.0f")")
-                                            .font(Font.custom("Orbitron-Medium", fixedSize: 56))
-                                            .foregroundColor(.coffioBeige)
-                                        Rectangle()
-                                            .frame(height: 2)
-                                            .foregroundColor(.coffioOrange)
-                                            .shadow(color: .coffioBackgroundDark, radius: 4, x: 4, y: 4)
-                                    }
-                                    .frame(
-                                        width: geo.size.width/2,
-                                        height: geo.size.height
-                                    )
-                                }
-                            }
-                        }
-                    }
-                    .frame(height: 128)
-
-
-
-
-                    Text("RATIO: CLASSIC")
-                        .font(Font.custom("Exo2-MediumItalic", fixedSize: 16))
-                        .foregroundColor(.coffioGray)
-                        .padding(.bottom, 16)
-                }
-                .padding()
-                .background(Color.coffioBackgroundDark)
-                // END: - RatioView
-
-
-
-
-
-                HStack {
-                    VStack(spacing: 36) {
-                        Text("COFFEE")
-                            .font(Font.custom("Exo2-MediumItalic", fixedSize: 16))
-                            .foregroundColor(.coffioGray)
-
-                        // Coffee amount
-                        VStack(spacing: 8) {
-                            Text("\(viewStore.coffeeAmount, specifier: "%.1f")")
-                                .font(Font.custom("Orbitron-Medium", fixedSize: 48))
-                                .foregroundColor(.coffioBeige)
-
-                            // Coffee buttons
-                            ZStack {
-                                // Gradient Bevel
-                                Rectangle()
-                                    .overlay(
-                                        LinearGradient(
-                                            gradient:
-                                                Gradient(colors: [.coffioBackgroundDark, Color(#colorLiteral(red: 0.1960784314, green: 0.2117647059, blue: 0.231372549, alpha: 1))]),
-                                            startPoint: .topLeading,
-                                            endPoint: .bottomTrailing
-                                        )
-                                    )
-                                    .clipShape(RoundedRectangle(cornerRadius: 30))
-                                    .shadow(color: Color(#colorLiteral(red: 0.2470588235, green: 0.262745098, blue: 0.2901960784, alpha: 1)), radius: 14, x: -4, y: -4)
-                                    .shadow(color: Color(#colorLiteral(red: 0.01568627451, green: 0.01568627451, blue: 0.01568627451, alpha: 1)), radius: 14, x: 4, y: 4)
-
-                                Rectangle()
-                                    .clipShape(RoundedRectangle(cornerRadius: 26))
-                                    .foregroundColor(.coffioBackgroundLight)
-                                    .frame(width: 142, height: 52)
-                                HStack {
-                                    Image(systemName: "minus")
-                                        .onTapGesture {
-                                            viewStore.send(.coffeeDecrementButtonTapped)
-                                        }
-                                    Spacer()
-                                    Image(systemName: "plus")
-                                        .onTapGesture {
-                                            viewStore.send(.coffeeIncrementButtonTapped)
-                                        }
-                                }
-                                .font(Font.custom("Orbitron-Medium", fixedSize: 20))
-                                .foregroundColor(.coffioGray)
-                                .padding(.horizontal, 24)
-                            }
-                            .frame(width: 150, height: 60)
-
-
-
-
-
-                        }
-
-                        // LOCK
-                        Toggle("", isOn: viewStore.binding(
-                            keyPath: \.lockCoffeeAmount,
-                            send: AppAction.form
-                        ))
-                        .labelsHidden()
-                        .toggleStyle(LockToggleStyle())
-                    }
-                    .padding()
-
-                    VStack(spacing: 36) {
-                        Text("WATER")
-                            .font(Font.custom("Exo2-MediumItalic", fixedSize: 16))
-                            .foregroundColor(.coffioGray)
-
-                        VStack(spacing: 8) {
-                            Text("\(viewStore.waterAmount, specifier: "%.0f")")
-                                .font(Font.custom("Orbitron-Medium", fixedSize: 52))
-                                .foregroundColor(.coffioBeige)
-
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 30)
-                                HStack {
-                                    Image(systemName: "minus")
-                                        .onTapGesture {
-                                            viewStore.send(.waterDecrementButtonTapped)
-                                        }
-                                    Spacer()
-                                    Image(systemName: "plus")
-                                        .onTapGesture {
-                                            viewStore.send(.waterIncrementButtonTapped)
-                                        }
-                                }
-                                .font(Font.custom("Orbitron-Medium", fixedSize: 20))
-                                .foregroundColor(.coffioGray)
-                                .padding(.horizontal, 24)
-                            }
-                            .frame(height: 60)
-                        }
-
-                        // LOCK - WATER
-                        Toggle("", isOn: viewStore.binding(
-                            keyPath: \.lockWaterAmount,
-                            send: AppAction.form
-                        ))
-                        .labelsHidden()
-                        .toggleStyle(LockToggleStyle())
-                    }
-                    .padding()
-                }
-                .background(Color.coffioBackgroundLight)
-
-
-
-
-
-
-
-
-                // START: - Unit View
-                VStack {
-                    Text("CONVERSION")
-                        .font(Font.custom("Exo2-MediumItalic", fixedSize: 16))
-                        .foregroundColor(.coffioGray)
-                        .padding(.bottom, 16)
-
-
-                    // TOGGLE
-                    Circle()
-                        .fill(Color.coffioOrange)
-                }
-                .padding()
-                .background(Color.coffioBackgroundDark)
-                // END: - Unit View
+        VStack(spacing: 32) {
+            Text("WATER")
+                .coffioTextStyle(.mainLabel)
+            
+            VStack(spacing: 16) {
+                Text("\(viewStore.waterAmount, specifier: "%.0f")")
+                    .coffioTextStyle(.digitalLabel)
+                
+                IncrementDecrementButton(
+                    incrementAction: self.waterIncrementButtonTapped,
+                    decrementAction: self.waterDecrementButtonTapped
+                )
             }
-            .ignoresSafeArea(.all)
+            
+            Toggle("", isOn: viewStore.binding(
+                keyPath: \.lockWaterAmount,
+                send: AppAction.form
+            )).toggleStyle(LockToggleStyle())
+        }
+    }
+}
+
+struct CoffeeAmountView: View {
+    @ObservedObject var viewStore: ViewStore<AppState, AppAction>
+    
+    private func coffeeIncrementButtonTapped() {
+        self.viewStore.send(.coffeeIncrementButtonTapped)
+    }
+    
+    private func coffeeDecrementButtonTapped() {
+        self.viewStore.send(.coffeeDecrementButtonTapped)
+    }
+    
+    var body: some View {
+        VStack(spacing: 32) {
+            Text("COFFEE")
+                .coffioTextStyle(.mainLabel)
+            
+            VStack(spacing: 16) {
+                Text("\(viewStore.coffeeAmount, specifier: "%.1f")")
+                    .coffioTextStyle(.digitalLabel)
+                
+                IncrementDecrementButton(
+                    incrementAction: self.coffeeIncrementButtonTapped,
+                    decrementAction: self.coffeeDecrementButtonTapped
+                )
+            }
+            
+            Toggle("", isOn: viewStore.binding(
+                keyPath: \.lockCoffeeAmount,
+                send: AppAction.form
+            )).toggleStyle(LockToggleStyle())
         }
     }
 }
 
 struct RatioView: View {
+    @ObservedObject var viewStore: ViewStore<AppState, AppAction>
+
+    var ratioDenominatorLine: some View {
+        ZStack {
+            Rectangle()
+                .foregroundColor(.coffioOrange)
+                .shadow(color: Color.black.opacity(0.5), radius: 2, x: 0, y: 1)
+            Rectangle()
+                .frame(height: 1)
+                .foregroundColor(Color.white.opacity(0.3))
+                .blur(radius: 1)
+        }
+        .frame(height: 2)
+    }
+
     var body: some View {
-        Rectangle()
-            .background(Color.coffioBackgroundDark)
+        VStack(spacing: 24) {
+                ZStack {
+                    GeometryReader { geo in
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color(#colorLiteral(red: 0.09411764706, green: 0.09803921569, blue: 0.1019607843, alpha: 1)), style: StrokeStyle(lineWidth: 2))
+                            .background(
+                                RoundedRectangle(cornerRadius: 8)
+                                    .fill(
+                                        LinearGradient(
+                                            gradient: Gradient(colors: [Color(#colorLiteral(red: 0.137254902, green: 0.1490196078, blue: 0.168627451, alpha: 1)), Color(#colorLiteral(red: 0.2431372549, green: 0.262745098, blue: 0.2941176471, alpha: 1)), Color(#colorLiteral(red: 0.137254902, green: 0.1490196078, blue: 0.168627451, alpha: 1))]),
+                                            startPoint: .top,
+                                            endPoint: .bottom
+                                        )
+                                    )
+                            )
+
+                        HStack {
+                            Spacer()
+                            Rectangle()
+                                .frame(width: 2)
+                                .foregroundColor(Color(#colorLiteral(red: 0.09411764706, green: 0.09803921569, blue: 0.1019607843, alpha: 1)))
+                            Spacer()
+                        }
+                        HStack(spacing: 0) {
+                            Text("1")
+                                .coffioTextStyle(.ratioLabel)
+                                .frame(
+                                    width: geo.size.width/2,
+                                    height: geo.size.height
+                                )
+
+                            ZStack {
+                                Text("\(self.viewStore.ratioDenominator, specifier: "%.0f")")
+                                    .coffioTextStyle(.ratioLabel)
+                                self.ratioDenominatorLine
+                                    .frame(width: geo.size.width / 2 - 2)
+                            }
+                            .frame(
+                                width: geo.size.width/2,
+                                height: geo.size.height
+                            )
+                        }
+                }
+            }
+
+            Text("RATIO: CLASSIC")
+                .coffioTextStyle(.mainLabel)
+        }
     }
 }
 
-//struct AmountView: View {
-//    var body: some View {
-//    }
-//}
-
-struct ConversionView: View {
+struct Coffio: View {
+    let store: Store<AppState, AppAction>
+    
     var body: some View {
-        Rectangle()
-            .background(Color.coffioBackgroundDark)
+        WithViewStore(self.store) { viewStore in
+            VStack(spacing: 0) {
+                RatioView(viewStore: viewStore)
+                    .frame(height: 180)
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 32)
+                    .background(Color.coffioBackgroundDark)
+
+                HStack {
+                    CoffeeAmountView(viewStore: viewStore)
+                    Spacer()
+                    WaterAmountView(viewStore: viewStore)
+                }
+                .padding(.horizontal, 32)
+                .padding(.vertical, 32)
+                .background(Color.coffioBackgroundLight)
+
+                // START: - Unit View
+                VStack(spacing: 32) {
+                    ZStack {
+                        Text("CONVERSION")
+                            .kerning(2)
+                            .coffioTextStyle(.miniLabel)
+
+                        Path { path in
+                            path.move(to: CGPoint(x: 0, y: 0))
+                            path.addLine(to: CGPoint(x: 200, y: 0))
+                            path.addLine(to: CGPoint(x: 200, y: 20))
+                        }
+                        .stroke(Color.coffioBackgroundLight, lineWidth: 1)
+                    }
+
+                    // TOGGLE
+                    HStack(spacing: 30) {
+                        Text("\(UnitMass.grams.abbrString)")
+                            .coffioTextStyle(.unitLabel)
+
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 24, style: .continuous)
+                                .stroke(Color(#colorLiteral(red: 0.09411764706, green: 0.09803921569, blue: 0.1019607843, alpha: 1)), lineWidth: 2)
+                                .frame(width: 100, height: 40)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 24, style: .continuous)
+                                        .fill(Color.coffioBackgroundLight)
+                                        .shadow(color: Color(#colorLiteral(red: 0.09411764706, green: 0.09803921569, blue: 0.1019607843, alpha: 1)), radius: 4, x: 2, y: 2)
+                                )
+                                .shadow(color: Color(#colorLiteral(red: 0.09411764706, green: 0.09803921569, blue: 0.1019607843, alpha: 1)), radius: 4, x: 2, y: 2)
+
+
+                            Circle()
+                                .stroke(Color.coffioOrange, lineWidth: 2)
+                                .frame(width: 42, height: 42)
+                                .background(
+                                    Circle()
+                                        .fill(
+                                            LinearGradient(
+                                                gradient:
+                                                    Gradient(colors: [Color(#colorLiteral(red: 0.5568627451, green: 0.2, blue: 0, alpha: 1)), Color(#colorLiteral(red: 0.8980392157, green: 0.3803921569, blue: 0, alpha: 1))]),
+                                                startPoint: .leading,
+                                                endPoint: .trailing
+                                            )
+                                        )
+                                        .shadow(color: Color(#colorLiteral(red: 0.09411764706, green: 0.09803921569, blue: 0.1019607843, alpha: 1)), radius: 14, x: 4, y: 4)
+                                )
+                                .offset(x: -100/2 + (42/2))
+                        }
+
+                        Text("\(UnitMass.ounces.abbrString)")
+                            .coffioTextStyle(.unitLabel)
+                    }
+
+                    Spacer()
+                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 32)
+                .background(Color.coffioBackgroundDark)
+            }
+            .edgesIgnoringSafeArea(.all)
+        }
     }
 }
 
 
 
 
-//Orbitron-Medium
 
-extension Color {
-    public static let coffioBackgroundDark = Color(#colorLiteral(red: 0.1215686275, green: 0.1254901961, blue: 0.1450980392, alpha: 1))
-    public static let coffioBackgroundLight = Color(#colorLiteral(red: 0.1568627451, green: 0.1725490196, blue: 0.2, alpha: 1))
-    public static let coffioBeige = Color(#colorLiteral(red: 0.7411764706, green: 0.7333333333, blue: 0.5882352941, alpha: 1))
-    public static let coffioGray = Color(#colorLiteral(red: 0.5647058824, green: 0.5803921569, blue: 0.6274509804, alpha: 1))
-    public static let coffioOrange = Color(#colorLiteral(red: 0.8980392157, green: 0.3607843137, blue: 0, alpha: 1))
-}
+
+
+
+
+
+
 
 // MARK: - Previews
 
@@ -260,5 +249,93 @@ struct Coffio_Previews: PreviewProvider {
                             reducer: appReducer,
                             environment: AppEnvironment()
         ))
+    }
+}
+
+// MARK: - View + Extension
+
+extension View {
+    func inverseMask<Mask>(_ mask: Mask) -> some View where Mask: View {
+        self.mask(
+            mask
+                .foregroundColor(.black)
+                .background(Color.white)
+                .compositingGroup()
+                .luminanceToAlpha()
+        )
+    }
+    
+    func coffioTextStyle(_ textStyle: CoffioTextStyle) -> some View {
+        return self.modifier(CoffioText(textStyle))
+    }
+}
+
+
+// MARK: - Font+Extensions
+
+extension Font {
+    
+    static func orbitronMediumFont(size: CGFloat) -> Font {
+        return Font.custom("Orbitron-Medium", fixedSize: size)
+    }
+    
+    static func exo2MediumItalicFont(size: CGFloat) -> Font {
+        return Font.custom("Exo2-MediumItalic", fixedSize: size)
+    }
+    
+    static func exo2SemiBoldItalicFont(size: CGFloat) -> Font {
+        return Font.custom("Exo2-SemiBold", fixedSize: size)
+    }
+}
+
+enum CoffioTextStyle {
+    case mainLabel
+    case digitalLabel
+    case ratioLabel
+    case unitLabel
+    case miniLabel
+    
+    var font: Font {
+        switch self {
+        case .mainLabel:
+            return .exo2MediumItalicFont(size: 16)
+        case .digitalLabel:
+            return .orbitronMediumFont(size: 48)
+        case .ratioLabel:
+            return .orbitronMediumFont(size: 50)
+        case .unitLabel:
+            return .exo2SemiBoldItalicFont(size: 16)
+        case .miniLabel:
+            return .exo2MediumItalicFont(size: 12)
+        }
+    }
+    
+    var color: Color {
+        switch self {
+        case .mainLabel:
+            return .coffioGray
+        case .digitalLabel:
+            return .coffioBeige
+        case .ratioLabel:
+            return .coffioBeige
+        case .unitLabel:
+            return .coffioGray
+        case .miniLabel:
+            return .coffioGray
+        }
+    }
+}
+
+struct CoffioText: ViewModifier {
+    var textStyle: CoffioTextStyle
+    
+    init(_ textStyle: CoffioTextStyle) {
+        self.textStyle = textStyle
+    }
+    
+    func body(content: Content) -> some View {
+        content
+            .font(textStyle.font)
+            .foregroundColor(textStyle.color)
     }
 }

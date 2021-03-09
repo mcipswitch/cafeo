@@ -179,3 +179,17 @@ extension Reducer {
 //            let generator = UIImpactFeedbackGenerator(style: .light)
 //            generator.impactOccurred()
 //        }
+
+
+extension UnitMass {
+    var abbrString: String {
+        switch self {
+        case .grams:
+            return "gr"
+        case .ounces:
+            return "oz"
+        default:
+            return ""
+        }
+    }
+}
