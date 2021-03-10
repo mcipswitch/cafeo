@@ -192,4 +192,15 @@ extension UnitMass {
             return ""
         }
     }
+
+    var toggleOffset: CGFloat {
+        switch self {
+        case .grams:
+            return -30
+        case .ounces:
+            return 30
+        default:
+            return 0
+        }
+    }
 }

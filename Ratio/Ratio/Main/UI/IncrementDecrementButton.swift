@@ -23,9 +23,9 @@ struct IncrementDecrementButton: View {
                     ),
                     lineWidth: 2
                 )
-                .frame(width: 130, height: 50)
+                .frame(width: 130, height: 48)
                 .background(
-                    RoundedRectangle(cornerRadius: 25, style: .continuous)
+                    RoundedRectangle(cornerRadius: 24, style: .continuous)
                         .fill(Color.coffioBackgroundLight)
                         .shadow(color: Color(#colorLiteral(red: 0.2470588235, green: 0.262745098, blue: 0.2901960784, alpha: 1)), radius: 8, x: -4, y: -4)
                         .shadow(color: Color(#colorLiteral(red: 0.01568627451, green: 0.01568627451, blue: 0.01568627451, alpha: 1)), radius: 8, x: 4, y: 4)

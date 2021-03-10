@@ -146,12 +146,12 @@ struct RatioView: View {
 
 struct Coffio: View {
     let store: Store<AppState, AppAction>
-    
+
     var body: some View {
         WithViewStore(self.store) { viewStore in
             VStack(spacing: 0) {
                 RatioView(viewStore: viewStore)
-                    .frame(height: 180)
+                    .frame(height: 160)
                     .padding(.horizontal, 16)
                     .padding(.vertical, 32)
                     .background(Color.coffioBackgroundDark)
@@ -165,81 +165,101 @@ struct Coffio: View {
                 .padding(.vertical, 32)
                 .background(Color.coffioBackgroundLight)
 
-                // START: - Unit View
-                VStack(spacing: 32) {
-                    ZStack {
-                        Text("CONVERSION")
-                            .kerning(2)
-                            .coffioTextStyle(.miniLabel)
-
-                        Path { path in
-                            path.move(to: CGPoint(x: 0, y: 0))
-                            path.addLine(to: CGPoint(x: 200, y: 0))
-                            path.addLine(to: CGPoint(x: 200, y: 20))
-                        }
-                        .stroke(Color.coffioBackgroundLight, lineWidth: 1)
-                    }
-
-                    // TOGGLE
-                    HStack(spacing: 30) {
-                        Text("\(UnitMass.grams.abbrString)")
-                            .coffioTextStyle(.unitLabel)
-
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 24, style: .continuous)
-                                .stroke(Color(#colorLiteral(red: 0.09411764706, green: 0.09803921569, blue: 0.1019607843, alpha: 1)), lineWidth: 2)
-                                .frame(width: 100, height: 40)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 24, style: .continuous)
-                                        .fill(Color.coffioBackgroundLight)
-                                        .shadow(color: Color(#colorLiteral(red: 0.09411764706, green: 0.09803921569, blue: 0.1019607843, alpha: 1)), radius: 4, x: 2, y: 2)
-                                )
-                                .shadow(color: Color(#colorLiteral(red: 0.09411764706, green: 0.09803921569, blue: 0.1019607843, alpha: 1)), radius: 4, x: 2, y: 2)
-
-
-                            Circle()
-                                .stroke(Color.coffioOrange, lineWidth: 2)
-                                .frame(width: 42, height: 42)
-                                .background(
-                                    Circle()
-                                        .fill(
-                                            LinearGradient(
-                                                gradient:
-                                                    Gradient(colors: [Color(#colorLiteral(red: 0.5568627451, green: 0.2, blue: 0, alpha: 1)), Color(#colorLiteral(red: 0.8980392157, green: 0.3803921569, blue: 0, alpha: 1))]),
-                                                startPoint: .leading,
-                                                endPoint: .trailing
-                                            )
-                                        )
-                                        .shadow(color: Color(#colorLiteral(red: 0.09411764706, green: 0.09803921569, blue: 0.1019607843, alpha: 1)), radius: 14, x: 4, y: 4)
-                                )
-                                .offset(x: -100/2 + (42/2))
-                        }
-
-                        Text("\(UnitMass.ounces.abbrString)")
-                            .coffioTextStyle(.unitLabel)
-                    }
-
-                    Spacer()
-                }
-                .padding(.horizontal, 16)
-                .padding(.vertical, 32)
-                .background(Color.coffioBackgroundDark)
+                UnitView(viewStore: viewStore)
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 32)
+                    .background(Color.coffioBackgroundDark)
             }
             .edgesIgnoringSafeArea(.all)
         }
     }
 }
 
+struct UnitView: View {
+    @ObservedObject var viewStore: ViewStore<AppState, AppAction>
+    @State private var toggleOffset: CGFloat = -100/2 + (42/2)
+
+    var body: some View {
+        VStack(spacing: 20) {
+            Text("CONVERSION")
+                .kerning(2)
+                .coffioTextStyle(.miniLabel)
+                .padding(.horizontal, 8)
+                .background(Color.coffioBackgroundDark)
+                .anchorPreference(
+                    key: SelectionPreferenceKey.self,
+                    value: .bounds,
+                    transform: { $0 }
+                )
+                .backgroundPreferenceValue(SelectionPreferenceKey.self) { prefs in
+                    GeometryReader { geometry in
+                        prefs.map { value in
+                            Path { path in
+                                path.move(to: CGPoint(x: -40,
+                                                      y: 16))
+                                path.addLine(to: CGPoint(x: -40,
+                                                         y: geometry[value].height/2))
+                                path.addLine(to: CGPoint(x: geometry[value].width + 40,
+                                                         y: geometry[value].height/2))
+                                path.addLine(to: CGPoint(x: geometry[value].width + 40,
+                                                         y: 16))
+                            }
+                            .stroke(Color.coffioGray, lineWidth: 1)
+                        }
+                    }
+                }
+
+            HStack(spacing: 30) {
+                Text("\(UnitMass.grams.abbrString)")
+                    .coffioTextStyle(.unitLabel)
+
+                // Toggle
+                ZStack {
+                    RoundedRectangle(cornerRadius: 24, style: .continuous)
+                        .stroke(Color(#colorLiteral(red: 0.09411764706, green: 0.09803921569, blue: 0.1019607843, alpha: 1)), lineWidth: 2)
+                        .frame(width: 100, height: 40)
+                        .background(
+                            RoundedRectangle(cornerRadius: 24, style: .continuous)
+                                .fill(Color.coffioBackgroundLight)
+                                .shadow(color: Color(#colorLiteral(red: 0.09411764706, green: 0.09803921569, blue: 0.1019607843, alpha: 1)), radius: 4, x: 2, y: 2)
+                        )
+                        .shadow(color: Color(#colorLiteral(red: 0.09411764706, green: 0.09803921569, blue: 0.1019607843, alpha: 1)), radius: 4, x: 2, y: 2)
+
+                    Circle()
+                        .stroke(Color.coffioOrange, lineWidth: 2)
+                        .frame(width: 42, height: 42)
+                        .background(
+                            Circle()
+                                .fill(
+                                    LinearGradient(
+                                        gradient:
+                                            Gradient(colors: [Color(#colorLiteral(red: 0.5568627451, green: 0.2, blue: 0, alpha: 1)), Color(#colorLiteral(red: 0.8980392157, green: 0.3803921569, blue: 0, alpha: 1))]),
+                                        startPoint: .leading,
+                                        endPoint: .trailing
+                                    )
+                                )
+                                .shadow(color: Color(#colorLiteral(red: 0.09411764706, green: 0.09803921569, blue: 0.1019607843, alpha: 1)), radius: 14, x: 4, y: 4)
+                        )
+                        .offset(x: self.viewStore.unit.toggleOffset)
+                }
+                .onTapGesture {
+                    // TODO: - remove the animation for the digits
+                    self.viewStore.send(.unitChanged, animation: Animation.timingCurve(0.75, 0.69, 0, 0.94))
+                }
 
 
 
 
 
+                Text("\(UnitMass.ounces.abbrString)")
+                    .coffioTextStyle(.unitLabel)
+            }
 
-
-
-
-
+            Spacer()
+        }
+        .frame(minWidth: 0, maxWidth: .infinity)
+    }
+}
 
 // MARK: - Previews
 
@@ -252,90 +272,77 @@ struct Coffio_Previews: PreviewProvider {
     }
 }
 
-// MARK: - View + Extension
+
+
+
+
+
+
+
+
+
+
+struct SelectionPreferenceKey: PreferenceKey {
+    static var defaultValue: Anchor<CGRect>? = nil
+    static func reduce(value: inout Anchor<CGRect>?, nextValue: () -> Anchor<CGRect>?) {
+        value = nextValue()
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// MARK: - SizePrefKey
+
+struct SizePrefData: Equatable {
+    let viewID: Int
+    let bounds: CGRect
+}
+
+struct SizePrefKey: PreferenceKey {
+    static var defaultValue: [SizePrefData] = []
+    static func reduce(value: inout [SizePrefData], nextValue: () -> [SizePrefData]) {
+        value.append(contentsOf: nextValue())
+    }
+}
 
 extension View {
-    func inverseMask<Mask>(_ mask: Mask) -> some View where Mask: View {
-        self.mask(
-            mask
-                .foregroundColor(.black)
-                .background(Color.white)
-                .compositingGroup()
-                .luminanceToAlpha()
-        )
-    }
-    
-    func coffioTextStyle(_ textStyle: CoffioTextStyle) -> some View {
-        return self.modifier(CoffioText(textStyle))
-    }
-}
+    public func saveSizes(viewID: Int, coordinateSpace: CoordinateSpace = .global) -> some View {
+        /**
+         Attach a geometry reader to a view as a background to read its size.
 
-
-// MARK: - Font+Extensions
-
-extension Font {
-    
-    static func orbitronMediumFont(size: CGFloat) -> Font {
-        return Font.custom("Orbitron-Medium", fixedSize: size)
+         Please see:
+         https://swiftwithmajid.com/2020/01/15/the-magic-of-view-preferences-in-swiftui/
+         https://swiftui-lab.com/view-extensions-for-better-code-readability/
+        */
+        background(GeometryReader { geo in
+            Color.clear.preference(key: SizePrefKey.self,
+                                   value: [SizePrefData(viewID: viewID, bounds: geo.frame(in: coordinateSpace))])
+        })
     }
-    
-    static func exo2MediumItalicFont(size: CGFloat) -> Font {
-        return Font.custom("Exo2-MediumItalic", fixedSize: size)
-    }
-    
-    static func exo2SemiBoldItalicFont(size: CGFloat) -> Font {
-        return Font.custom("Exo2-SemiBold", fixedSize: size)
-    }
-}
 
-enum CoffioTextStyle {
-    case mainLabel
-    case digitalLabel
-    case ratioLabel
-    case unitLabel
-    case miniLabel
-    
-    var font: Font {
-        switch self {
-        case .mainLabel:
-            return .exo2MediumItalicFont(size: 16)
-        case .digitalLabel:
-            return .orbitronMediumFont(size: 48)
-        case .ratioLabel:
-            return .orbitronMediumFont(size: 50)
-        case .unitLabel:
-            return .exo2SemiBoldItalicFont(size: 16)
-        case .miniLabel:
-            return .exo2MediumItalicFont(size: 12)
+    public func retrieveSizes(viewID: Int, completion: @escaping (CGRect) -> Void) -> some View {
+        onPreferenceChange(SizePrefKey.self) { preferences in
+            DispatchQueue.main.async {
+                // The async is used to prevent a possible blocking loop,
+                // due to the child and the ancestor modifying each other.
+                let p = preferences.first(where: { $0.viewID == viewID })
+                completion(p?.bounds ?? .zero)
+            }
         }
-    }
-    
-    var color: Color {
-        switch self {
-        case .mainLabel:
-            return .coffioGray
-        case .digitalLabel:
-            return .coffioBeige
-        case .ratioLabel:
-            return .coffioBeige
-        case .unitLabel:
-            return .coffioGray
-        case .miniLabel:
-            return .coffioGray
-        }
-    }
-}
-
-struct CoffioText: ViewModifier {
-    var textStyle: CoffioTextStyle
-    
-    init(_ textStyle: CoffioTextStyle) {
-        self.textStyle = textStyle
-    }
-    
-    func body(content: Content) -> some View {
-        content
-            .font(textStyle.font)
-            .foregroundColor(textStyle.color)
     }
 }
