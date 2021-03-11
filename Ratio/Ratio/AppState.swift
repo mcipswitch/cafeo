@@ -21,6 +21,8 @@ struct AppState: Equatable {
 
     var unit: UnitMass = .grams
 
+    var toggleOffset: CGFloat = UnitMass.grams.toggleOffset
+
     var ratio: Double {
         1 / self.ratioDenominator
     }
@@ -31,6 +33,8 @@ enum AppAction: Equatable {
     case coffeeIncrementButtonTapped
     case waterDecrementButtonTapped
     case waterIncrementButtonTapped
+
+    case toggleUnitConversion
 
     case unitChanged
     case form(FormAction<AppState>)
@@ -70,6 +74,19 @@ struct FormAction<Root>: Equatable {
 
 let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, environment in
     switch action {
+
+    case .toggleUnitConversion:
+        if state.unit == .grams {
+            state.toggleOffset = UnitMass.ounces.toggleOffset
+        } else if state.unit == .ounces {
+            state.toggleOffset = UnitMass.grams.toggleOffset
+        }
+
+        return
+            Effect(value: AppAction.unitChanged)
+            .delay(for: 0, scheduler: DispatchQueue.main.animation(.none))
+            .eraseToEffect()
+
     case .unitChanged:
         switch state.unit {
         case .grams:

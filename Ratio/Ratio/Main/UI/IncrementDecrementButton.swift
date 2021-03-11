@@ -23,7 +23,7 @@ struct IncrementDecrementButton: View {
                     ),
                     lineWidth: 2
                 )
-                .frame(width: 130, height: 48)
+                .frame(width: 120, height: 44)
                 .background(
                     RoundedRectangle(cornerRadius: 24, style: .continuous)
                         .fill(Color.coffioBackgroundLight)

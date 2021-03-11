@@ -19,6 +19,6 @@ extension View {
     }
 
     func coffioTextStyle(_ textStyle: CoffioTextStyle) -> some View {
-        return self.modifier(CoffioText(textStyle))
+        return self.modifier(CoffioTextModifier(textStyle))
     }
 }

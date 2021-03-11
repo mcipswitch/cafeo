@@ -33,7 +33,7 @@ enum CoffioTextStyle {
     var font: Font {
         switch self {
         case .mainLabel:
-            return .exo2MediumItalicFont(size: 16)
+            return .exo2MediumItalicFont(size: 14)
         case .digitalLabel:
             return .orbitronMediumFont(size: 48)
         case .ratioLabel:
@@ -59,9 +59,27 @@ enum CoffioTextStyle {
             return .coffioGray
         }
     }
+
+    var kerning: CGFloat {
+        switch self {
+        case .digitalLabel, .ratioLabel:
+            return 4.0
+        default:
+            return 1.5
+        }
+    }
+
+    var textCase: Text.Case {
+        switch self {
+        case .unitLabel:
+            return .lowercase
+        default:
+            return .uppercase
+        }
+    }
 }
 
-struct CoffioText: ViewModifier {
+struct CoffioTextModifier: ViewModifier {
     var textStyle: CoffioTextStyle
 
     init(_ textStyle: CoffioTextStyle) {
