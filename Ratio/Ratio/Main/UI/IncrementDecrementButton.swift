@@ -8,11 +8,10 @@
 import SwiftUI
 
 struct IncrementDecrementButton: View {
-    var incrementAction: () -> Void
-    var decrementAction: () -> Void
-
-    @State private var timer: Timer?
-    @State private var isLongPressing = false
+    var onPress: (AmountAction) -> Void
+    var onRelease: () -> Void
+    var onTap: (AmountAction) -> Void
+    @State private var isSelected = false
 
     var body: some View {
         ZStack {
@@ -33,48 +32,35 @@ struct IncrementDecrementButton: View {
                         .shadow(color: Color(#colorLiteral(red: 0.2470588235, green: 0.262745098, blue: 0.2901960784, alpha: 1)), radius: 8, x: -4, y: -4)
                         .shadow(color: Color(#colorLiteral(red: 0.01568627451, green: 0.01568627451, blue: 0.01568627451, alpha: 1)), radius: 8, x: 4, y: 4)
                 )
-
                 .overlay(
                     HStack(spacing: 0) {
                         Button(action: {
-                            // This tap was triggered by the end of a long press gesture
-                            if self.isLongPressing {
-                                self.isLongPressing.toggle()
-                                self.timer?.invalidate()
-                            } else {
-                                self.decrementAction()
-                            }
+                            self.onTap(.decrement)
                         }, label: {
                             Image(systemName: "minus")
+                            // highlight
                         })
+
                         .frame(width: 44, height: 44)
                         .contentShape(Rectangle())
                         .simultaneousGesture(
                             LongPressGesture(minimumDuration: 0.2)
                                 .onEnded { _ in
-                                    self.isLongPressing = true
-
-                                    //or fastforward has started to start the timer
-                                    self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { _ in
-                                        self.decrementAction()
-                                    })
-                                })
-
-
-
-
+                                    self.onPress(.decrement)
+                                }
+                        )
+                        .simultaneousGesture(
+                            DragGesture(minimumDistance: 0)
+                                .onEnded { _ in
+                                    // This is triggered by the end of a long press gesture
+                                    self.onRelease()
+                                }
+                        )
 
                         Spacer()
 
-
                         Button(action: {
-                            // This tap was triggered by the end of a long press gesture
-                            if self.isLongPressing {
-                                self.isLongPressing.toggle()
-                                self.timer?.invalidate()
-                            } else {
-                                self.incrementAction()
-                            }
+                            self.onTap(.increment)
                         }, label: {
                             Image(systemName: "plus")
                         })
@@ -83,13 +69,16 @@ struct IncrementDecrementButton: View {
                         .simultaneousGesture(
                             LongPressGesture(minimumDuration: 0.2)
                                 .onEnded { _ in
-                                    self.isLongPressing = true
-
-                                    //or fastforward has started to start the timer
-                                    self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { _ in
-                                        self.incrementAction()
-                                    })
-                                })
+                                    self.onPress(.increment)
+                                }
+                        )
+                        .simultaneousGesture(
+                            DragGesture(minimumDistance: 0)
+                                .onEnded { _ in
+                                    // This is triggered by the end of a long press gesture
+                                    self.onRelease()
+                                }
+                        )
 
 
 
@@ -103,5 +92,15 @@ struct IncrementDecrementButton: View {
 }
 
 
-//var onPress: () -> Void
-//    var onRelease: () -> Void
+struct CoffioAmountAdjustmentButton: ButtonStyle {
+    var isSelected: Bool = false
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .foregroundColor(
+                configuration.isPressed
+                    ? .coffioOrange
+                    : .coffioGray
+            )
+    }
+}

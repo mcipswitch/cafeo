@@ -10,13 +10,17 @@ import SwiftUI
 
 struct WaterAmountView: View {
     @ObservedObject var viewStore: ViewStore<AppState, AppAction>
-    
-    private func waterIncrementButtonTapped() {
-        self.viewStore.send(.waterAmountChanged(.increment))
+
+    private func onPress(_ action: AmountAction) {
+        self.viewStore.send(.amountButtonLongPressed(.water, action))
     }
-    
-    private func waterDecrementButtonTapped() {
-        self.viewStore.send(.waterAmountChanged(.decrement))
+
+    private func onRelease() {
+        self.viewStore.send(.form(.set(\.isLongPressing, false)))
+    }
+
+    private func onTap(_ action: AmountAction) {
+        self.viewStore.send(.waterAmountChanged(action))
     }
     
     var body: some View {
@@ -30,8 +34,9 @@ struct WaterAmountView: View {
                     .coffioTextStyle(.digitalLabel)
                 
                 IncrementDecrementButton(
-                    incrementAction: self.waterIncrementButtonTapped,
-                    decrementAction: self.waterDecrementButtonTapped
+                    onPress: self.onPress(_:),
+                    onRelease: self.onRelease,
+                    onTap: self.onTap(_:)
                 )
             }
             
@@ -46,13 +51,17 @@ struct WaterAmountView: View {
 
 struct CoffeeAmountView: View {
     @ObservedObject var viewStore: ViewStore<AppState, AppAction>
-    
-    private func coffeeIncrementButtonTapped() {
-        self.viewStore.send(.coffeeAmountChanged(.increment))
+
+    private func onPress(_ action: AmountAction) {
+        self.viewStore.send(.amountButtonLongPressed(.coffee, action))
+    }
+
+    private func onRelease() {
+        self.viewStore.send(.form(.set(\.isLongPressing, false)))
     }
     
-    private func coffeeDecrementButtonTapped() {
-        self.viewStore.send(.coffeeAmountChanged(.decrement))
+    private func onTap(_ action: AmountAction) {
+        self.viewStore.send(.coffeeAmountChanged(action))
     }
     
     var body: some View {
@@ -65,8 +74,9 @@ struct CoffeeAmountView: View {
                     .coffioTextStyle(.digitalLabel)
                 
                 IncrementDecrementButton(
-                    incrementAction: self.coffeeIncrementButtonTapped,
-                    decrementAction: self.coffeeDecrementButtonTapped
+                    onPress: self.onPress(_:),
+                    onRelease: self.onRelease,
+                    onTap: self.onTap(_:)
                 )
             }
             

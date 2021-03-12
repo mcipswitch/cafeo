@@ -12,8 +12,12 @@ import ComposableArchitecture
 
 struct AppState: Equatable {
     var ratioDenominator: Double = 16
-    var coffeeAmount: Double = 15.6
-    var waterAmount: Double = 250
+    //var coffeeAmount: Double = 15.6
+    //var waterAmount: Double = 250
+
+    var coffeeAmount: Double = 1
+    var waterAmount: Double = 1
+
     var lockCoffeeAmount = true
     var lockWaterAmount = false
 
@@ -34,9 +38,15 @@ enum AmountAction {
     case increment, decrement
 }
 
+enum CoffioIngredient {
+    case coffee, water
+}
+
 enum AppAction: Equatable {
     case coffeeAmountChanged(AmountAction)
     case waterAmountChanged(AmountAction)
+
+    case amountButtonLongPressed(CoffioIngredient, AmountAction)
 
     case toggleUnitConversion
 
@@ -44,7 +54,9 @@ enum AppAction: Equatable {
     case form(FormAction<AppState>)
 }
 
-struct AppEnvironment { }
+struct AppEnvironment {
+    //var mainQueue: AnySchedulerOf<DispatchQueue>
+}
 
 // MARK: - FormAction
 
@@ -76,7 +88,9 @@ struct FormAction<Root>: Equatable {
 
 // MARK: - AppReducer
 
-let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, environment in
+let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, env in
+    struct TimerID: Hashable {}
+
     switch action {
 
     case .toggleUnitConversion:
@@ -132,7 +146,10 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, e
         case .increment:
             state.waterAmount += 1
         case .decrement:
-            state.waterAmount -= 1
+            let newValue = state.waterAmount - 1
+            if newValue > 0 {
+                state.waterAmount -= 1
+            }
         }
 
         return Effect(value: .form(.set(\.coffeeAmount, state.waterAmount * state.ratio)))
@@ -141,16 +158,35 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, e
 
         switch action {
         case .increment:
-            if state.coffeeAmount > 0 {
+            state.coffeeAmount += 0.1
+        case .decrement:
+            let newValue = state.coffeeAmount - 0.1
+            if newValue > 0 {
                 state.coffeeAmount -= 0.1
             }
-        case .decrement:
-            state.coffeeAmount += 0.1
         }
 
         return Effect(value: .form(.set(\.waterAmount, state.coffeeAmount / state.ratio)))
 
 
+
+
+
+
+
+
+
+
+    case .amountButtonLongPressed(let ingredient, let action):
+        return Effect.timer(id: TimerID(), every: 0.001, on: DispatchQueue.main)
+            .map { _ in
+                ingredient == .coffee
+                    ? .coffeeAmountChanged(action)
+                    : .waterAmountChanged(action)
+            }
+
+    case .form(\.isLongPressing):
+        return state.isLongPressing ? .none : .cancel(id: TimerID())
 
 
 
@@ -182,11 +218,7 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, e
 
     case .form:
         return .none
-
     }
-
-
-
 }
 .form(action: /AppAction.form)
 .debug()
