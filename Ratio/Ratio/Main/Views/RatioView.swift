@@ -98,16 +98,18 @@ struct RatioView: View {
 struct CoffioText: View {
     var text: String
     var textStyle: CoffioTextStyle
+    var state: CoffioTextState
 
-    init(text: String, _ textStyle: CoffioTextStyle) {
+    init(text: String, state: CoffioTextState = .normal, _ textStyle: CoffioTextStyle) {
         self.text = text
         self.textStyle = textStyle
+        self.state = state
     }
 
     var body: some View {
         Text(self.text)
             .kerning(self.textStyle.kerning)
-            .coffioTextStyle(self.textStyle)
+            .coffioTextStyle(self.textStyle, state: self.state)
             .textCase(self.textStyle.textCase)
     }
 }

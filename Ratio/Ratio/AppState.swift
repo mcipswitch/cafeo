@@ -23,16 +23,20 @@ struct AppState: Equatable {
 
     var toggleOffset: CGFloat = UnitMass.grams.toggleOffset
 
+    var isLongPressing = false
+
     var ratio: Double {
         1 / self.ratioDenominator
     }
 }
 
+enum AmountAction {
+    case increment, decrement
+}
+
 enum AppAction: Equatable {
-    case coffeeDecrementButtonTapped
-    case coffeeIncrementButtonTapped
-    case waterDecrementButtonTapped
-    case waterIncrementButtonTapped
+    case coffeeAmountChanged(AmountAction)
+    case waterAmountChanged(AmountAction)
 
     case toggleUnitConversion
 
@@ -119,23 +123,41 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, e
             return .none
         }
 
-    case .coffeeDecrementButtonTapped:
-        if state.coffeeAmount > 0 {
-            state.coffeeAmount -= 0.1
+
+
+
+    case let .waterAmountChanged(action):
+
+        switch action {
+        case .increment:
+            state.waterAmount += 1
+        case .decrement:
+            state.waterAmount -= 1
         }
-        return Effect(value: .form(.set(\.waterAmount, state.coffeeAmount / state.ratio)))
 
-    case .coffeeIncrementButtonTapped:
-        state.coffeeAmount += 0.1
-        return Effect(value: .form(.set(\.waterAmount, state.coffeeAmount / state.ratio)))
-
-    case .waterDecrementButtonTapped:
-        state.waterAmount -= 1
         return Effect(value: .form(.set(\.coffeeAmount, state.waterAmount * state.ratio)))
 
-    case .waterIncrementButtonTapped:
-        state.waterAmount += 1
-        return Effect(value: .form(.set(\.coffeeAmount, state.waterAmount * state.ratio)))
+    case let .coffeeAmountChanged(action):
+
+        switch action {
+        case .increment:
+            if state.coffeeAmount > 0 {
+                state.coffeeAmount -= 0.1
+            }
+        case .decrement:
+            state.coffeeAmount += 0.1
+        }
+
+        return Effect(value: .form(.set(\.waterAmount, state.coffeeAmount / state.ratio)))
+
+
+
+
+
+
+
+
+
 
     case .form(\.ratioDenominator):
         if state.lockWaterAmount {
@@ -154,9 +176,17 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, e
         state.lockWaterAmount.toggle()
         return .none
 
+
+
+
+
     case .form:
         return .none
+
     }
+
+
+
 }
 .form(action: /AppAction.form)
 .debug()

@@ -11,6 +11,9 @@ struct IncrementDecrementButton: View {
     var incrementAction: () -> Void
     var decrementAction: () -> Void
 
+    @State private var timer: Timer?
+    @State private var isLongPressing = false
+
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 25, style: .continuous)
@@ -32,23 +35,73 @@ struct IncrementDecrementButton: View {
                 )
 
                 .overlay(
-                    HStack {
-                        Image(systemName: "minus")
-                            .onTapGesture {
+                    HStack(spacing: 0) {
+                        Button(action: {
+                            // This tap was triggered by the end of a long press gesture
+                            if self.isLongPressing {
+                                self.isLongPressing.toggle()
+                                self.timer?.invalidate()
+                            } else {
                                 self.decrementAction()
                             }
+                        }, label: {
+                            Image(systemName: "minus")
+                        })
+                        .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
+                        .simultaneousGesture(
+                            LongPressGesture(minimumDuration: 0.2)
+                                .onEnded { _ in
+                                    self.isLongPressing = true
+
+                                    //or fastforward has started to start the timer
+                                    self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { _ in
+                                        self.decrementAction()
+                                    })
+                                })
+
+
+
+
 
                         Spacer()
 
-                        Image(systemName: "plus")
-                            .onTapGesture {
+
+                        Button(action: {
+                            // This tap was triggered by the end of a long press gesture
+                            if self.isLongPressing {
+                                self.isLongPressing.toggle()
+                                self.timer?.invalidate()
+                            } else {
                                 self.incrementAction()
                             }
+                        }, label: {
+                            Image(systemName: "plus")
+                        })
+                        .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
+                        .simultaneousGesture(
+                            LongPressGesture(minimumDuration: 0.2)
+                                .onEnded { _ in
+                                    self.isLongPressing = true
+
+                                    //or fastforward has started to start the timer
+                                    self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { _ in
+                                        self.incrementAction()
+                                    })
+                                })
+
+
+
                     }
                     .font(Font.custom("Orbitron-Medium", fixedSize: 16))
                     .foregroundColor(.coffioGray)
-                    .padding(.horizontal, 20)
+                    .padding(.horizontal, 6)
                 )
         }
     }
 }
+
+
+//var onPress: () -> Void
+//    var onRelease: () -> Void

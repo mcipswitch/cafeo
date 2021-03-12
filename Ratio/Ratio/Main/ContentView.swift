@@ -54,7 +54,7 @@ struct ContentView: View {
 
                     HStack {
                         Button(action: {
-                            viewStore.send(.coffeeDecrementButtonTapped)
+                            viewStore.send(.coffeeAmountChanged(.decrement))
                             //viewStore.send(.coffee(.set(\.coffeeAmount, 10)))
                         }, label: {
                             Image(systemName: "minus.square")
@@ -63,7 +63,7 @@ struct ContentView: View {
                         Text("\(viewStore.coffeeAmount, specifier: "%.1f") \(viewStore.unit.symbol)")
                         Spacer()
                         Button(action: {
-                            viewStore.send(.coffeeIncrementButtonTapped)
+                            viewStore.send(.coffeeAmountChanged(.increment))
                         }, label: {
                             Image(systemName: "plus.square")
                         }).buttonStyle(PlainButtonStyle())
@@ -82,7 +82,7 @@ struct ContentView: View {
 
                     HStack {
                         Button(action: {
-                            viewStore.send(.waterDecrementButtonTapped)
+                            viewStore.send(.waterAmountChanged(.decrement))
                         }, label: {
                             Image(systemName: "minus.square")
                         }).buttonStyle(PlainButtonStyle())
@@ -90,7 +90,7 @@ struct ContentView: View {
                         Text("\(viewStore.waterAmount, specifier: "%.0f") \(viewStore.unit.symbol)")
                         Spacer()
                         Button(action: {
-                            viewStore.send(.waterIncrementButtonTapped)
+                            viewStore.send(.waterAmountChanged(.increment))
                         }, label: {
                             Image(systemName: "plus.square")
                         }).buttonStyle(PlainButtonStyle())

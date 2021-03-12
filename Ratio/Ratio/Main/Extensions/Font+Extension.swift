@@ -81,14 +81,23 @@ enum CoffioTextStyle {
 
 struct CoffioTextModifier: ViewModifier {
     var textStyle: CoffioTextStyle
+    var state: CoffioTextState
 
-    init(_ textStyle: CoffioTextStyle) {
+    init(_ textStyle: CoffioTextStyle, state: CoffioTextState = .normal) {
         self.textStyle = textStyle
+        self.state = state
     }
 
     func body(content: Content) -> some View {
         content
             .font(textStyle.font)
-            .foregroundColor(textStyle.color)
+            // TODO: - revisit this
+            .foregroundColor(
+                state == .selected ? .coffioOrange : textStyle.color
+            )
     }
+}
+
+enum CoffioTextState {
+    case normal, selected
 }

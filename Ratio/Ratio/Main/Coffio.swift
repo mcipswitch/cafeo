@@ -12,11 +12,11 @@ struct WaterAmountView: View {
     @ObservedObject var viewStore: ViewStore<AppState, AppAction>
     
     private func waterIncrementButtonTapped() {
-        self.viewStore.send(.waterIncrementButtonTapped)
+        self.viewStore.send(.waterAmountChanged(.increment))
     }
     
     private func waterDecrementButtonTapped() {
-        self.viewStore.send(.waterDecrementButtonTapped)
+        self.viewStore.send(.waterAmountChanged(.decrement))
     }
     
     var body: some View {
@@ -48,11 +48,11 @@ struct CoffeeAmountView: View {
     @ObservedObject var viewStore: ViewStore<AppState, AppAction>
     
     private func coffeeIncrementButtonTapped() {
-        self.viewStore.send(.coffeeIncrementButtonTapped)
+        self.viewStore.send(.coffeeAmountChanged(.increment))
     }
     
     private func coffeeDecrementButtonTapped() {
-        self.viewStore.send(.coffeeDecrementButtonTapped)
+        self.viewStore.send(.coffeeAmountChanged(.decrement))
     }
     
     var body: some View {
