@@ -24,7 +24,7 @@ struct ContentView: View {
                 Section(header: Text("Ratio")) {
                     HStack {
                         Button(action: {
-                            viewStore.send(.form(.set(\.ratioDenominator, viewStore.ratioDenominator - 1)))
+                            viewStore.send(.form(.set(\.activeRatioIdx, viewStore.activeRatioIdx - 1)))
                         }, label: {
                             Image(systemName: "minus.square")
                         }).buttonStyle(PlainButtonStyle())
@@ -36,7 +36,7 @@ struct ContentView: View {
                         Spacer()
 
                         Button(action: {
-                            viewStore.send(.form(.set(\.ratioDenominator, viewStore.ratioDenominator + 1)))
+                            viewStore.send(.form(.set(\.activeRatioIdx, viewStore.activeRatioIdx + 1)))
                         }, label: {
                             Image(systemName: "plus.square")
                         }).buttonStyle(PlainButtonStyle())
@@ -99,7 +99,7 @@ struct ContentView: View {
                 }
             }
             .onAppear {
-                viewStore.send(.form(.set(\.ratioDenominator, 16)))
+                viewStore.send(.form(.set(\.activeRatioIdx, 15)))
             }
         }
     }

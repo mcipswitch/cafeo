@@ -15,6 +15,7 @@ struct Coffio: View {
         WithViewStore(self.store) { viewStore in
             ZStack {
                 VStack(spacing: 0) {
+                    // TODO: - fix this
                     Image("top-image")
                         .resizable()
                         .scaledToFit()

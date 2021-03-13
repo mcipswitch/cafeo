@@ -28,6 +28,7 @@
 		93B4C78F25FD3A8C00E479C1 /* BoundsPreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C78E25FD3A8C00E479C1 /* BoundsPreferenceKey.swift */; };
 		93B4C79725FD3AE300E479C1 /* WaterAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C79625FD3AE300E479C1 /* WaterAmountView.swift */; };
 		93B4C79A25FD3B0300E479C1 /* CoffeeAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C79925FD3B0300E479C1 /* CoffeeAmountView.swift */; };
+		93B4C7A325FD62E400E479C1 /* Comparable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C7A225FD62E300E479C1 /* Comparable+Extension.swift */; };
 		93C8399625F6979F00C66710 /* Orbitron-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 93C8399325F6979F00C66710 /* Orbitron-Medium.ttf */; };
 		93C8399725F6979F00C66710 /* Exo2-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 93C8399425F6979F00C66710 /* Exo2-SemiBold.ttf */; };
 		93C8399825F6979F00C66710 /* Exo2-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 93C8399525F6979F00C66710 /* Exo2-MediumItalic.ttf */; };
@@ -56,6 +57,7 @@
 		93B4C78E25FD3A8C00E479C1 /* BoundsPreferenceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundsPreferenceKey.swift; sourceTree = "<group>"; };
 		93B4C79625FD3AE300E479C1 /* WaterAmountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterAmountView.swift; sourceTree = "<group>"; };
 		93B4C79925FD3B0300E479C1 /* CoffeeAmountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeAmountView.swift; sourceTree = "<group>"; };
+		93B4C7A225FD62E300E479C1 /* Comparable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Comparable+Extension.swift"; sourceTree = "<group>"; };
 		93C8399325F6979F00C66710 /* Orbitron-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Orbitron-Medium.ttf"; sourceTree = "<group>"; };
 		93C8399425F6979F00C66710 /* Exo2-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo2-SemiBold.ttf"; sourceTree = "<group>"; };
 		93C8399525F6979F00C66710 /* Exo2-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo2-MediumItalic.ttf"; sourceTree = "<group>"; };
@@ -101,10 +103,9 @@
 		9375EEE625D1B3900003A323 /* Ratio */ = {
 			isa = PBXGroup;
 			children = (
-				937FD33025D216C00048C406 /* Main */,
 				937FD32D25D216830048C406 /* AppState.swift */,
+				937FD33025D216C00048C406 /* Main */,
 				937FD32725D211670048C406 /* Styles */,
-				937FD32225D211440048C406 /* Extensions */,
 				9375EEEB25D1B3910003A323 /* Assets.xcassets */,
 				93C8399A25F697A400C66710 /* Resources */,
 				9375EEF025D1B3910003A323 /* Info.plist */,
@@ -119,14 +120,6 @@
 				9375EEEE25D1B3910003A323 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		937FD32225D211440048C406 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				937FD31F25D1EC9C0048C406 /* Binding+Extension.swift */,
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		937FD32725D211670048C406 /* Styles */ = {
@@ -155,7 +148,9 @@
 		93B4C76D25F7E53700E479C1 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				937FD31F25D1EC9C0048C406 /* Binding+Extension.swift */,
 				93B4C76A25F7E53400E479C1 /* Color+Extension.swift */,
+				93B4C7A225FD62E300E479C1 /* Comparable+Extension.swift */,
 				93B4C77025F90F7B00E479C1 /* Font+Extension.swift */,
 				93B4C78A25FD38D500E479C1 /* Gradient+Extension.swift */,
 				93B4C77325F90FC900E479C1 /* View+Extension.swift */,
@@ -278,6 +273,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93B4C7A325FD62E400E479C1 /* Comparable+Extension.swift in Sources */,
 				93B4C78B25FD38D500E479C1 /* Gradient+Extension.swift in Sources */,
 				931BE97925F7DF030030444F /* IncrementDecrementButton.swift in Sources */,
 				93B4C76B25F7E53400E479C1 /* Color+Extension.swift in Sources */,

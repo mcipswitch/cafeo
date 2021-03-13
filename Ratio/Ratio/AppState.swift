@@ -11,7 +11,7 @@ import ComposableArchitecture
 // MARK: - Domain
 
 struct AppState: Equatable {
-    var ratioDenominator: Double = 16
+
     var coffeeAmount: Double = 15.6
     var waterAmount: Double = 250
 
@@ -26,8 +26,15 @@ struct AppState: Equatable {
 
     var isLongPressing = false
 
-    // helper vars
-    var ratio: Double { 1 / self.ratioDenominator }
+
+    var ratioDenominators = [
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+    ]
+    var activeRatioIdx: Int = 15
+    var ratioDenominator: Int {
+        ratioDenominators[self.activeRatioIdx]
+    }
+    var ratio: Double { 1 / Double(self.ratioDenominator) }
 }
 
 enum AmountAction {
@@ -191,7 +198,7 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, e
 
 
 
-    case .form(\.ratioDenominator):
+    case .form(\.activeRatioIdx):
         if state.lockWaterAmount {
             return Effect(value: .form(.set(\.coffeeAmount, state.waterAmount * state.ratio)))
         } else if state.lockCoffeeAmount {
