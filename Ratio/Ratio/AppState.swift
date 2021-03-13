@@ -12,11 +12,8 @@ import ComposableArchitecture
 
 struct AppState: Equatable {
     var ratioDenominator: Double = 16
-    //var coffeeAmount: Double = 15.6
-    //var waterAmount: Double = 250
-
-    var coffeeAmount: Double = 1
-    var waterAmount: Double = 1
+    var coffeeAmount: Double = 15.6
+    var waterAmount: Double = 250
 
     var lockCoffeeAmount = true
     var lockWaterAmount = false
@@ -29,9 +26,8 @@ struct AppState: Equatable {
 
     var isLongPressing = false
 
-    var ratio: Double {
-        1 / self.ratioDenominator
-    }
+    // helper vars
+    var ratio: Double { 1 / self.ratioDenominator }
 }
 
 enum AmountAction {
@@ -178,7 +174,7 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, e
 
 
     case .amountButtonLongPressed(let ingredient, let action):
-        return Effect.timer(id: TimerID(), every: 0.001, on: DispatchQueue.main)
+        return Effect.timer(id: TimerID(), every: 0.1, on: DispatchQueue.main)
             .map { _ in
                 ingredient == .coffee
                     ? .coffeeAmountChanged(action)

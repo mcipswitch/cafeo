@@ -23,6 +23,11 @@
 		93B4C77425F90FC900E479C1 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C77325F90FC900E479C1 /* View+Extension.swift */; };
 		93B4C77D25FA74E900E479C1 /* UnitConversionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C77C25FA74E900E479C1 /* UnitConversionView.swift */; };
 		93B4C78225FA752D00E479C1 /* RatioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C78125FA752D00E479C1 /* RatioView.swift */; };
+		93B4C78825FD386800E479C1 /* CoffioText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C78725FD386800E479C1 /* CoffioText.swift */; };
+		93B4C78B25FD38D500E479C1 /* Gradient+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C78A25FD38D500E479C1 /* Gradient+Extension.swift */; };
+		93B4C78F25FD3A8C00E479C1 /* BoundsPreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C78E25FD3A8C00E479C1 /* BoundsPreferenceKey.swift */; };
+		93B4C79725FD3AE300E479C1 /* WaterAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C79625FD3AE300E479C1 /* WaterAmountView.swift */; };
+		93B4C79A25FD3B0300E479C1 /* CoffeeAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C79925FD3B0300E479C1 /* CoffeeAmountView.swift */; };
 		93C8399625F6979F00C66710 /* Orbitron-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 93C8399325F6979F00C66710 /* Orbitron-Medium.ttf */; };
 		93C8399725F6979F00C66710 /* Exo2-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 93C8399425F6979F00C66710 /* Exo2-SemiBold.ttf */; };
 		93C8399825F6979F00C66710 /* Exo2-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 93C8399525F6979F00C66710 /* Exo2-MediumItalic.ttf */; };
@@ -46,6 +51,11 @@
 		93B4C77325F90FC900E479C1 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		93B4C77C25FA74E900E479C1 /* UnitConversionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitConversionView.swift; sourceTree = "<group>"; };
 		93B4C78125FA752D00E479C1 /* RatioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatioView.swift; sourceTree = "<group>"; };
+		93B4C78725FD386800E479C1 /* CoffioText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffioText.swift; sourceTree = "<group>"; };
+		93B4C78A25FD38D500E479C1 /* Gradient+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Gradient+Extension.swift"; sourceTree = "<group>"; };
+		93B4C78E25FD3A8C00E479C1 /* BoundsPreferenceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundsPreferenceKey.swift; sourceTree = "<group>"; };
+		93B4C79625FD3AE300E479C1 /* WaterAmountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterAmountView.swift; sourceTree = "<group>"; };
+		93B4C79925FD3B0300E479C1 /* CoffeeAmountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeAmountView.swift; sourceTree = "<group>"; };
 		93C8399325F6979F00C66710 /* Orbitron-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Orbitron-Medium.ttf"; sourceTree = "<group>"; };
 		93C8399425F6979F00C66710 /* Exo2-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo2-SemiBold.ttf"; sourceTree = "<group>"; };
 		93C8399525F6979F00C66710 /* Exo2-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo2-MediumItalic.ttf"; sourceTree = "<group>"; };
@@ -67,6 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				931BE97825F7DF030030444F /* IncrementDecrementButton.swift */,
+				93B4C78725FD386800E479C1 /* CoffioText.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -135,6 +146,7 @@
 				93A9FDE925F6911D006D5428 /* Coffio.swift */,
 				93B4C77F25FA751A00E479C1 /* Views */,
 				93B4C76D25F7E53700E479C1 /* Extensions */,
+				93B4C79125FD3A8F00E479C1 /* Keys */,
 				931BE97B25F7DF090030444F /* UI */,
 			);
 			path = Main;
@@ -144,8 +156,9 @@
 			isa = PBXGroup;
 			children = (
 				93B4C76A25F7E53400E479C1 /* Color+Extension.swift */,
-				93B4C77325F90FC900E479C1 /* View+Extension.swift */,
 				93B4C77025F90F7B00E479C1 /* Font+Extension.swift */,
+				93B4C78A25FD38D500E479C1 /* Gradient+Extension.swift */,
+				93B4C77325F90FC900E479C1 /* View+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -154,9 +167,19 @@
 			isa = PBXGroup;
 			children = (
 				93B4C78125FA752D00E479C1 /* RatioView.swift */,
+				93B4C79925FD3B0300E479C1 /* CoffeeAmountView.swift */,
+				93B4C79625FD3AE300E479C1 /* WaterAmountView.swift */,
 				93B4C77C25FA74E900E479C1 /* UnitConversionView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		93B4C79125FD3A8F00E479C1 /* Keys */ = {
+			isa = PBXGroup;
+			children = (
+				93B4C78E25FD3A8C00E479C1 /* BoundsPreferenceKey.swift */,
+			);
+			path = Keys;
 			sourceTree = "<group>";
 		};
 		93C8399225F6979F00C66710 /* Fonts */ = {
@@ -255,18 +278,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93B4C78B25FD38D500E479C1 /* Gradient+Extension.swift in Sources */,
 				931BE97925F7DF030030444F /* IncrementDecrementButton.swift in Sources */,
 				93B4C76B25F7E53400E479C1 /* Color+Extension.swift in Sources */,
 				93A9FDEA25F6911D006D5428 /* Coffio.swift in Sources */,
 				937FD32525D2115E0048C406 /* LockToggleStyle.swift in Sources */,
 				937FD32E25D216830048C406 /* AppState.swift in Sources */,
 				9375EEEA25D1B3900003A323 /* ContentView.swift in Sources */,
+				93B4C78F25FD3A8C00E479C1 /* BoundsPreferenceKey.swift in Sources */,
 				93B4C77125F90F7B00E479C1 /* Font+Extension.swift in Sources */,
 				93B4C78225FA752D00E479C1 /* RatioView.swift in Sources */,
+				93B4C79A25FD3B0300E479C1 /* CoffeeAmountView.swift in Sources */,
 				93B4C77425F90FC900E479C1 /* View+Extension.swift in Sources */,
 				93B4C77D25FA74E900E479C1 /* UnitConversionView.swift in Sources */,
 				937FD32025D1EC9C0048C406 /* Binding+Extension.swift in Sources */,
+				93B4C79725FD3AE300E479C1 /* WaterAmountView.swift in Sources */,
 				9375EEE825D1B3900003A323 /* RatioApp.swift in Sources */,
+				93B4C78825FD386800E479C1 /* CoffioText.swift in Sources */,
 				9364AD5F25D37BCF00149F49 /* UnitOfMeasurementToggleStyle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

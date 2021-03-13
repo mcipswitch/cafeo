@@ -19,13 +19,13 @@ struct UnitConversionView: View {
                 .padding(.horizontal, 8)
                 .background(Color.coffioBackgroundDark)
                 .anchorPreference(
-                    key: SizePrefKey.self,
+                    key: BoundsPreferenceKey.self,
                     value: .bounds,
                     transform: { $0 }
                 )
-                .backgroundPreferenceValue(SizePrefKey.self) { prefs in
+                .backgroundPreferenceValue(BoundsPreferenceKey.self) { preferences in
                     GeometryReader { geometry in
-                        prefs.map { value in
+                        preferences.map { value in
                             Path { path in
                                 path.move(to: CGPoint(x: -40,
                                                       y: 16))
@@ -92,13 +92,4 @@ struct CoffioToggle: View {
                 .offset(x: self.offset)
         }
     }
-}
-
-// MARK: - LinearGradient+Extension
-
-extension LinearGradient {
-    static let coffioOrange = LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.5568627451, green: 0.2, blue: 0, alpha: 1)), Color(#colorLiteral(red: 0.8980392157, green: 0.3803921569, blue: 0, alpha: 1))]),
-                                                           startPoint: .leading,
-                                                           endPoint: .trailing
-    )
 }
