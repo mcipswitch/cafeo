@@ -13,7 +13,8 @@ struct LockToggleStyle: ToggleStyle {
             Image(systemName: configuration.isOn ? "lock" : "lock.open")
                 .foregroundColor(configuration.isOn ? .coffioOrange : .coffioGray)
                 .font(.system(size: 16, weight: .medium))
-                //.frame(width: 15, height: 15)
+                //.frame(width: 30, height: 30)
+                .contentShape(Rectangle())
                 .onTapGesture { configuration.isOn.toggle() }
         }
         .foregroundColor(configuration.isOn ? .black : .gray)

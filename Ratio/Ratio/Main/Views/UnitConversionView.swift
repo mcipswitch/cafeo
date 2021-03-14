@@ -50,12 +50,16 @@ struct UnitConversionView: View {
                         keyPath: \.toggleYOffset,
                         send: AppAction.form
                     ))
-                    .onTapGesture {
-                        self.viewStore.send(
-                            .unitConversionToggleYOffsetChanged,
-                            animation: Animation.timingCurve(0.60, 0.80, 0, 0.96)
-                        )
-                    }
+                    .gesture(
+                        // This registers tap and swipe gestures
+                        DragGesture(minimumDistance: 0)
+                            .onEnded { value in
+                                self.viewStore.send(
+                                    .unitConversionToggleYOffsetChanged,
+                                    animation: Animation.timingCurve(0.60, 0.80, 0, 0.96)
+                                )
+                            }
+                    )
 
                 CoffioText(text: "\(UnitMass.ounces.abbrString)",
                            state: self.viewStore.conversionUnit == .ounces ? .selected : .normal,

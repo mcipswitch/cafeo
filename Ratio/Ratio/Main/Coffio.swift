@@ -10,29 +10,31 @@ import SwiftUI
 
 struct Coffio: View {
     let store: Store<AppState, AppAction>
+    var padding: CGFloat = 30
 
     var body: some View {
         WithViewStore(self.store) { viewStore in
             ZStack {
                 VStack(spacing: 0) {
-                    // TODO: - fix this
+                    // TODO: - fix background
                     Image("top-image")
                         .resizable()
                         .scaledToFit()
                     Image("top-image")
                         .resizable()
                         .scaledToFit()
-                    Spacer()
+                    Color.coffioBackgroundDark
                 }
+                .edgesIgnoringSafeArea(.all)
 
                 VStack(spacing: 0) {
-                    Spacer()
+                    //Spacer()
 
                     RatioView(viewStore: viewStore)
                         .frame(height: 180)
                         .padding(.horizontal, 24)
-                        .padding(.top, 40)
-                        .padding(.bottom, 40)
+                        .padding(.top, self.padding)
+                        .padding(.bottom, self.padding)
                         .background(Color.coffioBackgroundDark)
 
                     HStack {
@@ -41,17 +43,17 @@ struct Coffio: View {
                         WaterAmountView(viewStore: viewStore)
                             .frame(width: UIScreen.main.bounds.width / 2)
                     }
-                    .padding(.vertical, 30)
+                    .padding(.vertical, self.padding)
                     .background(Color.coffioBackgroundLight)
 
                     UnitConversionView(viewStore: viewStore)
                         .padding(.horizontal, 24)
-                        .padding(.top, 40)
-                        .padding(.bottom, 40)
+                        .padding(.top, self.padding)
+                        .padding(.bottom, self.padding)
                         .background(Color.coffioBackgroundDark)
                 }
             }
-            .edgesIgnoringSafeArea(.all)
+            .background(Color.coffioBackgroundDark)
         }
     }
 }

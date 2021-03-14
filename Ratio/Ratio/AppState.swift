@@ -22,6 +22,9 @@ struct AppState: Equatable {
     var toggleYOffset: CGFloat = UnitMass.grams.toggleYOffset
 
     // Ratio
+    var ratioCarouselDragYOffset: CGFloat = .zero
+    var ratioCarouselYOffset: CGFloat = .zero
+
     var ratioDenominators = [
         1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
     ]
@@ -36,8 +39,6 @@ struct AppState: Equatable {
         1 / Double(self.activeRatioDenominator)
     }
 }
-
-
 
 enum AppAction: Equatable {
 
@@ -80,6 +81,8 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, e
             state.toggleYOffset = UnitMass.grams.toggleYOffset
         }
 
+        feedback(.light)
+
         return
             Effect(value: AppAction.unitConversionChanged)
             .delay(for: 0, scheduler: DispatchQueue.main.animation(.none))
@@ -120,10 +123,12 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, e
     case let .waterAmountChanged(action):
         switch action {
         case .increment:
+            feedback(.light)
             state.waterAmount += 1
         case .decrement:
             let newValue = state.waterAmount - 1
             if newValue > 0 {
+                feedback(.light)
                 state.waterAmount -= 1
             }
         }
@@ -133,10 +138,12 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, e
     case let .coffeeAmountChanged(action):
         switch action {
         case .increment:
+            feedback(.light)
             state.coffeeAmount += 0.1
         case .decrement:
             let newValue = state.coffeeAmount - 0.1
             if newValue > 0 {
+                feedback(.light)
                 state.coffeeAmount -= 0.1
             }
         }
@@ -166,10 +173,12 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, e
         }
 
     case .form(\.waterAmountIsLocked):
+        feedback(.light)
         state.coffeeAmountIsLocked.toggle()
         return .none
 
     case .form(\.coffeeAmountIsLocked):
+        feedback(.light)
         state.waterAmountIsLocked.toggle()
         return .none
 

@@ -103,7 +103,9 @@ struct RatioSnapCarousel: View {
         VStack {
             ForEach(self.viewStore.ratioDenominators, id: \.self) { ratioDenom in
                 CoffioText(text: "\(ratioDenom)", .ratioLabel)
-                    .frame(height: itemHeight)
+                    .frame(width: itemHeight * 2, height: itemHeight)
+                    // Control the tappable area
+                    .contentShape(Rectangle())
             }
         }
         .offset(y: totalOffset)
