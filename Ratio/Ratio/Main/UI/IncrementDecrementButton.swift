@@ -8,10 +8,9 @@
 import SwiftUI
 
 struct IncrementDecrementButton: View {
-    var onPress: (AmountAction) -> Void
+    var onPress: (AdjustAmountAction) -> Void
     var onRelease: () -> Void
-    var onTap: (AmountAction) -> Void
-    @State private var isSelected = false
+    var onTap: (AdjustAmountAction) -> Void
 
     var body: some View {
         ZStack {
@@ -38,9 +37,7 @@ struct IncrementDecrementButton: View {
                             self.onTap(.decrement)
                         }, label: {
                             Image(systemName: "minus")
-                            // highlight
                         })
-
                         .frame(width: 44, height: 44)
                         .contentShape(Rectangle())
                         .simultaneousGesture(
@@ -91,16 +88,17 @@ struct IncrementDecrementButton: View {
     }
 }
 
-
-struct CoffioAmountAdjustmentButton: ButtonStyle {
-    var isSelected: Bool = false
-
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .foregroundColor(
-                configuration.isPressed
-                    ? .coffioOrange
-                    : .coffioGray
-            )
-    }
-}
+//struct CoffioAmountAdjustmentButton: ButtonStyle {
+//    var isSelected: Bool = false
+//
+//    func makeBody(configuration: Configuration) -> some View {
+//        configuration.label
+////            .foregroundColor(
+////                configuration.isPressed
+////                    ? .white
+////                    : .coffioGray
+////            )
+//            .scaleEffect(configuration.isPressed ? 1.5 : 1.0)
+//            .animation(.easeInOut(duration: 0.4), value: configuration.isPressed)
+//    }
+//}

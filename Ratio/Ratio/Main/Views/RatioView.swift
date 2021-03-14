@@ -14,68 +14,60 @@ struct RatioView: View {
 
     var body: some View {
         VStack(spacing: 20) {
-                ZStack {
-                    GeometryReader { geo in
-                        RoundedRectangle(cornerRadius: 8)
-                            .stroke(Color(#colorLiteral(red: 0.09411764706, green: 0.09803921569, blue: 0.1019607843, alpha: 1)), style: StrokeStyle(lineWidth: 2))
-                            .mask(RoundedRectangle(cornerRadius: 8))
-                            .background(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .fill(
-                                        LinearGradient(
-                                            gradient: Gradient(colors: [Color(#colorLiteral(red: 0.137254902, green: 0.1490196078, blue: 0.168627451, alpha: 1)), Color(#colorLiteral(red: 0.2431372549, green: 0.262745098, blue: 0.2941176471, alpha: 1)), Color(#colorLiteral(red: 0.137254902, green: 0.1490196078, blue: 0.168627451, alpha: 1))]),
-                                            startPoint: .top,
-                                            endPoint: .bottom
-                                        )
-                                    )
-                            )
-                            // Inner shadow
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color(#colorLiteral(red: 0.09411764706, green: 0.09803921569, blue: 0.1019607843, alpha: 1)), style: StrokeStyle(lineWidth: 2))
-                                    .blur(radius: 4)
-                                    .frame(width: geo.size.width - 4, height: geo.size.height - 4)
-                            )
-
-                        HStack {
-                            Spacer()
-                            Rectangle().frame(width: self.dividerWidth)
-                                .foregroundColor(.coffioShadow)
-                            Spacer()
-                        }
-
-                        HStack(spacing: 0) {
-                            CoffioText(text: "1", .ratioLabel)
+            ZStack {
+                GeometryReader { geo in
+                    self.ratioBox
+                        .stroke(Color.coffioShadow, lineWidth: 2)
+                        .background(
+                            self.ratioBox
+                                .fill(LinearGradient.coffioChrome)
+                        )
+                        // inner shadow
+                        .overlay(
+                            self.ratioBox
+                                .stroke(Color.coffioShadow, lineWidth: 2)
+                                .blur(radius: 4)
                                 .frame(
-                                    width: geo.size.width/2,
-                                    height: geo.size.height
+                                    width: geo.size.width - 4,
+                                    height: geo.size.height - 4
                                 )
-
-                            ZStack {
-                                SnapCarousel(viewStore: self.viewStore)
-                                    // TODO: - could this be animated in appstate?????
-                                    .animation(.spring())
-
-                                self.ratioDenominatorLine
-                                    .frame(width: geo.size.width / 2 - self.dividerWidth)
-                            }
+                        )
+                    HStack {
+                        Spacer()
+                        Rectangle().frame(width: self.dividerWidth)
+                            .foregroundColor(.coffioShadow)
+                        Spacer()
+                    }
+                    HStack(spacing: 0) {
+                        CoffioText(text: "1", .ratioLabel)
                             .frame(
                                 width: geo.size.width / 2,
                                 height: geo.size.height
                             )
-//                            .mask(
-//                                RoundedRectangle(cornerRadius: 50)
-//                                    .frame(
-//                                        width: geo.size.width / 2,
-//                                        height: geo.size.height - 2
-//                                    )
-//                            )
+                        ZStack {
+                            RatioSnapCarousel(viewStore: self.viewStore)
+                                // TODO: - Could this be animated in AppState?
+                                .animation(.spring())
+
+                            self.ratioDenominatorLine
+                                .frame(width: geo.size.width / 2 - self.dividerWidth)
                         }
+                        .frame(
+                            width: geo.size.width / 2,
+                            height: geo.size.height
+                        )
+                        // Control the tappable area
+                        .clipShape(Rectangle())
+                        .contentShape(Rectangle())
+                    }
                 }
             }
-
             CoffioText(text: "ratio", .mainLabel)
         }
+    }
+
+    var ratioBox: RoundedRectangle {
+        RoundedRectangle(cornerRadius: 8)
     }
 
     var ratioDenominatorLine: some View {
@@ -94,30 +86,27 @@ struct RatioView: View {
 }
 
 /// Please see: https://medium.com/flawless-app-stories/implementing-snap-carousel-in-swiftui-3ae084504670
-struct SnapCarousel: View {
+struct RatioSnapCarousel: View {
     @ObservedObject var viewStore: ViewStore<AppState, AppAction>
     @GestureState var dragOffset = CGFloat.zero
 
     var body: some View {
 
-        let cardHeight: CGFloat = 80
+        let itemHeight: CGFloat = 80
         let numberOfItems: CGFloat = CGFloat(self.viewStore.ratioDenominators.count)
+        let totalHeight: CGFloat = itemHeight * numberOfItems
 
-        let totalCanvasHeight: CGFloat = cardHeight * numberOfItems
-        let yOffsetToShift: CGFloat = (totalCanvasHeight - cardHeight) / 2
-
-        let activeOffset: CGFloat = yOffsetToShift - (cardHeight * CGFloat(self.viewStore.activeRatioIdx))
-
-        var calcOffset: CGFloat = CGFloat(activeOffset) + self.dragOffset
+        let yOffsetToShift: CGFloat = (totalHeight - itemHeight) / 2
+        let activeOffset: CGFloat = yOffsetToShift - (itemHeight * CGFloat(self.viewStore.activeRatioIdx))
+        let totalOffset: CGFloat = CGFloat(activeOffset) + self.dragOffset
 
         VStack {
-            ForEach(0 ..< self.viewStore.ratioDenominators.count) { idx in
-                CoffioText(text: "\(self.viewStore.ratioDenominators[idx])", .ratioLabel)
-                    .frame(height: cardHeight)
+            ForEach(self.viewStore.ratioDenominators, id: \.self) { ratioDenom in
+                CoffioText(text: "\(ratioDenom)", .ratioLabel)
+                    .frame(height: itemHeight)
             }
         }
-
-        .offset(y: CGFloat(calcOffset))
+        .offset(y: totalOffset)
         .gesture(
             DragGesture()
                 .updating($dragOffset) { value, state, transaction in
@@ -126,23 +115,20 @@ struct SnapCarousel: View {
                 .onEnded { drag in
                     let dragAmount = drag.translation.height
 
-                    // Calculate the index shift to the closest entry
-                    let idxOffset = Int(round(dragAmount / cardHeight))
+                    // Calculate the index shift to the closet ratio denominator
+                    let idxOffset = Int(round(dragAmount / itemHeight))
 
-                    if (dragAmount < cardHeight/2 || dragAmount > cardHeight/2) {
-                        let newIdx = (self.viewStore.activeRatioIdx - idxOffset).clamp(low: 0, high: self.viewStore.ratioDenominators.count - 1)
+                    var dragAmountThresholdPassed: Bool {
+                        dragAmount < itemHeight / 2 || dragAmount > itemHeight / 2
+                    }
+
+                    if dragAmountThresholdPassed {
+                        let newIdx = (self.viewStore.activeRatioIdx - idxOffset)
+                            .clamp(low: 0, high: self.viewStore.ratioDenominators.count - 1)
 
                         self.viewStore.send(.form(.set(\.activeRatioIdx, newIdx)))
-                        self.feedback()
                     }
                 }
         )
     }
-
-    private func feedback() {
-        let generator = UIImpactFeedbackGenerator(style: .light)
-        generator.impactOccurred()
-    }
 }
-
-

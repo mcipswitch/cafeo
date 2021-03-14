@@ -16,9 +16,9 @@ struct ContentView: View {
             Form {
                 Section(header: Text("Unit of Measurement")) {
                     Button(action: {
-                        viewStore.send(.unitChanged)
+                        viewStore.send(.unitConversionChanged)
                     }, label: {
-                        Text("\(viewStore.unit.symbol)")
+                        Text("\(viewStore.conversionUnit.symbol)")
                     }).buttonStyle(PlainButtonStyle())
                 }
                 Section(header: Text("Ratio")) {
@@ -31,7 +31,7 @@ struct ContentView: View {
 
                         Spacer()
 
-                        Text("1 / \(viewStore.ratioDenominator, specifier: "%.0f")")
+                        Text("1 / \(viewStore.activeRatioDenominator, specifier: "%.0f")")
 
                         Spacer()
 
@@ -47,7 +47,7 @@ struct ContentView: View {
                     Toggle(
                         "Keep locked while changing ratio",
                         isOn: viewStore.binding(
-                            keyPath: \.lockCoffeeAmount,
+                            keyPath: \.coffeeAmountIsLocked,
                             send: AppAction.form
                         )
                     ).toggleStyle(LockToggleStyle())
@@ -60,7 +60,7 @@ struct ContentView: View {
                             Image(systemName: "minus.square")
                         }).buttonStyle(PlainButtonStyle())
                         Spacer()
-                        Text("\(viewStore.coffeeAmount, specifier: "%.1f") \(viewStore.unit.symbol)")
+                        Text("\(viewStore.coffeeAmount, specifier: "%.1f") \(viewStore.conversionUnit.symbol)")
                         Spacer()
                         Button(action: {
                             viewStore.send(.coffeeAmountChanged(.increment))
@@ -75,7 +75,7 @@ struct ContentView: View {
                     Toggle(
                         "Keep locked while changing ratio",
                         isOn: viewStore.binding(
-                            keyPath: \.lockWaterAmount,
+                            keyPath: \.waterAmountIsLocked,
                             send: AppAction.form
                         )
                     ).toggleStyle(LockToggleStyle())
@@ -87,7 +87,7 @@ struct ContentView: View {
                             Image(systemName: "minus.square")
                         }).buttonStyle(PlainButtonStyle())
                         Spacer()
-                        Text("\(viewStore.waterAmount, specifier: "%.0f") \(viewStore.unit.symbol)")
+                        Text("\(viewStore.waterAmount, specifier: "%.0f") \(viewStore.conversionUnit.symbol)")
                         Spacer()
                         Button(action: {
                             viewStore.send(.waterAmountChanged(.increment))

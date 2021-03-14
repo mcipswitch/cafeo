@@ -29,6 +29,9 @@
 		93B4C79725FD3AE300E479C1 /* WaterAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C79625FD3AE300E479C1 /* WaterAmountView.swift */; };
 		93B4C79A25FD3B0300E479C1 /* CoffeeAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C79925FD3B0300E479C1 /* CoffeeAmountView.swift */; };
 		93B4C7A325FD62E400E479C1 /* Comparable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C7A225FD62E300E479C1 /* Comparable+Extension.swift */; };
+		93B4C7A925FDC2BD00E479C1 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C7A825FDC2BD00E479C1 /* Double+Extension.swift */; };
+		93B4C7AC25FDC47C00E479C1 /* AppState+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C7AB25FDC47C00E479C1 /* AppState+Helpers.swift */; };
+		93B4C7AF25FDC4A700E479C1 /* Reducer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C7AE25FDC4A700E479C1 /* Reducer+Extension.swift */; };
 		93C8399625F6979F00C66710 /* Orbitron-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 93C8399325F6979F00C66710 /* Orbitron-Medium.ttf */; };
 		93C8399725F6979F00C66710 /* Exo2-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 93C8399425F6979F00C66710 /* Exo2-SemiBold.ttf */; };
 		93C8399825F6979F00C66710 /* Exo2-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 93C8399525F6979F00C66710 /* Exo2-MediumItalic.ttf */; };
@@ -58,6 +61,9 @@
 		93B4C79625FD3AE300E479C1 /* WaterAmountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterAmountView.swift; sourceTree = "<group>"; };
 		93B4C79925FD3B0300E479C1 /* CoffeeAmountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeAmountView.swift; sourceTree = "<group>"; };
 		93B4C7A225FD62E300E479C1 /* Comparable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Comparable+Extension.swift"; sourceTree = "<group>"; };
+		93B4C7A825FDC2BD00E479C1 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
+		93B4C7AB25FDC47C00E479C1 /* AppState+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppState+Helpers.swift"; sourceTree = "<group>"; };
+		93B4C7AE25FDC4A700E479C1 /* Reducer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reducer+Extension.swift"; sourceTree = "<group>"; };
 		93C8399325F6979F00C66710 /* Orbitron-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Orbitron-Medium.ttf"; sourceTree = "<group>"; };
 		93C8399425F6979F00C66710 /* Exo2-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo2-SemiBold.ttf"; sourceTree = "<group>"; };
 		93C8399525F6979F00C66710 /* Exo2-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo2-MediumItalic.ttf"; sourceTree = "<group>"; };
@@ -104,6 +110,8 @@
 			isa = PBXGroup;
 			children = (
 				937FD32D25D216830048C406 /* AppState.swift */,
+				93B4C7AB25FDC47C00E479C1 /* AppState+Helpers.swift */,
+				93B4C7AE25FDC4A700E479C1 /* Reducer+Extension.swift */,
 				937FD33025D216C00048C406 /* Main */,
 				937FD32725D211670048C406 /* Styles */,
 				9375EEEB25D1B3910003A323 /* Assets.xcassets */,
@@ -149,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				937FD31F25D1EC9C0048C406 /* Binding+Extension.swift */,
+				93B4C7A825FDC2BD00E479C1 /* Double+Extension.swift */,
 				93B4C76A25F7E53400E479C1 /* Color+Extension.swift */,
 				93B4C7A225FD62E300E479C1 /* Comparable+Extension.swift */,
 				93B4C77025F90F7B00E479C1 /* Font+Extension.swift */,
@@ -281,8 +290,11 @@
 				937FD32525D2115E0048C406 /* LockToggleStyle.swift in Sources */,
 				937FD32E25D216830048C406 /* AppState.swift in Sources */,
 				9375EEEA25D1B3900003A323 /* ContentView.swift in Sources */,
+				93B4C7AC25FDC47C00E479C1 /* AppState+Helpers.swift in Sources */,
+				93B4C7A925FDC2BD00E479C1 /* Double+Extension.swift in Sources */,
 				93B4C78F25FD3A8C00E479C1 /* BoundsPreferenceKey.swift in Sources */,
 				93B4C77125F90F7B00E479C1 /* Font+Extension.swift in Sources */,
+				93B4C7AF25FDC4A700E479C1 /* Reducer+Extension.swift in Sources */,
 				93B4C78225FA752D00E479C1 /* RatioView.swift in Sources */,
 				93B4C79A25FD3B0300E479C1 /* CoffeeAmountView.swift in Sources */,
 				93B4C77425F90FC900E479C1 /* View+Extension.swift in Sources */,

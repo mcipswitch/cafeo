@@ -15,4 +15,5 @@ extension Color {
     public static let coffioOrange = Color(#colorLiteral(red: 0.8980392157, green: 0.3607843137, blue: 0, alpha: 1))
 
     public static let coffioShadow = Color(#colorLiteral(red: 0.09411764706, green: 0.09803921569, blue: 0.1019607843, alpha: 1))
+    public static let coffioShadowDark = Color(#colorLiteral(red: 0.01568627451, green: 0.01568627451, blue: 0.01568627451, alpha: 1))
 }

@@ -11,27 +11,11 @@ import SwiftUI
 struct WaterAmountView: View {
     @ObservedObject var viewStore: ViewStore<AppState, AppAction>
 
-    private func onPress(_ action: AmountAction) {
-        self.viewStore.send(.amountButtonLongPressed(.water, action))
-    }
-
-    private func onRelease() {
-        self.viewStore.send(.form(.set(\.isLongPressing, false)))
-    }
-
-    private func onTap(_ action: AmountAction) {
-        self.viewStore.send(.waterAmountChanged(action))
-    }
-
     var body: some View {
         VStack(spacing: 20) {
             CoffioText(text: "water", .mainLabel)
-
             VStack(spacing: 10) {
-                // TODO: - How to use CoffioText with specifier?
-                Text("\(viewStore.waterAmount, specifier: "%.0f")")
-                    .kerning(4)
-                    .coffioTextStyle(.digitalLabel)
+                CoffioText(text: viewStore.waterAmount.format(to: "%.0f"), .digitalLabel)
 
                 IncrementDecrementButton(
                     onPress: self.onPress(_:),
@@ -39,12 +23,27 @@ struct WaterAmountView: View {
                     onTap: self.onTap(_:)
                 )
             }
-
             Toggle("", isOn: viewStore.binding(
-                keyPath: \.lockWaterAmount,
+                keyPath: \.waterAmountIsLocked,
                 send: AppAction.form
             )).toggleStyle(LockToggleStyle())
             .padding(.top, 20)
         }
+    }
+}
+
+// MARK: - WaterAmountView+Extension
+
+extension WaterAmountView {
+    private func onPress(_ action: AdjustAmountAction) {
+        self.viewStore.send(.adjustAmountButtonLongPressed(.water, action))
+    }
+
+    private func onRelease() {
+        self.viewStore.send(.form(.set(\.isLongPressing, false)))
+    }
+
+    private func onTap(_ action: AdjustAmountAction) {
+        self.viewStore.send(.waterAmountChanged(action))
     }
 }
