@@ -118,6 +118,7 @@
 				93C8399A25F697A400C66710 /* Resources */,
 				9375EEF025D1B3910003A323 /* Info.plist */,
 				9375EEED25D1B3910003A323 /* Preview Content */,
+				9382B05425FEB367004DCA4B /* Old */,
 			);
 			path = Ratio;
 			sourceTree = "<group>";
@@ -143,7 +144,6 @@
 			isa = PBXGroup;
 			children = (
 				9375EEE725D1B3900003A323 /* RatioApp.swift */,
-				9375EEE925D1B3900003A323 /* ContentView.swift */,
 				93A9FDE925F6911D006D5428 /* Coffio.swift */,
 				93B4C77F25FA751A00E479C1 /* Views */,
 				93B4C76D25F7E53700E479C1 /* Extensions */,
@@ -151,6 +151,14 @@
 				931BE97B25F7DF090030444F /* UI */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		9382B05425FEB367004DCA4B /* Old */ = {
+			isa = PBXGroup;
+			children = (
+				9375EEE925D1B3900003A323 /* ContentView.swift */,
+			);
+			path = Old;
 			sourceTree = "<group>";
 		};
 		93B4C76D25F7E53700E479C1 /* Extensions */ = {
