@@ -13,7 +13,6 @@
 		9375EEEA25D1B3900003A323 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9375EEE925D1B3900003A323 /* ContentView.swift */; };
 		9375EEEC25D1B3910003A323 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9375EEEB25D1B3910003A323 /* Assets.xcassets */; };
 		9375EEEF25D1B3910003A323 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9375EEEE25D1B3910003A323 /* Preview Assets.xcassets */; };
-		937FD32025D1EC9C0048C406 /* Binding+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937FD31F25D1EC9C0048C406 /* Binding+Extension.swift */; };
 		937FD32525D2115E0048C406 /* LockToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937FD32425D2115E0048C406 /* LockToggleStyle.swift */; };
 		937FD32B25D216160048C406 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 937FD32A25D216160048C406 /* ComposableArchitecture */; };
 		937FD32E25D216830048C406 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937FD32D25D216830048C406 /* AppState.swift */; };
@@ -46,7 +45,6 @@
 		9375EEEB25D1B3910003A323 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9375EEEE25D1B3910003A323 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9375EEF025D1B3910003A323 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		937FD31F25D1EC9C0048C406 /* Binding+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Extension.swift"; sourceTree = "<group>"; };
 		937FD32425D2115E0048C406 /* LockToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockToggleStyle.swift; sourceTree = "<group>"; };
 		937FD32D25D216830048C406 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		93A9FDE925F6911D006D5428 /* Coffio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coffio.swift; sourceTree = "<group>"; };
@@ -164,7 +162,6 @@
 		93B4C76D25F7E53700E479C1 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				937FD31F25D1EC9C0048C406 /* Binding+Extension.swift */,
 				93B4C7A825FDC2BD00E479C1 /* Double+Extension.swift */,
 				93B4C76A25F7E53400E479C1 /* Color+Extension.swift */,
 				93B4C7A225FD62E300E479C1 /* Comparable+Extension.swift */,
@@ -307,7 +304,6 @@
 				93B4C79A25FD3B0300E479C1 /* CoffeeAmountView.swift in Sources */,
 				93B4C77425F90FC900E479C1 /* View+Extension.swift in Sources */,
 				93B4C77D25FA74E900E479C1 /* UnitConversionView.swift in Sources */,
-				937FD32025D1EC9C0048C406 /* Binding+Extension.swift in Sources */,
 				93B4C79725FD3AE300E479C1 /* WaterAmountView.swift in Sources */,
 				9375EEE825D1B3900003A323 /* RatioApp.swift in Sources */,
 				93B4C78825FD386800E479C1 /* CoffioText.swift in Sources */,
