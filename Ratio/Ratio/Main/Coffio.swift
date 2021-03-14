@@ -28,7 +28,7 @@ struct Coffio: View {
                 .edgesIgnoringSafeArea(.all)
 
                 VStack(spacing: 0) {
-                    //Spacer()
+                    Spacer()
 
                     RatioView(viewStore: viewStore)
                         .frame(height: 180)
