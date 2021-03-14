@@ -46,7 +46,7 @@ struct RatioView: View {
                             )
                         ZStack {
                             RatioSnapCarousel(viewStore: self.viewStore)
-                                // TODO: - Could this be animated in AppState?
+                                // TODO: - This could be animated in AppState in the future
                                 .animation(.spring())
 
                             self.ratioDenominatorLine

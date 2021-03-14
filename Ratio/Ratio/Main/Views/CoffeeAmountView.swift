@@ -18,7 +18,7 @@ struct CoffeeAmountView: View {
             VStack(spacing: 10) {
                 CoffioText(text: viewStore.coffeeAmount.format(to: "%.1f"), .digitalLabel)
 
-                IncrementDecrementButton(
+                AmountAdjustButton(
                     onPress: self.onPress(_:),
                     onRelease: self.onRelease,
                     onTap: self.onTap(_:)

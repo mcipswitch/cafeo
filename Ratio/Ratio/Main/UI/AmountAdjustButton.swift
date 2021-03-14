@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct IncrementDecrementButton: View {
+struct AmountAdjustButton: View {
     var onPress: (AdjustAmountAction) -> Void
     var onRelease: () -> Void
     var onTap: (AdjustAmountAction) -> Void

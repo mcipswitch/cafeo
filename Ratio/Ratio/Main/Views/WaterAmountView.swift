@@ -17,7 +17,7 @@ struct WaterAmountView: View {
             VStack(spacing: 10) {
                 CoffioText(text: viewStore.waterAmount.format(to: "%.0f"), .digitalLabel)
 
-                IncrementDecrementButton(
+                AmountAdjustButton(
                     onPress: self.onPress(_:),
                     onRelease: self.onRelease,
                     onTap: self.onTap(_:)

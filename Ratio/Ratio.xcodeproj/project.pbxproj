@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		931BE97925F7DF030030444F /* IncrementDecrementButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931BE97825F7DF030030444F /* IncrementDecrementButton.swift */; };
+		931BE97925F7DF030030444F /* AmountAdjustButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931BE97825F7DF030030444F /* AmountAdjustButton.swift */; };
 		9364AD5F25D37BCF00149F49 /* UnitOfMeasurementToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9364AD5E25D37BCF00149F49 /* UnitOfMeasurementToggleStyle.swift */; };
 		9375EEE825D1B3900003A323 /* RatioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9375EEE725D1B3900003A323 /* RatioApp.swift */; };
 		9375EEEA25D1B3900003A323 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9375EEE925D1B3900003A323 /* ContentView.swift */; };
@@ -38,7 +38,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		931BE97825F7DF030030444F /* IncrementDecrementButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncrementDecrementButton.swift; sourceTree = "<group>"; };
+		931BE97825F7DF030030444F /* AmountAdjustButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountAdjustButton.swift; sourceTree = "<group>"; };
 		9364AD5E25D37BCF00149F49 /* UnitOfMeasurementToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitOfMeasurementToggleStyle.swift; sourceTree = "<group>"; };
 		9375EEE425D1B3900003A323 /* Ratio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ratio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9375EEE725D1B3900003A323 /* RatioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatioApp.swift; sourceTree = "<group>"; };
@@ -84,7 +84,7 @@
 		931BE97B25F7DF090030444F /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				931BE97825F7DF030030444F /* IncrementDecrementButton.swift */,
+				931BE97825F7DF030030444F /* AmountAdjustButton.swift */,
 				93B4C78725FD386800E479C1 /* CoffioText.swift */,
 			);
 			path = UI;
@@ -284,7 +284,7 @@
 			files = (
 				93B4C7A325FD62E400E479C1 /* Comparable+Extension.swift in Sources */,
 				93B4C78B25FD38D500E479C1 /* Gradient+Extension.swift in Sources */,
-				931BE97925F7DF030030444F /* IncrementDecrementButton.swift in Sources */,
+				931BE97925F7DF030030444F /* AmountAdjustButton.swift in Sources */,
 				93B4C76B25F7E53400E479C1 /* Color+Extension.swift in Sources */,
 				93A9FDEA25F6911D006D5428 /* Coffio.swift in Sources */,
 				937FD32525D2115E0048C406 /* LockToggleStyle.swift in Sources */,
