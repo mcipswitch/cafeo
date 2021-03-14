@@ -18,7 +18,7 @@ struct AmountAdjustButton: View {
                 .stroke(
                     LinearGradient(
                         gradient:
-                            Gradient(colors: [Color.coffioBackgroundDark, Color(#colorLiteral(red: 0.2862745098, green: 0.3058823529, blue: 0.3450980392, alpha: 1))]),
+                            Gradient(colors: [Color.coffioBackgroundDark, Color(#colorLiteral(red: 0.1960784314, green: 0.2117647059, blue: 0.231372549, alpha: 1))]),
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
                     ),
@@ -28,8 +28,9 @@ struct AmountAdjustButton: View {
                 .background(
                     RoundedRectangle(cornerRadius: 24, style: .continuous)
                         .fill(Color.coffioBackgroundLight)
-                        .shadow(color: .coffioHighlight, radius: 8, x: -4, y: -4)
-                        .shadow(color: .coffioShadowDark, radius: 8, x: 4, y: 4)
+                        // highlight and shadow
+                        .shadow(color: .coffioHighlight1, radius: 8, x: -4, y: -4)
+                        .shadow(color: .coffioShadowDark00, radius: 8, x: 4, y: 4)
                 )
                 .overlay(
                     HStack(spacing: 0) {

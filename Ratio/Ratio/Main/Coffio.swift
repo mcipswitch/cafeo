@@ -33,8 +33,7 @@ struct Coffio: View {
                     RatioView(viewStore: viewStore)
                         .frame(height: 180)
                         .padding(.horizontal, 24)
-                        .padding(.top, self.padding)
-                        .padding(.bottom, self.padding)
+                        .padding(.vertical, self.padding)
                         .background(Color.coffioBackgroundDark)
 
                     HStack {
@@ -48,8 +47,7 @@ struct Coffio: View {
 
                     UnitConversionView(viewStore: viewStore)
                         .padding(.horizontal, 24)
-                        .padding(.top, self.padding)
-                        .padding(.bottom, self.padding)
+                        .padding(.vertical, self.padding)
                         .background(Color.coffioBackgroundDark)
                 }
             }

@@ -17,7 +17,7 @@ struct RatioView: View {
             ZStack {
                 GeometryReader { geo in
                     self.ratioBox
-                        .stroke(Color.coffioShadowDarker, lineWidth: 2)
+                        .stroke(Color.coffioShadowDark1, lineWidth: 2)
                         .background(
                             self.ratioBox
                                 .fill(LinearGradient.coffioChrome)
@@ -25,7 +25,7 @@ struct RatioView: View {
                         // inner shadow
                         .overlay(
                             self.ratioBox
-                                .stroke(Color.coffioShadowDarker, lineWidth: 2)
+                                .stroke(Color.coffioShadowDark1, lineWidth: 2)
                                 .blur(radius: 4)
                                 .frame(
                                     width: geo.size.width - 4,
@@ -35,7 +35,7 @@ struct RatioView: View {
                     HStack {
                         Spacer()
                         Rectangle().frame(width: self.dividerWidth)
-                            .foregroundColor(.coffioShadowDarker)
+                            .foregroundColor(.coffioShadowDark1)
                         Spacer()
                     }
                     HStack(spacing: 0) {

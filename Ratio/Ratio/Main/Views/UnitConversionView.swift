@@ -77,17 +77,17 @@ struct CoffioToggle: View {
     var body: some View {
         ZStack {
             self.togglePill
-                .stroke(Color.coffioShadowDarker, lineWidth: 2)
+                .stroke(Color.coffioShadowDark1, lineWidth: 2)
                 .frame(width: 100, height: self.toggleHeight)
                 .background(
                     self.togglePill
                         .fill(Color.coffioBackgroundLight)
                         // outer shadow and highlight
-                        .shadow(color: .coffioShadowDarker, radius: 4, x: 2, y: 2)
-                        .shadow(color: .coffioHighlight, radius: 4, x: -2, y: -2)
+                        .shadow(color: .coffioShadowDark1, radius: 4, x: 2, y: 2)
+                        .shadow(color: .coffioHighlight00, radius: 4, x: -2, y: -2)
                 )
                 // inner shadow
-                .shadow(color: .coffioShadowDarker, radius: 2, x: 2, y: 2)
+                .shadow(color: .coffioShadowDark1, radius: 2, x: 2, y: 2)
 
             Circle()
                 .stroke(Color.coffioOrange, lineWidth: 2)
@@ -95,7 +95,7 @@ struct CoffioToggle: View {
                 .background(
                     Circle()
                         .fill(LinearGradient.coffioOrange)
-                        .shadow(color: Color.coffioShadowDark.opacity(0.6), radius: 14, x: 0, y: 0)
+                        .shadow(color: Color.coffioShadowDark00.opacity(0.6), radius: 14, x: 0, y: 0)
                 )
                 .offset(x: self.offset)
         }
