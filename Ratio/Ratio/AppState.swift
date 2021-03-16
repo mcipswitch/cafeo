@@ -8,7 +8,6 @@
 import SwiftUI
 import ComposableArchitecture
 
-// TODO: - up to 100z max
 struct AppState: Equatable {
 
     var coffeeAmount: Double = 15.6
