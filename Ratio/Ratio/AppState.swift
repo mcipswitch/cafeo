@@ -8,6 +8,7 @@
 import SwiftUI
 import ComposableArchitecture
 
+// TODO: - up to 100z max
 struct AppState: Equatable {
 
     var coffeeAmount: Double = 15.6
@@ -126,10 +127,13 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, e
             feedback(.light)
             state.waterAmount += 1
         case .decrement:
-            let newValue = state.waterAmount - 1
+            feedback(.light)
+
+            let newValue = state.waterAmount.rounded() - 1
             if newValue > 0 {
-                feedback(.light)
                 state.waterAmount -= 1
+            } else if newValue == 0 {
+                state.waterAmount = 0
             }
         }
 
@@ -141,10 +145,13 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, e
             feedback(.light)
             state.coffeeAmount += 0.1
         case .decrement:
-            let newValue = state.coffeeAmount - 0.1
+            feedback(.light)
+
+            let newValue = state.coffeeAmount.round(to: 1) - 0.1
             if newValue > 0 {
-                feedback(.light)
                 state.coffeeAmount -= 0.1
+            } else if newValue == 0 {
+                state.coffeeAmount = 0
             }
         }
 

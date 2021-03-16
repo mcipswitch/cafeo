@@ -23,5 +23,6 @@ struct CoffioText: View {
             .kerning(self.textStyle.kerning)
             .coffioTextStyle(self.textStyle, state: self.state)
             .textCase(self.textStyle.textCase)
+            .multilineTextAlignment(.center)
     }
 }
