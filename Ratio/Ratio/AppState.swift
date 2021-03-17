@@ -61,7 +61,8 @@ enum AppAction: Equatable {
 }
 
 struct AppEnvironment {
-    //var mainQueue: AnySchedulerOf<DispatchQueue>
+    //var uuid: () -> UUID
+    var mainQueue: AnySchedulerOf<DispatchQueue>
 }
 
 // MARK: - AppReducer
@@ -69,6 +70,7 @@ struct AppEnvironment {
 let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, env in
 
     struct TimerID: Hashable {}
+    struct CancelDelayID: Hashable {}
 
     func feedback(_ style: UIImpactFeedbackGenerator.FeedbackStyle) {
         let generator = UIImpactFeedbackGenerator(style: style)
@@ -108,7 +110,7 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, e
 
         feedback(.light)
         return Effect(value: AppAction.unitConversionToggleYOffsetChanged)
-            .delay(for: 0, scheduler: DispatchQueue.main.animation(                  Animation.timingCurve(0.60, 0.80, 0, 0.96)))
+            .receive(on: DispatchQueue.main.animation(Animation.timingCurve(0.60, 0.80, 0, 0.96)))
             .eraseToEffect()
 
     case .unitConversionToggleYOffsetChanged:
@@ -162,7 +164,7 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, e
         return .none
 
     case .adjustAmountButtonLongPressed(let ingredient, let action):
-        return Effect.timer(id: TimerID(), every: 0.1, on: DispatchQueue.main)
+        return Effect.timer(id: TimerID(), every: 0.1, on: env.mainQueue)
             .map { _ in
                 ingredient == .coffee
                     ? .coffeeAmountChanged(action)

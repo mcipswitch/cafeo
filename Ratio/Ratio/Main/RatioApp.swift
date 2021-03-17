@@ -14,7 +14,9 @@ struct RatioApp: App {
         WindowGroup {
             Coffio(store: Store(initialState: AppState(),
                                 reducer: appReducer,
-                                environment: AppEnvironment()
+                                environment: AppEnvironment(
+                                    mainQueue: DispatchQueue.main.eraseToAnyScheduler()
+                                )
             ))
         }
     }
