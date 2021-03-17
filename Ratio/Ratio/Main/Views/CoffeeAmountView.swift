@@ -26,8 +26,8 @@ struct CoffeeAmountView: View {
             }
 
             Toggle("", isOn: viewStore.binding(
-                keyPath: \.coffeeAmountIsLocked,
-                send: AppAction.form
+                    get: \.coffeeAmountIsLocked,
+                    send: AppAction.amountLockToggled
             )).toggleStyle(LockToggleStyle())
             .padding(.top, 20)
         }

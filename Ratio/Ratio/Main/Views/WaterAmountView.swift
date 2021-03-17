@@ -24,9 +24,9 @@ struct WaterAmountView: View {
                 )
             }
             Toggle("", isOn: viewStore.binding(
-                keyPath: \.waterAmountIsLocked,
-                send: AppAction.form
-            )).toggleStyle(LockToggleStyle())
+                    get: \.waterAmountIsLocked,
+                    send: .amountLockToggled)
+            ).toggleStyle(LockToggleStyle())
             .padding(.top, 20)
         }
     }

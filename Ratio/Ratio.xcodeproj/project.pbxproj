@@ -16,6 +16,8 @@
 		937FD32525D2115E0048C406 /* LockToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937FD32425D2115E0048C406 /* LockToggleStyle.swift */; };
 		937FD32B25D216160048C406 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 937FD32A25D216160048C406 /* ComposableArchitecture */; };
 		937FD32E25D216830048C406 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937FD32D25D216830048C406 /* AppState.swift */; };
+		9382B0662600F28E004DCA4B /* RatioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9382B0652600F28E004DCA4B /* RatioTests.swift */; };
+		9382B08626013061004DCA4B /* ViewStore+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9382B08526013061004DCA4B /* ViewStore+Extension.swift */; };
 		93A9FDEA25F6911D006D5428 /* Coffio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A9FDE925F6911D006D5428 /* Coffio.swift */; };
 		93B4C76B25F7E53400E479C1 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C76A25F7E53400E479C1 /* Color+Extension.swift */; };
 		93B4C77125F90F7B00E479C1 /* Font+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C77025F90F7B00E479C1 /* Font+Extension.swift */; };
@@ -36,6 +38,16 @@
 		93C8399825F6979F00C66710 /* Exo2-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 93C8399525F6979F00C66710 /* Exo2-MediumItalic.ttf */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		9382B0682600F28E004DCA4B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9375EEDC25D1B3900003A323 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9375EEE325D1B3900003A323;
+			remoteInfo = Ratio;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		931BE97825F7DF030030444F /* AmountAdjustButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountAdjustButton.swift; sourceTree = "<group>"; };
 		9364AD5E25D37BCF00149F49 /* UnitOfMeasurementToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitOfMeasurementToggleStyle.swift; sourceTree = "<group>"; };
@@ -47,6 +59,10 @@
 		9375EEF025D1B3910003A323 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		937FD32425D2115E0048C406 /* LockToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockToggleStyle.swift; sourceTree = "<group>"; };
 		937FD32D25D216830048C406 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		9382B0632600F28E004DCA4B /* RatioTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RatioTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9382B0652600F28E004DCA4B /* RatioTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatioTests.swift; sourceTree = "<group>"; };
+		9382B0672600F28E004DCA4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9382B08526013061004DCA4B /* ViewStore+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewStore+Extension.swift"; sourceTree = "<group>"; };
 		93A9FDE925F6911D006D5428 /* Coffio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coffio.swift; sourceTree = "<group>"; };
 		93B4C76A25F7E53400E479C1 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		93B4C77025F90F7B00E479C1 /* Font+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Extension.swift"; sourceTree = "<group>"; };
@@ -76,6 +92,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9382B0602600F28E004DCA4B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -92,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				9375EEE625D1B3900003A323 /* Ratio */,
+				9382B0642600F28E004DCA4B /* RatioTests */,
 				9375EEE525D1B3900003A323 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -100,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				9375EEE425D1B3900003A323 /* Ratio.app */,
+				9382B0632600F28E004DCA4B /* RatioTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -110,6 +135,7 @@
 				937FD32D25D216830048C406 /* AppState.swift */,
 				93B4C7AB25FDC47C00E479C1 /* AppState+Helpers.swift */,
 				93B4C7AE25FDC4A700E479C1 /* Reducer+Extension.swift */,
+				9382B08526013061004DCA4B /* ViewStore+Extension.swift */,
 				937FD33025D216C00048C406 /* Main */,
 				937FD32725D211670048C406 /* Styles */,
 				9375EEEB25D1B3910003A323 /* Assets.xcassets */,
@@ -157,6 +183,15 @@
 				9375EEE925D1B3900003A323 /* ContentView.swift */,
 			);
 			path = Old;
+			sourceTree = "<group>";
+		};
+		9382B0642600F28E004DCA4B /* RatioTests */ = {
+			isa = PBXGroup;
+			children = (
+				9382B0652600F28E004DCA4B /* RatioTests.swift */,
+				9382B0672600F28E004DCA4B /* Info.plist */,
+			);
+			path = RatioTests;
 			sourceTree = "<group>";
 		};
 		93B4C76D25F7E53700E479C1 /* Extensions */ = {
@@ -232,6 +267,24 @@
 			productReference = 9375EEE425D1B3900003A323 /* Ratio.app */;
 			productType = "com.apple.product-type.application";
 		};
+		9382B0622600F28E004DCA4B /* RatioTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9382B06A2600F28E004DCA4B /* Build configuration list for PBXNativeTarget "RatioTests" */;
+			buildPhases = (
+				9382B05F2600F28E004DCA4B /* Sources */,
+				9382B0602600F28E004DCA4B /* Frameworks */,
+				9382B0612600F28E004DCA4B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9382B0692600F28E004DCA4B /* PBXTargetDependency */,
+			);
+			name = RatioTests;
+			productName = RatioTests;
+			productReference = 9382B0632600F28E004DCA4B /* RatioTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -243,6 +296,10 @@
 				TargetAttributes = {
 					9375EEE325D1B3900003A323 = {
 						CreatedOnToolsVersion = 12.4;
+					};
+					9382B0622600F28E004DCA4B = {
+						CreatedOnToolsVersion = 12.4;
+						TestTargetID = 9375EEE325D1B3900003A323;
 					};
 				};
 			};
@@ -263,6 +320,7 @@
 			projectRoot = "";
 			targets = (
 				9375EEE325D1B3900003A323 /* Ratio */,
+				9382B0622600F28E004DCA4B /* RatioTests */,
 			);
 		};
 /* End PBXProject section */
@@ -280,6 +338,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9382B0612600F28E004DCA4B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -291,6 +356,7 @@
 				93B4C78B25FD38D500E479C1 /* Gradient+Extension.swift in Sources */,
 				931BE97925F7DF030030444F /* AmountAdjustButton.swift in Sources */,
 				93B4C76B25F7E53400E479C1 /* Color+Extension.swift in Sources */,
+				9382B08626013061004DCA4B /* ViewStore+Extension.swift in Sources */,
 				93A9FDEA25F6911D006D5428 /* Coffio.swift in Sources */,
 				937FD32525D2115E0048C406 /* LockToggleStyle.swift in Sources */,
 				937FD32E25D216830048C406 /* AppState.swift in Sources */,
@@ -311,7 +377,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9382B05F2600F28E004DCA4B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9382B0662600F28E004DCA4B /* RatioTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9382B0692600F28E004DCA4B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9375EEE325D1B3900003A323 /* Ratio */;
+			targetProxy = 9382B0682600F28E004DCA4B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		9375EEF125D1B3910003A323 /* Debug */ = {
@@ -474,6 +556,46 @@
 			};
 			name = Release;
 		};
+		9382B06B2600F28E004DCA4B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = A5L5S7CN8F;
+				INFOPLIST_FILE = RatioTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.prsclla.RatioTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ratio.app/Ratio";
+			};
+			name = Debug;
+		};
+		9382B06C2600F28E004DCA4B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = A5L5S7CN8F;
+				INFOPLIST_FILE = RatioTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.prsclla.RatioTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ratio.app/Ratio";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -491,6 +613,15 @@
 			buildConfigurations = (
 				9375EEF425D1B3910003A323 /* Debug */,
 				9375EEF525D1B3910003A323 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9382B06A2600F28E004DCA4B /* Build configuration list for PBXNativeTarget "RatioTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9382B06B2600F28E004DCA4B /* Debug */,
+				9382B06C2600F28E004DCA4B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

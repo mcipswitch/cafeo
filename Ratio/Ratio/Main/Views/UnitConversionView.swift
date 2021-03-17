@@ -42,7 +42,7 @@ struct UnitConversionView: View {
 
             HStack(spacing: 30) {
                 CoffioText(text: "\(UnitMass.grams.abbrString)",
-                           state: self.viewStore.conversionUnit == .grams ? .selected : .normal,
+                           state: self.viewStore.unitConversion == .grams ? .selected : .normal,
                            .unitLabel)
 
                 CoffioToggle(
@@ -53,16 +53,13 @@ struct UnitConversionView: View {
                     .gesture(
                         // This registers tap and swipe gestures
                         DragGesture(minimumDistance: 0)
-                            .onEnded { value in
-                                self.viewStore.send(
-                                    .unitConversionToggleYOffsetChanged,
-                                    animation: Animation.timingCurve(0.60, 0.80, 0, 0.96)
-                                )
+                            .onEnded { _ in
+                                self.viewStore.send(.unitConversionToggled)
                             }
                     )
 
                 CoffioText(text: "\(UnitMass.ounces.abbrString)",
-                           state: self.viewStore.conversionUnit == .ounces ? .selected : .normal,
+                           state: self.viewStore.unitConversion == .ounces ? .selected : .normal,
                            .unitLabel)
             }
         }

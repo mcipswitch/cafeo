@@ -10,7 +10,7 @@ import ComposableArchitecture
 
 struct AppState: Equatable {
 
-    var coffeeAmount: Double = 15.6
+    var coffeeAmount: Double = 15.625
     var waterAmount: Double = 250
 
     var coffeeAmountIsLocked = true
@@ -18,7 +18,7 @@ struct AppState: Equatable {
 
     var isLongPressing = false
 
-    var conversionUnit: UnitMass = .grams
+    var unitConversion: UnitMass = .grams
     var toggleYOffset: CGFloat = UnitMass.grams.toggleYOffset
 
     // Ratio
@@ -31,6 +31,7 @@ struct AppState: Equatable {
 
     var activeRatioIdx: Int = 15 // "16"
 
+    // helper vars
     var activeRatioDenominator: Int {
         self.ratioDenominators[self.activeRatioIdx]
     }
@@ -41,7 +42,6 @@ struct AppState: Equatable {
 }
 
 enum AppAction: Equatable {
-
     enum CoffioIngredient {
         case coffee
         case water
@@ -51,8 +51,10 @@ enum AppAction: Equatable {
     case coffeeAmountChanged(AdjustAmountAction)
     case waterAmountChanged(AdjustAmountAction)
 
-    case unitConversionChanged
+    case unitConversionToggled
     case unitConversionToggleYOffsetChanged
+
+    case amountLockToggled
 
     // This can be ignored
     case form(FormAction<AppState>)
@@ -73,61 +75,57 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, e
         generator.impactOccurred()
     }
 
+    func updateCoffeeAmount() {
+        state.coffeeAmount = state.waterAmount * state.ratio
+    }
+
+    func updateWaterAmount() {
+        state.waterAmount = state.coffeeAmount / state.ratio
+    }
+
+    func convert(_ value: inout Double, from unitA: UnitMass, to unitB: UnitMass) {
+        let measurement = Measurement(value: value, unit: unitA)
+        value = measurement.converted(to: unitB).value
+    }
+
+    // Action
     switch action {
-    case .unitConversionToggleYOffsetChanged:
-        if state.conversionUnit == .grams {
-            state.toggleYOffset = UnitMass.ounces.toggleYOffset
-        } else if state.conversionUnit == .ounces {
-            state.toggleYOffset = UnitMass.grams.toggleYOffset
+    case .unitConversionToggled:
+        switch state.unitConversion {
+        case .grams:
+            state.unitConversion = .ounces
+            convert(&state.coffeeAmount, from: .grams, to: .ounces)
+            convert(&state.waterAmount, from: .grams, to: .ounces)
+
+        case .ounces:
+            state.unitConversion = .grams
+            convert(&state.coffeeAmount, from: .ounces, to: .grams)
+            convert(&state.waterAmount, from: .ounces, to: .grams)
+
+        default:
+            break
         }
 
         feedback(.light)
-
-        return
-            Effect(value: AppAction.unitConversionChanged)
-            .delay(for: 0, scheduler: DispatchQueue.main.animation(.none))
+        return Effect(value: AppAction.unitConversionToggleYOffsetChanged)
+            .delay(for: 0, scheduler: DispatchQueue.main.animation(                  Animation.timingCurve(0.60, 0.80, 0, 0.96)))
             .eraseToEffect()
 
-    case .unitConversionChanged:
-        switch state.conversionUnit {
-        case .grams:
-            state.conversionUnit = .ounces
-
-            let coffeeGrams = Measurement(value: state.coffeeAmount, unit: UnitMass.grams)
-            let coffeeOunces = coffeeGrams.converted(to: .ounces)
-            let waterGrams = Measurement(value: state.waterAmount, unit: UnitMass.grams)
-            let waterOunces = waterGrams.converted(to: .ounces)
-
-            state.coffeeAmount = coffeeOunces.value
-            state.waterAmount = waterOunces.value
-
-            return .none
-
-        case .ounces:
-            state.conversionUnit = .grams
-
-            let coffeeOunces = Measurement(value: state.coffeeAmount, unit: UnitMass.ounces)
-            let coffeeGrams = coffeeOunces.converted(to: .grams)
-            let waterOunces = Measurement(value: state.waterAmount, unit: UnitMass.ounces)
-            let waterGrams = waterOunces.converted(to: .grams)
-
-            state.coffeeAmount = coffeeGrams.value
-            state.waterAmount = waterGrams.value
-
-            return .none
-
-        default:
-            return .none
+    case .unitConversionToggleYOffsetChanged:
+        if state.unitConversion == .grams {
+            state.toggleYOffset = UnitMass.grams.toggleYOffset
+        } else if state.unitConversion == .ounces {
+            state.toggleYOffset = UnitMass.ounces.toggleYOffset
         }
+
+        feedback(.light)
+        return .none
 
     case let .waterAmountChanged(action):
         switch action {
         case .increment:
-            feedback(.light)
             state.waterAmount += 1
         case .decrement:
-            feedback(.light)
-
             let newValue = state.waterAmount.rounded() - 1
             if newValue > 0 {
                 state.waterAmount -= 1
@@ -136,16 +134,15 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, e
             }
         }
 
-        return Effect(value: .form(.set(\.coffeeAmount, state.waterAmount * state.ratio)))
+        feedback(.light)
+        updateCoffeeAmount()
+        return .none
 
     case let .coffeeAmountChanged(action):
         switch action {
         case .increment:
-            feedback(.light)
             state.coffeeAmount += 0.1
         case .decrement:
-            feedback(.light)
-
             let newValue = state.coffeeAmount.round(to: 1) - 0.1
             if newValue > 0 {
                 state.coffeeAmount -= 0.1
@@ -154,7 +151,15 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, e
             }
         }
 
-        return Effect(value: .form(.set(\.waterAmount, state.coffeeAmount / state.ratio)))
+        feedback(.light)
+        updateWaterAmount()
+        return .none
+
+    case .amountLockToggled:
+        feedback(.light)
+        state.waterAmountIsLocked.toggle()
+        state.coffeeAmountIsLocked.toggle()
+        return .none
 
     case .adjustAmountButtonLongPressed(let ingredient, let action):
         return Effect.timer(id: TimerID(), every: 0.1, on: DispatchQueue.main)
@@ -168,24 +173,11 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, e
         return state.isLongPressing ? .none : .cancel(id: TimerID())
 
     case .form(\.activeRatioIdx):
-        if state.waterAmountIsLocked {
-            feedback(.light)
-            return Effect(value: .form(.set(\.coffeeAmount, state.waterAmount * state.ratio)))
-        } else if state.coffeeAmountIsLocked {
-            feedback(.light)
-            return Effect(value: .form(.set(\.waterAmount, state.coffeeAmount / state.ratio)))
-        } else {
-            return .none
-        }
+        state.waterAmountIsLocked
+            ? updateCoffeeAmount()
+            : updateWaterAmount()
 
-    case .form(\.waterAmountIsLocked):
         feedback(.light)
-        state.coffeeAmountIsLocked.toggle()
-        return .none
-
-    case .form(\.coffeeAmountIsLocked):
-        feedback(.light)
-        state.waterAmountIsLocked.toggle()
         return .none
 
     // This can be ignored
