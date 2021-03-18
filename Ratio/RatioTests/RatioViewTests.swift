@@ -18,7 +18,7 @@ class RatioViewTests: XCTestCase {
 
         let store = TestStore(
             initialState: AppState(
-                coffeeAmount: 250 / 16,
+                coffeeAmount: waterAmount / 16,
                 waterAmount: waterAmount,
                 coffeeAmountIsLocked: false,
                 waterAmountIsLocked: true,

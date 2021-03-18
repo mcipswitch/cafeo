@@ -35,7 +35,7 @@ enum CoffioTextStyle {
         case .mainLabel:
             return .exo2MediumItalicFont(size: 14)
         case .digitalLabel:
-            return .orbitronMediumFont(size: 48)
+            return .orbitronMediumFont(size: 42)
         case .ratioLabel:
             return .orbitronMediumFont(size: 50)
         case .unitLabel:

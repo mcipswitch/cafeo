@@ -194,10 +194,10 @@
 		9382B0642600F28E004DCA4B /* RatioTests */ = {
 			isa = PBXGroup;
 			children = (
-				9382B09D26029A58004DCA4B /* RatioViewTests.swift */,
 				9382B09326028C17004DCA4B /* CoffeeAmountViewTests.swift */,
-				9382B08F26028BC6004DCA4B /* WaterAmountViewTests.swift */,
+				9382B09D26029A58004DCA4B /* RatioViewTests.swift */,
 				9382B08926028B7F004DCA4B /* UnitConversionViewTests.swift */,
+				9382B08F26028BC6004DCA4B /* WaterAmountViewTests.swift */,
 				9382B0672600F28E004DCA4B /* Info.plist */,
 			);
 			path = RatioTests;
@@ -542,7 +542,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.prsclla.Ratio;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -564,7 +564,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.prsclla.Ratio;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
