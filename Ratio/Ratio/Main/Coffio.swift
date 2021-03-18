@@ -8,6 +8,7 @@
 import ComposableArchitecture
 import SwiftUI
 
+// TODO: - userdefaults save last known setting
 struct Coffio: View {
     let store: Store<AppState, AppAction>
     var padding: CGFloat = 30

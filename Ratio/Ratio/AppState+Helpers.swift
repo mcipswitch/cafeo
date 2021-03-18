@@ -41,17 +41,19 @@ enum AdjustAmountAction {
     case increment, decrement
 }
 
-// MARK: - UnitMass+Extension
+enum CoffioUnit: String, Codable {
+    case grams, ounces
+}
 
-extension UnitMass {
+// MARK: - CoffioUnit+Extension
+
+extension CoffioUnit {
     var abbrString: String {
         switch self {
         case .grams:
             return "gr"
         case .ounces:
             return "oz"
-        default:
-            return ""
         }
     }
 
@@ -61,8 +63,6 @@ extension UnitMass {
             return -30
         case .ounces:
             return 30
-        default:
-            return 0
         }
     }
 }

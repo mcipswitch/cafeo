@@ -9,17 +9,12 @@ import SwiftUI
 import ComposableArchitecture
 
 struct AppState: Equatable {
-
     var coffeeAmount: Double = 15.625
     var waterAmount: Double = 250
-
     var coffeeAmountIsLocked = true
     var waterAmountIsLocked = false
-
     var isLongPressing = false
-
-    var unitConversion: UnitMass = .grams
-    var toggleYOffset: CGFloat = UnitMass.grams.toggleYOffset
+    var unitConversion: CoffioUnit = .grams
 
     // Ratio
     var ratioCarouselDragYOffset: CGFloat = .zero
@@ -33,6 +28,10 @@ struct AppState: Equatable {
 }
 
 extension AppState {
+    var toggleYOffset: CGFloat {
+        self.unitConversion.toggleYOffset
+    }
+
     var activeRatioDenominator: Int {
         self.ratioDenominators[self.activeRatioIdx]
     }
@@ -53,7 +52,6 @@ enum AppAction: Equatable {
     case waterAmountChanged(AdjustAmountAction)
 
     case unitConversionToggled
-    case unitConversionToggleYOffsetChanged
 
     case amountLockToggled
 
@@ -62,7 +60,6 @@ enum AppAction: Equatable {
 }
 
 struct AppEnvironment {
-    //var uuid: () -> UUID
     var mainQueue: AnySchedulerOf<DispatchQueue>
 }
 
@@ -104,21 +101,6 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, e
             state.unitConversion = .grams
             convert(&state.coffeeAmount, from: .ounces, to: .grams)
             convert(&state.waterAmount, from: .ounces, to: .grams)
-
-        default:
-            break
-        }
-
-        feedback(.light)
-        return Effect(value: AppAction.unitConversionToggleYOffsetChanged)
-            .receive(on: DispatchQueue.main.animation(Animation.timingCurve(0.60, 0.80, 0, 0.96)))
-            .eraseToEffect()
-
-    case .unitConversionToggleYOffsetChanged:
-        if state.unitConversion == .grams {
-            state.toggleYOffset = UnitMass.grams.toggleYOffset
-        } else if state.unitConversion == .ounces {
-            state.toggleYOffset = UnitMass.ounces.toggleYOffset
         }
 
         feedback(.light)
@@ -189,4 +171,3 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, e
     }
 }
 .form(action: /AppAction.form)
-.debug()

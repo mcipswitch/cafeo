@@ -41,14 +41,14 @@ struct UnitConversionView: View {
                 }
 
             HStack(spacing: 30) {
-                CoffioText(text: "\(UnitMass.grams.abbrString)",
+                CoffioText(text: "\(CoffioUnit.grams.abbrString)",
                            state: self.viewStore.unitConversion == .grams ? .selected : .normal,
                            .unitLabel)
 
                 CoffioToggle(
                     offset: self.viewStore.binding(
-                        keyPath: \.toggleYOffset,
-                        send: AppAction.form
+                        get: \.toggleYOffset,
+                        send: AppAction.unitConversionToggled
                     ))
                     .gesture(
                         // This registers tap and swipe gestures
@@ -58,7 +58,7 @@ struct UnitConversionView: View {
                             }
                     )
 
-                CoffioText(text: "\(UnitMass.ounces.abbrString)",
+                CoffioText(text: "\(CoffioUnit.ounces.abbrString)",
                            state: self.viewStore.unitConversion == .ounces ? .selected : .normal,
                            .unitLabel)
             }
@@ -95,6 +95,7 @@ struct CoffioToggle: View {
                         .shadow(color: Color.coffioShadowDark00.opacity(0.6), radius: 14, x: 0, y: 0)
                 )
                 .offset(x: self.offset)
+                .animation(Animation.timingCurve(0.60, 0.80, 0, 0.96), value: self.offset)
         }
     }
 

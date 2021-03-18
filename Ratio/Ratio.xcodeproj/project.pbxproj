@@ -21,6 +21,7 @@
 		9382B09026028BC6004DCA4B /* WaterAmountViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9382B08F26028BC6004DCA4B /* WaterAmountViewTests.swift */; };
 		9382B09426028C17004DCA4B /* CoffeeAmountViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9382B09326028C17004DCA4B /* CoffeeAmountViewTests.swift */; };
 		9382B09E26029A58004DCA4B /* RatioViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9382B09D26029A58004DCA4B /* RatioViewTests.swift */; };
+		9382B0AF2603C400004DCA4B /* AppState+UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9382B0AE2603C400004DCA4B /* AppState+UserDefaults.swift */; };
 		93A9FDEA25F6911D006D5428 /* Coffio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A9FDE925F6911D006D5428 /* Coffio.swift */; };
 		93B4C76B25F7E53400E479C1 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C76A25F7E53400E479C1 /* Color+Extension.swift */; };
 		93B4C77125F90F7B00E479C1 /* Font+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C77025F90F7B00E479C1 /* Font+Extension.swift */; };
@@ -69,6 +70,7 @@
 		9382B08F26028BC6004DCA4B /* WaterAmountViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterAmountViewTests.swift; sourceTree = "<group>"; };
 		9382B09326028C17004DCA4B /* CoffeeAmountViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeAmountViewTests.swift; sourceTree = "<group>"; };
 		9382B09D26029A58004DCA4B /* RatioViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatioViewTests.swift; sourceTree = "<group>"; };
+		9382B0AE2603C400004DCA4B /* AppState+UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppState+UserDefaults.swift"; sourceTree = "<group>"; };
 		93A9FDE925F6911D006D5428 /* Coffio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coffio.swift; sourceTree = "<group>"; };
 		93B4C76A25F7E53400E479C1 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		93B4C77025F90F7B00E479C1 /* Font+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Extension.swift"; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				937FD32D25D216830048C406 /* AppState.swift */,
+				9382B0AE2603C400004DCA4B /* AppState+UserDefaults.swift */,
 				93B4C7AB25FDC47C00E479C1 /* AppState+Helpers.swift */,
 				93B4C7AE25FDC4A700E479C1 /* Reducer+Extension.swift */,
 				9382B08526013061004DCA4B /* ViewStore+Extension.swift */,
@@ -364,6 +367,7 @@
 				93B4C7A325FD62E400E479C1 /* Comparable+Extension.swift in Sources */,
 				93B4C78B25FD38D500E479C1 /* Gradient+Extension.swift in Sources */,
 				931BE97925F7DF030030444F /* AmountAdjustButton.swift in Sources */,
+				9382B0AF2603C400004DCA4B /* AppState+UserDefaults.swift in Sources */,
 				93B4C76B25F7E53400E479C1 /* Color+Extension.swift in Sources */,
 				9382B08626013061004DCA4B /* ViewStore+Extension.swift in Sources */,
 				93A9FDEA25F6911D006D5428 /* Coffio.swift in Sources */,
