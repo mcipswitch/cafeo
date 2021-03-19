@@ -33,18 +33,18 @@ class RatioViewTests: XCTestCase {
 
         // Test + Validate
         store.assert(
-            .send(.form(.set(\.activeRatioIdx, 1))) {
-                $0.activeRatioIdx = 1
+            .send(.form(.set(\.ratioCarouselActiveIdx, 1))) {
+                $0.ratioCarouselActiveIdx = 1
                 $0.coffeeAmount = waterAmount * $0.ratio
                 XCTAssertEqual($0.activeRatioDenominator, 15)
             },
-            .send(.form(.set(\.activeRatioIdx, 2))) {
-                $0.activeRatioIdx = 2
+            .send(.form(.set(\.ratioCarouselActiveIdx, 2))) {
+                $0.ratioCarouselActiveIdx = 2
                 $0.coffeeAmount = waterAmount * $0.ratio
                 XCTAssertEqual($0.activeRatioDenominator, 16)
             },
-            .send(.form(.set(\.activeRatioIdx, 3))) {
-                $0.activeRatioIdx = 3
+            .send(.form(.set(\.ratioCarouselActiveIdx, 3))) {
+                $0.ratioCarouselActiveIdx = 3
                 $0.coffeeAmount = waterAmount * $0.ratio
                 XCTAssertEqual($0.activeRatioDenominator, 17)
             }

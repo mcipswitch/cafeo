@@ -37,12 +37,6 @@ class UnitConversionView: XCTestCase {
                 $0.waterAmount = Measurement(value: waterAmount, unit: UnitMass.grams)
                     .converted(to: .ounces)
                     .value
-            },
-            .do {
-                _ = XCTWaiter.wait(for: [self.expectation(description: "wait")], timeout: 1)
-            },
-            .receive(.unitConversionToggleYOffsetChanged) {
-                $0.toggleYOffset = UnitMass.ounces.toggleYOffset
             }
         )
     }
@@ -72,12 +66,6 @@ class UnitConversionView: XCTestCase {
                 $0.waterAmount = Measurement(value: $0.waterAmount, unit: UnitMass.ounces)
                     .converted(to: .grams)
                     .value
-            },
-            .do {
-                _ = XCTWaiter.wait(for: [self.expectation(description: "wait")], timeout: 1)
-            },
-            .receive(.unitConversionToggleYOffsetChanged) {
-                $0.toggleYOffset = UnitMass.grams.toggleYOffset
             }
         )
     }

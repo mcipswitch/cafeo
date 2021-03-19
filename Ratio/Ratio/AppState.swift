@@ -16,44 +16,24 @@ struct AppState: Equatable {
     var isLongPressing = false
     var unitConversion: CoffioUnit = .grams
 
-    // Ratio
     var ratioCarouselDragYOffset: CGFloat = .zero
     var ratioCarouselYOffset: CGFloat = .zero
-
-    var ratioDenominators = [
-        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
-    ]
-
-    var activeRatioIdx: Int = 15
+    var ratioCarouselActiveIdx: Int = 15
+    var ratioDenominators = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
 }
 
 extension AppState {
-    var toggleYOffset: CGFloat {
-        self.unitConversion.toggleYOffset
-    }
-
-    var activeRatioDenominator: Int {
-        self.ratioDenominators[self.activeRatioIdx]
-    }
-
-    var ratio: Double {
-        1 / Double(self.activeRatioDenominator)
-    }
+    var toggleYOffset: CGFloat { self.unitConversion.toggleYOffset }
+    var activeRatioDenominator: Int { self.ratioDenominators[self.ratioCarouselActiveIdx] }
+    var ratio: Double { 1 / Double(self.activeRatioDenominator) }
 }
 
 enum AppAction: Equatable {
-    enum CoffioIngredient {
-        case coffee
-        case water
-    }
-
-    case adjustAmountButtonLongPressed(CoffioIngredient, AdjustAmountAction)
-    case coffeeAmountChanged(AdjustAmountAction)
-    case waterAmountChanged(AdjustAmountAction)
-
-    case unitConversionToggled
-
+    case adjustAmountButtonLongPressed(CoffioIngredient, AmountAction)
+    case coffeeAmountChanged(AmountAction)
+    case waterAmountChanged(AmountAction)
     case amountLockToggled
+    case unitConversionToggled
 
     // This can be ignored
     case form(FormAction<AppState>)
@@ -83,9 +63,9 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, e
         state.waterAmount = state.coffeeAmount / state.ratio
     }
 
-    func convert(_ value: inout Double, from unitA: UnitMass, to unitB: UnitMass) {
-        let measurement = Measurement(value: value, unit: unitA)
-        value = measurement.converted(to: unitB).value
+    func convert(_ value: inout Double, fromUnit: UnitMass, toUnit: UnitMass) {
+        let measurement = Measurement(value: value, unit: fromUnit)
+        value = measurement.converted(to: toUnit).value
     }
 
     // Action
@@ -94,13 +74,13 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, e
         switch state.unitConversion {
         case .grams:
             state.unitConversion = .ounces
-            convert(&state.coffeeAmount, from: .grams, to: .ounces)
-            convert(&state.waterAmount, from: .grams, to: .ounces)
+            convert(&state.coffeeAmount, fromUnit: .grams, toUnit: .ounces)
+            convert(&state.waterAmount, fromUnit: .grams, toUnit: .ounces)
 
         case .ounces:
             state.unitConversion = .grams
-            convert(&state.coffeeAmount, from: .ounces, to: .grams)
-            convert(&state.waterAmount, from: .ounces, to: .grams)
+            convert(&state.coffeeAmount, fromUnit: .ounces, toUnit: .grams)
+            convert(&state.waterAmount, fromUnit: .ounces, toUnit: .grams)
         }
 
         feedback(.light)
@@ -157,7 +137,7 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, e
     case .form(\.isLongPressing):
         return state.isLongPressing ? .none : .cancel(id: TimerID())
 
-    case .form(\.activeRatioIdx):
+    case .form(\.ratioCarouselActiveIdx):
         state.waterAmountIsLocked
             ? updateCoffeeAmount()
             : updateWaterAmount()

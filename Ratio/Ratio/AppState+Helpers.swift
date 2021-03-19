@@ -37,8 +37,12 @@ struct FormAction<Root>: Equatable {
 
 // MARK: - Helpers
 
-enum AdjustAmountAction {
+enum AmountAction {
     case increment, decrement
+}
+
+enum CoffioIngredient: String {
+    case coffee, water
 }
 
 enum CoffioUnit: String, Codable {

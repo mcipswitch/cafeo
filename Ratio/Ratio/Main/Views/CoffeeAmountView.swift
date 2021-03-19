@@ -13,7 +13,7 @@ struct CoffeeAmountView: View {
 
     var body: some View {
         VStack(spacing: 20) {
-            CoffioText(text: "coffee", .mainLabel)
+            CoffioText(text: CoffioIngredient.coffee.rawValue, .mainLabel)
 
             VStack(spacing: 10) {
                 CoffioText(text: viewStore.coffeeAmount.format(to: "%.1f"), .digitalLabel)
@@ -35,7 +35,7 @@ struct CoffeeAmountView: View {
 }
 
 extension CoffeeAmountView {
-    private func onPress(_ action: AdjustAmountAction) {
+    private func onPress(_ action: AmountAction) {
         self.viewStore.send(.adjustAmountButtonLongPressed(.coffee, action))
     }
 
@@ -43,7 +43,7 @@ extension CoffeeAmountView {
         self.viewStore.send(.form(.set(\.isLongPressing, false)))
     }
 
-    private func onTap(_ action: AdjustAmountAction) {
+    private func onTap(_ action: AmountAction) {
         self.viewStore.send(.coffeeAmountChanged(action))
     }
 }

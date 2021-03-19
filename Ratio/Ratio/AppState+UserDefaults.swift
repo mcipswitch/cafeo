@@ -42,7 +42,7 @@ extension AppState {
             coffeeAmountIsLocked: self.coffeeAmountIsLocked,
             waterAmountIsLocked: self.waterAmountIsLocked,
             unitConversion: self.unitConversion,
-            activeRatioIdx: self.activeRatioIdx)
+            activeRatioIdx: self.ratioCarouselActiveIdx)
     }
 
     public init(userDefaults: UserDefaultsState? = nil) {
@@ -51,6 +51,6 @@ extension AppState {
         self.coffeeAmountIsLocked = userDefaults?.coffeeAmountIsLocked ?? true
         self.waterAmountIsLocked = userDefaults?.waterAmountIsLocked ?? false
         self.unitConversion = userDefaults?.unitConversion ?? .grams
-        self.activeRatioIdx = userDefaults?.activeRatioIdx ?? 15
+        self.ratioCarouselActiveIdx = userDefaults?.activeRatioIdx ?? 15
     }
 }

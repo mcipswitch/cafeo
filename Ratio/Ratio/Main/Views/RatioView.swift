@@ -97,7 +97,7 @@ struct RatioSnapCarousel: View {
         let totalHeight: CGFloat = itemHeight * numberOfItems
 
         let yOffsetToShift: CGFloat = (totalHeight - itemHeight) / 2
-        let activeOffset: CGFloat = yOffsetToShift - (itemHeight * CGFloat(self.viewStore.activeRatioIdx))
+        let activeOffset: CGFloat = yOffsetToShift - (itemHeight * CGFloat(self.viewStore.ratioCarouselActiveIdx))
         let totalOffset: CGFloat = CGFloat(activeOffset) + self.dragOffset
 
         VStack {
@@ -125,10 +125,10 @@ struct RatioSnapCarousel: View {
                     }
 
                     if dragAmountThresholdPassed {
-                        let newIdx = (self.viewStore.activeRatioIdx - idxOffset)
+                        let newIdx = (self.viewStore.ratioCarouselActiveIdx - idxOffset)
                             .clamp(low: 0, high: self.viewStore.ratioDenominators.count - 1)
 
-                        self.viewStore.send(.form(.set(\.activeRatioIdx, newIdx)))
+                        self.viewStore.send(.form(.set(\.ratioCarouselActiveIdx, newIdx)))
                     }
                 }
         )

@@ -135,8 +135,8 @@ class CoffeeAmountViewTests: XCTestCase {
 
         // Test + validate
         store.assert(
-            .send(.form(.set(\.activeRatioIdx, 14))) {
-                $0.activeRatioIdx = 14
+            .send(.form(.set(\.ratioCarouselActiveIdx, 14))) {
+                $0.ratioCarouselActiveIdx = 14
                 waterAmount = coffeeAmount / $0.ratio
                 $0.waterAmount = waterAmount
 
@@ -145,8 +145,8 @@ class CoffeeAmountViewTests: XCTestCase {
                 $0.coffeeAmountIsLocked = false
                 $0.waterAmountIsLocked = true
             },
-            .send(.form(.set(\.activeRatioIdx, 16))) {
-                $0.activeRatioIdx = 16
+            .send(.form(.set(\.ratioCarouselActiveIdx, 16))) {
+                $0.ratioCarouselActiveIdx = 16
                 $0.coffeeAmount = waterAmount * $0.ratio
             }
         )

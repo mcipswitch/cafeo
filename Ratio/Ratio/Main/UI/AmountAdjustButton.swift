@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct AmountAdjustButton: View {
-    var onPress: (AdjustAmountAction) -> Void
+    var onPress: (AmountAction) -> Void
     var onRelease: () -> Void
-    var onTap: (AdjustAmountAction) -> Void
+    var onTap: (AmountAction) -> Void
 
     var body: some View {
         ZStack {
