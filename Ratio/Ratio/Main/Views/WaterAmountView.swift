@@ -23,10 +23,11 @@ struct WaterAmountView: View {
                     onTap: self.onTap(_:)
                 )
             }
-            Toggle("", isOn: viewStore.binding(
+            Toggle("waterAmountLock", isOn: viewStore.binding(
                     get: \.waterAmountIsLocked,
                     send: .amountLockToggled)
             ).toggleStyle(LockToggleStyle())
+            .labelsHidden()
             .padding(.top, 20)
         }
     }

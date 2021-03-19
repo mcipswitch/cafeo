@@ -25,10 +25,11 @@ struct CoffeeAmountView: View {
                 )
             }
 
-            Toggle("", isOn: viewStore.binding(
+            Toggle("coffeeAmountLock", isOn: viewStore.binding(
                     get: \.coffeeAmountIsLocked,
                     send: AppAction.amountLockToggled
             )).toggleStyle(LockToggleStyle())
+            .labelsHidden()
             .padding(.top, 20)
         }
     }

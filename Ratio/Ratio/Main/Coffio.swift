@@ -8,7 +8,6 @@
 import ComposableArchitecture
 import SwiftUI
 
-// TODO: - userdefaults save last known setting
 struct Coffio: View {
     let store: Store<AppState, AppAction>
     var padding: CGFloat = 30
@@ -18,10 +17,10 @@ struct Coffio: View {
             ZStack {
                 VStack(spacing: 0) {
                     // TODO: - fix background
-                    Image("top-image")
+                    Image(decorative: "top-image")
                         .resizable()
                         .scaledToFit()
-                    Image("top-image")
+                    Image(decorative: "top-image")
                         .resizable()
                         .scaledToFit()
                     Color.coffioBackgroundDark
