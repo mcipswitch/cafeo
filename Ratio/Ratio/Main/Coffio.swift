@@ -16,14 +16,8 @@ struct Coffio: View {
         WithViewStore(self.store) { viewStore in
             ZStack {
                 VStack(spacing: 0) {
-                    // TODO: - fix background
-                    Image(decorative: "top-image")
-                        .resizable()
-                        .scaledToFit()
-                    Image(decorative: "top-image")
-                        .resizable()
-                        .scaledToFit()
-                    Color.coffioBackgroundDark
+                    Image(decorative: "background-pattern")
+                        .resizable(resizingMode: .tile)
                 }
                 .edgesIgnoringSafeArea(.all)
 
