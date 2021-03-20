@@ -39,10 +39,10 @@ struct Coffio: View {
                     HStack {
                         CoffeeAmountView(viewStore: viewStore)
                             .frame(width: UIScreen.main.bounds.width / 2)
-                            .accessibilitySortPriority(1)
+                            .accessibility(sortPriority: 1)
                         WaterAmountView(viewStore: viewStore)
                             .frame(width: UIScreen.main.bounds.width / 2)
-                            .accessibilitySortPriority(0)
+                            .accessibility(sortPriority: 0)
                     }
                     .padding(.vertical, self.padding)
                     .background(Color.coffioBackgroundLight)

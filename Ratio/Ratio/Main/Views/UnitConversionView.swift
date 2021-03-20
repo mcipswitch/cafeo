@@ -44,7 +44,7 @@ struct UnitConversionView: View {
                 CoffioText(text: "\(CoffioUnit.grams.abbrString)",
                            state: self.viewStore.unitConversion == .grams ? .selected : .normal,
                            .unitLabel)
-                    .accessibilitySortPriority(1)
+                    .accessibility(sortPriority: 1)
                     .accessibility(label: Text("grams"))
 
                 CoffioToggle(
@@ -59,14 +59,14 @@ struct UnitConversionView: View {
                                 self.viewStore.send(.unitConversionToggled)
                             }
                     )
-                    .accessibilitySortPriority(2)
+                    .accessibility(sortPriority: 1)
                     .accessibility(label: Text("unit conversion toggle"))
                     .accessibility(value: Text("\(viewStore.unitConversion.rawValue)"))
 
                 CoffioText(text: "\(CoffioUnit.ounces.abbrString)",
                            state: self.viewStore.unitConversion == .ounces ? .selected : .normal,
                            .unitLabel)
-                    .accessibilitySortPriority(0)
+                    .accessibility(sortPriority: 0)
             }
             .accessibilityElement(children: .contain)
         }
