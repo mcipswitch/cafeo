@@ -16,6 +16,7 @@ struct WaterAmountView: View {
             CoffioText(text: CoffioIngredient.water.rawValue, .mainLabel)
             VStack(spacing: 10) {
                 CoffioText(text: viewStore.waterAmount.format(to: "%.0f"), .digitalLabel)
+                    .accessibility(value: Text("\(viewStore.unitConversion.rawValue)"))
 
                 AmountAdjustButton(
                     onPress: self.onPress(_:),
@@ -23,12 +24,15 @@ struct WaterAmountView: View {
                     onTap: self.onTap(_:)
                 )
             }
-            Toggle("waterAmountLock", isOn: viewStore.binding(
-                    get: \.waterAmountIsLocked,
-                    send: .amountLockToggled)
-            ).toggleStyle(LockToggleStyle())
+            Toggle(isOn: viewStore.binding(
+                get: \.waterAmountIsLocked,
+                send: .amountLockToggled
+            ), label: {
+                Text("Water Amount Lock")
+            }).toggleStyle(LockToggleStyle())
             .labelsHidden()
             .padding(.top, 20)
+            .accessibility(label: Text("Water Amount"))
         }
     }
 }

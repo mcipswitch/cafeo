@@ -39,11 +39,14 @@ struct Coffio: View {
                     HStack {
                         CoffeeAmountView(viewStore: viewStore)
                             .frame(width: UIScreen.main.bounds.width / 2)
+                            .accessibilitySortPriority(1)
                         WaterAmountView(viewStore: viewStore)
                             .frame(width: UIScreen.main.bounds.width / 2)
+                            .accessibilitySortPriority(0)
                     }
                     .padding(.vertical, self.padding)
                     .background(Color.coffioBackgroundLight)
+                    .accessibilityElement(children: .contain)
 
                     UnitConversionView(viewStore: viewStore)
                         .padding(.horizontal, 24)
@@ -66,5 +69,12 @@ struct Coffio_Previews: PreviewProvider {
                                 mainQueue: DispatchQueue.main.eraseToAnyScheduler()
                             )
         ))
+
+        Coffio(store: Store(initialState: AppState(),
+                            reducer: appReducer,
+                            environment: AppEnvironment(
+                                mainQueue: DispatchQueue.main.eraseToAnyScheduler()
+                            )
+        )).environment(\.sizeCategory, .accessibilityExtraExtraExtraLarge)
     }
 }

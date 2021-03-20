@@ -17,6 +17,7 @@ struct CoffeeAmountView: View {
 
             VStack(spacing: 10) {
                 CoffioText(text: viewStore.coffeeAmount.format(to: "%.1f"), .digitalLabel)
+                    .accessibility(value: Text("\(viewStore.unitConversion.rawValue)"))
 
                 AmountAdjustButton(
                     onPress: self.onPress(_:),
@@ -24,13 +25,16 @@ struct CoffeeAmountView: View {
                     onTap: self.onTap(_:)
                 )
             }
-
-            Toggle("coffeeAmountLock", isOn: viewStore.binding(
-                    get: \.coffeeAmountIsLocked,
-                    send: AppAction.amountLockToggled
-            )).toggleStyle(LockToggleStyle())
+            Toggle(isOn: viewStore.binding(
+                get: \.coffeeAmountIsLocked,
+                send: AppAction.amountLockToggled
+            ), label: {
+                Text("Coffee Amount")
+            })
+            .toggleStyle(LockToggleStyle())
             .labelsHidden()
             .padding(.top, 20)
+            .accessibility(label: Text("Coffee Amount"))
         }
     }
 }

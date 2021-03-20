@@ -48,7 +48,8 @@ struct RatioView: View {
                             RatioSnapCarousel(viewStore: self.viewStore)
                                 // TODO: - This could be animated in AppState in the future
                                 .animation(.spring())
-
+                                .accessibilityElement(children: .ignore)
+                                .accessibility(label: Text("Ratio is 1 to \(viewStore.activeRatioDenominator)"))
                             self.ratioDenominatorLine
                                 .frame(width: geo.size.width / 2 - self.dividerWidth)
                         }
@@ -62,8 +63,12 @@ struct RatioView: View {
                     }
                 }
             }
+            .accessibility(sortPriority: 0)
+
             CoffioText(text: "ratio", .mainLabel)
+                .accessibility(sortPriority: 1)
         }
+        .accessibilityElement(children: .contain)
     }
 
     var ratioBox: RoundedRectangle {
@@ -104,6 +109,7 @@ struct RatioSnapCarousel: View {
             ForEach(self.viewStore.ratioDenominators, id: \.self) { ratioDenom in
                 CoffioText(text: "\(ratioDenom)", .ratioLabel)
                     .frame(width: itemHeight * 2, height: itemHeight)
+
                     // Control the tappable area
                     .contentShape(Rectangle())
             }

@@ -8,6 +8,8 @@
 import SwiftUI
 import ComposableArchitecture
 
+// TODO: - Accessibility
+
 struct AppState: Equatable {
     var coffeeAmount: Double = 15.625
     var waterAmount: Double = 250
