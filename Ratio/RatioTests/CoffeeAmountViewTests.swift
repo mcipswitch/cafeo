@@ -20,36 +20,36 @@ class CoffeeAmountViewTests: XCTestCase {
             initialState: AppState(
                 coffeeAmount: coffeeAmount,
                 waterAmount: 250,
-                ratioDenominators: [16],
-                activeRatioIdx: 0
+                ratioCarouselActiveIdx: 0,
+                ratioDenominators: [16]
             ),
             reducer: appReducer,
             environment: AppEnvironment(
-                mainQueue: scheduler.eraseToAnyScheduler()
+                mainQueue: .failing
             )
         )
 
         // Test + Validate
-        store.assert(
-            .send(.coffeeAmountChanged(.decrement)) {
-                coffeeAmount -= 0.1
+        store.send(.coffeeAmountChanged(.decrement)) {
+            coffeeAmount -= 0.1
 
-                $0.coffeeAmount = coffeeAmount
-                $0.waterAmount = coffeeAmount / $0.ratio
-            },
-            .send(.coffeeAmountChanged(.increment)) {
-                coffeeAmount += 0.1
+            $0.coffeeAmount = coffeeAmount
+            $0.waterAmount = coffeeAmount / $0.ratio
+        }
 
-                $0.coffeeAmount = coffeeAmount
-                $0.waterAmount = coffeeAmount / $0.ratio
-            },
-            .send(.coffeeAmountChanged(.increment)) {
-                coffeeAmount += 0.1
+        store.send(.coffeeAmountChanged(.increment)) {
+            coffeeAmount += 0.1
 
-                $0.coffeeAmount = coffeeAmount
-                $0.waterAmount = coffeeAmount / $0.ratio
-            }
-        )
+            $0.coffeeAmount = coffeeAmount
+            $0.waterAmount = coffeeAmount / $0.ratio
+        }
+
+        store.send(.coffeeAmountChanged(.increment)) {
+            coffeeAmount += 0.1
+
+            $0.coffeeAmount = coffeeAmount
+            $0.waterAmount = coffeeAmount / $0.ratio
+        }
     }
 
     func testCoffeeAmountChangedBelowZeroDoesNothing() {
@@ -58,26 +58,24 @@ class CoffeeAmountViewTests: XCTestCase {
             initialState: AppState(
                 coffeeAmount: 0.1,
                 waterAmount: 1.6,
-                ratioDenominators: [16],
-                activeRatioIdx: 0
+                ratioCarouselActiveIdx: 0, ratioDenominators: [16]
             ),
             reducer: appReducer,
             environment: AppEnvironment(
-                mainQueue: scheduler.eraseToAnyScheduler()
+                mainQueue: .failing
             )
         )
 
         // Test + Validate
-        store.assert(
-            .send(.coffeeAmountChanged(.decrement)) {
-                $0.coffeeAmount = 0
-                $0.waterAmount = 0
-            },
-            .send(.coffeeAmountChanged(.decrement)) {
-                $0.coffeeAmount = 0
-                $0.waterAmount = 0
-            }
-        )
+        store.send(.coffeeAmountChanged(.decrement)) {
+            $0.coffeeAmount = 0
+            $0.waterAmount = 0
+        }
+
+        store.send(.coffeeAmountChanged(.decrement)) {
+            $0.coffeeAmount = 0
+            $0.waterAmount = 0
+        }
     }
 
     func testCoffeeAmountButtonLongPressed() throws {
@@ -95,22 +93,24 @@ class CoffeeAmountViewTests: XCTestCase {
         )
 
         // Test + Validate
-        store.assert(
-            .send(.adjustAmountButtonLongPressed(.coffee, .increment)),
-            .do { self.scheduler.advance(by: .seconds(0.2)) },
-            .receive(.coffeeAmountChanged(.increment)) {
-                coffeeAmount += 0.1
-                $0.coffeeAmount = coffeeAmount
-                $0.waterAmount = coffeeAmount / $0.ratio
-            },
-            .receive(.coffeeAmountChanged(.increment)) {
-                coffeeAmount += 0.1
-                $0.coffeeAmount = coffeeAmount
-                $0.waterAmount = coffeeAmount / $0.ratio
-            },
-            // cancel the timer
-            .send(.form(.set(\.isLongPressing, false)))
-        )
+        store.send(.adjustAmountButtonLongPressed(.coffee, .increment))
+
+        self.scheduler.advance(by: .seconds(0.2))
+
+        store.receive(.coffeeAmountChanged(.increment)) {
+            coffeeAmount += 0.1
+            $0.coffeeAmount = coffeeAmount
+            $0.waterAmount = coffeeAmount / $0.ratio
+        }
+
+        store.receive(.coffeeAmountChanged(.increment)) {
+            coffeeAmount += 0.1
+            $0.coffeeAmount = coffeeAmount
+            $0.waterAmount = coffeeAmount / $0.ratio
+        }
+
+        // cancel the timer
+        store.send(.form(.set(\.isLongPressing, false)))
     }
 
     // Does not have to be re-tested in WaterAmountViewTests
@@ -118,8 +118,7 @@ class CoffeeAmountViewTests: XCTestCase {
         // Setup
         let coffeeAmount: Double = 250 / 16
         var waterAmount: Double = 250
-
-        let scheduler = DispatchQueue.testScheduler
+        
         let store = TestStore(
             initialState: AppState(
                 coffeeAmount: coffeeAmount,
@@ -129,26 +128,25 @@ class CoffeeAmountViewTests: XCTestCase {
             ),
             reducer: appReducer,
             environment: AppEnvironment(
-                mainQueue: scheduler.eraseToAnyScheduler()
+                mainQueue: .failing
             )
         )
 
         // Test + validate
-        store.assert(
-            .send(.form(.set(\.ratioCarouselActiveIdx, 14))) {
-                $0.ratioCarouselActiveIdx = 14
-                waterAmount = coffeeAmount / $0.ratio
-                $0.waterAmount = waterAmount
+        store.send(.form(.set(\.ratioCarouselActiveIdx, 14))) {
+            $0.ratioCarouselActiveIdx = 14
+            waterAmount = coffeeAmount / $0.ratio
+            $0.waterAmount = waterAmount
+        }
 
-            },
-            .send(.amountLockToggled) {
-                $0.coffeeAmountIsLocked = false
-                $0.waterAmountIsLocked = true
-            },
-            .send(.form(.set(\.ratioCarouselActiveIdx, 16))) {
-                $0.ratioCarouselActiveIdx = 16
-                $0.coffeeAmount = waterAmount * $0.ratio
-            }
-        )
+        store.send(.amountLockToggled) {
+            $0.coffeeAmountIsLocked = false
+            $0.waterAmountIsLocked = true
+        }
+
+        store.send(.form(.set(\.ratioCarouselActiveIdx, 16))) {
+            $0.ratioCarouselActiveIdx = 16
+            $0.coffeeAmount = waterAmount * $0.ratio
+        }
     }
 }

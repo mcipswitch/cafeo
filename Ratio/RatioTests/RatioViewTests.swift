@@ -22,32 +22,32 @@ class RatioViewTests: XCTestCase {
                 waterAmount: waterAmount,
                 coffeeAmountIsLocked: false,
                 waterAmountIsLocked: true,
-                ratioDenominators: [14, 15, 16, 17],
-                activeRatioIdx: 0
+                ratioCarouselActiveIdx: 0,
+                ratioDenominators: [14, 15, 16, 17]
             ),
             reducer: appReducer,
             environment: AppEnvironment(
-                mainQueue: scheduler.eraseToAnyScheduler()
+                mainQueue: .failing
             )
         )
 
         // Test + Validate
-        store.assert(
-            .send(.form(.set(\.ratioCarouselActiveIdx, 1))) {
-                $0.ratioCarouselActiveIdx = 1
-                $0.coffeeAmount = waterAmount * $0.ratio
-                XCTAssertEqual($0.activeRatioDenominator, 15)
-            },
-            .send(.form(.set(\.ratioCarouselActiveIdx, 2))) {
-                $0.ratioCarouselActiveIdx = 2
-                $0.coffeeAmount = waterAmount * $0.ratio
-                XCTAssertEqual($0.activeRatioDenominator, 16)
-            },
-            .send(.form(.set(\.ratioCarouselActiveIdx, 3))) {
-                $0.ratioCarouselActiveIdx = 3
-                $0.coffeeAmount = waterAmount * $0.ratio
-                XCTAssertEqual($0.activeRatioDenominator, 17)
-            }
-        )
+        store.send(.form(.set(\.ratioCarouselActiveIdx, 1))) {
+            $0.ratioCarouselActiveIdx = 1
+            $0.coffeeAmount = waterAmount * $0.ratio
+            XCTAssertEqual($0.activeRatioDenominator, 15)
+        }
+
+        store.send(.form(.set(\.ratioCarouselActiveIdx, 2))) {
+            $0.ratioCarouselActiveIdx = 2
+            $0.coffeeAmount = waterAmount * $0.ratio
+            XCTAssertEqual($0.activeRatioDenominator, 16)
+        }
+
+        store.send(.form(.set(\.ratioCarouselActiveIdx, 3))) {
+            $0.ratioCarouselActiveIdx = 3
+            $0.coffeeAmount = waterAmount * $0.ratio
+            XCTAssertEqual($0.activeRatioDenominator, 17)
+        }
     }
 }

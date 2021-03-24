@@ -19,36 +19,36 @@ class WaterAmountViewTests: XCTestCase {
         let store = TestStore(
             initialState: AppState(
                 waterAmount: waterAmount,
-                ratioDenominators: [16],
-                activeRatioIdx: 0
+                ratioCarouselActiveIdx: 0,
+                ratioDenominators: [16]
             ),
             reducer: appReducer,
             environment: AppEnvironment(
-                mainQueue: scheduler.eraseToAnyScheduler()
+                mainQueue: .failing
             )
         )
 
         // Test + Validate
-        store.assert(
-            .send(.waterAmountChanged(.decrement)) {
-                waterAmount -= 1
+        store.send(.waterAmountChanged(.decrement)) {
+            waterAmount -= 1
 
-                $0.coffeeAmount = waterAmount * $0.ratio
-                $0.waterAmount = waterAmount
-            },
-            .send(.waterAmountChanged(.increment)) {
-                waterAmount += 1
+            $0.coffeeAmount = waterAmount * $0.ratio
+            $0.waterAmount = waterAmount
+        }
 
-                $0.coffeeAmount = waterAmount * $0.ratio
-                $0.waterAmount = waterAmount
-            },
-            .send(.waterAmountChanged(.increment)) {
-                waterAmount += 1
+        store.send(.waterAmountChanged(.increment)) {
+            waterAmount += 1
 
-                $0.coffeeAmount = waterAmount * $0.ratio
-                $0.waterAmount = waterAmount
-            }
-        )
+            $0.coffeeAmount = waterAmount * $0.ratio
+            $0.waterAmount = waterAmount
+        }
+
+        store.send(.waterAmountChanged(.increment)) {
+            waterAmount += 1
+
+            $0.coffeeAmount = waterAmount * $0.ratio
+            $0.waterAmount = waterAmount
+        }
     }
 
     func testWaterAmountChangedBelowZeroDoesNothing() {
@@ -57,26 +57,25 @@ class WaterAmountViewTests: XCTestCase {
             initialState: AppState(
                 coffeeAmount: 1/16,
                 waterAmount: 1,
-                ratioDenominators: [16],
-                activeRatioIdx: 0
+                ratioCarouselActiveIdx: 0,
+                ratioDenominators: [16]
             ),
             reducer: appReducer,
             environment: AppEnvironment(
-                mainQueue: scheduler.eraseToAnyScheduler()
+                mainQueue: .failing
             )
         )
 
         // Test + Validate
-        store.assert(
-            .send(.coffeeAmountChanged(.decrement)) {
-                $0.coffeeAmount = 0
-                $0.waterAmount = 0
-            },
-            .send(.coffeeAmountChanged(.decrement)) {
-                $0.coffeeAmount = 0
-                $0.waterAmount = 0
-            }
-        )
+        store.send(.coffeeAmountChanged(.decrement)) {
+            $0.coffeeAmount = 0
+            $0.waterAmount = 0
+        }
+
+        store.send(.coffeeAmountChanged(.decrement)) {
+            $0.coffeeAmount = 0
+            $0.waterAmount = 0
+        }
     }
 
     func testWaterAmountButtonLongPressed() throws {
@@ -92,23 +91,25 @@ class WaterAmountViewTests: XCTestCase {
                 mainQueue: scheduler.eraseToAnyScheduler()
             )
         )
-        store.assert(
-            .send(.adjustAmountButtonLongPressed(.water, .increment)),
-            .do { self.scheduler.advance(by: .seconds(0.2)) },
-            .receive(.waterAmountChanged(.increment)) {
-                waterAmount += 1
+        store.send(.adjustAmountButtonLongPressed(.water, .increment))
 
-                $0.coffeeAmount = waterAmount * $0.ratio
-                $0.waterAmount = waterAmount
-            },
-            .receive(.waterAmountChanged(.increment)) {
-                waterAmount += 1
+        self.scheduler.advance(by: .seconds(0.2))
 
-                $0.coffeeAmount = waterAmount * $0.ratio
-                $0.waterAmount = waterAmount
-            },
-            // cancel the timer
-            .send(.form(.set(\.isLongPressing, false)))
-        )
+        store.receive(.waterAmountChanged(.increment)) {
+            waterAmount += 1
+
+            $0.coffeeAmount = waterAmount * $0.ratio
+            $0.waterAmount = waterAmount
+        }
+
+        store.receive(.waterAmountChanged(.increment)) {
+            waterAmount += 1
+
+            $0.coffeeAmount = waterAmount * $0.ratio
+            $0.waterAmount = waterAmount
+        }
+
+        // cancel the timer
+        store.send(.form(.set(\.isLongPressing, false)))
     }
 }

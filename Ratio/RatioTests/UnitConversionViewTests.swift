@@ -24,21 +24,19 @@ class UnitConversionView: XCTestCase {
             ),
             reducer: appReducer,
             environment: AppEnvironment(
-                mainQueue: scheduler.eraseToAnyScheduler()
+                mainQueue: .failing
             )
         )
 
-        store.assert(
-            .send(.unitConversionToggled) {
-                $0.unitConversion = .ounces
-                $0.coffeeAmount = Measurement(value: coffeeAmount, unit: UnitMass.grams)
-                    .converted(to: .ounces)
-                    .value
-                $0.waterAmount = Measurement(value: waterAmount, unit: UnitMass.grams)
-                    .converted(to: .ounces)
-                    .value
-            }
-        )
+        store.send(.unitConversionToggled) {
+            $0.unitConversion = .ounces
+            $0.coffeeAmount = Measurement(value: coffeeAmount, unit: UnitMass.grams)
+                .converted(to: .ounces)
+                .value
+            $0.waterAmount = Measurement(value: waterAmount, unit: UnitMass.grams)
+                .converted(to: .ounces)
+                .value
+        }
     }
 
     func testUnitConversionToggledToGrams() throws {
@@ -53,20 +51,18 @@ class UnitConversionView: XCTestCase {
             ),
             reducer: appReducer,
             environment: AppEnvironment(
-                mainQueue: scheduler.eraseToAnyScheduler()
+                mainQueue: .failing
             )
         )
 
-        store.assert(
-            .send(.unitConversionToggled) {
-                $0.unitConversion = .grams
-                $0.coffeeAmount = Measurement(value: $0.coffeeAmount, unit: UnitMass.ounces)
-                    .converted(to: .grams)
-                    .value
-                $0.waterAmount = Measurement(value: $0.waterAmount, unit: UnitMass.ounces)
-                    .converted(to: .grams)
-                    .value
-            }
-        )
+        store.send(.unitConversionToggled) {
+            $0.unitConversion = .grams
+            $0.coffeeAmount = Measurement(value: $0.coffeeAmount, unit: UnitMass.ounces)
+                .converted(to: .grams)
+                .value
+            $0.waterAmount = Measurement(value: $0.waterAmount, unit: UnitMass.ounces)
+                .converted(to: .grams)
+                .value
+        }
     }
 }
