@@ -18,6 +18,7 @@ struct Coffio: View {
                 VStack(spacing: 0) {
                     Image(decorative: "background-pattern")
                         .resizable(resizingMode: .tile)
+                    Color.coffioBackgroundDark
                 }
                 .edgesIgnoringSafeArea(.all)
 

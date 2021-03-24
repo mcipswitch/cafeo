@@ -28,6 +28,7 @@ struct AmountAdjustButton: View {
                 .background(
                     RoundedRectangle(cornerRadius: 24, style: .continuous)
                         .fill(Color.coffioBackgroundLight)
+
                         // highlight and shadow
                         .shadow(color: .coffioHighlight1, radius: 8, x: -4, y: -4)
                         .shadow(color: .coffioShadowDark00, radius: 8, x: 4, y: 4)
