@@ -40,6 +40,7 @@
 		93C8399625F6979F00C66710 /* Orbitron-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 93C8399325F6979F00C66710 /* Orbitron-Medium.ttf */; };
 		93C8399725F6979F00C66710 /* Exo2-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 93C8399425F6979F00C66710 /* Exo2-SemiBold.ttf */; };
 		93C8399825F6979F00C66710 /* Exo2-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 93C8399525F6979F00C66710 /* Exo2-MediumItalic.ttf */; };
+		93F6BA9A260BD465004FCAF2 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 93F6BA99260BD465004FCAF2 /* SnapshotTesting */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +98,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				937FD32B25D216160048C406 /* ComposableArchitecture in Frameworks */,
+				93F6BA9A260BD465004FCAF2 /* SnapshotTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +276,7 @@
 			name = Ratio;
 			packageProductDependencies = (
 				937FD32A25D216160048C406 /* ComposableArchitecture */,
+				93F6BA99260BD465004FCAF2 /* SnapshotTesting */,
 			);
 			productName = Ratio;
 			productReference = 9375EEE425D1B3900003A323 /* Ratio.app */;
@@ -326,6 +329,7 @@
 			mainGroup = 9375EEDB25D1B3900003A323;
 			packageReferences = (
 				937FD32925D216160048C406 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				93F6BA98260BD465004FCAF2 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
 			);
 			productRefGroup = 9375EEE525D1B3900003A323 /* Products */;
 			projectDirPath = "";
@@ -653,6 +657,14 @@
 				minimumVersion = 0.17.0;
 			};
 		};
+		93F6BA98260BD465004FCAF2 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.8.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -660,6 +672,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 937FD32925D216160048C406 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
+		};
+		93F6BA99260BD465004FCAF2 /* SnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 93F6BA98260BD465004FCAF2 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SnapshotTesting;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

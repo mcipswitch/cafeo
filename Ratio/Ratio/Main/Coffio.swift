@@ -70,6 +70,8 @@ struct Coffio_Previews: PreviewProvider {
                             environment: AppEnvironment(
                                 mainQueue: DispatchQueue.main.eraseToAnyScheduler()
                             )
-        )).environment(\.sizeCategory, .accessibilityExtraExtraExtraLarge)
+        ))
+        .environment(\.sizeCategory, .accessibilityExtraExtraExtraLarge)
+        .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
     }
 }
