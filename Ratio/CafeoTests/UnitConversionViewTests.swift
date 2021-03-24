@@ -6,10 +6,11 @@
 //
 
 import ComposableArchitecture
+import SnapshotTesting
 import XCTest
 @testable import Ratio
 
-class UnitConversionView: XCTestCase {
+class UnitConversionViewTests: XCTestCase {
     let scheduler = DispatchQueue.testScheduler
 
     func testUnitConversionToggledToOunces() throws {
@@ -65,4 +66,23 @@ class UnitConversionView: XCTestCase {
                 .value
         }
     }
+
+    // MARK: - Snapshot Tests
+//
+//    func testUnitConversionToggledToOuncesSnapshot() throws {
+//        let store = TestStore(
+//            initialState: AppState(
+//                unitConversion: .grams
+//            ),
+//            reducer: appReducer,
+//            environment: AppEnvironment(
+//                mainQueue: .failing
+//            )
+//        )
+//
+////        let view =
+////
+////        isRecording = true
+////        assertSnapshot(matching: view, as: .image)
+//    }
 }

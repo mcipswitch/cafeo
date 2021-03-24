@@ -32,9 +32,19 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9382B0622600F28E004DCA4B"
+               BlueprintIdentifier = "93EED349260BDD8100E6B557"
                BuildableName = "RatioTests.xctest"
                BlueprintName = "RatioTests"
+               ReferencedContainer = "container:Ratio.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "93210294260BDDFB001FDE3B"
+               BuildableName = "CafeoTests.xctest"
+               BlueprintName = "CafeoTests"
                ReferencedContainer = "container:Ratio.xcodeproj">
             </BuildableReference>
          </TestableReference>
