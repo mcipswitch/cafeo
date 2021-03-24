@@ -66,23 +66,4 @@ class UnitConversionViewTests: XCTestCase {
                 .value
         }
     }
-
-    // MARK: - Snapshot Tests
-//
-//    func testUnitConversionToggledToOuncesSnapshot() throws {
-//        let store = TestStore(
-//            initialState: AppState(
-//                unitConversion: .grams
-//            ),
-//            reducer: appReducer,
-//            environment: AppEnvironment(
-//                mainQueue: .failing
-//            )
-//        )
-//
-////        let view =
-////
-////        isRecording = true
-////        assertSnapshot(matching: view, as: .image)
-//    }
 }
