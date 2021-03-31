@@ -106,7 +106,7 @@ struct CoffioToggle: View {
         }
     }
 
-    var togglePill: RoundedRectangle {
+    private var togglePill: RoundedRectangle {
         RoundedRectangle(cornerRadius: 24, style: .continuous)
     }
 }
