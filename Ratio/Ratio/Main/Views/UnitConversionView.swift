@@ -49,7 +49,7 @@ struct UnitConversionView: View {
 
                 CoffioToggle(
                     offset: self.viewStore.binding(
-                        get: \.toggleYOffset,
+                        get: \.unitConversionToggleYOffset,
                         send: AppAction.unitConversionToggled
                     ))
                     .gesture(

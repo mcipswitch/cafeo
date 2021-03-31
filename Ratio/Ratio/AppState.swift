@@ -16,14 +16,12 @@ struct AppState: Equatable {
     var isLongPressing = false
     var unitConversion: CoffioUnit = .grams
 
-    var ratioCarouselDragYOffset: CGFloat = .zero
-    var ratioCarouselYOffset: CGFloat = .zero
     var ratioCarouselActiveIdx: Int = 15
     var ratioDenominators = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
 }
 
 extension AppState {
-    var toggleYOffset: CGFloat { self.unitConversion.toggleYOffset }
+    var unitConversionToggleYOffset: CGFloat { self.unitConversion.toggleYOffset }
     var activeRatioDenominator: Int { self.ratioDenominators[self.ratioCarouselActiveIdx] }
     var ratio: Double { 1 / Double(self.activeRatioDenominator) }
 }
@@ -49,11 +47,6 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, e
 
     struct TimerID: Hashable {}
     struct CancelDelayID: Hashable {}
-
-    func feedback(_ style: UIImpactFeedbackGenerator.FeedbackStyle) {
-        let generator = UIImpactFeedbackGenerator(style: style)
-        generator.impactOccurred()
-    }
 
     func updateCoffeeAmount() {
         state.coffeeAmount = state.waterAmount * state.ratio
@@ -83,7 +76,7 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, e
             convert(&state.waterAmount, fromUnit: .ounces, toUnit: .grams)
         }
 
-        feedback(.light)
+        HapticFeedbackManager.shared.generateImpact(.medium)
         return .none
 
     case let .waterAmountChanged(action):
@@ -99,7 +92,7 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, e
             }
         }
 
-        feedback(.light)
+        HapticFeedbackManager.shared.generateImpact(.medium)
         updateCoffeeAmount()
         return .none
 
@@ -116,12 +109,12 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, e
             }
         }
 
-        feedback(.light)
+        HapticFeedbackManager.shared.generateImpact(.medium)
         updateWaterAmount()
         return .none
 
     case .amountLockToggled:
-        feedback(.light)
+        HapticFeedbackManager.shared.generateImpact(.medium)
         state.waterAmountIsLocked.toggle()
         state.coffeeAmountIsLocked.toggle()
         return .none
@@ -142,7 +135,7 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, e
             ? updateCoffeeAmount()
             : updateWaterAmount()
 
-        feedback(.light)
+        HapticFeedbackManager.shared.generateImpact(.medium)
         return .none
 
     // This can be ignored
