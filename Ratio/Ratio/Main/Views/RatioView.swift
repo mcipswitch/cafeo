@@ -16,15 +16,13 @@ struct RatioView: View {
         VStack(spacing: 20) {
             ZStack {
                 GeometryReader { geo in
+
                     self.ratioBox
                         .stroke(Color.coffioShadowDark1, lineWidth: 2)
                         .background(self.ratioBox.fill(LinearGradient.coffioChrome))
-                    HStack {
-                        Spacer()
-                        Rectangle().frame(width: self.dividerWidth)
-                            .foregroundColor(.coffioShadowDark1)
-                        Spacer()
-                    }
+
+                    self.divider
+
                     HStack(spacing: 0) {
                         CoffioText(text: "1", .ratioLabel)
                             .frame(
@@ -62,6 +60,15 @@ struct RatioView: View {
     }
 
     // MARK: - Helpers
+
+    private var divider: some View {
+        HStack {
+            Spacer()
+            Rectangle().frame(width: self.dividerWidth)
+                .foregroundColor(.coffioShadowDark1)
+            Spacer()
+        }
+    }
 
     private var ratioBox: RoundedRectangle {
         RoundedRectangle(cornerRadius: 8)

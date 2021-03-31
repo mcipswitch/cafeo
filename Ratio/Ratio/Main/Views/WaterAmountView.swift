@@ -14,6 +14,7 @@ struct WaterAmountView: View {
     var body: some View {
         VStack(spacing: 20) {
             CoffioText(text: CoffioIngredient.water.rawValue, .mainLabel)
+            
             VStack(spacing: 10) {
                 CoffioText(text: viewStore.waterAmount.format(to: "%.0f"), .digitalLabel)
                     .accessibility(value: Text("\(viewStore.unitConversion.rawValue)"))
