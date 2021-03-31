@@ -9,7 +9,7 @@ import Foundation
 
 extension AppState {
 
-    // Cherry pick waht to save to userDefaults
+    // Cherry pick what to save to userDefaults
     public struct UserDefaultsState: Equatable, Codable {
         var coffeeAmount: Double
         var waterAmount: Double

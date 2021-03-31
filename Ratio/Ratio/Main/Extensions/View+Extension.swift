@@ -18,6 +18,14 @@ extension View {
         )
     }
 
+    func addInnerShadow(_ color: Color = Color.coffioShadowDark1, lineWidth: CGFloat = 4, blurRadius: CGFloat = 10) -> some View {
+        self.overlay(
+            Rectangle()
+                .strokeBorder(color, lineWidth: lineWidth)
+                .blur(radius: blurRadius)
+        )
+    }
+
     func coffioTextStyle(_ textStyle: CoffioTextStyle, state: CoffioTextState = .normal) -> some View {
         return self.modifier(CoffioTextModifier(textStyle, state: state))
     }

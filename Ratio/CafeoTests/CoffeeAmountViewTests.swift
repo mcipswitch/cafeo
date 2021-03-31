@@ -6,6 +6,7 @@
 //
 
 import ComposableArchitecture
+import SnapshotTesting
 import XCTest
 @testable import Ratio
 

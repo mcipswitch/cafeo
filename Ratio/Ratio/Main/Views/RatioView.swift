@@ -18,20 +18,7 @@ struct RatioView: View {
                 GeometryReader { geo in
                     self.ratioBox
                         .stroke(Color.coffioShadowDark1, lineWidth: 2)
-                        .background(
-                            self.ratioBox
-                                .fill(LinearGradient.coffioChrome)
-                        )
-                        // inner shadow
-                        .overlay(
-                            self.ratioBox
-                                .stroke(Color.coffioShadowDark1, lineWidth: 2)
-                                .blur(radius: 4)
-                                .frame(
-                                    width: geo.size.width - 4,
-                                    height: geo.size.height - 4
-                                )
-                        )
+                        .background(self.ratioBox.fill(LinearGradient.coffioChrome))
                     HStack {
                         Spacer()
                         Rectangle().frame(width: self.dividerWidth)
@@ -44,12 +31,14 @@ struct RatioView: View {
                                 width: geo.size.width / 2,
                                 height: geo.size.height
                             )
+                            .addInnerShadow()
                         ZStack {
                             RatioSnapCarousel(viewStore: self.viewStore)
-                                // TODO: - This could be animated in AppState in the future
+                                // TODO: - Could this be animated in AppState?
                                 .animation(.spring())
                                 .accessibilityElement(children: .ignore)
                                 .accessibility(label: Text("Ratio is 1 to \(viewStore.activeRatioDenominator)"))
+                            
                             self.ratioDenominatorLine
                                 .frame(width: geo.size.width / 2 - self.dividerWidth)
                         }
@@ -57,6 +46,7 @@ struct RatioView: View {
                             width: geo.size.width / 2,
                             height: geo.size.height
                         )
+                        .addInnerShadow()
                         // Control the tappable area
                         .clipShape(Rectangle())
                         .contentShape(Rectangle())
@@ -71,11 +61,13 @@ struct RatioView: View {
         .accessibilityElement(children: .contain)
     }
 
-    var ratioBox: RoundedRectangle {
+    // MARK: - Helpers
+
+    private var ratioBox: RoundedRectangle {
         RoundedRectangle(cornerRadius: 8)
     }
 
-    var ratioDenominatorLine: some View {
+    private var ratioDenominatorLine: some View {
         ZStack {
             Rectangle()
                 .foregroundColor(.coffioOrange)
