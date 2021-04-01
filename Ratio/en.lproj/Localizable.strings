@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  Ratio
+
+  Created by Priscilla Ip on 2021-03-31.
+  
+*/
+
+"ratio" = "ratio";
+"coffee" = "coffee";
+"water" = "water";
+"conversion" = "conversion"

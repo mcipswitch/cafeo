@@ -13,7 +13,7 @@ struct CoffeeAmountView: View {
 
     var body: some View {
         VStack(spacing: 20) {
-            CoffioText(text: CoffioIngredient.coffee.rawValue, .mainLabel)
+            CoffioText(text: CoffioIngredient.coffee.rawValue.localized, .mainLabel)
 
             VStack(spacing: 10) {
                 CoffioText(text: viewStore.coffeeAmount.format(to: "%.1f"), .digitalLabel)

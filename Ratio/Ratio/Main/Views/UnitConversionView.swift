@@ -14,7 +14,7 @@ struct UnitConversionView: View {
     var body: some View {
         VStack(spacing: 16) {
 
-            CoffioText(text: "conversion", .miniLabel)
+            CoffioText(text: "conversion".localized, .miniLabel)
                 .padding(.horizontal, 8)
                 .background(Color.coffioBackgroundDark)
                 .anchorPreference(

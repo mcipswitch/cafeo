@@ -13,6 +13,8 @@
 		932102A6260BDE14001FDE3B /* RatioViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9382B09D26029A58004DCA4B /* RatioViewTests.swift */; };
 		932102A7260BDE14001FDE3B /* WaterAmountViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9382B08F26028BC6004DCA4B /* WaterAmountViewTests.swift */; };
 		933E9C68260BE0040029D73D /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 933E9C67260BE0040029D73D /* SnapshotTesting */; };
+		9351034A26156FAA00C8F490 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9351034926156FAA00C8F490 /* String+Extension.swift */; };
+		935103552615711900C8F490 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 935103572615711900C8F490 /* Localizable.strings */; };
 		9364AD5F25D37BCF00149F49 /* UnitOfMeasurementToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9364AD5E25D37BCF00149F49 /* UnitOfMeasurementToggleStyle.swift */; };
 		9375EEE825D1B3900003A323 /* RatioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9375EEE725D1B3900003A323 /* RatioApp.swift */; };
 		9375EEEC25D1B3910003A323 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9375EEEB25D1B3910003A323 /* Assets.xcassets */; };
@@ -57,6 +59,10 @@
 		931BE97825F7DF030030444F /* AmountAdjustButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountAdjustButton.swift; sourceTree = "<group>"; };
 		93210295260BDDFB001FDE3B /* CafeoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CafeoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		93210299260BDDFB001FDE3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9351034926156FAA00C8F490 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		935103562615711900C8F490 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		9351035A2615711E00C8F490 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		9351035B2615711F00C8F490 /* fr-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CA"; path = "fr-CA.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		9364AD5E25D37BCF00149F49 /* UnitOfMeasurementToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitOfMeasurementToggleStyle.swift; sourceTree = "<group>"; };
 		9375EEE425D1B3900003A323 /* Ratio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ratio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9375EEE725D1B3900003A323 /* RatioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatioApp.swift; sourceTree = "<group>"; };
@@ -136,6 +142,7 @@
 		9375EEDB25D1B3900003A323 = {
 			isa = PBXGroup;
 			children = (
+				935103572615711900C8F490 /* Localizable.strings */,
 				9375EEE625D1B3900003A323 /* Ratio */,
 				93210296260BDDFB001FDE3B /* CafeoTests */,
 				9375EEE525D1B3900003A323 /* Products */,
@@ -216,6 +223,7 @@
 				93B4C7A225FD62E300E479C1 /* Comparable+Extension.swift */,
 				93B4C77025F90F7B00E479C1 /* Font+Extension.swift */,
 				93B4C78A25FD38D500E479C1 /* Gradient+Extension.swift */,
+				9351034926156FAA00C8F490 /* String+Extension.swift */,
 				93B4C77325F90FC900E479C1 /* View+Extension.swift */,
 			);
 			path = Extensions;
@@ -327,6 +335,8 @@
 			knownRegions = (
 				en,
 				Base,
+				"fr-CA",
+				fr,
 			);
 			mainGroup = 9375EEDB25D1B3900003A323;
 			packageReferences = (
@@ -356,6 +366,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9375EEEF25D1B3910003A323 /* Preview Assets.xcassets in Resources */,
+				935103552615711900C8F490 /* Localizable.strings in Resources */,
 				9375EEEC25D1B3910003A323 /* Assets.xcassets in Resources */,
 				93C8399625F6979F00C66710 /* Orbitron-Medium.ttf in Resources */,
 				93C8399825F6979F00C66710 /* Exo2-MediumItalic.ttf in Resources */,
@@ -397,6 +408,7 @@
 				93B4C77125F90F7B00E479C1 /* Font+Extension.swift in Sources */,
 				93B4C7AF25FDC4A700E479C1 /* Reducer+Extension.swift in Sources */,
 				93B4C78225FA752D00E479C1 /* RatioView.swift in Sources */,
+				9351034A26156FAA00C8F490 /* String+Extension.swift in Sources */,
 				93B4C79A25FD3B0300E479C1 /* CoffeeAmountView.swift in Sources */,
 				93B4C77425F90FC900E479C1 /* View+Extension.swift in Sources */,
 				93B4C77D25FA74E900E479C1 /* UnitConversionView.swift in Sources */,
@@ -416,6 +428,19 @@
 			targetProxy = 9321029A260BDDFB001FDE3B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		935103572615711900C8F490 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				935103562615711900C8F490 /* en */,
+				9351035A2615711E00C8F490 /* fr */,
+				9351035B2615711F00C8F490 /* fr-CA */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		9321029C260BDDFB001FDE3B /* Debug */ = {

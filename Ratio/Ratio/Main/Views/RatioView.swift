@@ -53,7 +53,7 @@ struct RatioView: View {
             }
             .accessibility(sortPriority: 0)
 
-            CoffioText(text: "ratio", .mainLabel)
+            CoffioText(text: "ratio".localized, .mainLabel)
                 .accessibility(sortPriority: 1)
         }
         .accessibilityElement(children: .contain)
