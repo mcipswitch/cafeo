@@ -1,6 +1,6 @@
 //
 //  UnitConversionViewTests.swift
-//  RatioTests
+//  CafeoTests
 //
 //  Created by Priscilla Ip on 2021-03-17.
 //
@@ -8,7 +8,7 @@
 import ComposableArchitecture
 import SnapshotTesting
 import XCTest
-@testable import Ratio
+@testable import Cafeo
 
 class UnitConversionViewTests: XCTestCase {
     let scheduler = DispatchQueue.testScheduler
