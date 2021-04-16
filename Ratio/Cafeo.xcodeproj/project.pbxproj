@@ -144,7 +144,6 @@
 		9375EEDB25D1B3900003A323 = {
 			isa = PBXGroup;
 			children = (
-				935103572615711900C8F490 /* Localizable.strings */,
 				9375EEE625D1B3900003A323 /* Cafeo */,
 				93210296260BDDFB001FDE3B /* CafeoTests */,
 				9375EEE525D1B3900003A323 /* Products */,
@@ -164,7 +163,6 @@
 			isa = PBXGroup;
 			children = (
 				937FD33025D216C00048C406 /* Main */,
-				937FD32725D211670048C406 /* Styles */,
 				9375EEEB25D1B3910003A323 /* Assets.xcassets */,
 				93C8399A25F697A400C66710 /* Resources */,
 				9375EEF025D1B3910003A323 /* Info.plist */,
@@ -210,6 +208,7 @@
 				93B4C76D25F7E53700E479C1 /* Extensions */,
 				93B4C79125FD3A8F00E479C1 /* Keys */,
 				9391338526150FC90077757A /* Managers */,
+				937FD32725D211670048C406 /* Styles */,
 				931BE97B25F7DF090030444F /* UI */,
 				93B4C77F25FA751A00E479C1 /* Views */,
 			);
@@ -272,6 +271,7 @@
 		93C8399A25F697A400C66710 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				935103572615711900C8F490 /* Localizable.strings */,
 				93C8399225F6979F00C66710 /* Fonts */,
 			);
 			path = Resources;
