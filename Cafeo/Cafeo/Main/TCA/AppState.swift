@@ -94,7 +94,10 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, e
 
         HapticFeedbackManager.shared.generateImpact(.medium)
         updateCoffeeAmount()
-        return .none
+
+        return !state.waterAmountIsLocked
+            ? Effect(value: AppAction.amountLockToggled)
+            : .none
 
     case let .coffeeAmountChanged(action):
         switch action {
@@ -111,7 +114,10 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, e
 
         HapticFeedbackManager.shared.generateImpact(.medium)
         updateWaterAmount()
-        return .none
+
+        return !state.coffeeAmountIsLocked
+            ? Effect(value: AppAction.amountLockToggled)
+            : .none
 
     case .amountLockToggled:
         HapticFeedbackManager.shared.generateImpact(.medium)
