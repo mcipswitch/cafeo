@@ -1,5 +1,5 @@
 //
-//  UnitConversionView.swift
+//  CafeoUnitConversionView.swift
 //  Cafeo
 //
 //  Created by Priscilla Ip on 2021-03-11.
@@ -8,7 +8,7 @@
 import ComposableArchitecture
 import SwiftUI
 
-struct UnitConversionView: View {
+struct CafeoUnitConversionView: View {
     @ObservedObject var viewStore: ViewStore<AppState, AppAction>
 
     var body: some View {

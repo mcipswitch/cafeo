@@ -1,5 +1,5 @@
 //
-//  CoffeeAmountView.swift
+//  CafeoCoffeeAmountView.swift
 //  Cafeo
 //
 //  Created by Priscilla Ip on 2021-03-13.
@@ -8,7 +8,7 @@
 import ComposableArchitecture
 import SwiftUI
 
-struct CoffeeAmountView: View {
+struct CafeoCoffeeAmountView: View {
     @ObservedObject var viewStore: ViewStore<AppState, AppAction>
 
     var body: some View {
@@ -41,7 +41,7 @@ struct CoffeeAmountView: View {
 
 // MARK: - Helpers
 
-extension CoffeeAmountView {
+extension CafeoCoffeeAmountView {
     private func onPress(_ action: IngredientAction) {
         self.viewStore.send(.adjustAmountButtonLongPressed(.coffee, action))
     }

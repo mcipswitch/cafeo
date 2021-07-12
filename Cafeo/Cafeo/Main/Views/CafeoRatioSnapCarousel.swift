@@ -1,5 +1,5 @@
 //
-//  RatioSnapCarousel.swift
+//  CafeoRatioSnapCarousel.swift
 //  Cafeo
 //
 //  Created by Priscilla Ip on 2021-04-15.
@@ -9,7 +9,7 @@ import ComposableArchitecture
 import SwiftUI
 
 /// Please see: https://medium.com/flawless-app-stories/implementing-snap-carousel-in-swiftui-3ae084504670
-struct RatioSnapCarousel: View {
+struct CafeoRatioSnapCarousel: View {
     @ObservedObject var viewStore: ViewStore<AppState, AppAction>
     @GestureState var dragOffset = CGFloat.zero
 

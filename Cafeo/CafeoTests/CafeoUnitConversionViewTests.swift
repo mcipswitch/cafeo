@@ -1,5 +1,5 @@
 //
-//  UnitConversionViewTests.swift
+//  CafeoUnitConversionViewTests.swift
 //  CafeoTests
 //
 //  Created by Priscilla Ip on 2021-03-17.
@@ -10,7 +10,7 @@ import SnapshotTesting
 import XCTest
 @testable import Cafeo
 
-class UnitConversionViewTests: XCTestCase {
+class CafeoUnitConversionViewTests: XCTestCase {
     let scheduler = DispatchQueue.testScheduler
 
     func testUnitConversionToggledToOunces() throws {

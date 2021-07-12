@@ -1,5 +1,5 @@
 //
-//  RatioView.swift
+//  CafeoRatioView.swift
 //  Cafeo
 //
 //  Created by Priscilla Ip on 2021-03-11.
@@ -8,7 +8,7 @@
 import ComposableArchitecture
 import SwiftUI
 
-struct RatioView: View {
+struct CafeoRatioView: View {
     @ObservedObject var viewStore: ViewStore<AppState, AppAction>
     var dividerWidth: CGFloat = 2
 
@@ -31,7 +31,7 @@ struct RatioView: View {
                             )
                             .addInnerShadow()
                         ZStack {
-                            RatioSnapCarousel(viewStore: self.viewStore)
+                            CafeoRatioSnapCarousel(viewStore: self.viewStore)
                                 .animation(.spring())
                                 .accessibilityElement(children: .ignore)
                                 .accessibility(label: Text("Ratio is 1 to \(self.viewStore.activeRatioDenominator)"))

@@ -1,5 +1,5 @@
 //
-//  WaterAmountViewTests.swift
+//  CafeoWaterAmountViewTests.swift
 //  CafeoTests
 //
 //  Created by Priscilla Ip on 2021-03-17.
@@ -10,7 +10,7 @@ import SnapshotTesting
 import XCTest
 @testable import Cafeo
 
-class WaterAmountViewTests: XCTestCase {
+class CafeoWaterAmountViewTests: XCTestCase {
     let scheduler = DispatchQueue.testScheduler
     
     func testWaterAmountChanged() throws {
@@ -35,6 +35,11 @@ class WaterAmountViewTests: XCTestCase {
 
             $0.coffeeAmount = waterAmount * $0.ratio
             $0.waterAmount = waterAmount
+        }
+
+        store.receive(.amountLockToggled) {
+            $0.waterAmountIsLocked = true
+            $0.coffeeAmountIsLocked = false
         }
 
         store.send(.waterAmountChanged(.increment)) {
@@ -101,6 +106,11 @@ class WaterAmountViewTests: XCTestCase {
 
             $0.coffeeAmount = waterAmount * $0.ratio
             $0.waterAmount = waterAmount
+        }
+
+        store.receive(.amountLockToggled) {
+            $0.waterAmountIsLocked = true
+            $0.coffeeAmountIsLocked = false
         }
 
         store.receive(.waterAmountChanged(.increment)) {

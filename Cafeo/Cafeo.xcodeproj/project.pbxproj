@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		931BE97925F7DF030030444F /* IngredientAdjustButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931BE97825F7DF030030444F /* IngredientAdjustButton.swift */; };
-		932102A4260BDE14001FDE3B /* UnitConversionViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9382B08926028B7F004DCA4B /* UnitConversionViewTests.swift */; };
-		932102A5260BDE14001FDE3B /* CoffeeAmountViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9382B09326028C17004DCA4B /* CoffeeAmountViewTests.swift */; };
-		932102A7260BDE14001FDE3B /* WaterAmountViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9382B08F26028BC6004DCA4B /* WaterAmountViewTests.swift */; };
+		932102A4260BDE14001FDE3B /* CafeoUnitConversionViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9382B08926028B7F004DCA4B /* CafeoUnitConversionViewTests.swift */; };
+		932102A5260BDE14001FDE3B /* CafeoCoffeeAmountViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9382B09326028C17004DCA4B /* CafeoCoffeeAmountViewTests.swift */; };
+		932102A7260BDE14001FDE3B /* CafeoWaterAmountViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9382B08F26028BC6004DCA4B /* CafeoWaterAmountViewTests.swift */; };
 		933E9C68260BE0040029D73D /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 933E9C67260BE0040029D73D /* SnapshotTesting */; };
 		9351034A26156FAA00C8F490 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9351034926156FAA00C8F490 /* String+Extension.swift */; };
 		935103552615711900C8F490 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 935103572615711900C8F490 /* Localizable.strings */; };
@@ -22,21 +22,21 @@
 		937FD32E25D216830048C406 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937FD32D25D216830048C406 /* AppState.swift */; };
 		9382B08626013061004DCA4B /* ViewStore+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9382B08526013061004DCA4B /* ViewStore+Extension.swift */; };
 		9382B0AF2603C400004DCA4B /* AppState+UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9382B0AE2603C400004DCA4B /* AppState+UserDefaults.swift */; };
-		938D224F262922F5004EFF8D /* IngredientAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938D224E262922F5004EFF8D /* IngredientAmountView.swift */; };
-		938D225F262932B6004EFF8D /* RatioSnapCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938D225E262932B6004EFF8D /* RatioSnapCarousel.swift */; };
-		938E9CFF262933DC003FF53A /* RatioViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9382B09D26029A58004DCA4B /* RatioViewTests.swift */; };
+		938D224F262922F5004EFF8D /* CafeoIngredientAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938D224E262922F5004EFF8D /* CafeoIngredientAmountView.swift */; };
+		938D225F262932B6004EFF8D /* CafeoRatioSnapCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938D225E262932B6004EFF8D /* CafeoRatioSnapCarousel.swift */; };
+		938E9CFF262933DC003FF53A /* CafeoRatioViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9382B09D26029A58004DCA4B /* CafeoRatioViewTests.swift */; };
 		9391338226150FC50077757A /* HapticFeedbackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9391338126150FC50077757A /* HapticFeedbackManager.swift */; };
 		93A9FDEA25F6911D006D5428 /* Cafeo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A9FDE925F6911D006D5428 /* Cafeo.swift */; };
 		93B4C76B25F7E53400E479C1 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C76A25F7E53400E479C1 /* Color+Extension.swift */; };
 		93B4C77125F90F7B00E479C1 /* Font+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C77025F90F7B00E479C1 /* Font+Extension.swift */; };
 		93B4C77425F90FC900E479C1 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C77325F90FC900E479C1 /* View+Extension.swift */; };
-		93B4C77D25FA74E900E479C1 /* UnitConversionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C77C25FA74E900E479C1 /* UnitConversionView.swift */; };
-		93B4C78225FA752D00E479C1 /* RatioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C78125FA752D00E479C1 /* RatioView.swift */; };
+		93B4C77D25FA74E900E479C1 /* CafeoUnitConversionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C77C25FA74E900E479C1 /* CafeoUnitConversionView.swift */; };
+		93B4C78225FA752D00E479C1 /* CafeoRatioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C78125FA752D00E479C1 /* CafeoRatioView.swift */; };
 		93B4C78825FD386800E479C1 /* CafeoText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C78725FD386800E479C1 /* CafeoText.swift */; };
 		93B4C78B25FD38D500E479C1 /* Gradient+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C78A25FD38D500E479C1 /* Gradient+Extension.swift */; };
 		93B4C78F25FD3A8C00E479C1 /* BoundsPreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C78E25FD3A8C00E479C1 /* BoundsPreferenceKey.swift */; };
-		93B4C79725FD3AE300E479C1 /* WaterAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C79625FD3AE300E479C1 /* WaterAmountView.swift */; };
-		93B4C79A25FD3B0300E479C1 /* CoffeeAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C79925FD3B0300E479C1 /* CoffeeAmountView.swift */; };
+		93B4C79725FD3AE300E479C1 /* CafeoWaterAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C79625FD3AE300E479C1 /* CafeoWaterAmountView.swift */; };
+		93B4C79A25FD3B0300E479C1 /* CafeoCoffeeAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C79925FD3B0300E479C1 /* CafeoCoffeeAmountView.swift */; };
 		93B4C7A325FD62E400E479C1 /* Comparable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C7A225FD62E300E479C1 /* Comparable+Extension.swift */; };
 		93B4C7A925FDC2BD00E479C1 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C7A825FDC2BD00E479C1 /* Double+Extension.swift */; };
 		93B4C7AC25FDC47C00E479C1 /* AppState+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C7AB25FDC47C00E479C1 /* AppState+Helpers.swift */; };
@@ -72,25 +72,25 @@
 		937FD32425D2115E0048C406 /* LockToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockToggleStyle.swift; sourceTree = "<group>"; };
 		937FD32D25D216830048C406 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		9382B08526013061004DCA4B /* ViewStore+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewStore+Extension.swift"; sourceTree = "<group>"; };
-		9382B08926028B7F004DCA4B /* UnitConversionViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitConversionViewTests.swift; sourceTree = "<group>"; };
-		9382B08F26028BC6004DCA4B /* WaterAmountViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterAmountViewTests.swift; sourceTree = "<group>"; };
-		9382B09326028C17004DCA4B /* CoffeeAmountViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeAmountViewTests.swift; sourceTree = "<group>"; };
-		9382B09D26029A58004DCA4B /* RatioViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatioViewTests.swift; sourceTree = "<group>"; };
+		9382B08926028B7F004DCA4B /* CafeoUnitConversionViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoUnitConversionViewTests.swift; sourceTree = "<group>"; };
+		9382B08F26028BC6004DCA4B /* CafeoWaterAmountViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoWaterAmountViewTests.swift; sourceTree = "<group>"; };
+		9382B09326028C17004DCA4B /* CafeoCoffeeAmountViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoCoffeeAmountViewTests.swift; sourceTree = "<group>"; };
+		9382B09D26029A58004DCA4B /* CafeoRatioViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoRatioViewTests.swift; sourceTree = "<group>"; };
 		9382B0AE2603C400004DCA4B /* AppState+UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppState+UserDefaults.swift"; sourceTree = "<group>"; };
-		938D224E262922F5004EFF8D /* IngredientAmountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientAmountView.swift; sourceTree = "<group>"; };
-		938D225E262932B6004EFF8D /* RatioSnapCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatioSnapCarousel.swift; sourceTree = "<group>"; };
+		938D224E262922F5004EFF8D /* CafeoIngredientAmountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoIngredientAmountView.swift; sourceTree = "<group>"; };
+		938D225E262932B6004EFF8D /* CafeoRatioSnapCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoRatioSnapCarousel.swift; sourceTree = "<group>"; };
 		9391338126150FC50077757A /* HapticFeedbackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticFeedbackManager.swift; sourceTree = "<group>"; };
 		93A9FDE925F6911D006D5428 /* Cafeo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cafeo.swift; sourceTree = "<group>"; };
 		93B4C76A25F7E53400E479C1 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		93B4C77025F90F7B00E479C1 /* Font+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Extension.swift"; sourceTree = "<group>"; };
 		93B4C77325F90FC900E479C1 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
-		93B4C77C25FA74E900E479C1 /* UnitConversionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitConversionView.swift; sourceTree = "<group>"; };
-		93B4C78125FA752D00E479C1 /* RatioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatioView.swift; sourceTree = "<group>"; };
+		93B4C77C25FA74E900E479C1 /* CafeoUnitConversionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoUnitConversionView.swift; sourceTree = "<group>"; };
+		93B4C78125FA752D00E479C1 /* CafeoRatioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoRatioView.swift; sourceTree = "<group>"; };
 		93B4C78725FD386800E479C1 /* CafeoText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoText.swift; sourceTree = "<group>"; };
 		93B4C78A25FD38D500E479C1 /* Gradient+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Gradient+Extension.swift"; sourceTree = "<group>"; };
 		93B4C78E25FD3A8C00E479C1 /* BoundsPreferenceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundsPreferenceKey.swift; sourceTree = "<group>"; };
-		93B4C79625FD3AE300E479C1 /* WaterAmountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterAmountView.swift; sourceTree = "<group>"; };
-		93B4C79925FD3B0300E479C1 /* CoffeeAmountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeAmountView.swift; sourceTree = "<group>"; };
+		93B4C79625FD3AE300E479C1 /* CafeoWaterAmountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoWaterAmountView.swift; sourceTree = "<group>"; };
+		93B4C79925FD3B0300E479C1 /* CafeoCoffeeAmountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoCoffeeAmountView.swift; sourceTree = "<group>"; };
 		93B4C7A225FD62E300E479C1 /* Comparable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Comparable+Extension.swift"; sourceTree = "<group>"; };
 		93B4C7A825FDC2BD00E479C1 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		93B4C7AB25FDC47C00E479C1 /* AppState+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppState+Helpers.swift"; sourceTree = "<group>"; };
@@ -132,10 +132,10 @@
 		93210296260BDDFB001FDE3B /* CafeoTests */ = {
 			isa = PBXGroup;
 			children = (
-				9382B09D26029A58004DCA4B /* RatioViewTests.swift */,
-				9382B09326028C17004DCA4B /* CoffeeAmountViewTests.swift */,
-				9382B08F26028BC6004DCA4B /* WaterAmountViewTests.swift */,
-				9382B08926028B7F004DCA4B /* UnitConversionViewTests.swift */,
+				9382B09D26029A58004DCA4B /* CafeoRatioViewTests.swift */,
+				9382B09326028C17004DCA4B /* CafeoCoffeeAmountViewTests.swift */,
+				9382B08F26028BC6004DCA4B /* CafeoWaterAmountViewTests.swift */,
+				9382B08926028B7F004DCA4B /* CafeoUnitConversionViewTests.swift */,
 				93210299260BDDFB001FDE3B /* Info.plist */,
 			);
 			path = CafeoTests;
@@ -240,12 +240,12 @@
 		93B4C77F25FA751A00E479C1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				93B4C78125FA752D00E479C1 /* RatioView.swift */,
-				938D225E262932B6004EFF8D /* RatioSnapCarousel.swift */,
-				938D224E262922F5004EFF8D /* IngredientAmountView.swift */,
-				93B4C79925FD3B0300E479C1 /* CoffeeAmountView.swift */,
-				93B4C79625FD3AE300E479C1 /* WaterAmountView.swift */,
-				93B4C77C25FA74E900E479C1 /* UnitConversionView.swift */,
+				93B4C78125FA752D00E479C1 /* CafeoRatioView.swift */,
+				938D225E262932B6004EFF8D /* CafeoRatioSnapCarousel.swift */,
+				938D224E262922F5004EFF8D /* CafeoIngredientAmountView.swift */,
+				93B4C79925FD3B0300E479C1 /* CafeoCoffeeAmountView.swift */,
+				93B4C79625FD3AE300E479C1 /* CafeoWaterAmountView.swift */,
+				93B4C77C25FA74E900E479C1 /* CafeoUnitConversionView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -392,10 +392,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				938E9CFF262933DC003FF53A /* RatioViewTests.swift in Sources */,
-				932102A5260BDE14001FDE3B /* CoffeeAmountViewTests.swift in Sources */,
-				932102A4260BDE14001FDE3B /* UnitConversionViewTests.swift in Sources */,
-				932102A7260BDE14001FDE3B /* WaterAmountViewTests.swift in Sources */,
+				938E9CFF262933DC003FF53A /* CafeoRatioViewTests.swift in Sources */,
+				932102A5260BDE14001FDE3B /* CafeoCoffeeAmountViewTests.swift in Sources */,
+				932102A4260BDE14001FDE3B /* CafeoUnitConversionViewTests.swift in Sources */,
+				932102A7260BDE14001FDE3B /* CafeoWaterAmountViewTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,18 +414,18 @@
 				937FD32525D2115E0048C406 /* LockToggleStyle.swift in Sources */,
 				937FD32E25D216830048C406 /* AppState.swift in Sources */,
 				93B4C7AC25FDC47C00E479C1 /* AppState+Helpers.swift in Sources */,
-				938D224F262922F5004EFF8D /* IngredientAmountView.swift in Sources */,
+				938D224F262922F5004EFF8D /* CafeoIngredientAmountView.swift in Sources */,
 				93B4C7A925FDC2BD00E479C1 /* Double+Extension.swift in Sources */,
 				93B4C78F25FD3A8C00E479C1 /* BoundsPreferenceKey.swift in Sources */,
 				93B4C77125F90F7B00E479C1 /* Font+Extension.swift in Sources */,
 				93B4C7AF25FDC4A700E479C1 /* Reducer+Extension.swift in Sources */,
-				93B4C78225FA752D00E479C1 /* RatioView.swift in Sources */,
-				938D225F262932B6004EFF8D /* RatioSnapCarousel.swift in Sources */,
+				93B4C78225FA752D00E479C1 /* CafeoRatioView.swift in Sources */,
+				938D225F262932B6004EFF8D /* CafeoRatioSnapCarousel.swift in Sources */,
 				9351034A26156FAA00C8F490 /* String+Extension.swift in Sources */,
-				93B4C79A25FD3B0300E479C1 /* CoffeeAmountView.swift in Sources */,
+				93B4C79A25FD3B0300E479C1 /* CafeoCoffeeAmountView.swift in Sources */,
 				93B4C77425F90FC900E479C1 /* View+Extension.swift in Sources */,
-				93B4C77D25FA74E900E479C1 /* UnitConversionView.swift in Sources */,
-				93B4C79725FD3AE300E479C1 /* WaterAmountView.swift in Sources */,
+				93B4C77D25FA74E900E479C1 /* CafeoUnitConversionView.swift in Sources */,
+				93B4C79725FD3AE300E479C1 /* CafeoWaterAmountView.swift in Sources */,
 				9375EEE825D1B3900003A323 /* CafeoApp.swift in Sources */,
 				93B4C78825FD386800E479C1 /* CafeoText.swift in Sources */,
 			);

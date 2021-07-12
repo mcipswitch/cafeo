@@ -1,5 +1,5 @@
 //
-//  RatioViewTests.swift
+//  CafeoRatioViewTests.swift
 //  CafeoTests
 //
 //  Created by Priscilla Ip on 2021-03-17.
@@ -10,7 +10,7 @@ import SnapshotTesting
 import XCTest
 @testable import Cafeo
 
-class RatioViewTests: XCTestCase {
+class CafeoRatioViewTests: XCTestCase {
     let scheduler = DispatchQueue.testScheduler
 
     func testActiveRatioIdxChanged() throws {

@@ -1,5 +1,5 @@
 //
-//  CoffeeAmountViewTests.swift
+//  CafeoCoffeeAmountViewTests.swift
 //  CafeoTests
 //
 //  Created by Priscilla Ip on 2021-03-17.
@@ -10,7 +10,7 @@ import SnapshotTesting
 import XCTest
 @testable import Cafeo
 
-class CoffeeAmountViewTests: XCTestCase {
+class CafeoCoffeeAmountViewTests: XCTestCase {
     let scheduler = DispatchQueue.testScheduler
 
     func testCoffeeAmountChanged() throws {
@@ -21,6 +21,8 @@ class CoffeeAmountViewTests: XCTestCase {
             initialState: AppState(
                 coffeeAmount: coffeeAmount,
                 waterAmount: 250,
+                coffeeAmountIsLocked: false,
+                waterAmountIsLocked: true,
                 ratioCarouselActiveIdx: 0,
                 ratioDenominators: [16]
             ),
@@ -36,6 +38,11 @@ class CoffeeAmountViewTests: XCTestCase {
 
             $0.coffeeAmount = coffeeAmount
             $0.waterAmount = coffeeAmount / $0.ratio
+        }
+
+        store.receive(.amountLockToggled) {
+            $0.waterAmountIsLocked = false
+            $0.coffeeAmountIsLocked = true
         }
 
         store.send(.coffeeAmountChanged(.increment)) {
@@ -85,7 +92,9 @@ class CoffeeAmountViewTests: XCTestCase {
 
         let store = TestStore(
             initialState: AppState(
-                coffeeAmount: coffeeAmount
+                coffeeAmount: coffeeAmount,
+                coffeeAmountIsLocked: false,
+                waterAmountIsLocked: true
             ),
             reducer: appReducer,
             environment: AppEnvironment(
@@ -102,6 +111,11 @@ class CoffeeAmountViewTests: XCTestCase {
             coffeeAmount += 0.1
             $0.coffeeAmount = coffeeAmount
             $0.waterAmount = coffeeAmount / $0.ratio
+        }
+
+        store.receive(.amountLockToggled) {
+            $0.waterAmountIsLocked = false
+            $0.coffeeAmountIsLocked = true
         }
 
         store.receive(.coffeeAmountChanged(.increment)) {

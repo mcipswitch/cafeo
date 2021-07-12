@@ -27,18 +27,18 @@ struct Cafeo: View {
                 VStack(spacing: 0) {
                     Spacer()
 
-                    RatioView(viewStore: viewStore)
+                    CafeoRatioView(viewStore: viewStore)
                         .frame(height: 180)
                         .padding(.horizontal, 24)
                         .padding(.vertical, self.padding)
                         .background(Color.cafeoBackgroundDark)
 
-                    IngredientAmountView(viewStore: viewStore)
+                    CafeoIngredientAmountView(viewStore: viewStore)
                         .padding(.vertical, self.padding)
                         .background(Color.cafeoBackgroundLight)
                         .accessibilityElement(children: .contain)
 
-                    UnitConversionView(viewStore: viewStore)
+                    CafeoUnitConversionView(viewStore: viewStore)
                         .padding(.horizontal, 24)
                         .padding(.vertical, self.padding)
                         .background(Color.cafeoBackgroundDark)

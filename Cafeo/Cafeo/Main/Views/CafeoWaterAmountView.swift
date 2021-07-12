@@ -1,5 +1,5 @@
 //
-//  WaterAmountView.swift
+//  CafeoWaterAmountView.swift
 //  Cafeo
 //
 //  Created by Priscilla Ip on 2021-03-13.
@@ -8,7 +8,7 @@
 import ComposableArchitecture
 import SwiftUI
 
-struct WaterAmountView: View {
+struct CafeoWaterAmountView: View {
     @ObservedObject var viewStore: ViewStore<AppState, AppAction>
 
     var body: some View {
@@ -41,7 +41,7 @@ struct WaterAmountView: View {
 
 // MARK: - Helpers
 
-extension WaterAmountView {
+extension CafeoWaterAmountView {
     private func onPress(_ action: IngredientAction) {
         self.viewStore.send(.adjustAmountButtonLongPressed(.water, action))
     }
