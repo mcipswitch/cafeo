@@ -8,7 +8,6 @@
 import SwiftUI
 
 final class HapticFeedbackManager {
-
     private init() {}
     static let shared = HapticFeedbackManager()
 

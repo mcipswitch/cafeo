@@ -9,92 +9,83 @@ import ComposableArchitecture
 import SwiftUI
 
 struct CafeoUnitConversionView: View {
-    @ObservedObject var viewStore: ViewStore<AppState, AppAction>
+    let store: Store<AppState, AppAction>
 
     var body: some View {
-        VStack(spacing: 16) {
-
-            Text("conversion".localized)
-                .kerning(1.5)
-                .cafeoText(.miniLabel, color: .cafeoGray)
-                .textCase(.uppercase)
-                .padding(.horizontal, 8)
-                .background(Color.cafeoBackgroundDark)
-                .anchorPreference(
-                    key: BoundsPreferenceKey.self,
-                    value: .bounds,
-                    transform: { $0 }
-                )
-                .backgroundPreferenceValue(BoundsPreferenceKey.self) { preferences in
-                    GeometryReader { geo in
-                        preferences.map { value in
-                            Path { path in
-                                path.move(to: CGPoint(x: -40,
-                                                      y: 16))
-                                path.addLine(to: CGPoint(x: -40,
-                                                         y: geo[value].height/2))
-                                path.addLine(to: CGPoint(x: geo[value].width + 40,
-                                                         y: geo[value].height/2))
-                                path.addLine(to: CGPoint(x: geo[value].width + 40,
-                                                         y: 16))
+        WithViewStore(self.store) { viewStore in
+            VStack(spacing: 16) {
+                Text("conversion".localized)
+                    .kerning(.cafeo(.standard))
+                    .cafeoText(.miniLabel, color: .cafeoGray)
+                    .textCase(.uppercase)
+                    .padding(.horizontal, 8)
+                    .background(Color.cafeoBackgroundDark)
+                    .anchorPreference(
+                        key: BoundsPreferenceKey.self,
+                        value: .bounds,
+                        transform: { $0 }
+                    )
+                    .backgroundPreferenceValue(BoundsPreferenceKey.self) { preferences in
+                        GeometryReader { geo in
+                            preferences.map { value in
+                                Path { path in
+                                    path.move(to: CGPoint(x: -40,
+                                                          y: 16))
+                                    path.addLine(to: CGPoint(x: -40,
+                                                             y: geo[value].height/2))
+                                    path.addLine(to: CGPoint(x: geo[value].width + 40,
+                                                             y: geo[value].height/2))
+                                    path.addLine(to: CGPoint(x: geo[value].width + 40,
+                                                             y: 16))
+                                }
+                                .stroke(Color(#colorLiteral(red: 0.2862745098, green: 0.3058823529, blue: 0.3450980392, alpha: 1)), lineWidth: 1)
                             }
-                            .stroke(Color(#colorLiteral(red: 0.2862745098, green: 0.3058823529, blue: 0.3450980392, alpha: 1)), lineWidth: 1)
                         }
                     }
+
+                HStack(spacing: 30) {
+                    Text("\(CafeoUnit.grams.abbrString)")
+                        .kerning(.cafeo(.standard))
+                        .cafeoText(.unitLabel,
+                                   color: viewStore.unitConversion == .grams ? .cafeoOrange : .cafeoGray)
+                        .textCase(.lowercase)
+                        .accessibility(sortPriority: 1)
+                        .accessibility(label: Text("grams"))
+
+                    CafeoToggle(
+                        offset: viewStore.binding(
+                            get: \.unitConversionToggleYOffset,
+                            send: AppAction.unitConversionToggled
+                        ))
+                        .gesture(
+                            // This registers both tap and swipe gestures
+                            DragGesture(minimumDistance: 0)
+                                .onEnded { _ in
+                                    viewStore.send(.unitConversionToggled)
+                                }
+                        )
+                        .accessibility(sortPriority: 1)
+                        .accessibility(label: Text("unit conversion toggle"))
+                        .accessibility(value: Text("\(viewStore.unitConversion.rawValue)"))
+
+                    Text("\(CafeoUnit.ounces.abbrString)")
+                        .kerning(.cafeo(.standard))
+                        .cafeoText(.unitLabel,
+                                   color: viewStore.unitConversion == .ounces ? .cafeoOrange : .cafeoGray)
+                        .textCase(.lowercase)
+                        .accessibility(sortPriority: 0)
+                        .accessibility(label: Text("ounces"))
                 }
-
-            HStack(spacing: 30) {
-                Text("\(CafeoUnit.grams.abbrString)")
-                    .kerning(1.5)
-                    .cafeoText(.unitLabel,
-                               color: self.isGrams ? .cafeoOrange : .cafeoGray)
-                    .textCase(.lowercase)
-                    .accessibility(sortPriority: 1)
-                    .accessibility(label: Text("grams"))
-
-                CoffioToggle(
-                    offset: self.viewStore.binding(
-                        get: \.unitConversionToggleYOffset,
-                        send: AppAction.unitConversionToggled
-                    ))
-                    .gesture(
-                        // This registers both tap and swipe gestures
-                        DragGesture(minimumDistance: 0)
-                            .onEnded { _ in
-                                self.viewStore.send(.unitConversionToggled)
-                            }
-                    )
-                    .accessibility(sortPriority: 1)
-                    .accessibility(label: Text("unit conversion toggle"))
-                    .accessibility(value: Text("\(self.viewStore.unitConversion.rawValue)"))
-
-                Text("\(CafeoUnit.ounces.abbrString)")
-                    .kerning(1.5)
-                    .cafeoText(.unitLabel,
-                               color: self.isOunces ? .cafeoOrange : .cafeoGray)
-                    .textCase(.lowercase)
-                    .accessibility(sortPriority: 0)
-                    .accessibility(label: Text("ounces"))
+                .accessibilityElement(children: .contain)
             }
-            .accessibilityElement(children: .contain)
+            .frame(minWidth: 0, maxWidth: .infinity)
         }
-        .frame(minWidth: 0, maxWidth: .infinity)
-    }
-
-    // MARK: Helpers
-
-    private var isGrams: Bool {
-        return self.viewStore.unitConversion == .grams
-    }
-
-    private var isOunces: Bool {
-        return self.viewStore.unitConversion == .ounces
     }
 }
 
 // MARK: - CoffioToggle
 
-struct CoffioToggle: View {
+struct CafeoToggle: View {
     @Binding var offset: CGFloat
     var toggleHeight: CGFloat = 40
 

@@ -9,58 +9,65 @@ import ComposableArchitecture
 import SwiftUI
 
 struct CafeoRatioView: View {
+    let store: Store<AppState, AppAction>
     @ObservedObject var viewStore: ViewStore<AppState, AppAction>
-    var dividerWidth: CGFloat = 2
+
+    init(store: Store<AppState, AppAction>) {
+        self.store = store
+        self.viewStore = ViewStore(store)
+    }
 
     var body: some View {
-        VStack(spacing: 20) {
-            ZStack {
-                GeometryReader { geo in
-                    self.ratioBox
-                        .stroke(Color.cafeoShadowDark1, lineWidth: 2)
-                        .background(self.ratioBox.fill(LinearGradient.cafeoChrome))
+        WithViewStore(self.store) { viewStore in
+            VStack(spacing: 20) {
+                ZStack {
+                    GeometryReader { geo in
+                        self.ratioBox
+                            .stroke(Color.cafeoShadowDark1, lineWidth: 2)
+                            .background(self.ratioBox.fill(LinearGradient.cafeoChrome))
 
-                    self.divider
+                        self.divider
 
-                    HStack(spacing: 0) {
-                        Text("1")
-                            .kerning(4.0)
-                            .cafeoText(.ratioLabel, color: .cafeoBeige)
+                        HStack(spacing: 0) {
+                            Text("1")
+                                .kerning(.cafeo(.large))
+                                .cafeoText(.ratioLabel, color: .cafeoBeige)
+                                .frame(
+                                    width: geo.size.width / 2,
+                                    height: geo.size.height
+                                )
+                                .addInnerShadow()
+                            ZStack {
+                                CafeoRatioSnapCarousel(store: self.store)
+                                    .animation(.spring())
+                                    .accessibilityElement(children: .ignore)
+                                    .accessibility(label: Text("Ratio is 1 to \(viewStore.activeRatioDenominator)"))
+
+                                self.ratioDenominatorLine
+                                    .frame(width: geo.size.width / 2 - .cafeo(.scale05))
+                            }
                             .frame(
                                 width: geo.size.width / 2,
                                 height: geo.size.height
                             )
                             .addInnerShadow()
-                        ZStack {
-                            CafeoRatioSnapCarousel(viewStore: self.viewStore)
-                                .animation(.spring())
-                                .accessibilityElement(children: .ignore)
-                                .accessibility(label: Text("Ratio is 1 to \(self.viewStore.activeRatioDenominator)"))
-                            
-                            self.ratioDenominatorLine
-                                .frame(width: geo.size.width / 2 - self.dividerWidth)
-                        }
-                        .frame(
-                            width: geo.size.width / 2,
-                            height: geo.size.height
-                        )
-                        .addInnerShadow()
 
-                        // Control the tappable area
-                        .clipShape(Rectangle())
-                        .contentShape(Rectangle())
+                            // Control the tappable area
+                            .clipShape(Rectangle())
+                            .contentShape(Rectangle())
+                        }
                     }
                 }
-            }
-            .accessibility(sortPriority: 0)
+                .accessibility(sortPriority: 0)
 
-            Text("ratio".localized)
-                .kerning(1.5)
-                .cafeoText(.mainLabel, color: .cafeoGray)
-                .textCase(.uppercase)
-                .accessibility(sortPriority: 1)
+                Text("ratio".localized)
+                    .kerning(.cafeo(.standard))
+                    .cafeoText(.mainLabel, color: .cafeoGray)
+                    .textCase(.uppercase)
+                    .accessibility(sortPriority: 1)
+            }
+            .accessibilityElement(children: .contain)
         }
-        .accessibilityElement(children: .contain)
     }
 
     // MARK: Helpers
@@ -68,7 +75,7 @@ struct CafeoRatioView: View {
     private var divider: some View {
         HStack {
             Spacer()
-            Rectangle().frame(width: self.dividerWidth)
+            Rectangle().frame(width: .cafeo(.scale05))
                 .foregroundColor(.cafeoShadowDark1)
             Spacer()
         }

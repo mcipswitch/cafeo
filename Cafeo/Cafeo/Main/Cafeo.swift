@@ -10,41 +10,46 @@ import SwiftUI
 
 struct Cafeo: View {
     let store: Store<AppState, AppAction>
-    var padding: CGFloat = 30
 
     var body: some View {
         WithViewStore(self.store) { viewStore in
             ZStack {
-
-                // Background
-                VStack(spacing: 0) {
-                    Image(decorative: "background-pattern")
-                        .resizable(resizingMode: .tile)
-                    Color.cafeoBackgroundDark
-                }
-                .edgesIgnoringSafeArea(.all)
+                BackgroundPattern()
+                    .edgesIgnoringSafeArea(.all)
 
                 VStack(spacing: 0) {
                     Spacer()
 
-                    CafeoRatioView(viewStore: viewStore)
+                    CafeoRatioView(store: self.store)
                         .frame(height: 180)
-                        .padding(.horizontal, 24)
-                        .padding(.vertical, self.padding)
+                        .padding(.horizontal, .cafeo(.scale5))
+                        .padding(.vertical, .cafeo(.scale55))
                         .background(Color.cafeoBackgroundDark)
 
-                    CafeoIngredientAmountView(viewStore: viewStore)
-                        .padding(.vertical, self.padding)
+                    CafeoIngredientAmountView(store: self.store)
+                        .padding(.vertical, .cafeo(.scale55))
                         .background(Color.cafeoBackgroundLight)
                         .accessibilityElement(children: .contain)
 
-                    CafeoUnitConversionView(viewStore: viewStore)
-                        .padding(.horizontal, 24)
-                        .padding(.vertical, self.padding)
+                    CafeoUnitConversionView(store: self.store)
+                        .padding(.horizontal, .cafeo(.scale5))
+                        .padding(.vertical, .cafeo(.scale55))
                         .background(Color.cafeoBackgroundDark)
                 }
             }
             .background(Color.cafeoBackgroundDark)
+        }
+    }
+}
+
+extension Cafeo {
+    struct BackgroundPattern: View {
+        var body: some View {
+            VStack(spacing: 0) {
+                Image(decorative: "background-pattern")
+                    .resizable(resizingMode: .tile)
+                Color.cafeoBackgroundDark
+            }
         }
     }
 }
@@ -54,17 +59,17 @@ struct Cafeo: View {
 struct Cafeo_Previews: PreviewProvider {
     static var previews: some View {
         Cafeo(store: Store(initialState: AppState(),
-                            reducer: appReducer,
-                            environment: AppEnvironment(
-                                mainQueue: DispatchQueue.main.eraseToAnyScheduler()
-                            )
+                           reducer: appReducer,
+                           environment: AppEnvironment(
+                            mainQueue: DispatchQueue.main.eraseToAnyScheduler()
+                           )
         ))
 
         Cafeo(store: Store(initialState: AppState(),
-                            reducer: appReducer,
-                            environment: AppEnvironment(
-                                mainQueue: DispatchQueue.main.eraseToAnyScheduler()
-                            )
+                           reducer: appReducer,
+                           environment: AppEnvironment(
+                            mainQueue: DispatchQueue.main.eraseToAnyScheduler()
+                           )
         ))
         .environment(\.sizeCategory, .accessibilityExtraExtraExtraLarge)
         .previewDevice(PreviewDevice(rawValue: "iPhone 8"))

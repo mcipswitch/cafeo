@@ -9,37 +9,45 @@ import ComposableArchitecture
 import SwiftUI
 
 struct CafeoWaterAmountView: View {
+    let store: Store<AppState, AppAction>
     @ObservedObject var viewStore: ViewStore<AppState, AppAction>
 
-    var body: some View {
-        VStack(spacing: 20) {
-            Text(CafeoIngredient.water.rawValue.localized)
-                .kerning(1.5)
-                .cafeoText(.mainLabel, color: .cafeoGray)
-                .textCase(.uppercase)
-            
-            VStack(spacing: 10) {
-                Text(self.viewStore.waterAmount.format(to: "%.0f"))
-                    .kerning(4.0)
-                    .cafeoText(.digitalLabel, color: .cafeoBeige)
-                    .accessibility(value: Text("\(self.viewStore.unitConversion.rawValue)"))
+    init(store: Store<AppState, AppAction>) {
+        self.store = store
+        self.viewStore = ViewStore(store)
+    }
 
-                IngredientAdjustButton(
-                    onPress: self.onPress(_:),
-                    onRelease: self.onRelease,
-                    onTap: self.onTap(_:)
-                )
+    var body: some View {
+        WithViewStore(self.store) { viewStore in
+            VStack(spacing: 20) {
+                Text(CafeoIngredient.water.rawValue.localized)
+                    .kerning(.cafeo(.standard))
+                    .cafeoText(.mainLabel, color: .cafeoGray)
+                    .textCase(.uppercase)
+
+                VStack(spacing: 10) {
+                    Text(viewStore.waterAmount.format(to: "%.0f"))
+                        .kerning(.cafeo(.large))
+                        .cafeoText(.digitalLabel, color: .cafeoBeige)
+                        .accessibility(value: Text("\(viewStore.unitConversion.rawValue)"))
+
+                    CafeoIngredientQuantityButton(
+                        onPress: self.onPress(_:),
+                        onRelease: self.onRelease,
+                        onTap: self.onTap(_:)
+                    )
+                }
+                Toggle(isOn: viewStore.binding(
+                    get: \.waterAmountIsLocked,
+                    send: .amountLockToggled
+                ), label: {
+                    Text("Water Amount Lock")
+                })
+                .toggleStyle(CafeoLockToggleStyle())
+                .labelsHidden()
+                .padding(.top, 20)
+                .accessibility(label: Text("Water Amount"))
             }
-            Toggle(isOn: self.viewStore.binding(
-                get: \.waterAmountIsLocked,
-                send: .amountLockToggled
-            ), label: {
-                Text("Water Amount Lock")
-            })
-            .toggleStyle(CafeoLockToggleStyle())
-            .labelsHidden()
-            .padding(.top, 20)
-            .accessibility(label: Text("Water Amount"))
         }
     }
 }

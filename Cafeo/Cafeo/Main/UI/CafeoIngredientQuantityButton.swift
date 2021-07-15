@@ -1,5 +1,5 @@
 //
-//  AddMinusButton.swift
+//  CafeoIngredientQuantityButton.swift
 //  Cafeo
 //
 //  Created by Priscilla Ip on 2021-03-09.

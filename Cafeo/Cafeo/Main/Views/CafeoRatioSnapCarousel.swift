@@ -10,53 +10,57 @@ import SwiftUI
 
 /// Please see: https://medium.com/flawless-app-stories/implementing-snap-carousel-in-swiftui-3ae084504670
 struct CafeoRatioSnapCarousel: View {
-    @ObservedObject var viewStore: ViewStore<AppState, AppAction>
+    let store: Store<AppState, AppAction>
     @GestureState var dragOffset = CGFloat.zero
 
     var body: some View {
+        WithViewStore(self.store) { viewStore in
 
-        let itemHeight: CGFloat = 80
-        let numberOfItems: CGFloat = CGFloat(self.viewStore.ratioDenominators.count)
-        let totalHeight: CGFloat = itemHeight * numberOfItems
+            // MARK: Helpers
 
-        let yOffsetToShift: CGFloat = (totalHeight - itemHeight) / 2
-        let activeOffset: CGFloat = yOffsetToShift - (itemHeight * CGFloat(self.viewStore.ratioCarouselActiveIdx))
-        let totalOffset: CGFloat = CGFloat(activeOffset) + self.dragOffset
+            let itemHeight: CGFloat = 80
+            let numberOfItems: CGFloat = CGFloat(viewStore.ratioDenominators.count)
+            let totalHeight: CGFloat = itemHeight * numberOfItems
 
-        VStack {
-            ForEach(self.viewStore.ratioDenominators, id: \.self) { ratioDenom in
-                Text("\(ratioDenom)")
-                    .kerning(4.0)
-                    .cafeoText(.ratioLabel, color: .cafeoBeige)
-                    .frame(width: itemHeight * 2, height: itemHeight)
+            let yOffsetToShift: CGFloat = (totalHeight - itemHeight) / 2
+            let activeOffset: CGFloat = yOffsetToShift - (itemHeight * CGFloat(viewStore.ratioCarouselActiveIdx))
+            let totalOffset: CGFloat = CGFloat(activeOffset) + self.dragOffset
 
-                    // Control the tappable area
-                    .contentShape(Rectangle())
+            VStack {
+                ForEach(viewStore.ratioDenominators, id: \.self) { ratioDenom in
+                    Text("\(ratioDenom)")
+                        .kerning(.cafeo(.large))
+                        .cafeoText(.ratioLabel, color: .cafeoBeige)
+                        .frame(width: itemHeight * 2, height: itemHeight)
+
+                        // Control the tappable area
+                        .contentShape(Rectangle())
+                }
             }
+            .offset(y: totalOffset)
+            .gesture(
+                DragGesture()
+                    .updating(self.$dragOffset) { value, state, transaction in
+                        state = value.translation.height
+                    }
+                    .onEnded { drag in
+                        let dragAmount = drag.translation.height
+
+                        // Calculate the index shift to the closet ratio denominator
+                        let idxOffset = Int(round(dragAmount / itemHeight))
+
+                        var dragAmountThresholdPassed: Bool {
+                            dragAmount < itemHeight / 2 || dragAmount > itemHeight / 2
+                        }
+
+                        if dragAmountThresholdPassed {
+                            let newIdx = (viewStore.ratioCarouselActiveIdx - idxOffset)
+                                .clamp(low: 0, high: viewStore.ratioDenominators.count - 1)
+
+                            viewStore.send(.form(.set(\.ratioCarouselActiveIdx, newIdx)))
+                        }
+                    }
+            )
         }
-        .offset(y: totalOffset)
-        .gesture(
-            DragGesture()
-                .updating(self.$dragOffset) { value, state, transaction in
-                    state = value.translation.height
-                }
-                .onEnded { drag in
-                    let dragAmount = drag.translation.height
-
-                    // Calculate the index shift to the closet ratio denominator
-                    let idxOffset = Int(round(dragAmount / itemHeight))
-
-                    var dragAmountThresholdPassed: Bool {
-                        dragAmount < itemHeight / 2 || dragAmount > itemHeight / 2
-                    }
-
-                    if dragAmountThresholdPassed {
-                        let newIdx = (self.viewStore.ratioCarouselActiveIdx - idxOffset)
-                            .clamp(low: 0, high: self.viewStore.ratioDenominators.count - 1)
-
-                        self.viewStore.send(.form(.set(\.ratioCarouselActiveIdx, newIdx)))
-                    }
-                }
-        )
     }
 }

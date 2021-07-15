@@ -9,17 +9,19 @@ import ComposableArchitecture
 import SwiftUI
 
 struct CafeoIngredientAmountView: View {
-    @ObservedObject var viewStore: ViewStore<AppState, AppAction>
+    let store: Store<AppState, AppAction>
 
     // TODO: - geometry reader?
     var body: some View {
-        HStack {
-            CafeoCoffeeAmountView(viewStore: self.viewStore)
-                .frame(width: UIScreen.main.bounds.width / 2)
-                .accessibility(sortPriority: 1)
-            CafeoWaterAmountView(viewStore: self.viewStore)
-                .frame(width: UIScreen.main.bounds.width / 2)
-                .accessibility(sortPriority: 0)
+        WithViewStore(self.store) { viewStore in
+            HStack {
+                CafeoCoffeeAmountView(store: self.store)
+                    .frame(width: UIScreen.main.bounds.width / 2)
+                    .accessibility(sortPriority: 1)
+                CafeoWaterAmountView(store: self.store)
+                    .frame(width: UIScreen.main.bounds.width / 2)
+                    .accessibility(sortPriority: 0)
+            }
         }
     }
 }

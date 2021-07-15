@@ -12,7 +12,7 @@
 		9314109B26A09C2500B48044 /* ButtonStyle+CafeoExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9314109A26A09C2500B48044 /* ButtonStyle+CafeoExtensions.swift */; };
 		9314109F26A0A14C00B48044 /* CGFloat+CafeoExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9314109E26A0A14C00B48044 /* CGFloat+CafeoExtensions.swift */; };
 		931410A526A0A2F200B48044 /* Image+CafeoExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931410A426A0A2F200B48044 /* Image+CafeoExtensions.swift */; };
-		931BE97925F7DF030030444F /* IngredientAdjustButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931BE97825F7DF030030444F /* IngredientAdjustButton.swift */; };
+		931BE97925F7DF030030444F /* CafeoIngredientQuantityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931BE97825F7DF030030444F /* CafeoIngredientQuantityButton.swift */; };
 		932102A4260BDE14001FDE3B /* CafeoUnitConversionViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9382B08926028B7F004DCA4B /* CafeoUnitConversionViewTests.swift */; };
 		932102A5260BDE14001FDE3B /* CafeoCoffeeAmountViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9382B09326028C17004DCA4B /* CafeoCoffeeAmountViewTests.swift */; };
 		932102A7260BDE14001FDE3B /* CafeoWaterAmountViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9382B08F26028BC6004DCA4B /* CafeoWaterAmountViewTests.swift */; };
@@ -65,7 +65,7 @@
 		9314109A26A09C2500B48044 /* ButtonStyle+CafeoExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ButtonStyle+CafeoExtensions.swift"; sourceTree = "<group>"; };
 		9314109E26A0A14C00B48044 /* CGFloat+CafeoExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+CafeoExtensions.swift"; sourceTree = "<group>"; };
 		931410A426A0A2F200B48044 /* Image+CafeoExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+CafeoExtensions.swift"; sourceTree = "<group>"; };
-		931BE97825F7DF030030444F /* IngredientAdjustButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientAdjustButton.swift; sourceTree = "<group>"; };
+		931BE97825F7DF030030444F /* CafeoIngredientQuantityButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoIngredientQuantityButton.swift; sourceTree = "<group>"; };
 		93210295260BDDFB001FDE3B /* CafeoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CafeoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		93210299260BDDFB001FDE3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9351034926156FAA00C8F490 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
@@ -129,7 +129,7 @@
 		931BE97B25F7DF090030444F /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				931BE97825F7DF030030444F /* IngredientAdjustButton.swift */,
+				931BE97825F7DF030030444F /* CafeoIngredientQuantityButton.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -210,12 +210,12 @@
 				9376F42226291E1C00BEABAB /* TCA */,
 				9375EEE725D1B3900003A323 /* CafeoApp.swift */,
 				93A9FDE925F6911D006D5428 /* Cafeo.swift */,
+				93B4C77F25FA751A00E479C1 /* Views */,
 				93B4C76D25F7E53700E479C1 /* Extensions */,
 				93B4C79125FD3A8F00E479C1 /* Keys */,
 				9391338526150FC90077757A /* Managers */,
 				937FD32725D211670048C406 /* Styles */,
 				931BE97B25F7DF090030444F /* UI */,
-				93B4C77F25FA751A00E479C1 /* Views */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -414,7 +414,7 @@
 			files = (
 				93B4C7A325FD62E400E479C1 /* Comparable+Extension.swift in Sources */,
 				93B4C78B25FD38D500E479C1 /* Gradient+Extension.swift in Sources */,
-				931BE97925F7DF030030444F /* IngredientAdjustButton.swift in Sources */,
+				931BE97925F7DF030030444F /* CafeoIngredientQuantityButton.swift in Sources */,
 				9382B0AF2603C400004DCA4B /* AppState+UserDefaults.swift in Sources */,
 				93B4C76B25F7E53400E479C1 /* Color+Extension.swift in Sources */,
 				9391338226150FC50077757A /* HapticFeedbackManager.swift in Sources */,
