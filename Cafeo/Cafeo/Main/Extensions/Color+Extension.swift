@@ -24,3 +24,12 @@ extension Color {
     public static let black05 = Color.black.opacity(0.5)
     public static let white03 = Color.white.opacity(0.3)
 }
+
+// TODO: Change Color to CafeoColor
+extension Color {
+    /// Returns the corresponding Cafeo color
+    static func cafeo(_ color: Color) -> Color {
+        return color
+        //return Color(color.rawValue, bundle: Bundle.module)
+    }
+}

@@ -25,7 +25,9 @@ struct CafeoRatioSnapCarousel: View {
 
         VStack {
             ForEach(self.viewStore.ratioDenominators, id: \.self) { ratioDenom in
-                CafeoText(text: "\(ratioDenom)", .ratioLabel)
+                Text("\(ratioDenom)")
+                    .kerning(4.0)
+                    .cafeoText(.ratioLabel, color: .cafeoBeige)
                     .frame(width: itemHeight * 2, height: itemHeight)
 
                     // Control the tappable area

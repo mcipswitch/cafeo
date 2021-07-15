@@ -14,20 +14,19 @@ struct IngredientAdjustButton: View {
 
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 25, style: .continuous)
+            RoundedRectangle(cornerRadius: .cafeo(.scale5), style: .continuous)
                 .stroke(LinearGradient.cafeoIngredientAmountButtonStroke, lineWidth: 2)
                 .frame(width: 120, height: 44)
                 .background(
-                    RoundedRectangle(cornerRadius: 24, style: .continuous)
+                    RoundedRectangle(cornerRadius: .cafeo(.scale5), style: .continuous)
                         .fill(Color.cafeoBackgroundLight)
-
                         // highlight and shadow
                         .shadow(color: .cafeoHighlight1, radius: 8, x: -4, y: -4)
                         .shadow(color: .cafeoShadowDark00, radius: 8, x: 4, y: 4)
                 )
                 .overlay(
                     HStack(spacing: 0) {
-                        AdjustButton(Image(systemName: "minus")) {
+                        CafeoQuantityStepperButton(Image.cafeo(.minus)) {
                             self.onTap(.decrement)
                         }
                         .simultaneousGesture(
@@ -44,7 +43,7 @@ struct IngredientAdjustButton: View {
 
                         Spacer()
 
-                        AdjustButton(Image(systemName: "plus")) {
+                        CafeoQuantityStepperButton(Image.cafeo(.plus)) {
                             self.onTap(.increment)
                         }
                         .simultaneousGesture(
@@ -67,7 +66,7 @@ struct IngredientAdjustButton: View {
 
 // MARK: - AdjustButton
 
-struct AdjustButton: View {
+struct CafeoQuantityStepperButton: View {
     var action: () -> Void
     var image: Image
 
@@ -80,26 +79,11 @@ struct AdjustButton: View {
         Button(action: self.action) {
             self.image
         }
-        .frame(width: 44, height: 44)
         .contentShape(Rectangle())
-        .cafeoTextStyle(.adjustButtonLabel)
-    }
-}
-
-// MARK: - Previews
-
-struct AmountAdjustButton_Previews: PreviewProvider {
-    static var previews: some View {
-        ZStack {
-            Rectangle()
-                .fill(Color.cafeoBackgroundLight)
-
-            IngredientAdjustButton(
-                onPress: { _ in },
-                onRelease: { },
-                onTap: { _ in }
-            )
-        }
-        .edgesIgnoringSafeArea(.all)
+        .cafeoButtonStyle(.init(labelFont: .adjustButtonLabel,
+                                labelColor: .quantityStepper,
+                                backgroundColor: .clear,
+                                size: CGSize(width: 44, height: 44)))
+        .animation(.easeInOut)
     }
 }

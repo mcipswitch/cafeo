@@ -14,7 +14,10 @@ struct CafeoUnitConversionView: View {
     var body: some View {
         VStack(spacing: 16) {
 
-            CafeoText(text: "conversion".localized, .miniLabel)
+            Text("conversion".localized)
+                .kerning(1.5)
+                .cafeoText(.miniLabel, color: .cafeoGray)
+                .textCase(.uppercase)
                 .padding(.horizontal, 8)
                 .background(Color.cafeoBackgroundDark)
                 .anchorPreference(
@@ -41,8 +44,11 @@ struct CafeoUnitConversionView: View {
                 }
 
             HStack(spacing: 30) {
-                CafeoText(text: "\(CafeoUnit.grams.abbrString)",
-                          state: self.isGrams ? .selected : .normal, .unitLabel)
+                Text("\(CafeoUnit.grams.abbrString)")
+                    .kerning(1.5)
+                    .cafeoText(.unitLabel,
+                               color: self.isGrams ? .cafeoOrange : .cafeoGray)
+                    .textCase(.lowercase)
                     .accessibility(sortPriority: 1)
                     .accessibility(label: Text("grams"))
 
@@ -62,9 +68,13 @@ struct CafeoUnitConversionView: View {
                     .accessibility(label: Text("unit conversion toggle"))
                     .accessibility(value: Text("\(self.viewStore.unitConversion.rawValue)"))
 
-                CafeoText(text: "\(CafeoUnit.ounces.abbrString)",
-                          state: self.isOunces ? .selected : .normal, .unitLabel)
+                Text("\(CafeoUnit.ounces.abbrString)")
+                    .kerning(1.5)
+                    .cafeoText(.unitLabel,
+                               color: self.isOunces ? .cafeoOrange : .cafeoGray)
+                    .textCase(.lowercase)
                     .accessibility(sortPriority: 0)
+                    .accessibility(label: Text("ounces"))
             }
             .accessibilityElement(children: .contain)
         }
@@ -118,6 +128,6 @@ struct CoffioToggle: View {
     }
 
     private var togglePill: RoundedRectangle {
-        RoundedRectangle(cornerRadius: 24, style: .continuous)
+        RoundedRectangle(cornerRadius: .cafeo(.scale5), style: .continuous)
     }
 }

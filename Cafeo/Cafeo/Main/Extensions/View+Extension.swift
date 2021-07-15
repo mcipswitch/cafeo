@@ -20,7 +20,9 @@ extension View {
         )
     }
 
-    func cafeoTextStyle(_ textStyle: CafeoTextStyle, state: CafeoTextState = .normal) -> some View {
-        return self.modifier(CafeoTextModifier(textStyle, state: state))
+    /// Applies the corresponding Cafeo text attributes
+    func cafeoText(_ fontStyle: CafeoFontStyle, color: Color) -> some View {
+        self.font(.cafeo(fontStyle))
+            .foregroundColor(.cafeo(color))
     }
 }

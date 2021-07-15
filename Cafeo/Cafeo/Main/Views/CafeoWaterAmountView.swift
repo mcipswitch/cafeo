@@ -13,10 +13,15 @@ struct CafeoWaterAmountView: View {
 
     var body: some View {
         VStack(spacing: 20) {
-            CafeoText(text: CafeoIngredient.water.rawValue.localized, .mainLabel)
+            Text(CafeoIngredient.water.rawValue.localized)
+                .kerning(1.5)
+                .cafeoText(.mainLabel, color: .cafeoGray)
+                .textCase(.uppercase)
             
             VStack(spacing: 10) {
-                CafeoText(text: self.viewStore.waterAmount.format(to: "%.0f"), .digitalLabel)
+                Text(self.viewStore.waterAmount.format(to: "%.0f"))
+                    .kerning(4.0)
+                    .cafeoText(.digitalLabel, color: .cafeoBeige)
                     .accessibility(value: Text("\(self.viewStore.unitConversion.rawValue)"))
 
                 IngredientAdjustButton(
@@ -31,7 +36,7 @@ struct CafeoWaterAmountView: View {
             ), label: {
                 Text("Water Amount Lock")
             })
-            .toggleStyle(LockToggleStyle())
+            .toggleStyle(CafeoLockToggleStyle())
             .labelsHidden()
             .padding(.top, 20)
             .accessibility(label: Text("Water Amount"))

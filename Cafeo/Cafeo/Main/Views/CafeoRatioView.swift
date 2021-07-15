@@ -16,7 +16,6 @@ struct CafeoRatioView: View {
         VStack(spacing: 20) {
             ZStack {
                 GeometryReader { geo in
-
                     self.ratioBox
                         .stroke(Color.cafeoShadowDark1, lineWidth: 2)
                         .background(self.ratioBox.fill(LinearGradient.cafeoChrome))
@@ -24,7 +23,9 @@ struct CafeoRatioView: View {
                     self.divider
 
                     HStack(spacing: 0) {
-                        CafeoText(text: "1", .ratioLabel)
+                        Text("1")
+                            .kerning(4.0)
+                            .cafeoText(.ratioLabel, color: .cafeoBeige)
                             .frame(
                                 width: geo.size.width / 2,
                                 height: geo.size.height
@@ -53,7 +54,10 @@ struct CafeoRatioView: View {
             }
             .accessibility(sortPriority: 0)
 
-            CafeoText(text: "ratio".localized, .mainLabel)
+            Text("ratio".localized)
+                .kerning(1.5)
+                .cafeoText(.mainLabel, color: .cafeoGray)
+                .textCase(.uppercase)
                 .accessibility(sortPriority: 1)
         }
         .accessibilityElement(children: .contain)
@@ -71,7 +75,8 @@ struct CafeoRatioView: View {
     }
 
     private var ratioBox: RoundedRectangle {
-        RoundedRectangle(cornerRadius: 8)
+        RoundedRectangle(cornerRadius: .cafeo(.scale2
+        ))
     }
 
     private var ratioDenominatorLine: some View {
