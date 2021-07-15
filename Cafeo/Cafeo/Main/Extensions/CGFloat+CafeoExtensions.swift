@@ -11,7 +11,9 @@ import SwiftUI
 enum CafeoSpacing: CGFloat, RawRepresentable {
     case scale05 = 2
     case scale1 = 4
+    case scale15 = 6
     case scale2 = 8
+    case scale25 = 10
     case scale3 = 12
     case scale4 = 16
     case scale45 = 20

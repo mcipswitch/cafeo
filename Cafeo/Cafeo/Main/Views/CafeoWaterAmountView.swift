@@ -25,7 +25,7 @@ struct CafeoWaterAmountView: View {
                     .cafeoText(.mainLabel, color: .cafeoGray)
                     .textCase(.uppercase)
 
-                VStack(spacing: 10) {
+                VStack(spacing: .cafeo(.scale25)) {
                     Text(viewStore.waterAmount.format(to: "%.0f"))
                         .kerning(.cafeo(.large))
                         .cafeoText(.digitalLabel, color: .cafeoBeige)

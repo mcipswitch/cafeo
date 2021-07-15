@@ -58,7 +58,7 @@ struct CafeoIngredientQuantityButton: View {
                                 }
                         )
                     }
-                    .padding(.horizontal, 6)
+                    .padding(.horizontal, .cafeo(.scale15))
                 )
         }
     }
