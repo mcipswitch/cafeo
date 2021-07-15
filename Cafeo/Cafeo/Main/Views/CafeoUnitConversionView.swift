@@ -13,12 +13,9 @@ struct CafeoUnitConversionView: View {
 
     var body: some View {
         WithViewStore(self.store) { viewStore in
-            VStack(spacing: 16) {
-                Text("conversion".localized)
-                    .kerning(.cafeo(.standard))
-                    .cafeoText(.miniLabel, color: .cafeoGray)
-                    .textCase(.uppercase)
-                    .padding(.horizontal, 8)
+            VStack(spacing: .cafeo(.scale4)) {
+                ConversionText()
+                    .padding(.horizontal, .cafeo(.scale2))
                     .background(Color.cafeoBackgroundDark)
                     .anchorPreference(
                         key: BoundsPreferenceKey.self,
@@ -43,36 +40,26 @@ struct CafeoUnitConversionView: View {
                         }
                     }
 
-                HStack(spacing: 30) {
-                    Text("\(CafeoUnit.grams.abbrString)")
-                        .kerning(.cafeo(.standard))
-                        .cafeoText(.unitLabel,
-                                   color: viewStore.unitConversion == .grams ? .cafeoOrange : .cafeoGray)
-                        .textCase(.lowercase)
+                HStack(spacing: .cafeo(.scale55)) {
+                    UnitLabel(.grams, isSelected: viewStore.unitConversion == .grams)
                         .accessibility(sortPriority: 1)
                         .accessibility(label: Text("grams"))
 
                     CafeoToggle(
                         offset: viewStore.binding(
                             get: \.unitConversionToggleYOffset,
-                            send: AppAction.unitConversionToggled
+                            send: .unitConversionToggled
                         ))
                         .gesture(
                             // This registers both tap and swipe gestures
                             DragGesture(minimumDistance: 0)
-                                .onEnded { _ in
-                                    viewStore.send(.unitConversionToggled)
-                                }
+                                .onEnded { _ in viewStore.send(.unitConversionToggled) }
                         )
                         .accessibility(sortPriority: 1)
                         .accessibility(label: Text("unit conversion toggle"))
-                        .accessibility(value: Text("\(viewStore.unitConversion.rawValue)"))
+                        .accessibility(value: Text(viewStore.unitConversion.rawValue))
 
-                    Text("\(CafeoUnit.ounces.abbrString)")
-                        .kerning(.cafeo(.standard))
-                        .cafeoText(.unitLabel,
-                                   color: viewStore.unitConversion == .ounces ? .cafeoOrange : .cafeoGray)
-                        .textCase(.lowercase)
+                    UnitLabel(.ounces, isSelected: viewStore.unitConversion == .ounces)
                         .accessibility(sortPriority: 0)
                         .accessibility(label: Text("ounces"))
                 }
@@ -83,42 +70,32 @@ struct CafeoUnitConversionView: View {
     }
 }
 
-// MARK: - CoffioToggle
+// MARK: - Helpers
 
-struct CafeoToggle: View {
-    @Binding var offset: CGFloat
-    var toggleHeight: CGFloat = 40
-
-    var body: some View {
-        ZStack {
-            self.togglePill
-                .stroke(Color.cafeoShadowDark1, lineWidth: 2)
-                .frame(width: 100, height: self.toggleHeight)
-                .background(
-                    self.togglePill
-                        .fill(Color.cafeoBackgroundLight)
-
-                        // outer shadow and highlight
-                        .shadow(color: .cafeoShadowDark1, radius: 4, x: 2, y: 2)
-                        .shadow(color: .cafeoHighlight00, radius: 4, x: -2, y: -2)
-                )
-                // inner shadow
-                .shadow(color: .cafeoShadowDark1, radius: 2, x: 2, y: 2)
-
-            Circle()
-                .stroke(Color.cafeoOrange, lineWidth: 2)
-                .frame(width: self.toggleHeight, height: self.toggleHeight)
-                .background(
-                    Circle()
-                        .fill(LinearGradient.cafeoOrange)
-                        .shadow(color: Color.cafeoShadowDark00.opacity(0.6), radius: 14, x: 0, y: 0)
-                )
-                .offset(x: self.offset)
-                .animation(Animation.timingCurve(0.60, 0.80, 0, 0.96), value: self.offset)
+extension CafeoUnitConversionView {
+    struct ConversionText: View {
+        var body: some View {
+            Text("conversion".localized)
+                .kerning(.cafeo(.standard))
+                .cafeoText(.miniLabel, color: .cafeoGray)
+                .textCase(.uppercase)
         }
     }
 
-    private var togglePill: RoundedRectangle {
-        RoundedRectangle(cornerRadius: .cafeo(.scale5), style: .continuous)
+    struct UnitLabel: View {
+        var unit: CafeoUnit
+        var isSelected: Bool
+
+        init(_ unit: CafeoUnit, isSelected: Bool) {
+            self.unit = unit
+            self.isSelected = isSelected
+        }
+
+        var body: some View {
+            Text(unit.abbrString)
+                .kerning(.cafeo(.standard))
+                .cafeoText(.unitLabel, color: self.isSelected ? .cafeoOrange : .cafeoGray)
+                .textCase(.lowercase)
+        }
     }
 }

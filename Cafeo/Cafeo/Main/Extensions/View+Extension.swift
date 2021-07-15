@@ -8,11 +8,9 @@
 import SwiftUI
 
 extension View {
-    func addInnerShadow(
-        _ color: Color = .cafeoShadowDark1,
-        lineWidth: CGFloat = 4,
-        blurRadius: CGFloat = 10
-    ) -> some View {
+    func cafeoInnerShadow(_ color: Color = .cafeoShadowDark1,
+                          lineWidth: CGFloat = 4,
+                          blurRadius: CGFloat = 10) -> some View {
         self.overlay(
             Rectangle()
                 .strokeBorder(color, lineWidth: lineWidth)

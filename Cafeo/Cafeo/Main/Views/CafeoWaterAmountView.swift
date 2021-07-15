@@ -37,6 +37,7 @@ struct CafeoWaterAmountView: View {
                         onTap: self.onTap(_:)
                     )
                 }
+
                 Toggle(isOn: viewStore.binding(
                     get: \.waterAmountIsLocked,
                     send: .amountLockToggled
@@ -45,7 +46,7 @@ struct CafeoWaterAmountView: View {
                 })
                 .toggleStyle(CafeoLockToggleStyle())
                 .labelsHidden()
-                .padding(.top, 20)
+                .padding(.top, .cafeo(.scale45))
                 .accessibility(label: Text("Water Amount"))
             }
         }

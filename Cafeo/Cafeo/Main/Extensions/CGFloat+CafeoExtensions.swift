@@ -14,6 +14,7 @@ enum CafeoSpacing: CGFloat, RawRepresentable {
     case scale2 = 8
     case scale3 = 12
     case scale4 = 16
+    case scale45 = 20
     case scale5 = 24
     case scale55 = 30
     case scale6 = 32
@@ -23,7 +24,7 @@ enum CafeoSpacing: CGFloat, RawRepresentable {
 /// Represents a kerning constant within the Cafeo iOS design system
 enum CafeoKerning: CGFloat, RawRepresentable {
     case standard = 1.5
-    case large = 40
+    case large = 4.0
 }
 
 extension CGFloat {

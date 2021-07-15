@@ -19,6 +19,7 @@
 		933E9C68260BE0040029D73D /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 933E9C67260BE0040029D73D /* SnapshotTesting */; };
 		9351034A26156FAA00C8F490 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9351034926156FAA00C8F490 /* String+Extension.swift */; };
 		935103552615711900C8F490 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 935103572615711900C8F490 /* Localizable.strings */; };
+		936BAAB626A0E9DF0089E43B /* CafeoToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936BAAB526A0E9DF0089E43B /* CafeoToggle.swift */; };
 		9375EEE825D1B3900003A323 /* CafeoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9375EEE725D1B3900003A323 /* CafeoApp.swift */; };
 		9375EEEC25D1B3910003A323 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9375EEEB25D1B3910003A323 /* Assets.xcassets */; };
 		9375EEEF25D1B3910003A323 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9375EEEE25D1B3910003A323 /* Preview Assets.xcassets */; };
@@ -72,6 +73,7 @@
 		935103562615711900C8F490 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9351035A2615711E00C8F490 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9351035B2615711F00C8F490 /* fr-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CA"; path = "fr-CA.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		936BAAB526A0E9DF0089E43B /* CafeoToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoToggle.swift; sourceTree = "<group>"; };
 		9375EEE425D1B3900003A323 /* Cafeo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cafeo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9375EEE725D1B3900003A323 /* CafeoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoApp.swift; sourceTree = "<group>"; };
 		9375EEEB25D1B3910003A323 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -144,6 +146,14 @@
 				93210299260BDDFB001FDE3B /* Info.plist */,
 			);
 			path = CafeoTests;
+			sourceTree = "<group>";
+		};
+		936BAAB926A0EA130089E43B /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				936BAAB526A0E9DF0089E43B /* CafeoToggle.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		9375EEDB25D1B3900003A323 = {
@@ -255,6 +265,7 @@
 				93B4C79925FD3B0300E479C1 /* CafeoCoffeeAmountView.swift */,
 				93B4C79625FD3AE300E479C1 /* CafeoWaterAmountView.swift */,
 				93B4C77C25FA74E900E479C1 /* CafeoUnitConversionView.swift */,
+				936BAAB926A0EA130089E43B /* Components */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -435,6 +446,7 @@
 				93B4C79A25FD3B0300E479C1 /* CafeoCoffeeAmountView.swift in Sources */,
 				93B4C77425F90FC900E479C1 /* View+Extension.swift in Sources */,
 				9314109F26A0A14C00B48044 /* CGFloat+CafeoExtensions.swift in Sources */,
+				936BAAB626A0E9DF0089E43B /* CafeoToggle.swift in Sources */,
 				93B4C77D25FA74E900E479C1 /* CafeoUnitConversionView.swift in Sources */,
 				93B4C79725FD3AE300E479C1 /* CafeoWaterAmountView.swift in Sources */,
 				9314108F26A08C7400B48044 /* Font+CafeoExtensions.swift in Sources */,

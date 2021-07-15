@@ -84,6 +84,5 @@ struct CafeoQuantityStepperButton: View {
                                 labelColor: .quantityStepper,
                                 backgroundColor: .clear,
                                 size: CGSize(width: 44, height: 44)))
-        .animation(.easeInOut)
     }
 }
