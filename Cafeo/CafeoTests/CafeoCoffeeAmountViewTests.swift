@@ -103,7 +103,7 @@ class CafeoCoffeeAmountViewTests: XCTestCase {
         )
 
         // Test + Validate
-        store.send(.adjustAmountButtonLongPressed(.coffee, .increment))
+        store.send(.quantityButtonLongPressed(.coffee, .increment))
 
         self.scheduler.advance(by: .seconds(0.2))
 

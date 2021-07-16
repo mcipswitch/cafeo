@@ -13,6 +13,14 @@ struct CafeoIngredientQuantityButton: View {
     var onTap: (IngredientAction) -> Void
 
     var body: some View {
+
+        // MARK: Helpers
+        let releaseGesture = DragGesture(minimumDistance: 0)
+            .onEnded { _ in
+                // This is triggered by the end of a long press gesture
+                self.onRelease()
+            }
+
         ZStack {
             RoundedRectangle(cornerRadius: .cafeo(.scale5), style: .continuous)
                 .stroke(LinearGradient.cafeoIngredientAmountButtonStroke, lineWidth: 2)
@@ -33,13 +41,7 @@ struct CafeoIngredientQuantityButton: View {
                             LongPressGesture(minimumDuration: 0.2)
                                 .onEnded { _ in self.onPress(.decrement) }
                         )
-                        .simultaneousGesture(
-                            DragGesture(minimumDistance: 0)
-                                .onEnded { _ in
-                                    // This is triggered by the end of a long press gesture
-                                    self.onRelease()
-                                }
-                        )
+                        .simultaneousGesture(releaseGesture)
 
                         Spacer()
 
@@ -50,13 +52,7 @@ struct CafeoIngredientQuantityButton: View {
                             LongPressGesture(minimumDuration: 0.2)
                                 .onEnded { _ in self.onPress(.increment) }
                         )
-                        .simultaneousGesture(
-                            DragGesture(minimumDistance: 0)
-                                .onEnded { _ in
-                                    // This is triggered by the end of a long press gesture
-                                    self.onRelease()
-                                }
-                        )
+                        .simultaneousGesture(releaseGesture)
                     }
                     .padding(.horizontal, .cafeo(.scale15))
                 )

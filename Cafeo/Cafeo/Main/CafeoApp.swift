@@ -23,7 +23,7 @@ struct CafeoApp: App {
             Cafeo(store: Store(
                 initialState: AppState(userDefaults: self.userDefaults),
                 reducer: appReducer
-                    .debug()
+                    //.debug()
                     .userDefaults(
                         self.userDefaultsKey,
                         state: { state in state.userDefaults }

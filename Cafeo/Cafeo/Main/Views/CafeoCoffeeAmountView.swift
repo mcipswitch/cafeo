@@ -19,17 +19,29 @@ struct CafeoCoffeeAmountView: View {
 
     var body: some View {
         WithViewStore(self.store) { viewStore in
-            VStack(spacing: 20) {
+            VStack(spacing: .cafeo(.scale45)) {
                 Text(CafeoIngredient.coffee.rawValue.localized)
                     .kerning(.cafeo(.standard))
                     .cafeoText(.mainLabel, color: .cafeoGray)
                     .textCase(.uppercase)
 
-                VStack(spacing: 10) {
+                VStack(spacing: .cafeo(.scale25)) {
                     Text(viewStore.coffeeAmount.format(to: "%.1f"))
                         .kerning(.cafeo(.large))
                         .cafeoText(.digitalLabel, color: .cafeoBeige)
                         .accessibility(value: Text("\(viewStore.unitConversion.rawValue)"))
+                        .gesture(
+                            DragGesture(minimumDistance: 0)
+                                .onChanged {
+                                    self.onCoffeeQuantityLabelDrag($0)
+
+                                    print($0.translation.width)
+                                }
+                                .onEnded { _ in
+                                    self.onRelease()
+                                }
+                        )
+
                     CafeoIngredientQuantityButton(
                         onPress: self.onPress(_:),
                         onRelease: self.onRelease,
@@ -45,7 +57,7 @@ struct CafeoCoffeeAmountView: View {
                 })
                 .toggleStyle(CafeoLockToggleStyle())
                 .labelsHidden()
-                .padding(.top, 20)
+                .padding(.top, .cafeo(.scale45))
                 .accessibility(label: Text("Coffee Amount"))
             }
         }
@@ -56,14 +68,23 @@ struct CafeoCoffeeAmountView: View {
 
 extension CafeoCoffeeAmountView {
     private func onPress(_ action: IngredientAction) {
-        self.viewStore.send(.adjustAmountButtonLongPressed(.coffee, action))
+        self.viewStore.send(.quantityButtonLongPressed(.coffee, action))
     }
 
     private func onRelease() {
-        self.viewStore.send(.form(.set(\.isLongPressing, false)))
+        self.viewStore.send(.onRelease)
     }
 
     private func onTap(_ action: IngredientAction) {
         self.viewStore.send(.coffeeAmountChanged(action))
+    }
+
+    private func onCoffeeQuantityLabelDrag(_ value: DragGesture.Value) {
+        let dragDistance = value.translation.width
+        if dragDistance > 0 {
+            self.viewStore.send(.quantityLabelDragged(.coffee, .increment))
+        } else if dragDistance < 0 {
+            self.viewStore.send(.quantityLabelDragged(.coffee, .decrement))
+        }
     }
 }

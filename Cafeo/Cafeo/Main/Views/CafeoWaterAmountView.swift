@@ -30,6 +30,11 @@ struct CafeoWaterAmountView: View {
                         .kerning(.cafeo(.large))
                         .cafeoText(.digitalLabel, color: .cafeoBeige)
                         .accessibility(value: Text("\(viewStore.unitConversion.rawValue)"))
+                        .gesture(
+                            DragGesture(minimumDistance: 0)
+                                .onChanged { self.onWaterQuantityLabelDrag($0) }
+                                .onEnded { _ in self.onRelease() }
+                        )
 
                     CafeoIngredientQuantityButton(
                         onPress: self.onPress(_:),
@@ -57,14 +62,22 @@ struct CafeoWaterAmountView: View {
 
 extension CafeoWaterAmountView {
     private func onPress(_ action: IngredientAction) {
-        self.viewStore.send(.adjustAmountButtonLongPressed(.water, action))
+        self.viewStore.send(.quantityButtonLongPressed(.water, action))
     }
 
     private func onRelease() {
-        self.viewStore.send(.form(.set(\.isLongPressing, false)))
+        self.viewStore.send(.onRelease)
     }
 
     private func onTap(_ action: IngredientAction) {
         self.viewStore.send(.waterAmountChanged(action))
+    }
+
+    private func onWaterQuantityLabelDrag(_ value: DragGesture.Value) {
+        if value.translation.width > 0 {
+            self.viewStore.send(.quantityLabelDragged(.water, .increment))
+        } else if value.translation.width < 0 {
+            self.viewStore.send(.quantityLabelDragged(.water, .decrement))
+        }
     }
 }

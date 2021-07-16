@@ -97,7 +97,7 @@ class CafeoWaterAmountViewTests: XCTestCase {
                 mainQueue: scheduler.eraseToAnyScheduler()
             )
         )
-        store.send(.adjustAmountButtonLongPressed(.water, .increment))
+        store.send(.quantityButtonLongPressed(.water, .increment))
 
         self.scheduler.advance(by: .seconds(0.2))
 

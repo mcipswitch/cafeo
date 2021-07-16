@@ -13,11 +13,12 @@ struct AppState: Equatable {
     var waterAmount: Double = 250
     var coffeeAmountIsLocked = true
     var waterAmountIsLocked = false
-    var isLongPressing = false
     var unitConversion: CafeoUnit = .grams
 
     var ratioCarouselActiveIdx: Int = 15
     var ratioDenominators = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+
+    var currentAction: IngredientAction?
 }
 
 extension AppState {
@@ -27,11 +28,15 @@ extension AppState {
 }
 
 enum AppAction: Equatable {
-    case adjustAmountButtonLongPressed(CafeoIngredient, IngredientAction)
+    case quantityButtonLongPressed(CafeoIngredient, IngredientAction)
     case coffeeAmountChanged(IngredientAction)
     case waterAmountChanged(IngredientAction)
     case amountLockToggled
     case unitConversionToggled
+
+    case quantityLabelDragged(CafeoIngredient, IngredientAction)
+
+    case onRelease
 
     // This can be ignored
     case form(FormAction<AppState>)
@@ -63,6 +68,7 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, e
 
     // Action
     switch action {
+
     case .unitConversionToggled:
         switch state.unitConversion {
         case .grams:
@@ -125,7 +131,7 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, e
         state.coffeeAmountIsLocked.toggle()
         return .none
 
-    case .adjustAmountButtonLongPressed(let ingredient, let action):
+    case .quantityButtonLongPressed(let ingredient, let action):
         return Effect.timer(id: TimerID(), every: 0.1, on: env.mainQueue)
             .map { _ in
                 ingredient == .coffee
@@ -133,8 +139,35 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, e
                     : .waterAmountChanged(action)
             }
 
-    case .form(\.isLongPressing):
-        return state.isLongPressing ? .none : .cancel(id: TimerID())
+    case .quantityLabelDragged(let ingredient, let newAction):
+
+        let effect = Effect.timer(id: TimerID(), every: 0.05, on: env.mainQueue)
+            .map { _ in
+                ingredient == .coffee
+                    ? AppAction.coffeeAmountChanged(newAction)
+                    : AppAction.waterAmountChanged(newAction)
+            }
+
+        /// If there is no current action, update it
+        guard let currentAction = state.currentAction else {
+            state.currentAction = newAction
+            return effect
+        }
+
+        /// If the new action is distinct, cancel the timer and update the effect
+        guard currentAction == newAction else {
+            state.currentAction = newAction
+            return Effect.concatenate(.cancel(id: TimerID()), effect)
+        }
+
+        /// Otherwise, do nothing
+        return .none
+
+    case .onRelease:
+        state.currentAction = nil
+        return .cancel(id: TimerID())
+
+    // MARK: Form Action
 
     case .form(\.ratioCarouselActiveIdx):
         state.waterAmountIsLocked
