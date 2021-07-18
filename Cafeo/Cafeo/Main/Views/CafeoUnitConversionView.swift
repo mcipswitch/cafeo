@@ -41,7 +41,7 @@ struct CafeoUnitConversionView: View {
                     }
 
                 HStack(spacing: .cafeo(.scale55)) {
-                    UnitLabel(.grams, isSelected: viewStore.unitConversion == .grams)
+                    UnitLabel(.grams, isSelected: viewStore.currentSettings.unitConversion == .grams)
                         .accessibility(sortPriority: 1)
                         .accessibility(label: Text("grams"))
 
@@ -57,9 +57,9 @@ struct CafeoUnitConversionView: View {
                         )
                         .accessibility(sortPriority: 1)
                         .accessibility(label: Text("unit conversion toggle"))
-                        .accessibility(value: Text(viewStore.unitConversion.rawValue))
+                        .accessibility(value: Text(viewStore.currentSettings.unitConversion.rawValue))
 
-                    UnitLabel(.ounces, isSelected: viewStore.unitConversion == .ounces)
+                    UnitLabel(.ounces, isSelected: viewStore.currentSettings.unitConversion == .ounces)
                         .accessibility(sortPriority: 0)
                         .accessibility(label: Text("ounces"))
                 }

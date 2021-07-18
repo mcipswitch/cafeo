@@ -26,20 +26,14 @@ struct CafeoCoffeeAmountView: View {
                     .textCase(.uppercase)
 
                 VStack(spacing: .cafeo(.scale25)) {
-                    Text(viewStore.coffeeAmount.format(to: "%.1f"))
+                    Text(viewStore.currentSettings.coffeeAmount.format(to: "%.1f"))
                         .kerning(.cafeo(.large))
                         .cafeoText(.digitalLabel, color: .cafeoBeige)
-                        .accessibility(value: Text("\(viewStore.unitConversion.rawValue)"))
+                        .accessibility(value: Text("\(viewStore.currentSettings.unitConversion.rawValue)"))
                         .gesture(
                             DragGesture(minimumDistance: 0)
-                                .onChanged {
-                                    self.onCoffeeQuantityLabelDrag($0)
-
-                                    print($0.translation.width)
-                                }
-                                .onEnded { _ in
-                                    self.onRelease()
-                                }
+                                .onChanged { self.onCoffeeQuantityLabelDrag($0) }
+                                .onEnded { _ in self.onRelease() }
                         )
 
                     CafeoIngredientQuantityButton(
@@ -50,7 +44,7 @@ struct CafeoCoffeeAmountView: View {
                 }
 
                 Toggle(isOn: viewStore.binding(
-                    get: \.coffeeAmountIsLocked,
+                    get: \.currentSettings.coffeeAmountIsLocked,
                     send: AppAction.amountLockToggled
                 ), label: {
                     Text("Coffee Amount")
@@ -80,7 +74,9 @@ extension CafeoCoffeeAmountView {
     }
 
     private func onCoffeeQuantityLabelDrag(_ value: DragGesture.Value) {
+
         let dragDistance = value.translation.width
+
         if dragDistance > 0 {
             self.viewStore.send(.quantityLabelDragged(.coffee, .increment))
         } else if dragDistance < 0 {

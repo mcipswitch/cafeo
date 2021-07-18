@@ -5,12 +5,35 @@
 //  Created by Priscilla Ip on 2021-03-18.
 //
 
+import ComposableArchitecture
 import Foundation
 
 extension AppState {
 
-    /// Cherry pick what to save to User Defaults
     public struct UserDefaultsState: Equatable, Codable {
+        var settings: CafeoSettings
+        var savedPresets: IdentifiedArrayOf<CafeoPresetDomain.State>
+
+        public init(settings: CafeoSettings, savedPresets: IdentifiedArrayOf<CafeoPresetDomain.State>) {
+            self.settings = settings
+            self.savedPresets = savedPresets
+        }
+    }
+
+    var userDefaults: UserDefaultsState {
+        UserDefaultsState(settings: self.currentSettings, savedPresets: self.savedPresetsState.savedPresets)
+    }
+
+    public init(userDefaults: UserDefaultsState? = nil) {
+        self.currentSettings = userDefaults?.settings ?? .initial
+        self.savedPresetsState.savedPresets = userDefaults?.savedPresets ?? []
+    }
+}
+
+extension AppState {
+
+    /// Cherry pick what `CafeoSettings` to save to User Defaults
+    public struct CafeoSettings: Equatable, Codable {
         var coffeeAmount: Double
         var waterAmount: Double
         var coffeeAmountIsLocked: Bool
@@ -33,25 +56,9 @@ extension AppState {
             self.unitConversion = unitConversion
             self.activeRatioIdx = activeRatioIdx
         }
-    }
 
-    var userDefaults: UserDefaultsState {
-        UserDefaultsState(
-            coffeeAmount: self.coffeeAmount,
-            waterAmount: self.waterAmount,
-            coffeeAmountIsLocked: self.coffeeAmountIsLocked,
-            waterAmountIsLocked: self.waterAmountIsLocked,
-            unitConversion: self.unitConversion,
-            activeRatioIdx: self.ratioCarouselActiveIdx
-        )
-    }
-
-    public init(userDefaults: UserDefaultsState? = nil) {
-        self.coffeeAmount = userDefaults?.coffeeAmount ?? 15.625
-        self.waterAmount = userDefaults?.waterAmount ?? 250
-        self.coffeeAmountIsLocked = userDefaults?.coffeeAmountIsLocked ?? true
-        self.waterAmountIsLocked = userDefaults?.waterAmountIsLocked ?? false
-        self.unitConversion = userDefaults?.unitConversion ?? .grams
-        self.ratioCarouselActiveIdx = userDefaults?.activeRatioIdx ?? 15
+        static var initial: Self {
+            return .init(coffeeAmount: 15.625, waterAmount: 250, coffeeAmountIsLocked: true, waterAmountIsLocked: false, unitConversion: .grams, activeRatioIdx: 15)
+        }
     }
 }
