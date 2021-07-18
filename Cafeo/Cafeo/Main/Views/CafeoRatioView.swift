@@ -70,7 +70,7 @@ struct CafeoRatioView: View {
                         ),
                         selectedPreset: viewStore.selectedPreset,
                         newPresetSelected: {
-                            viewStore.send(.currentSettingsUpdated($0))
+                            viewStore.send(.newPresetSelected($0))
                         }
                     )
                 }
@@ -88,7 +88,9 @@ struct CafeoRatioView: View {
                                               cancel: "Cancel".localized,
                                               action: { presetName in
                                                 if let name = presetName {
-                                                    viewStore.send(.savedPresetsAction(.savePreset(name, viewStore.currentSettings)))
+                                                    let preset: CafeoPresetDomain.State = .init(name: name, settings: viewStore.currentSettings)
+
+                                                    viewStore.send(.savedPresetsAction(.savePreset(preset)))
                                                 }
                                               }))
                             .frame(width: 0, height: 0, alignment: .center)

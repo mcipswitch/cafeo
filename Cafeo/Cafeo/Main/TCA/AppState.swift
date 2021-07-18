@@ -34,8 +34,10 @@ enum AppAction: Equatable {
     case quantityLabelDragged(CafeoIngredient, IngredientAction)
     case onRelease
 
+    case newPresetSelected(CafeoPresetDomain.State)
     case currentSettingsUpdated(CafeoPresetDomain.State)
 
+    // MARK: SavedPresetsDomain
     case savedPresetsAction(CafeoSavedPresetsDomain.Action)
 
     // This can be ignored
@@ -76,8 +78,13 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
 
         switch action {
 
-        case let .currentSettingsUpdated(preset):
+        case let .newPresetSelected(preset):
             state.selectedPreset = preset
+            return Effect(value: AppAction.currentSettingsUpdated(preset))
+                .delay(for: 0.350, scheduler: env.mainQueue)
+                .eraseToEffect()
+
+        case let .currentSettingsUpdated(preset):
             state.currentSettings = preset.settings
             return .none
 
@@ -179,8 +186,21 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
             state.currentAction = nil
             return .cancel(id: TimerID())
 
-        case .savedPresetsAction:
-            return .none
+
+        // MARK: SavedPresetsDomain
+
+        case let .savedPresetsAction(action):
+            switch action {
+            case let .savePreset(preset):
+                state.selectedPreset = preset
+                return .none
+
+            case .deletePreset(_):
+                return .none
+
+            case .presetAction(id: _, action: _):
+                return .none
+            }
 
         // MARK: Form Action
 

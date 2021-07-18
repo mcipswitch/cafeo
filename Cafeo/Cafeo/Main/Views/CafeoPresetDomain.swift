@@ -9,7 +9,7 @@ import ComposableArchitecture
 import Foundation
 
 struct CafeoPresetDomain {
-    
+
     struct State: Equatable, Identifiable, Codable {
         var id = UUID()
         var name: String

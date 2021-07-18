@@ -17,7 +17,7 @@ struct CafeoSavedPresetsDomain {
     enum Action: Equatable {
         case presetAction(id: CafeoPresetDomain.State.ID, action: CafeoPresetDomain.Action)
 
-        case savePreset(String, AppState.CafeoSettings)
+        case savePreset(CafeoPresetDomain.State)
         case deletePreset(IndexSet)
     }
 
@@ -34,8 +34,8 @@ struct CafeoSavedPresetsDomain {
             Reducer.init { state, action, env in
                 switch action {
 
-                case .savePreset(let name, let preset):
-                    state.savedPresets.append(.init(name: name, settings: preset))
+                case let .savePreset(preset):
+                    state.savedPresets.append(preset)
                     return .none
 
                 case let .deletePreset(indexSet):
