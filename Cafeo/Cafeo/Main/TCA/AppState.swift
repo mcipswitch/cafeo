@@ -9,26 +9,30 @@ import SwiftUI
 import ComposableArchitecture
 
 struct AppState: Equatable {
-    var currentSettings: AppState.CafeoSettings = .initial
+    var settings: AppState.CafeoSettings = .initial
     var ratioDenominators = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
 
     var currentAction: IngredientAction?
 
     var selectedPreset: CafeoPresetDomain.State?
-    var savedPresetsState: CafeoSavedPresetsDomain.State = .init(savedPresets: [])
+    var savedPresetsState: CafeoSavedPresetsDomain.State = .empty
 }
 
 extension AppState {
-    var unitConversionToggleYOffset: CGFloat { self.currentSettings.unitConversion.toggleYOffset }
-    var activeRatioDenominator: Int { self.ratioDenominators[self.currentSettings.activeRatioIdx] }
+    var unitConversionToggleYOffset: CGFloat { self.settings.unitConversion.toggleYOffset }
+    var activeRatioDenominator: Int { self.ratioDenominators[self.settings.activeRatioIdx] }
     var ratio: Double { 1 / Double(self.activeRatioDenominator) }
+
+    var isWaterLocked: Bool { self.settings.lockedIngredient == .water }
+    var isCoffeeLocked: Bool { self.settings.lockedIngredient == .coffee }
 }
 
 enum AppAction: Equatable {
     case quantityButtonLongPressed(CafeoIngredient, IngredientAction)
     case coffeeAmountChanged(IngredientAction)
     case waterAmountChanged(IngredientAction)
-    case amountLockToggled
+
+    case lockToggled
     case unitConversionToggled
 
     case quantityLabelDragged(CafeoIngredient, IngredientAction)
@@ -64,11 +68,11 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
         struct CancelDelayID: Hashable {}
 
         func updateCoffeeAmount() {
-            state.currentSettings.coffeeAmount = state.currentSettings.waterAmount * state.ratio
+            state.settings.coffeeAmount = state.settings.waterAmount * state.ratio
         }
 
         func updateWaterAmount() {
-            state.currentSettings.waterAmount = state.currentSettings.coffeeAmount / state.ratio
+            state.settings.waterAmount = state.settings.coffeeAmount / state.ratio
         }
 
         func convert(_ value: inout Double, fromUnit: UnitMass, toUnit: UnitMass) {
@@ -79,26 +83,26 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
         switch action {
 
         case let .newPresetSelected(preset):
-            state.selectedPreset = preset
             return Effect(value: AppAction.currentSettingsUpdated(preset))
                 .delay(for: 0.350, scheduler: env.mainQueue)
                 .eraseToEffect()
 
         case let .currentSettingsUpdated(preset):
-            state.currentSettings = preset.settings
+            state.selectedPreset = preset
+            state.settings = preset.settings
             return .none
 
         case .unitConversionToggled:
-            switch state.currentSettings.unitConversion {
+            switch state.settings.unitConversion {
             case .grams:
-                state.currentSettings.unitConversion = .ounces
-                convert(&state.currentSettings.coffeeAmount, fromUnit: .grams, toUnit: .ounces)
-                convert(&state.currentSettings.waterAmount, fromUnit: .grams, toUnit: .ounces)
+                state.settings.unitConversion = .ounces
+                convert(&state.settings.coffeeAmount, fromUnit: .grams, toUnit: .ounces)
+                convert(&state.settings.waterAmount, fromUnit: .grams, toUnit: .ounces)
 
             case .ounces:
-                state.currentSettings.unitConversion = .grams
-                convert(&state.currentSettings.coffeeAmount, fromUnit: .ounces, toUnit: .grams)
-                convert(&state.currentSettings.waterAmount, fromUnit: .ounces, toUnit: .grams)
+                state.settings.unitConversion = .grams
+                convert(&state.settings.coffeeAmount, fromUnit: .ounces, toUnit: .grams)
+                convert(&state.settings.waterAmount, fromUnit: .ounces, toUnit: .grams)
             }
 
             HapticFeedbackManager.shared.generateImpact(.medium)
@@ -107,47 +111,48 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
         case let .waterAmountChanged(action):
             switch action {
             case .increment:
-                state.currentSettings.waterAmount += 1
+                state.settings.waterAmount += 1
             case .decrement:
-                let newValue = state.currentSettings.waterAmount.rounded() - 1
+                let newValue = state.settings.waterAmount.rounded() - 1
                 if newValue > 0 {
-                    state.currentSettings.waterAmount -= 1
+                    state.settings.waterAmount -= 1
                 } else if newValue == 0 {
-                    state.currentSettings.waterAmount = 0
+                    state.settings.waterAmount = 0
                 }
             }
 
             HapticFeedbackManager.shared.generateImpact(.medium)
             updateCoffeeAmount()
 
-            return !state.currentSettings.waterAmountIsLocked
-                ? Effect(value: AppAction.amountLockToggled)
+            return state.settings.lockedIngredient == .coffee
+                ? Effect(value: AppAction.lockToggled)
                 : .none
 
         case let .coffeeAmountChanged(action):
             switch action {
             case .increment:
-                state.currentSettings.coffeeAmount += 0.1
+                state.settings.coffeeAmount += 0.1
             case .decrement:
-                let newValue = state.currentSettings.coffeeAmount.round(to: 1) - 0.1
+                let newValue = state.settings.coffeeAmount.round(to: 1) - 0.1
                 if newValue > 0 {
-                    state.currentSettings.coffeeAmount -= 0.1
+                    state.settings.coffeeAmount -= 0.1
                 } else if newValue == 0 {
-                    state.currentSettings.coffeeAmount = 0
+                    state.settings.coffeeAmount = 0
                 }
             }
 
             HapticFeedbackManager.shared.generateImpact(.medium)
             updateWaterAmount()
 
-            return !state.currentSettings.coffeeAmountIsLocked
-                ? Effect(value: AppAction.amountLockToggled)
+            return state.settings.lockedIngredient == .water
+                ? Effect(value: AppAction.lockToggled)
                 : .none
 
-        case .amountLockToggled:
+        case .lockToggled:
             HapticFeedbackManager.shared.generateImpact(.medium)
-            state.currentSettings.waterAmountIsLocked.toggle()
-            state.currentSettings.coffeeAmountIsLocked.toggle()
+            let lockedIngredient = state.settings.lockedIngredient
+            state.settings.lockedIngredient = lockedIngredient == .coffee ? .water : .coffee
+
             return .none
 
         case .quantityButtonLongPressed(let ingredient, let action):
@@ -204,10 +209,10 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
 
         // MARK: Form Action
 
-        case .form(\.currentSettings.activeRatioIdx):
-            state.currentSettings.waterAmountIsLocked
-                ? updateCoffeeAmount()
-                : updateWaterAmount()
+        case .form(\.settings.activeRatioIdx):
+            state.settings.lockedIngredient == .coffee
+                ? updateWaterAmount()
+                : updateCoffeeAmount()
 
             HapticFeedbackManager.shared.generateImpact(.medium)
             return .none

@@ -50,7 +50,7 @@ enum IngredientAction {
     case decrement
 }
 
-enum CafeoIngredient: String {
+enum CafeoIngredient: String, Codable {
     case coffee
     case water
 }

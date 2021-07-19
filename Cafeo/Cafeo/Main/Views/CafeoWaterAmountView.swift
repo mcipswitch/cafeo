@@ -26,10 +26,10 @@ struct CafeoWaterAmountView: View {
                     .textCase(.uppercase)
 
                 VStack(spacing: .cafeo(.scale25)) {
-                    Text(viewStore.currentSettings.waterAmount.format(to: "%.0f"))
+                    Text(viewStore.settings.waterAmount.format(to: "%.0f"))
                         .kerning(.cafeo(.large))
                         .cafeoText(.digitalLabel, color: .cafeoBeige)
-                        .accessibility(value: Text("\(viewStore.currentSettings.unitConversion.rawValue)"))
+                        .accessibility(value: Text("\(viewStore.settings.unitConversion.rawValue)"))
                         .gesture(
                             DragGesture(minimumDistance: 0)
                                 .onChanged { self.onWaterQuantityLabelDrag($0) }
@@ -44,8 +44,8 @@ struct CafeoWaterAmountView: View {
                 }
 
                 Toggle(isOn: viewStore.binding(
-                    get: \.currentSettings.waterAmountIsLocked,
-                    send: .amountLockToggled
+                    get: \.isWaterLocked,
+                    send: .lockToggled
                 ), label: {
                     Text("Water Amount Lock")
                 })

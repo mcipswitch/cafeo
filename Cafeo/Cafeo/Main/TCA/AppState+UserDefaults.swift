@@ -21,11 +21,11 @@ extension AppState {
     }
 
     var userDefaults: UserDefaultsState {
-        UserDefaultsState(settings: self.currentSettings, savedPresets: self.savedPresetsState.savedPresets)
+        UserDefaultsState(settings: self.settings, savedPresets: self.savedPresetsState.savedPresets)
     }
 
     public init(userDefaults: UserDefaultsState? = nil) {
-        self.currentSettings = userDefaults?.settings ?? .initial
+        self.settings = userDefaults?.settings ?? .initial
         self.savedPresetsState.savedPresets = userDefaults?.savedPresets ?? []
     }
 }
@@ -36,29 +36,26 @@ extension AppState {
     public struct CafeoSettings: Equatable, Codable {
         var coffeeAmount: Double
         var waterAmount: Double
-        var coffeeAmountIsLocked: Bool
-        var waterAmountIsLocked: Bool
+        var lockedIngredient: CafeoIngredient
         var unitConversion: CafeoUnit
         var activeRatioIdx: Int
 
         public init(
             coffeeAmount: Double,
             waterAmount: Double,
-            coffeeAmountIsLocked: Bool,
-            waterAmountIsLocked: Bool,
+            lockedIngredient: CafeoIngredient,
             unitConversion: CafeoUnit,
             activeRatioIdx: Int
         ) {
             self.coffeeAmount = coffeeAmount
             self.waterAmount = waterAmount
-            self.coffeeAmountIsLocked = coffeeAmountIsLocked
-            self.waterAmountIsLocked = waterAmountIsLocked
+            self.lockedIngredient = lockedIngredient
             self.unitConversion = unitConversion
             self.activeRatioIdx = activeRatioIdx
         }
 
         static var initial: Self {
-            return .init(coffeeAmount: 15.625, waterAmount: 250, coffeeAmountIsLocked: true, waterAmountIsLocked: false, unitConversion: .grams, activeRatioIdx: 15)
+            return .init(coffeeAmount: 15.625, waterAmount: 250, lockedIngredient: .coffee, unitConversion: .grams, activeRatioIdx: 15)
         }
     }
 }

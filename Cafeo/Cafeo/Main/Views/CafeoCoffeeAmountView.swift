@@ -26,10 +26,10 @@ struct CafeoCoffeeAmountView: View {
                     .textCase(.uppercase)
 
                 VStack(spacing: .cafeo(.scale25)) {
-                    Text(viewStore.currentSettings.coffeeAmount.format(to: "%.1f"))
+                    Text(viewStore.settings.coffeeAmount.format(to: "%.1f"))
                         .kerning(.cafeo(.large))
                         .cafeoText(.digitalLabel, color: .cafeoBeige)
-                        .accessibility(value: Text("\(viewStore.currentSettings.unitConversion.rawValue)"))
+                        .accessibility(value: Text("\(viewStore.settings.unitConversion.rawValue)"))
                         .gesture(
                             DragGesture(minimumDistance: 0)
                                 .onChanged { self.onCoffeeQuantityLabelDrag($0) }
@@ -44,8 +44,8 @@ struct CafeoCoffeeAmountView: View {
                 }
 
                 Toggle(isOn: viewStore.binding(
-                    get: \.currentSettings.coffeeAmountIsLocked,
-                    send: AppAction.amountLockToggled
+                    get: \.isCoffeeLocked,
+                    send: AppAction.lockToggled
                 ), label: {
                     Text("Coffee Amount")
                 })

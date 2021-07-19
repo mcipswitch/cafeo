@@ -12,13 +12,17 @@ struct CafeoSavedPresetsDomain {
 
     struct State: Equatable {
         var savedPresets: IdentifiedArrayOf<CafeoPresetDomain.State>
+
+        static var empty: Self {
+            return .init(savedPresets: [])
+        }
     }
 
     enum Action: Equatable {
-        case presetAction(id: CafeoPresetDomain.State.ID, action: CafeoPresetDomain.Action)
-
         case savePreset(CafeoPresetDomain.State)
         case deletePreset(IndexSet)
+
+        case presetAction(id: CafeoPresetDomain.State.ID, action: CafeoPresetDomain.Action)
     }
 
     struct Environment {}

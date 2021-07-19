@@ -42,7 +42,7 @@ struct CafeoRatioView: View {
                                     .frame(width: geo.size.width / 2 - .cafeo(.scale05))
                             }
                             .frame(width: geo.size.width / 2,
-                                   height: geo.size.height)
+                                   height: geo.size.height - .cafeo(.scale1))
                             .cafeoInnerShadow()
 
                             // Control the tappable area
@@ -53,50 +53,60 @@ struct CafeoRatioView: View {
                 }
                 .accessibility(sortPriority: 0)
 
-                Button(action: {
-                    self.showSavedPresets.toggle()
-                }, label: {
-                    Text("ratio: \(viewStore.selectedPreset?.name ?? "none")".localized)
-                        .kerning(.cafeo(.standard))
-                        .cafeoText(.mainLabel, color: .cafeoGray)
-                        .textCase(.uppercase)
-                        .accessibility(sortPriority: 1)
-                })
-                .sheet(isPresented: self.$showSavedPresets) {
-                    CafeoSavedPresetsView(
-                        store: self.store.scope(
-                            state: \.savedPresetsState,
-                            action: { .savedPresetsAction($0) }
-                        ),
-                        selectedPreset: viewStore.selectedPreset,
-                        newPresetSelected: {
-                            viewStore.send(.newPresetSelected($0))
-                        }
-                    )
-                }
 
-                Button(action: {
-                    self.showSavePresetAlert.toggle()
-                }, label: {
-                    ZStack {
-                        EmptyView()
-                            .cafeoAlert(isPresented: self.$showSavePresetAlert,
-                                        .init(title: "Save Preset".localized,
-                                              message: "Give your preset a name.".localized,
-                                              placeholder: "e.g. Morning brew, Espresso...".localized,
-                                              accept: "Save".localized,
-                                              cancel: "Cancel".localized,
-                                              action: { presetName in
-                                                if let name = presetName {
-                                                    let preset: CafeoPresetDomain.State = .init(name: name, settings: viewStore.currentSettings)
+                VStack(spacing: .cafeo(.scale05)) {
 
-                                                    viewStore.send(.savedPresetsAction(.savePreset(preset)))
-                                                }
-                                              }))
-                            .frame(width: 0, height: 0, alignment: .center)
-                        Image.cafeo(.plus)
+                    Button(action: {
+                        self.showSavedPresets.toggle()
+                    }, label: {
+                        Text(viewStore.selectedPreset?.name ?? "ratio".localized)
+                            .kerning(.cafeo(.standard))
+                            .cafeoText(.mainLabel, color: .cafeoGray)
+                            .textCase(.uppercase)
+                            .accessibility(sortPriority: 1)
+                    })
+                    .sheet(isPresented: self.$showSavedPresets) {
+                        CafeoSavedPresetsView(
+                            store: self.store.scope(
+                                state: \.savedPresetsState,
+                                action: { .savedPresetsAction($0) }
+                            ),
+                            selectedPreset: viewStore.selectedPreset,
+                            newPresetSelected: {
+                                viewStore.send(.newPresetSelected($0))
+                            }
+                        )
                     }
-                })
+
+                    Button(action: {
+                        self.showSavePresetAlert.toggle()
+                    }, label: {
+                        ZStack {
+                            EmptyView()
+                                .cafeoAlert(isPresented: self.$showSavePresetAlert,
+                                            .init(title: "Save Preset".localized,
+                                                  message: "Give your preset a name.".localized,
+                                                  placeholder: "e.g. Morning brew, Espresso...".localized,
+                                                  accept: "Save".localized,
+                                                  cancel: "Cancel".localized,
+                                                  action: { presetName in
+                                                    if let name = presetName {
+                                                        let preset: CafeoPresetDomain.State = .init(name: name, settings: viewStore.settings)
+
+                                                        viewStore.send(.savedPresetsAction(.savePreset(preset)))
+                                                    }
+                                                  }))
+                                .frame(width: 0, height: 0, alignment: .center)
+
+                            Text("(Save)".localized)
+                                .kerning(.cafeo(.standard))
+                                .cafeoText(.mainLabel, color: .cafeoOrange)
+                                .textCase(.uppercase)
+                        }
+                    })
+
+
+                }
             }
             .accessibilityElement(children: .contain)
         }

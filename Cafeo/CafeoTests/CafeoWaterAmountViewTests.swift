@@ -37,7 +37,7 @@ class CafeoWaterAmountViewTests: XCTestCase {
             $0.waterAmount = waterAmount
         }
 
-        store.receive(.amountLockToggled) {
+        store.receive(.lockToggled) {
             $0.waterAmountIsLocked = true
             $0.coffeeAmountIsLocked = false
         }
@@ -108,7 +108,7 @@ class CafeoWaterAmountViewTests: XCTestCase {
             $0.waterAmount = waterAmount
         }
 
-        store.receive(.amountLockToggled) {
+        store.receive(.lockToggled) {
             $0.waterAmountIsLocked = true
             $0.coffeeAmountIsLocked = false
         }
