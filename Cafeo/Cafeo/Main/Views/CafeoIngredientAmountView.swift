@@ -13,15 +13,13 @@ struct CafeoIngredientAmountView: View {
 
     // TODO: - geometry reader?
     var body: some View {
-        WithViewStore(self.store) { viewStore in
-            HStack {
-                CafeoCoffeeAmountView(store: self.store)
-                    .frame(width: UIScreen.main.bounds.width / 2)
-                    .accessibility(sortPriority: 1)
-                CafeoWaterAmountView(store: self.store)
-                    .frame(width: UIScreen.main.bounds.width / 2)
-                    .accessibility(sortPriority: 0)
-            }
+        HStack {
+            CafeoCoffeeAmountView(store: self.store)
+                .frame(width: UIScreen.main.bounds.width / 2)
+                .accessibility(sortPriority: 1)
+            CafeoWaterAmountView(store: self.store)
+                .frame(width: UIScreen.main.bounds.width / 2)
+                .accessibility(sortPriority: 0)
         }
     }
 }

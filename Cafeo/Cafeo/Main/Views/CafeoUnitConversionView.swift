@@ -11,8 +11,18 @@ import SwiftUI
 struct CafeoUnitConversionView: View {
     let store: Store<AppState, AppAction>
 
+    struct ViewState: Equatable {
+        let settings: AppState.CafeoSettings
+        let toggleYOffset: CGFloat
+
+        init(state: AppState) {
+            self.settings = state.settings
+            self.toggleYOffset = state.settings.unitConversion.toggleYOffset
+        }
+    }
+
     var body: some View {
-        WithViewStore(self.store) { viewStore in
+        WithViewStore(self.store.scope(state: ViewState.init)) { viewStore in
             VStack(spacing: .cafeo(.scale4)) {
                 ConversionText()
                     .padding(.horizontal, .cafeo(.scale2))
@@ -47,7 +57,7 @@ struct CafeoUnitConversionView: View {
 
                     CafeoToggle(
                         offset: viewStore.binding(
-                            get: \.unitConversionToggleYOffset,
+                            get: \.toggleYOffset,
                             send: .unitConversionToggled
                         ))
                         .gesture(

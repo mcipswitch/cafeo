@@ -17,8 +17,18 @@ struct CafeoCoffeeAmountView: View {
         self.viewStore = ViewStore(store)
     }
 
+    struct ViewState: Equatable {
+        let settings: AppState.CafeoSettings
+        let isCoffeeLocked: Bool
+
+        init(state: AppState) {
+            self.settings = state.settings
+            self.isCoffeeLocked = state.settings.lockedIngredient == .coffee
+        }
+    }
+
     var body: some View {
-        WithViewStore(self.store) { viewStore in
+        WithViewStore(self.store.scope(state: ViewState.init)) { viewStore in
             VStack(spacing: .cafeo(.scale45)) {
                 Text(CafeoIngredient.coffee.rawValue.localized)
                     .kerning(.cafeo(.standard))
@@ -45,7 +55,7 @@ struct CafeoCoffeeAmountView: View {
 
                 Toggle(isOn: viewStore.binding(
                     get: \.isCoffeeLocked,
-                    send: AppAction.lockToggled
+                    send: .form(.set(\.settings.lockedIngredient, .coffee))
                 ), label: {
                     Text("Coffee Amount")
                 })

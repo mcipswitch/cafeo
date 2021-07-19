@@ -10,31 +10,30 @@ import ComposableArchitecture
 
 struct AppState: Equatable {
     var settings: AppState.CafeoSettings = .initial
-    var ratioDenominators = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+    var ratioDenominators: [Int] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
 
     var currentAction: IngredientAction?
 
     var selectedPreset: CafeoPresetDomain.State?
     var savedPresetsState: CafeoSavedPresetsDomain.State = .empty
+
+    // MARK: CafeoRatioView
+    var showSavedPresetsView = false
+    var showSavePresetAlert = false
 }
 
 extension AppState {
     var unitConversionToggleYOffset: CGFloat { self.settings.unitConversion.toggleYOffset }
     var activeRatioDenominator: Int { self.ratioDenominators[self.settings.activeRatioIdx] }
     var ratio: Double { 1 / Double(self.activeRatioDenominator) }
-
-    var isWaterLocked: Bool { self.settings.lockedIngredient == .water }
-    var isCoffeeLocked: Bool { self.settings.lockedIngredient == .coffee }
 }
 
 enum AppAction: Equatable {
-    case quantityButtonLongPressed(CafeoIngredient, IngredientAction)
     case coffeeAmountChanged(IngredientAction)
     case waterAmountChanged(IngredientAction)
-
-    case lockToggled
     case unitConversionToggled
 
+    case quantityButtonLongPressed(CafeoIngredient, IngredientAction)
     case quantityLabelDragged(CafeoIngredient, IngredientAction)
     case onRelease
 
@@ -125,7 +124,7 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
             updateCoffeeAmount()
 
             return state.settings.lockedIngredient == .coffee
-                ? Effect(value: AppAction.lockToggled)
+                ? Effect(value: .form(.set(\.settings.lockedIngredient, .water)))
                 : .none
 
         case let .coffeeAmountChanged(action):
@@ -145,15 +144,8 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
             updateWaterAmount()
 
             return state.settings.lockedIngredient == .water
-                ? Effect(value: AppAction.lockToggled)
+                ? Effect(value: .form(.set(\.settings.lockedIngredient, .coffee)))
                 : .none
-
-        case .lockToggled:
-            HapticFeedbackManager.shared.generateImpact(.medium)
-            let lockedIngredient = state.settings.lockedIngredient
-            state.settings.lockedIngredient = lockedIngredient == .coffee ? .water : .coffee
-
-            return .none
 
         case .quantityButtonLongPressed(let ingredient, let action):
             return Effect.timer(id: TimerID(), every: 0.1, on: env.mainQueue)
@@ -208,6 +200,10 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
             }
 
         // MARK: Form Action
+
+        case .form(\.settings.lockedIngredient):
+            HapticFeedbackManager.shared.generateImpact(.medium)
+            return .none
 
         case .form(\.settings.activeRatioIdx):
             state.settings.lockedIngredient == .coffee

@@ -11,11 +11,24 @@ import SwiftUI
 struct CafeoRatioView: View {
     let store: Store<AppState, AppAction>
 
-    @State private var showSavedPresets = false
-    @State private var showSavePresetAlert = false
+    struct ViewState: Equatable {
+        let settings: AppState.CafeoSettings
+        let selectedPreset: CafeoPresetDomain.State?
+        let activeRatioDenominator: Int
+        let showSavedPresetsView: Bool
+        let showSavePresetAlert: Bool
+
+        init(state: AppState) {
+            self.settings = state.settings
+            self.selectedPreset = state.selectedPreset
+            self.activeRatioDenominator = state.ratioDenominators[self.settings.activeRatioIdx]
+            self.showSavedPresetsView = state.showSavedPresetsView
+            self.showSavePresetAlert = state.showSavePresetAlert
+        }
+    }
 
     var body: some View {
-        WithViewStore(self.store) { viewStore in
+        WithViewStore(self.store.scope(state: ViewState.init)) { viewStore in
             VStack(spacing: .cafeo(.scale45)) {
                 ZStack {
                     GeometryReader { geo in
@@ -57,7 +70,7 @@ struct CafeoRatioView: View {
                 VStack(spacing: .cafeo(.scale05)) {
 
                     Button(action: {
-                        self.showSavedPresets.toggle()
+                        viewStore.send(.form(.set(\.showSavedPresetsView, !viewStore.showSavedPresetsView)))
                     }, label: {
                         Text(viewStore.selectedPreset?.name ?? "ratio".localized)
                             .kerning(.cafeo(.standard))
@@ -65,7 +78,11 @@ struct CafeoRatioView: View {
                             .textCase(.uppercase)
                             .accessibility(sortPriority: 1)
                     })
-                    .sheet(isPresented: self.$showSavedPresets) {
+                    .sheet(
+                        isPresented: viewStore.binding(
+                            get: \.showSavedPresetsView,
+                            send: AppAction.form(.set(\.showSavedPresetsView, !viewStore.showSavedPresetsView))
+                        )) {
                         CafeoSavedPresetsView(
                             store: self.store.scope(
                                 state: \.savedPresetsState,
@@ -79,23 +96,26 @@ struct CafeoRatioView: View {
                     }
 
                     Button(action: {
-                        self.showSavePresetAlert.toggle()
+                        viewStore.send(.form(.set(\.showSavePresetAlert, !viewStore.showSavePresetAlert)))
                     }, label: {
                         ZStack {
                             EmptyView()
-                                .cafeoAlert(isPresented: self.$showSavePresetAlert,
-                                            .init(title: "Save Preset".localized,
-                                                  message: "Give your preset a name.".localized,
-                                                  placeholder: "e.g. Morning brew, Espresso...".localized,
-                                                  accept: "Save".localized,
-                                                  cancel: "Cancel".localized,
-                                                  action: { presetName in
-                                                    if let name = presetName {
-                                                        let preset: CafeoPresetDomain.State = .init(name: name, settings: viewStore.settings)
+                                .cafeoAlert(isPresented: viewStore.binding(
+                                    get: \.showSavePresetAlert,
+                                    send: .form(.set(\.showSavePresetAlert, !viewStore.showSavePresetAlert))
+                                ),
+                                .init(title: "Save Preset".localized,
+                                      message: "Give your preset a name.".localized,
+                                      placeholder: "e.g. Morning brew, Espresso...".localized,
+                                      accept: "Save".localized,
+                                      cancel: "Cancel".localized,
+                                      action: { presetName in
+                                        if let name = presetName {
+                                            let preset: CafeoPresetDomain.State = .init(name: name, settings: viewStore.settings)
 
-                                                        viewStore.send(.savedPresetsAction(.savePreset(preset)))
-                                                    }
-                                                  }))
+                                            viewStore.send(.savedPresetsAction(.savePreset(preset)))
+                                        }
+                                      }))
                                 .frame(width: 0, height: 0, alignment: .center)
 
                             Text("(Save)".localized)
@@ -104,8 +124,6 @@ struct CafeoRatioView: View {
                                 .textCase(.uppercase)
                         }
                     })
-
-
                 }
             }
             .accessibilityElement(children: .contain)

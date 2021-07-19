@@ -12,38 +12,36 @@ struct Cafeo: View {
     let store: Store<AppState, AppAction>
 
     var body: some View {
-        WithViewStore(self.store) { viewStore in
-            ZStack {
-                BackgroundPattern()
-                    .edgesIgnoringSafeArea(.all)
+        ZStack {
+            BackgroundPattern()
+                .edgesIgnoringSafeArea(.all)
 
-                VStack(spacing: 0) {
-                    Spacer()
+            VStack(spacing: 0) {
+                Spacer()
 
-                    CafeoRatioView(store: self.store)
-                        .frame(height: 180)
-                        .padding(.horizontal, .cafeo(.scale5))
-                        .padding(.vertical, .cafeo(.scale55))
-                        .background(Color.cafeoBackgroundDark)
+                CafeoRatioView(store: self.store)
+                    .frame(height: 180)
+                    .padding(.horizontal, .cafeo(.scale5))
+                    .padding(.vertical, .cafeo(.scale55))
+                    .background(Color.cafeoBackgroundDark)
 
-                    CafeoIngredientAmountView(store: self.store)
-                        .padding(.vertical, .cafeo(.scale55))
-                        .background(Color.cafeoBackgroundLight)
-                        .accessibilityElement(children: .contain)
+                CafeoIngredientAmountView(store: self.store)
+                    .padding(.vertical, .cafeo(.scale55))
+                    .background(Color.cafeoBackgroundLight)
+                    .accessibilityElement(children: .contain)
 
-                    CafeoUnitConversionView(store: self.store)
-                        .padding(.horizontal, .cafeo(.scale5))
-                        .padding(.vertical, .cafeo(.scale55))
-                        .background(Color.cafeoBackgroundDark)
-                }
+                CafeoUnitConversionView(store: self.store)
+                    .padding(.horizontal, .cafeo(.scale5))
+                    .padding(.vertical, .cafeo(.scale55))
+                    .background(Color.cafeoBackgroundDark)
             }
-            .background(Color.cafeoBackgroundDark)
         }
+        .background(Color.cafeoBackgroundDark)
     }
 }
 
 extension Cafeo {
-    struct BackgroundPattern: View {
+    private struct BackgroundPattern: View {
         var body: some View {
             VStack(spacing: 0) {
                 Image(decorative: "background-pattern")
