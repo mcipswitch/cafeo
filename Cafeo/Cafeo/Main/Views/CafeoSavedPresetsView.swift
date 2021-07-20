@@ -18,18 +18,20 @@ struct CafeoSavedPresetsView: View {
     init(store: Store<CafeoSavedPresetsDomain.State, CafeoSavedPresetsDomain.Action>,
          selectedPreset: CafeoPresetDomain.State?,
          newPresetSelected: @escaping (CafeoPresetDomain.State) -> Void) {
-    self.store = store
-    self.selectedPreset = selectedPreset
-    self.newPresetSelected = newPresetSelected
+        self.store = store
+        self.selectedPreset = selectedPreset
+        self.newPresetSelected = newPresetSelected
 
-    // This is required to set up the list background color
-    UITableView.appearance().backgroundColor = UIColor(.cafeoBackgroundDark)
+        // This is required to set up the list background color
+        UITableView.appearance().backgroundColor = UIColor(.cafeoBackgroundDark)
     }
+
+    @State var isEditing = false
 
     var body: some View {
         WithViewStore(self.store) { viewStore in
             List {
-                Section(header: HeaderText(text: "Saved presets".localized)) {
+                Section(header: HeaderText(isEditing: self.$isEditing, text: "Saved presets".localized)) {
                     ForEachStore(
                         self.store.scope(
                             state: \.savedPresets,
@@ -41,23 +43,35 @@ struct CafeoSavedPresetsView: View {
                             self.newPresetSelected($0)
                         }
                     }
-                    .onDelete {
-                        viewStore.send(.deletePreset($0))
-                    }
+                    .onMove { viewStore.send(.movePreset($0, $1)) }
+                    .onDelete { viewStore.send(.deletePreset($0)) }
                 }
             }
+            .environment(\.editMode, .constant(self.isEditing ? .active : .inactive))
             .preferredColorScheme(.dark)
             .listStyle(GroupedListStyle())
         }
     }
 
     private struct HeaderText: View {
+        @Binding var isEditing: Bool
         var text: String
         var body: some View {
-            Text(self.text)
-                .kerning(.cafeo(.standard))
-                .cafeoText(.mainLabel, color: .cafeoGray)
-                .padding(.vertical, .cafeo(.scale4))
+            HStack {
+                Text(self.text)
+                    .kerning(.cafeo(.standard))
+                    .cafeoText(.mainLabel, color: .cafeoGray)
+                Spacer()
+                Button(action: {
+                    self.isEditing.toggle()
+                }, label: {
+                    Text("Edit".localized)
+                        .kerning(.cafeo(.standard))
+                        .cafeoText(.mainLabel, color: .cafeoGray)
+                        .textCase(.uppercase)
+                })
+            }
+            .padding(.vertical, .cafeo(.scale4))
         }
     }
 
@@ -72,9 +86,14 @@ struct CafeoSavedPresetsView: View {
                     self.action(viewStore.state)
                 }) {
                     HStack {
-                        Text(viewStore.name)
-                            .kerning(.cafeo(.standard))
-                            .cafeoText(.mainLabel, color: .cafeoGray)
+                        VStack(alignment: .leading, spacing: .cafeo(.scale2)) {
+                            Text(viewStore.name)
+                                .kerning(.cafeo(.standard))
+                                .cafeoText(.mainLabel, color: .cafeoGray)
+                            Text("1/\(viewStore.settings.activeRatioIdx)")
+                                .kerning(.cafeo(.standard))
+                                .cafeoText(.mainLabel, color: .cafeoGray)
+                        }
                         Spacer()
                         if self.isSelected {
                             Image(systemName: "checkmark")
@@ -85,9 +104,5 @@ struct CafeoSavedPresetsView: View {
                 .listRowBackground(Color.cafeoBackgroundDark)
             }
         }
-
-//        private func dismissAlert() {
-//            self.presentation.wrappedValue.dismiss()
-//        }
     }
 }

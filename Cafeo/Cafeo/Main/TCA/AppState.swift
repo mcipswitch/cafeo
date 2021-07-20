@@ -188,6 +188,9 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
 
         case let .savedPresetsAction(action):
             switch action {
+            case .movePreset(_, _):
+                return .none
+
             case let .savePreset(preset):
                 state.selectedPreset = preset
                 return .none

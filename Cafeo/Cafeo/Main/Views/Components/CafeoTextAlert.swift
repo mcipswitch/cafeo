@@ -14,7 +14,9 @@ public struct CafeoTextAlert {
     public var message: String?
     /// Placeholder text for the `TextField`
     public var placeholder: String = ""
+    /// Accept button
     public var accept: String = "OK"
+    /// Cancel button
     public var cancel: String = "Cancel"
     /// Triggers when `accept` or `cancel` button closes the alert
     public var action: (String?) -> ()

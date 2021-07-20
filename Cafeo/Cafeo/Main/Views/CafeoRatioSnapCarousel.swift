@@ -19,18 +19,9 @@ struct CafeoRatioSnapCarousel: View {
         self.viewStore = ViewStore<AppState, AppAction>(self.store)
     }
 
-    struct ViewState: Equatable {
-        let settings: AppState.CafeoSettings
-
-        init(state: AppState) {
-            self.settings = state.settings
-        }
-    }
-
     @GestureState var dragOffset = CGFloat.zero
 
     var body: some View {
-        // MARK: Helpers
 
         let itemHeight: CGFloat = 80
         let numberOfItems: CGFloat = CGFloat(viewStore.ratioDenominators.count)

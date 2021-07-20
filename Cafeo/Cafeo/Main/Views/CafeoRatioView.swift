@@ -110,9 +110,8 @@ struct CafeoRatioView: View {
                                       accept: "Save".localized,
                                       cancel: "Cancel".localized,
                                       action: { presetName in
-                                        if let name = presetName {
-                                            let preset: CafeoPresetDomain.State = .init(name: name, settings: viewStore.settings)
-
+                                        if let name = presetName, !name.isEmpty {
+                                            let preset = CafeoPresetDomain.State(name: name, settings: viewStore.settings)
                                             viewStore.send(.savedPresetsAction(.savePreset(preset)))
                                         }
                                       }))
