@@ -22,11 +22,12 @@ struct CafeoIngredientQuantityButton: View {
             }
 
         ZStack {
-            RoundedRectangle(cornerRadius: .cafeo(.scale5), style: .continuous)
+            RoundedRectangle(cornerRadius: .cafeo(.spacing24), style: .continuous)
                 .stroke(LinearGradient.cafeoIngredientAmountButtonStroke, lineWidth: 2)
+                .clipShape(RoundedRectangle(cornerRadius: .cafeo(.spacing24), style: .continuous))
                 .frame(width: 120, height: 44)
                 .background(
-                    RoundedRectangle(cornerRadius: .cafeo(.scale5), style: .continuous)
+                    RoundedRectangle(cornerRadius: .cafeo(.spacing24), style: .continuous)
                         .fill(Color.cafeoBackgroundLight)
                         // highlight and shadow
                         .shadow(color: .cafeoHighlight1, radius: 8, x: -4, y: -4)
@@ -54,7 +55,7 @@ struct CafeoIngredientQuantityButton: View {
                         )
                         .simultaneousGesture(releaseGesture)
                     }
-                    .padding(.horizontal, .cafeo(.scale15))
+                    .padding(.horizontal, .cafeo(.spacing6))
                 )
         }
     }

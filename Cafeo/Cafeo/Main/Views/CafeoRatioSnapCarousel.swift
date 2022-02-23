@@ -14,32 +14,32 @@ struct CafeoRatioSnapCarousel: View {
 
     @ObservedObject var viewStore: ViewStore<AppState, AppAction>
 
-    init(store: Store<AppState, AppAction>) {
+    var height: CGFloat = .zero
+
+    init(store: Store<AppState, AppAction>, height: CGFloat) {
         self.store = store
         self.viewStore = ViewStore<AppState, AppAction>(self.store)
+        self.height = height
     }
 
     @GestureState var dragOffset = CGFloat.zero
 
     var body: some View {
 
-        let itemHeight: CGFloat = 80
+        let itemHeight: CGFloat = self.height
         let numberOfItems: CGFloat = CGFloat(viewStore.ratioDenominators.count)
         let totalHeight: CGFloat = itemHeight * numberOfItems
-
         let yOffsetToShift: CGFloat = (totalHeight - itemHeight) / 2
         let activeOffset: CGFloat = yOffsetToShift - (itemHeight * CGFloat(viewStore.settings.activeRatioIdx))
         let totalOffset: CGFloat = CGFloat(activeOffset) + self.dragOffset
 
-        VStack {
+        VStack(spacing: 0) {
             ForEach(viewStore.ratioDenominators, id: \.self) { ratioDenom in
                 Text("\(ratioDenom)")
                     .kerning(.cafeo(.large))
                     .cafeoText(.ratioLabel, color: .cafeoBeige)
                     .frame(width: itemHeight * 2, height: itemHeight)
-
-                    // Control the tappable area
-                    .contentShape(Rectangle())
+                    .contentShape(Rectangle()) /* control tappable area */
             }
         }
         .offset(y: totalOffset)

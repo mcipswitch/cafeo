@@ -9,18 +9,18 @@ import SwiftUI
 
 /// Represents a spacing constant within the Cafeo iOS design system
 enum CafeoSpacing: CGFloat, RawRepresentable {
-    case scale05 = 2
-    case scale1 = 4
-    case scale15 = 6
-    case scale2 = 8
-    case scale25 = 10
-    case scale3 = 12
-    case scale4 = 16
-    case scale45 = 20
-    case scale5 = 24
-    case scale55 = 30
-    case scale6 = 32
-    case scale7 = 48
+    case spacing2 = 2
+    case spacing4 = 4
+    case spacing6 = 6
+    case spacing8 = 8
+    case spacing10 = 10
+    case spacing12 = 12
+    case spacing16 = 16
+    case spacing20 = 20
+    case spacing24 = 24
+    case spacing30 = 30
+    case spacing32 = 32
+    case spacing48 = 48
 }
 
 /// Represents a kerning constant within the Cafeo iOS design system

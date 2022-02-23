@@ -42,6 +42,6 @@ struct CafeoToggle: View {
     }
 
     private var togglePill: RoundedRectangle {
-        RoundedRectangle(cornerRadius: .cafeo(.scale5), style: .continuous)
+        RoundedRectangle(cornerRadius: .cafeo(.spacing24), style: .continuous)
     }
 }

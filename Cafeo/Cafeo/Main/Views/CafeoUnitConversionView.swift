@@ -23,9 +23,9 @@ struct CafeoUnitConversionView: View {
 
     var body: some View {
         WithViewStore(self.store.scope(state: ViewState.init)) { viewStore in
-            VStack(spacing: .cafeo(.scale4)) {
+            VStack(spacing: .cafeo(.spacing16)) {
                 ConversionText()
-                    .padding(.horizontal, .cafeo(.scale2))
+                    .padding(.horizontal, .cafeo(.spacing8))
                     .background(Color.cafeoBackgroundDark)
                     .anchorPreference(
                         key: BoundsPreferenceKey.self,
@@ -50,7 +50,7 @@ struct CafeoUnitConversionView: View {
                         }
                     }
 
-                HStack(spacing: .cafeo(.scale55)) {
+                HStack(spacing: .cafeo(.spacing30)) {
                     UnitLabel(.grams, isSelected: viewStore.settings.unitConversion == .grams)
                         .accessibility(sortPriority: 1)
                         .accessibility(label: Text("grams"))

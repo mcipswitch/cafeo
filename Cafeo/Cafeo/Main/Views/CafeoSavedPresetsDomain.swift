@@ -51,6 +51,7 @@ struct CafeoSavedPresetsDomain {
                     return .none
 
                 case .presetAction:
+                    // There are no actions right now
                     return .none
                 }
             }

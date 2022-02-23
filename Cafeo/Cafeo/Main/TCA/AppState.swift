@@ -23,9 +23,15 @@ struct AppState: Equatable {
 }
 
 extension AppState {
-    var unitConversionToggleYOffset: CGFloat { self.settings.unitConversion.toggleYOffset }
-    var activeRatioDenominator: Int { self.ratioDenominators[self.settings.activeRatioIdx] }
-    var ratio: Double { 1 / Double(self.activeRatioDenominator) }
+    var unitConversionToggleYOffset: CGFloat {
+        self.settings.unitConversion.toggleYOffset
+    }
+    var activeRatioDenominator: Int {
+        self.ratioDenominators[self.settings.activeRatioIdx]
+    }
+    var ratio: Double {
+        1 / Double(self.activeRatioDenominator)
+    }
 }
 
 enum AppAction: Equatable {
@@ -40,10 +46,10 @@ enum AppAction: Equatable {
     case newPresetSelected(CafeoPresetDomain.State)
     case currentSettingsUpdated(CafeoPresetDomain.State)
 
-    // MARK: SavedPresetsDomain
+    // MARK: Saved Presets Domain
     case savedPresetsAction(CafeoSavedPresetsDomain.Action)
 
-    // This can be ignored
+    // MARK: TCA Concise Actions
     case form(FormAction<AppState>)
 }
 
@@ -81,6 +87,8 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
 
         switch action {
 
+        // MARK: Presets
+
         case let .newPresetSelected(preset):
             return Effect(value: AppAction.currentSettingsUpdated(preset))
                 .delay(for: 0.350, scheduler: env.mainQueue)
@@ -92,6 +100,9 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
             return .none
 
         case .unitConversionToggled:
+
+            state.selectedPreset = nil
+
             switch state.settings.unitConversion {
             case .grams:
                 state.settings.unitConversion = .ounces
@@ -108,9 +119,13 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
             return .none
 
         case let .waterAmountChanged(action):
+
+            state.selectedPreset = nil
+
             switch action {
             case .increment:
                 state.settings.waterAmount += 1
+
             case .decrement:
                 let newValue = state.settings.waterAmount.rounded() - 1
                 if newValue > 0 {
@@ -128,9 +143,13 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
                 : .none
 
         case let .coffeeAmountChanged(action):
+
+            state.selectedPreset = nil
+
             switch action {
             case .increment:
                 state.settings.coffeeAmount += 0.1
+
             case .decrement:
                 let newValue = state.settings.coffeeAmount.round(to: 1) - 0.1
                 if newValue > 0 {
@@ -186,29 +205,27 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
 
         // MARK: SavedPresetsDomain
 
-        case let .savedPresetsAction(action):
-            switch action {
-            case .movePreset(_, _):
-                return .none
+        case let .savedPresetsAction(.savePreset(preset)):
+            state.selectedPreset = preset
+            return .none
 
-            case let .savePreset(preset):
-                state.selectedPreset = preset
-                return .none
-
-            case .deletePreset(_):
-                return .none
-
-            case .presetAction(id: _, action: _):
-                return .none
-            }
+        case .savedPresetsAction:
+            // Ignore other actions
+            return .none
 
         // MARK: Form Action
 
         case .form(\.settings.lockedIngredient):
+
+            state.selectedPreset = nil
+
             HapticFeedbackManager.shared.generateImpact(.medium)
             return .none
 
         case .form(\.settings.activeRatioIdx):
+
+            state.selectedPreset = nil
+
             state.settings.lockedIngredient == .coffee
                 ? updateWaterAmount()
                 : updateCoffeeAmount()
@@ -216,10 +233,9 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
             HapticFeedbackManager.shared.generateImpact(.medium)
             return .none
 
-        // This can be ignored
         case .form:
+            // Ignore other actions
             return .none
         }
     }
-    .form(action: /AppAction.form)
-)
+).form(action: /AppAction.form)

@@ -71,7 +71,7 @@ struct CafeoSavedPresetsView: View {
                         .textCase(.uppercase)
                 })
             }
-            .padding(.vertical, .cafeo(.scale4))
+            .padding(.vertical, .cafeo(.spacing16))
         }
     }
 
@@ -86,7 +86,7 @@ struct CafeoSavedPresetsView: View {
                     self.action(viewStore.state)
                 }) {
                     HStack {
-                        VStack(alignment: .leading, spacing: .cafeo(.scale2)) {
+                        VStack(alignment: .leading, spacing: .cafeo(.spacing8)) {
                             Text(viewStore.name)
                                 .kerning(.cafeo(.standard))
                                 .cafeoText(.mainLabel, color: .cafeoGray)

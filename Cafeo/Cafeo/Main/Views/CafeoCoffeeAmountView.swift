@@ -29,13 +29,13 @@ struct CafeoCoffeeAmountView: View {
 
     var body: some View {
         WithViewStore(self.store.scope(state: ViewState.init)) { viewStore in
-            VStack(spacing: .cafeo(.scale45)) {
+            VStack(spacing: .cafeo(.spacing16)) {
                 Text(CafeoIngredient.coffee.rawValue.localized)
                     .kerning(.cafeo(.standard))
                     .cafeoText(.mainLabel, color: .cafeoGray)
                     .textCase(.uppercase)
 
-                VStack(spacing: .cafeo(.scale25)) {
+                VStack(spacing: .cafeo(.spacing10)) {
                     Text(viewStore.settings.coffeeAmount.format(to: "%.1f"))
                         .kerning(.cafeo(.large))
                         .cafeoText(.digitalLabel, color: .cafeoBeige)
@@ -61,7 +61,7 @@ struct CafeoCoffeeAmountView: View {
                 })
                 .toggleStyle(CafeoLockToggleStyle())
                 .labelsHidden()
-                .padding(.top, .cafeo(.scale45))
+                .padding(.top, .cafeo(.spacing20))
                 .accessibility(label: Text("Coffee Amount"))
             }
         }

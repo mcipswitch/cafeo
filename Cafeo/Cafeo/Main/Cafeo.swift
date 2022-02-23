@@ -19,22 +19,26 @@ struct Cafeo: View {
             VStack(spacing: 0) {
                 Spacer()
 
+                // MARK: Ratio Carousel
                 CafeoRatioView(store: self.store)
-                    .frame(height: 180)
-                    .padding(.horizontal, .cafeo(.scale5))
-                    .padding(.vertical, .cafeo(.scale55))
+                    .frame(minHeight: 150, maxHeight: 180)
+                    .padding(.horizontal, .cafeo(.spacing24))
+                    .padding(.vertical, .cafeo(.spacing20))
                     .background(Color.cafeoBackgroundDark)
 
+                // MARK: Ingredients
                 CafeoIngredientAmountView(store: self.store)
-                    .padding(.vertical, .cafeo(.scale55))
+                    .padding(.vertical, .cafeo(.spacing20))
                     .background(Color.cafeoBackgroundLight)
                     .accessibilityElement(children: .contain)
 
+                // MARK: Conversion Toggle
                 CafeoUnitConversionView(store: self.store)
-                    .padding(.horizontal, .cafeo(.scale5))
-                    .padding(.vertical, .cafeo(.scale55))
+                    .padding(.horizontal, .cafeo(.spacing24))
+                    .padding(.top, .cafeo(.spacing20))
                     .background(Color.cafeoBackgroundDark)
             }
+            .padding(.vertical, .cafeo(.spacing20))
         }
         .background(Color.cafeoBackgroundDark)
     }

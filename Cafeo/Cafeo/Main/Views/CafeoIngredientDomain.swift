@@ -23,7 +23,6 @@ struct CafeoIngredientDomain {
     static var reducer: Reducer<State, Action, Environment> = {
         Reducer.init { state, action, env in
             switch action {
-
             case .dummy:
                 return .none
             }

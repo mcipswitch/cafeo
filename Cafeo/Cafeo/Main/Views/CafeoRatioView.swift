@@ -29,7 +29,7 @@ struct CafeoRatioView: View {
 
     var body: some View {
         WithViewStore(self.store.scope(state: ViewState.init)) { viewStore in
-            VStack(spacing: .cafeo(.scale45)) {
+            VStack(spacing: .cafeo(.spacing20)) {
                 ZStack {
                     GeometryReader { geo in
                         self.ratioBox
@@ -41,21 +41,28 @@ struct CafeoRatioView: View {
                         HStack(spacing: 0) {
                             Text("1")
                                 .cafeoText(.ratioLabel, color: .cafeoBeige)
-                                .frame(width: geo.size.width / 2,
-                                       height: geo.size.height)
+                                .frame(
+                                    width: geo.size.width / 2,
+                                    height: geo.size.height
+                                )
                                 .cafeoInnerShadow()
 
                             ZStack {
-                                CafeoRatioSnapCarousel(store: self.store)
+                                CafeoRatioSnapCarousel(
+                                    store: self.store,
+                                    height: geo.size.height
+                                )
                                     .animation(.spring())
                                     .accessibilityElement(children: .ignore)
                                     .accessibility(label: Text("Ratio is 1 to \(viewStore.activeRatioDenominator)"))
 
                                 RatioDenominatorLine()
-                                    .frame(width: geo.size.width / 2 - .cafeo(.scale05))
+                                    .frame(width: geo.size.width / 2 - .cafeo(.spacing2))
                             }
-                            .frame(width: geo.size.width / 2,
-                                   height: geo.size.height - .cafeo(.scale1))
+                            .frame(
+                                width: geo.size.width / 2,
+                                height: geo.size.height - .cafeo(.spacing4)
+                            )
                             .cafeoInnerShadow()
 
                             // Control the tappable area
@@ -67,17 +74,19 @@ struct CafeoRatioView: View {
                 .accessibility(sortPriority: 0)
 
 
-                VStack(spacing: .cafeo(.scale05)) {
+                VStack(spacing: .cafeo(.spacing2)) {
 
+                    // MARK: Ratio Button
                     Button(action: {
-                        viewStore.send(.form(.set(\.showSavedPresetsView, !viewStore.showSavedPresetsView)))
+                        viewStore.send(.form(.set(\.showSavedPresetsView, !viewStore.showSavedPresetsView))
+                        )
                     }, label: {
-                        Text(viewStore.selectedPreset?.name ?? "ratio".localized)
+                        Text(viewStore.selectedPreset?.name ?? "Custom".localized)
                             .kerning(.cafeo(.standard))
                             .cafeoText(.mainLabel, color: .cafeoGray)
                             .textCase(.uppercase)
-                            .accessibility(sortPriority: 1)
                     })
+                            .accessibility(sortPriority: 1)
                     .sheet(
                         isPresented: viewStore.binding(
                             get: \.showSavedPresetsView,
@@ -95,6 +104,7 @@ struct CafeoRatioView: View {
                         )
                     }
 
+                    // MARK: Save Button
                     Button(action: {
                         viewStore.send(.form(.set(\.showSavePresetAlert, !viewStore.showSavePresetAlert)))
                     }, label: {
@@ -117,9 +127,9 @@ struct CafeoRatioView: View {
                                       }))
                                 .frame(width: 0, height: 0, alignment: .center)
 
-                            Text("(Save)".localized)
+                            Text("Save Preset".localized)
                                 .kerning(.cafeo(.standard))
-                                .cafeoText(.mainLabel, color: .cafeoOrange)
+                                .cafeoText(.miniLabel, color: .cafeoOrange)
                                 .textCase(.uppercase)
                         }
                     })
@@ -138,7 +148,7 @@ extension CafeoRatioView {
             HStack {
                 Spacer()
                 Rectangle()
-                    .frame(width: .cafeo(.scale05))
+                    .frame(width: .cafeo(.spacing2))
                     .foregroundColor(.cafeoShadowDark1)
                 Spacer()
             }
@@ -163,6 +173,6 @@ extension CafeoRatioView {
     }
 
     private var ratioBox: RoundedRectangle {
-        RoundedRectangle(cornerRadius: .cafeo(.scale2))
+        RoundedRectangle(cornerRadius: .cafeo(.spacing8))
     }
 }

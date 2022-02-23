@@ -11,7 +11,6 @@ import SwiftUI
 struct CafeoIngredientAmountView: View {
     let store: Store<AppState, AppAction>
 
-    // TODO: - geometry reader?
     var body: some View {
         HStack {
             CafeoCoffeeAmountView(store: self.store)
