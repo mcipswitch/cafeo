@@ -7,9 +7,13 @@
 
 import SwiftUI
 
+extension UIColor {
+    public static let cafeoOrange = UIColor(#colorLiteral(red: 0.8980392157, green: 0.3607843137, blue: 0, alpha: 1))
+}
+
 extension Color {
-    public static let cafeoBackgroundDark = Color(#colorLiteral(red: 0.1215686275, green: 0.1254901961, blue: 0.1450980392, alpha: 1))
-    public static let cafeoBackgroundLight = Color(#colorLiteral(red: 0.1568627451, green: 0.1725490196, blue: 0.2, alpha: 1))
+    public static let primaryBackgroundDark = Color(#colorLiteral(red: 0.1215686275, green: 0.1254901961, blue: 0.1450980392, alpha: 1))
+    public static let primaryBackgroundLight = Color(#colorLiteral(red: 0.1568627451, green: 0.1725490196, blue: 0.2, alpha: 1))
 
     public static let cafeoBeige = Color(#colorLiteral(red: 0.7411764706, green: 0.7333333333, blue: 0.5882352941, alpha: 1))
     public static let cafeoGray = Color(#colorLiteral(red: 0.5647058824, green: 0.5803921569, blue: 0.6274509804, alpha: 1))
@@ -25,11 +29,9 @@ extension Color {
     public static let white03 = Color.white.opacity(0.3)
 }
 
-// TODO: Change Color to CafeoColor
 extension Color {
     /// Returns the corresponding Cafeo color
     static func cafeo(_ color: Color) -> Color {
         return color
-        //return Color(color.rawValue, bundle: Bundle.module)
     }
 }

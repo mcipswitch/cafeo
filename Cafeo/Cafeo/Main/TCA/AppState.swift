@@ -9,8 +9,11 @@ import SwiftUI
 import ComposableArchitecture
 
 struct AppState: Equatable {
+
     var settings: AppState.PresetSettings = .initial
-    var ratioDenominators: [Int] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+
+    // Array of denominators for the ratio.
+    var ratioDenominators: [Int] = Array(1...20)
 
     var currentAction: IngredientAction?
 
@@ -35,8 +38,17 @@ extension AppState {
 }
 
 enum AppAction: Equatable {
-    case coffeeAmountChanged(IngredientAction)
-    case waterAmountChanged(IngredientAction)
+
+    // MARK: Haptics
+    case generateImpact(style: UIImpactFeedbackGenerator.FeedbackStyle)
+
+    case toggleSavePresetAlert
+    case toggleShowSavedPresetsView
+    case setActiveRatioIdx(index: Int)
+    case setLockedIngredient(ingredient: CafeoIngredient)
+
+    case updateCoffeeAmount(IngredientAction)
+    case updateWaterAmount(IngredientAction)
     case unitConversionToggled
 
     case quantityButtonLongPressed(CafeoIngredient, IngredientAction)
@@ -44,13 +56,10 @@ enum AppAction: Equatable {
     case onRelease
 
     case newPresetSelected(CafeoPresetDomain.State)
-    case currentSettingsUpdated(CafeoPresetDomain.State)
+    case updateSettings(CafeoPresetDomain.State)
 
     // MARK: Saved Presets Domain
     case savedPresetsAction(CafeoSavedPresetsDomain.Action)
-
-    // MARK: TCA Concise Actions
-    case form(FormAction<AppState>)
 }
 
 struct AppEnvironment {
@@ -70,7 +79,6 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
     Reducer { state, action, env in
 
         struct TimerID: Hashable {}
-        struct CancelDelayID: Hashable {}
 
         func updateCoffeeAmount() {
             state.settings.coffeeAmount = state.settings.waterAmount * state.ratio
@@ -87,14 +95,34 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
 
         switch action {
 
-        // MARK: Presets
+        case .generateImpact(let style):
+            HapticFeedbackManager.shared.generateImpact(style)
+            return .none
+
+        case .toggleSavePresetAlert:
+            state.showSavePresetAlert.toggle()
+            return .none
+
+        case .toggleShowSavedPresetsView:
+            state.showSavedPresetsView.toggle()
+            return .none
+
+        case .setActiveRatioIdx(let index):
+            state.settings.activeRatioIdx = index
+            state.settings.lockedIngredient == .coffee ? updateWaterAmount() : updateCoffeeAmount()
+            return Effect(value: .generateImpact(style: .medium))
+
+        case .setLockedIngredient(let ingredient):
+            state.settings.lockedIngredient = ingredient
+            return Effect(value: .generateImpact(style: .medium))
 
         case .newPresetSelected(let preset):
-            return Effect(value: AppAction.currentSettingsUpdated(preset))
+            // Add delay so user can see the settings update.
+            return Effect(value: .updateSettings(preset))
                 .delay(for: 0.350, scheduler: env.mainQueue)
                 .eraseToEffect()
 
-        case .currentSettingsUpdated(let preset):
+        case .updateSettings(let preset):
             state.selectedPreset = preset
             state.settings = preset.settings
             return .none
@@ -112,10 +140,9 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
                 convert(&state.settings.waterAmount, fromUnit: .ounces, toUnit: .grams)
             }
 
-            HapticFeedbackManager.shared.generateImpact(.medium)
-            return .none
+            return Effect(value: .generateImpact(style: .medium))
 
-        case let .waterAmountChanged(action):
+        case let .updateWaterAmount(action):
             switch action {
             case .increment:
                 state.settings.waterAmount += 1
@@ -133,10 +160,10 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
             updateCoffeeAmount()
 
             return state.settings.lockedIngredient == .coffee
-                ? Effect(value: .form(.set(\.settings.lockedIngredient, .water)))
-                : .none
+            ? Effect(value: .setLockedIngredient(ingredient: .water))
+            : .none
 
-        case let .coffeeAmountChanged(action):
+        case let .updateCoffeeAmount(action):
             switch action {
             case .increment:
                 state.settings.coffeeAmount += 0.1
@@ -154,74 +181,51 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
             updateWaterAmount()
 
             return state.settings.lockedIngredient == .water
-                ? Effect(value: .form(.set(\.settings.lockedIngredient, .coffee)))
-                : .none
+            ? Effect(value: .setLockedIngredient(ingredient: .coffee))
+            : .none
 
         case .quantityButtonLongPressed(let ingredient, let action):
             return Effect.timer(id: TimerID(), every: 0.1, on: env.mainQueue)
                 .map { _ in
-                    ingredient == .coffee
-                        ? .coffeeAmountChanged(action)
-                        : .waterAmountChanged(action)
+                    ingredient == .coffee ? .updateCoffeeAmount(action) : .updateWaterAmount(action)
                 }
 
         case .quantityLabelDragged(let ingredient, let newAction):
 
             let effect = Effect.timer(id: TimerID(), every: 0.05, on: env.mainQueue)
                 .map { _ in
-                    ingredient == .coffee
-                        ? AppAction.coffeeAmountChanged(newAction)
-                        : AppAction.waterAmountChanged(newAction)
+                    ingredient == .coffee ? AppAction.updateCoffeeAmount(newAction) : AppAction.updateWaterAmount(newAction)
                 }
 
-            /// If there is no current action, update it
+            // If there is no current action, update it.
             guard let currentAction = state.currentAction else {
                 state.currentAction = newAction
                 return effect
             }
 
-            /// If the new action is distinct, cancel the timer and update the effect
+            // If the new action is distinct, cancel the timer and update the effect.
             guard currentAction == newAction else {
                 state.currentAction = newAction
                 return Effect.concatenate(.cancel(id: TimerID()), effect)
             }
 
-            /// Otherwise, do nothing
+            // Otherwise, do nothing
             return .none
 
         case .onRelease:
             state.currentAction = nil
             return .cancel(id: TimerID())
 
-
         // MARK: SavedPresetsDomain
 
         case let .savedPresetsAction(.savePreset(preset)):
-            return Effect(value: AppAction.currentSettingsUpdated(preset))
+            // Add delay so user can see the settings update.
+            return Effect(value: .updateSettings(preset))
                 .delay(for: 0.350, scheduler: env.mainQueue)
                 .eraseToEffect()
 
         case .savedPresetsAction:
-            // Ignore other actions
-            return .none
-
-        // MARK: Form Action
-
-        case .form(\.settings.lockedIngredient):
-            HapticFeedbackManager.shared.generateImpact(.medium)
-            return .none
-
-        case .form(\.settings.activeRatioIdx):
-            state.settings.lockedIngredient == .coffee
-                ? updateWaterAmount()
-                : updateCoffeeAmount()
-
-            HapticFeedbackManager.shared.generateImpact(.medium)
-            return .none
-
-        case .form:
-            // Ignore other actions
-            return .none
+            return .none /* ignore other actions */
         }
     }
-).form(action: /AppAction.form)
+)

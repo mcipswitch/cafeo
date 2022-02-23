@@ -77,19 +77,18 @@ struct CafeoRatioView: View {
                 VStack(spacing: .cafeo(.spacing2)) {
 
                     // MARK: Ratio Button
-                    Button(action: {
-                        viewStore.send(.form(.set(\.showSavedPresetsView, !viewStore.showSavedPresetsView))
-                        )
-                    }, label: {
+                    Button {
+                        viewStore.send(.toggleShowSavedPresetsView)
+                    } label: {
                         Text(viewStore.selectedPreset?.name ?? "Custom".localized)
                             .kerning(.cafeo(.standard))
                             .cafeoText(.mainLabel, color: .cafeoGray)
                             .textCase(.uppercase)
-                    }).accessibility(sortPriority: 1)
+                    }.accessibility(sortPriority: 1)
                         .sheet(
                             isPresented: viewStore.binding(
                                 get: \.showSavedPresetsView,
-                                send: AppAction.form(.set(\.showSavedPresetsView, !viewStore.showSavedPresetsView))
+                                send: .toggleShowSavedPresetsView
                             )) {
                                 CafeoSavedPresetsView(
                                     store: self.store.scope(
@@ -104,26 +103,30 @@ struct CafeoRatioView: View {
                             }
 
                     // MARK: Save Button
-                    Button(action: {
-                        viewStore.send(.form(.set(\.showSavePresetAlert, !viewStore.showSavePresetAlert)))
-                    }, label: {
+                    Button {
+                        viewStore.send(.toggleSavePresetAlert)
+                    } label: {
                         ZStack {
                             EmptyView()
-                                .cafeoAlert(isPresented: viewStore.binding(
-                                    get: \.showSavePresetAlert,
-                                    send: .form(.set(\.showSavePresetAlert, !viewStore.showSavePresetAlert))
-                                ),
-                                .init(title: "Save Preset".localized,
-                                      message: "Give your preset a name.".localized,
-                                      placeholder: "e.g. Morning brew, Espresso...".localized,
-                                      accept: "Save".localized,
-                                      cancel: "Cancel".localized,
-                                      action: { presetName in
-                                        if let name = presetName, !name.isEmpty {
-                                            let preset = CafeoPresetDomain.State(name: name, settings: viewStore.settings)
-                                            viewStore.send(.savedPresetsAction(.savePreset(preset)))
+                                .cafeoAlert(
+                                    isPresented: viewStore.binding(
+                                        get: \.showSavePresetAlert,
+                                        send: .toggleSavePresetAlert
+                                    ),
+                                    CafeoTextAlert(
+                                        title: "Save Preset".localized,
+                                        message: "Give your preset a name.".localized,
+                                        placeholder: "e.g. Morning brew, Espresso...".localized,
+                                        accept: "Save".localized,
+                                        cancel: "Cancel".localized,
+                                        action: { presetName in
+                                            if let name = presetName, !name.isEmpty {
+                                                let preset = CafeoPresetDomain.State(name: name, settings: viewStore.settings)
+                                                viewStore.send(.savedPresetsAction(.savePreset(preset)))
+                                            }
                                         }
-                                      }))
+                                    )
+                                )
                                 .frame(width: 0, height: 0, alignment: .center)
 
                             Text("Save New Preset".localized)
@@ -131,7 +134,7 @@ struct CafeoRatioView: View {
                                 .cafeoText(.miniLabel, color: .cafeoOrange)
                                 .textCase(.uppercase)
                         }
-                    })
+                    }
                 }
             }
             .accessibilityElement(children: .contain)

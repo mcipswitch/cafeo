@@ -62,7 +62,7 @@ struct CafeoRatioSnapCarousel: View {
                         let newIdx = (viewStore.settings.activeRatioIdx - idxOffset)
                             .clamp(low: 0, high: viewStore.ratioDenominators.count - 1)
 
-                        viewStore.send(.form(.set(\.settings.activeRatioIdx, newIdx)))
+                        viewStore.send(.setActiveRatioIdx(index: newIdx))
                     }
                 }
         )

@@ -23,6 +23,7 @@
 		9351034A26156FAA00C8F490 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9351034926156FAA00C8F490 /* String+Extension.swift */; };
 		935103552615711900C8F490 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 935103572615711900C8F490 /* Localizable.strings */; };
 		936BAAB626A0E9DF0089E43B /* CafeoToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936BAAB526A0E9DF0089E43B /* CafeoToggle.swift */; };
+		936E211D27C6E3C1001830E3 /* CafeoRatioViewDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936E211C27C6E3C1001830E3 /* CafeoRatioViewDomain.swift */; };
 		9375EEE825D1B3900003A323 /* CafeoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9375EEE725D1B3900003A323 /* CafeoApp.swift */; };
 		9375EEEC25D1B3910003A323 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9375EEEB25D1B3910003A323 /* Assets.xcassets */; };
 		9375EEEF25D1B3910003A323 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9375EEEE25D1B3910003A323 /* Preview Assets.xcassets */; };
@@ -81,6 +82,7 @@
 		9351035A2615711E00C8F490 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9351035B2615711F00C8F490 /* fr-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CA"; path = "fr-CA.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		936BAAB526A0E9DF0089E43B /* CafeoToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoToggle.swift; sourceTree = "<group>"; };
+		936E211C27C6E3C1001830E3 /* CafeoRatioViewDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoRatioViewDomain.swift; sourceTree = "<group>"; };
 		9375EEE425D1B3900003A323 /* Cafeo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cafeo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9375EEE725D1B3900003A323 /* CafeoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoApp.swift; sourceTree = "<group>"; };
 		9375EEEB25D1B3910003A323 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 				93B4C78125FA752D00E479C1 /* CafeoRatioView.swift */,
 				939DEAE426A3D9460030AE15 /* CafeoSavedPresetsView.swift */,
 				933C9F8826A4BB6C00EDA6B8 /* CafeoSavedPresetsDomain.swift */,
+				936E211C27C6E3C1001830E3 /* CafeoRatioViewDomain.swift */,
 				933C9F8426A4BB4300EDA6B8 /* CafeoPresetDomain.swift */,
 				938D225E262932B6004EFF8D /* CafeoRatioSnapCarousel.swift */,
 				938D224E262922F5004EFF8D /* CafeoIngredientAmountView.swift */,
@@ -440,6 +443,7 @@
 				931BE97925F7DF030030444F /* CafeoIngredientQuantityButton.swift in Sources */,
 				9382B0AF2603C400004DCA4B /* AppState+UserDefaults.swift in Sources */,
 				93B4C76B25F7E53400E479C1 /* Color+Extension.swift in Sources */,
+				936E211D27C6E3C1001830E3 /* CafeoRatioViewDomain.swift in Sources */,
 				9391338226150FC50077757A /* HapticFeedbackManager.swift in Sources */,
 				939DEAE526A3D9460030AE15 /* CafeoSavedPresetsView.swift in Sources */,
 				9382B08626013061004DCA4B /* ViewStore+Extension.swift in Sources */,

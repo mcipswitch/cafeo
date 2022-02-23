@@ -21,12 +21,21 @@ struct CafeoUnitConversionView: View {
         }
     }
 
+    private var conversionLabel: some View {
+        Text("conversion".localized)
+            .kerning(.cafeo(.standard))
+            .cafeoText(.miniLabel, color: .cafeoGray)
+            .textCase(.uppercase)
+    }
+
     var body: some View {
         WithViewStore(self.store.scope(state: ViewState.init)) { viewStore in
             VStack(spacing: .cafeo(.spacing16)) {
-                ConversionText()
+
+                // MARK: Conversion Label
+                self.conversionLabel
                     .padding(.horizontal, .cafeo(.spacing8))
-                    .background(Color.cafeoBackgroundDark)
+                    .background(Color.primaryBackgroundDark)
                     .anchorPreference(
                         key: BoundsPreferenceKey.self,
                         value: .bounds,
@@ -55,6 +64,7 @@ struct CafeoUnitConversionView: View {
                         .accessibility(sortPriority: 1)
                         .accessibility(label: Text("grams"))
 
+                    // MARK: Toggle
                     CafeoToggle(
                         offset: viewStore.binding(
                             get: \.toggleYOffset,
@@ -80,17 +90,9 @@ struct CafeoUnitConversionView: View {
     }
 }
 
-// MARK: - Helpers
+// MARK: - Subviews
 
 extension CafeoUnitConversionView {
-    struct ConversionText: View {
-        var body: some View {
-            Text("conversion".localized)
-                .kerning(.cafeo(.standard))
-                .cafeoText(.miniLabel, color: .cafeoGray)
-                .textCase(.uppercase)
-        }
-    }
 
     struct UnitLabel: View {
         var unit: CafeoUnit

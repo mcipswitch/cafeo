@@ -19,7 +19,7 @@ struct CafeoToggle: View {
                 .frame(width: 100, height: self.toggleHeight)
                 .background(
                     self.togglePill
-                        .fill(Color.cafeoBackgroundLight)
+                        .fill(Color.primaryBackgroundLight)
 
                         // outer shadow and highlight
                         .shadow(color: .cafeoShadowDark1, radius: 4, x: 2, y: 2)

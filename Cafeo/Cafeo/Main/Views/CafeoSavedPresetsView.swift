@@ -23,7 +23,7 @@ struct CafeoSavedPresetsView: View {
         self.newPresetSelected = newPresetSelected
 
         // This is required to set up the list background color
-        UITableView.appearance().backgroundColor = UIColor(.cafeoBackgroundDark)
+        UITableView.appearance().backgroundColor = UIColor(.primaryBackgroundDark)
     }
 
     @State var isEditing = false
@@ -124,7 +124,7 @@ struct CafeoSavedPresetsView: View {
                         }
                     }
                 }
-                .listRowBackground(Color.cafeoBackgroundDark)
+                .listRowBackground(Color.primaryBackgroundDark)
             }
         }
     }

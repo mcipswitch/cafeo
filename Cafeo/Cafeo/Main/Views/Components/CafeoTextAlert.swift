@@ -63,6 +63,7 @@ struct CafeoAlertWrapper<Content: View>: UIViewControllerRepresentable {
             }
 
             let ac = UIAlertController(alert: alert)
+            ac.view.tintColor = .cafeoOrange
             ac.overrideUserInterfaceStyle = .dark
             context.coordinator.alertController = ac
 

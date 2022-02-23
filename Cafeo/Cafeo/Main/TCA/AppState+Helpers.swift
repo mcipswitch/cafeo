@@ -7,41 +7,41 @@
 
 import SwiftUI
 
-// MARK: - FormAction
-
-/// Please see: https://www.pointfree.co/episodes/ep133-concise-forms-bye-bye-boilerplate
-struct FormAction<Root>: Equatable {
-    let keyPath: PartialKeyPath<Root>
-    let value: AnyHashable
-    let setter: (inout Root) -> Void
-
-    init<Value>(
-        _ keyPath: WritableKeyPath<Root, Value>,
-        _ value: Value
-    ) where Value: Hashable {
-        self.keyPath = keyPath
-        self.value = value
-        self.setter = { $0[keyPath: keyPath] = value }
-    }
-
-    static func set<Value>(
-        _ keyPath: WritableKeyPath<Root, Value>,
-        _ value: Value
-    ) -> Self where Value: Hashable {
-        .init(keyPath, value)
-    }
-
-    static func == (lhs: FormAction<Root>, rhs: FormAction<Root>) -> Bool {
-        lhs.keyPath == rhs.keyPath && lhs.value == rhs.value
-    }
-}
-
-func ~= <Root, Value> (
-    keyPath: WritableKeyPath<Root, Value>,
-    formAction: FormAction<Root>
-) -> Bool {
-    formAction.keyPath == keyPath
-}
+//// MARK: - FormAction
+//
+///// Please see: https://www.pointfree.co/episodes/ep133-concise-forms-bye-bye-boilerplate
+//struct FormAction<Root>: Equatable {
+//    let keyPath: PartialKeyPath<Root>
+//    let value: AnyHashable
+//    let setter: (inout Root) -> Void
+//
+//    init<Value>(
+//        _ keyPath: WritableKeyPath<Root, Value>,
+//        _ value: Value
+//    ) where Value: Hashable {
+//        self.keyPath = keyPath
+//        self.value = value
+//        self.setter = { $0[keyPath: keyPath] = value }
+//    }
+//
+//    static func set<Value>(
+//        _ keyPath: WritableKeyPath<Root, Value>,
+//        _ value: Value
+//    ) -> Self where Value: Hashable {
+//        .init(keyPath, value)
+//    }
+//
+//    static func == (lhs: FormAction<Root>, rhs: FormAction<Root>) -> Bool {
+//        lhs.keyPath == rhs.keyPath && lhs.value == rhs.value
+//    }
+//}
+//
+//func ~= <Root, Value> (
+//    keyPath: WritableKeyPath<Root, Value>,
+//    formAction: FormAction<Root>
+//) -> Bool {
+//    formAction.keyPath == keyPath
+//}
 
 // MARK: - Enum Helpers
 
@@ -60,7 +60,7 @@ enum CafeoUnit: String, Codable {
     case ounces
 }
 
-// MARK: - CoffioUnit+Extension
+// MARK: - CafeoUnit + Extension
 
 extension CafeoUnit {
     var abbrString: String {

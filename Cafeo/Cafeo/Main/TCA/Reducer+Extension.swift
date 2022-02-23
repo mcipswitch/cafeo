@@ -8,18 +8,18 @@
 import ComposableArchitecture
 
 extension Reducer {
-    func form(
-        action formAction: CasePath<Action, FormAction<State>>
-    ) -> Self {
-        Self { state, action, environment in
-            guard let formAction = formAction.extract(from: action) else {
-                return self.run(&state, action, environment)
-            }
-
-            formAction.setter(&state)
-            return self.run(&state, action, environment)
-        }
-    }
+//    func form(
+//        action formAction: CasePath<Action, FormAction<State>>
+//    ) -> Self {
+//        Self { state, action, environment in
+//            guard let formAction = formAction.extract(from: action) else {
+//                return self.run(&state, action, environment)
+//            }
+//
+//            formAction.setter(&state)
+//            return self.run(&state, action, environment)
+//        }
+//    }
 
     /// Please see: https://forums.swift.org/t/saving-and-restoring-appstate/39838
     func userDefaults<LocalState>(

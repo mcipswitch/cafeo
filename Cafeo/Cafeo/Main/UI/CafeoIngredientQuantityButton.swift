@@ -28,7 +28,7 @@ struct CafeoIngredientQuantityButton: View {
                 .frame(width: 120, height: 44)
                 .background(
                     RoundedRectangle(cornerRadius: .cafeo(.spacing24), style: .continuous)
-                        .fill(Color.cafeoBackgroundLight)
+                        .fill(Color.primaryBackgroundLight)
                         // highlight and shadow
                         .shadow(color: .cafeoHighlight1, radius: 8, x: -4, y: -4)
                         .shadow(color: .cafeoShadowDark00, radius: 8, x: 4, y: 4)

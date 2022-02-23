@@ -55,7 +55,7 @@ struct CafeoWaterAmountView: View {
 
                 Toggle(isOn: viewStore.binding(
                     get: \.isWaterLocked,
-                    send: .form(.set(\.settings.lockedIngredient, .water))
+                    send: .setLockedIngredient(ingredient: .water)
                 ), label: {
                     Text("Water Amount Lock")
                 })
@@ -80,7 +80,7 @@ extension CafeoWaterAmountView {
     }
 
     private func onTap(_ action: IngredientAction) {
-        self.viewStore.send(.waterAmountChanged(action))
+        self.viewStore.send(.updateWaterAmount(action))
     }
 
     private func onWaterQuantityLabelDrag(_ value: DragGesture.Value) {

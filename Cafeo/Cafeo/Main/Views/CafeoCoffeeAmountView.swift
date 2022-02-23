@@ -42,8 +42,12 @@ struct CafeoCoffeeAmountView: View {
                         .accessibility(value: Text("\(viewStore.settings.unitConversion.rawValue)"))
                         .gesture(
                             DragGesture(minimumDistance: 0)
-                                .onChanged { self.onCoffeeQuantityLabelDrag($0) }
-                                .onEnded { _ in self.onRelease() }
+                                .onChanged {
+                                    self.onCoffeeQuantityLabelDrag($0)
+                                }
+                                .onEnded { _ in
+                                    self.onRelease()
+                                }
                         )
 
                     CafeoIngredientQuantityButton(
@@ -55,7 +59,7 @@ struct CafeoCoffeeAmountView: View {
 
                 Toggle(isOn: viewStore.binding(
                     get: \.isCoffeeLocked,
-                    send: .form(.set(\.settings.lockedIngredient, .coffee))
+                    send: .setLockedIngredient(ingredient: .coffee)
                 ), label: {
                     Text("Coffee Amount")
                 })
@@ -80,7 +84,7 @@ extension CafeoCoffeeAmountView {
     }
 
     private func onTap(_ action: IngredientAction) {
-        self.viewStore.send(.coffeeAmountChanged(action))
+        self.viewStore.send(.updateCoffeeAmount(action))
     }
 
     private func onCoffeeQuantityLabelDrag(_ value: DragGesture.Value) {
