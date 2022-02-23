@@ -12,7 +12,7 @@ struct CafeoUnitConversionView: View {
     let store: Store<AppState, AppAction>
 
     struct ViewState: Equatable {
-        let settings: AppState.CafeoSettings
+        let settings: AppState.PresetSettings
         let toggleYOffset: CGFloat
 
         init(state: AppState) {

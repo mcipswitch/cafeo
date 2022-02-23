@@ -18,7 +18,7 @@ struct CafeoCoffeeAmountView: View {
     }
 
     struct ViewState: Equatable {
-        let settings: AppState.CafeoSettings
+        let settings: AppState.PresetSettings
         let isCoffeeLocked: Bool
 
         init(state: AppState) {

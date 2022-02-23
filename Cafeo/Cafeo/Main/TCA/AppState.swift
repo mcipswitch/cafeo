@@ -9,20 +9,20 @@ import SwiftUI
 import ComposableArchitecture
 
 struct AppState: Equatable {
-    var settings: AppState.CafeoSettings = .initial
+    var settings: AppState.PresetSettings = .initial
     var ratioDenominators: [Int] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
 
     var currentAction: IngredientAction?
 
-    var selectedPreset: CafeoPresetDomain.State?
     var savedPresetsState: CafeoSavedPresetsDomain.State = .empty
+    var selectedPreset: CafeoPresetDomain.State?
 
-    // MARK: CafeoRatioView
     var showSavedPresetsView = false
     var showSavePresetAlert = false
 }
 
 extension AppState {
+    
     var unitConversionToggleYOffset: CGFloat {
         self.settings.unitConversion.toggleYOffset
     }
@@ -89,20 +89,17 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
 
         // MARK: Presets
 
-        case let .newPresetSelected(preset):
+        case .newPresetSelected(let preset):
             return Effect(value: AppAction.currentSettingsUpdated(preset))
                 .delay(for: 0.350, scheduler: env.mainQueue)
                 .eraseToEffect()
 
-        case let .currentSettingsUpdated(preset):
+        case .currentSettingsUpdated(let preset):
             state.selectedPreset = preset
             state.settings = preset.settings
             return .none
 
         case .unitConversionToggled:
-
-            state.selectedPreset = nil
-
             switch state.settings.unitConversion {
             case .grams:
                 state.settings.unitConversion = .ounces
@@ -119,9 +116,6 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
             return .none
 
         case let .waterAmountChanged(action):
-
-            state.selectedPreset = nil
-
             switch action {
             case .increment:
                 state.settings.waterAmount += 1
@@ -143,9 +137,6 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
                 : .none
 
         case let .coffeeAmountChanged(action):
-
-            state.selectedPreset = nil
-
             switch action {
             case .increment:
                 state.settings.coffeeAmount += 0.1
@@ -206,8 +197,9 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
         // MARK: SavedPresetsDomain
 
         case let .savedPresetsAction(.savePreset(preset)):
-            state.selectedPreset = preset
-            return .none
+            return Effect(value: AppAction.currentSettingsUpdated(preset))
+                .delay(for: 0.350, scheduler: env.mainQueue)
+                .eraseToEffect()
 
         case .savedPresetsAction:
             // Ignore other actions
@@ -216,16 +208,10 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
         // MARK: Form Action
 
         case .form(\.settings.lockedIngredient):
-
-            state.selectedPreset = nil
-
             HapticFeedbackManager.shared.generateImpact(.medium)
             return .none
 
         case .form(\.settings.activeRatioIdx):
-
-            state.selectedPreset = nil
-
             state.settings.lockedIngredient == .coffee
                 ? updateWaterAmount()
                 : updateCoffeeAmount()

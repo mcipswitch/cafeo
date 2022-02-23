@@ -31,7 +31,7 @@ struct CafeoSavedPresetsView: View {
     var body: some View {
         WithViewStore(self.store) { viewStore in
             List {
-                Section(header: HeaderText(isEditing: self.$isEditing, text: "Saved presets".localized)) {
+                Section(header: HeaderText(isEditing: self.$isEditing, text: "Saved Presets".localized)) {
                     ForEachStore(
                         self.store.scope(
                             state: \.savedPresets,
@@ -87,12 +87,35 @@ struct CafeoSavedPresetsView: View {
                 }) {
                     HStack {
                         VStack(alignment: .leading, spacing: .cafeo(.spacing8)) {
-                            Text(viewStore.name)
+                            Text(viewStore.name.localizedUppercase)
                                 .kerning(.cafeo(.standard))
                                 .cafeoText(.mainLabel, color: .cafeoGray)
                             Text("1/\(viewStore.settings.activeRatioIdx)")
                                 .kerning(.cafeo(.standard))
-                                .cafeoText(.mainLabel, color: .cafeoGray)
+                                .cafeoText(.miniLabel, color: .cafeoGray)
+
+                            HStack(alignment: .top) {
+                                HStack(alignment: .center) {
+                                    Text("\(viewStore.settings.coffeeAmount.format(to: "%.1f"))\(viewStore.settings.unitConversion.abbrString)")
+                                        .kerning(.cafeo(.standard))
+                                        .cafeoText(.miniLabel, color: .cafeoGray)
+                                    Image(systemName: "circle")
+                                        .resizable().aspectRatio(1, contentMode: .fit)
+                                        .frame(height: .cafeo(.spacing12))
+                                        .tint(.brown)
+                                }
+
+                                HStack(alignment: .center) {
+                                    Text("\(viewStore.settings.waterAmount.format(to: "%.0f"))\(viewStore.settings.unitConversion.abbrString)")
+                                        .kerning(.cafeo(.standard))
+                                        .cafeoText(.miniLabel, color: .cafeoGray)
+                                    Image(systemName: "circle")
+                                        .resizable().aspectRatio(1, contentMode: .fit)
+                                        .frame(height: .cafeo(.spacing12))
+                                        .tint(.blue)
+                                }
+                            }
+
                         }
                         Spacer()
                         if self.isSelected {

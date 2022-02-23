@@ -11,9 +11,9 @@ import Foundation
 struct CafeoPresetDomain {
 
     struct State: Equatable, Identifiable, Codable {
-        var id = UUID()
+        var id = UUID().uuidString
         var name: String
-        var settings: AppState.CafeoSettings
+        var settings: AppState.PresetSettings
     }
 
     enum Action: Equatable {

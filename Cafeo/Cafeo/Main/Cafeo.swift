@@ -13,8 +13,7 @@ struct Cafeo: View {
 
     var body: some View {
         ZStack {
-            BackgroundPattern()
-                .edgesIgnoringSafeArea(.all)
+            BackgroundPattern().ignoresSafeArea()
 
             VStack(spacing: 0) {
                 Spacer()
@@ -40,7 +39,7 @@ struct Cafeo: View {
             }
             .padding(.vertical, .cafeo(.spacing20))
         }
-        .background(Color.cafeoBackgroundDark)
+        .background(Color.cafeoBackgroundDark.ignoresSafeArea())
     }
 }
 

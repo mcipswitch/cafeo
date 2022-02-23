@@ -18,7 +18,7 @@ struct CafeoWaterAmountView: View {
     }
 
     struct ViewState: Equatable {
-        let settings: AppState.CafeoSettings
+        let settings: AppState.PresetSettings
         let isWaterLocked: Bool
 
         init(state: AppState) {

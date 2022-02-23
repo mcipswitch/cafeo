@@ -22,7 +22,6 @@
 		933E9C68260BE0040029D73D /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 933E9C67260BE0040029D73D /* SnapshotTesting */; };
 		9351034A26156FAA00C8F490 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9351034926156FAA00C8F490 /* String+Extension.swift */; };
 		935103552615711900C8F490 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 935103572615711900C8F490 /* Localizable.strings */; };
-		9363C96F26A4FF2F00AEFEF4 /* CafeoIngredientDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9363C96E26A4FF2F00AEFEF4 /* CafeoIngredientDomain.swift */; };
 		936BAAB626A0E9DF0089E43B /* CafeoToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936BAAB526A0E9DF0089E43B /* CafeoToggle.swift */; };
 		9375EEE825D1B3900003A323 /* CafeoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9375EEE725D1B3900003A323 /* CafeoApp.swift */; };
 		9375EEEC25D1B3910003A323 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9375EEEB25D1B3910003A323 /* Assets.xcassets */; };
@@ -81,7 +80,6 @@
 		935103562615711900C8F490 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9351035A2615711E00C8F490 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9351035B2615711F00C8F490 /* fr-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CA"; path = "fr-CA.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		9363C96E26A4FF2F00AEFEF4 /* CafeoIngredientDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoIngredientDomain.swift; sourceTree = "<group>"; };
 		936BAAB526A0E9DF0089E43B /* CafeoToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoToggle.swift; sourceTree = "<group>"; };
 		9375EEE425D1B3900003A323 /* Cafeo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cafeo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9375EEE725D1B3900003A323 /* CafeoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoApp.swift; sourceTree = "<group>"; };
@@ -276,7 +274,6 @@
 				933C9F8426A4BB4300EDA6B8 /* CafeoPresetDomain.swift */,
 				938D225E262932B6004EFF8D /* CafeoRatioSnapCarousel.swift */,
 				938D224E262922F5004EFF8D /* CafeoIngredientAmountView.swift */,
-				9363C96E26A4FF2F00AEFEF4 /* CafeoIngredientDomain.swift */,
 				93B4C79925FD3B0300E479C1 /* CafeoCoffeeAmountView.swift */,
 				93B4C79625FD3AE300E479C1 /* CafeoWaterAmountView.swift */,
 				93B4C77C25FA74E900E479C1 /* CafeoUnitConversionView.swift */,
@@ -443,7 +440,6 @@
 				931BE97925F7DF030030444F /* CafeoIngredientQuantityButton.swift in Sources */,
 				9382B0AF2603C400004DCA4B /* AppState+UserDefaults.swift in Sources */,
 				93B4C76B25F7E53400E479C1 /* Color+Extension.swift in Sources */,
-				9363C96F26A4FF2F00AEFEF4 /* CafeoIngredientDomain.swift in Sources */,
 				9391338226150FC50077757A /* HapticFeedbackManager.swift in Sources */,
 				939DEAE526A3D9460030AE15 /* CafeoSavedPresetsView.swift in Sources */,
 				9382B08626013061004DCA4B /* ViewStore+Extension.swift in Sources */,
@@ -590,7 +586,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -645,7 +641,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -665,7 +661,7 @@
 				DEVELOPMENT_TEAM = A5L5S7CN8F;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Cafeo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -687,7 +683,7 @@
 				DEVELOPMENT_TEAM = A5L5S7CN8F;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Cafeo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

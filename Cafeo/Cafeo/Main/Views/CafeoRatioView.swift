@@ -12,7 +12,7 @@ struct CafeoRatioView: View {
     let store: Store<AppState, AppAction>
 
     struct ViewState: Equatable {
-        let settings: AppState.CafeoSettings
+        let settings: AppState.PresetSettings
         let selectedPreset: CafeoPresetDomain.State?
         let activeRatioDenominator: Int
         let showSavedPresetsView: Bool
@@ -85,24 +85,23 @@ struct CafeoRatioView: View {
                             .kerning(.cafeo(.standard))
                             .cafeoText(.mainLabel, color: .cafeoGray)
                             .textCase(.uppercase)
-                    })
-                            .accessibility(sortPriority: 1)
-                    .sheet(
-                        isPresented: viewStore.binding(
-                            get: \.showSavedPresetsView,
-                            send: AppAction.form(.set(\.showSavedPresetsView, !viewStore.showSavedPresetsView))
-                        )) {
-                        CafeoSavedPresetsView(
-                            store: self.store.scope(
-                                state: \.savedPresetsState,
-                                action: { .savedPresetsAction($0) }
-                            ),
-                            selectedPreset: viewStore.selectedPreset,
-                            newPresetSelected: {
-                                viewStore.send(.newPresetSelected($0))
+                    }).accessibility(sortPriority: 1)
+                        .sheet(
+                            isPresented: viewStore.binding(
+                                get: \.showSavedPresetsView,
+                                send: AppAction.form(.set(\.showSavedPresetsView, !viewStore.showSavedPresetsView))
+                            )) {
+                                CafeoSavedPresetsView(
+                                    store: self.store.scope(
+                                        state: \.savedPresetsState,
+                                        action: { .savedPresetsAction($0) }
+                                    ),
+                                    selectedPreset: viewStore.selectedPreset,
+                                    newPresetSelected: {
+                                        viewStore.send(.newPresetSelected($0))
+                                    }
+                                )
                             }
-                        )
-                    }
 
                     // MARK: Save Button
                     Button(action: {
@@ -127,7 +126,7 @@ struct CafeoRatioView: View {
                                       }))
                                 .frame(width: 0, height: 0, alignment: .center)
 
-                            Text("Save Preset".localized)
+                            Text("Save New Preset".localized)
                                 .kerning(.cafeo(.standard))
                                 .cafeoText(.miniLabel, color: .cafeoOrange)
                                 .textCase(.uppercase)

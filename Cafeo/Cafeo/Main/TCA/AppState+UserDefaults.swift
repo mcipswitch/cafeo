@@ -11,29 +11,40 @@ import Foundation
 extension AppState {
 
     public struct UserDefaultsState: Equatable, Codable {
-        var settings: CafeoSettings
+        var settings: PresetSettings
         var savedPresets: IdentifiedArrayOf<CafeoPresetDomain.State>
+        var selectedPreset: CafeoPresetDomain.State?
 
-        public init(settings: CafeoSettings, savedPresets: IdentifiedArrayOf<CafeoPresetDomain.State>) {
+        public init(
+            settings: PresetSettings,
+            savedPresets: IdentifiedArrayOf<CafeoPresetDomain.State>,
+            selectedPreset: CafeoPresetDomain.State?
+        ) {
             self.settings = settings
             self.savedPresets = savedPresets
+            self.selectedPreset = selectedPreset
         }
     }
 
     var userDefaults: UserDefaultsState {
-        UserDefaultsState(settings: self.settings, savedPresets: self.savedPresetsState.savedPresets)
+        UserDefaultsState(
+            settings: self.settings,
+            savedPresets: self.savedPresetsState.savedPresets,
+            selectedPreset: self.selectedPreset
+        )
     }
 
     public init(userDefaults: UserDefaultsState? = nil) {
         self.settings = userDefaults?.settings ?? .initial
         self.savedPresetsState.savedPresets = userDefaults?.savedPresets ?? []
+        self.selectedPreset = userDefaults?.selectedPreset
     }
 }
 
 extension AppState {
 
-    /// Cherry pick what `CafeoSettings` to save to User Defaults
-    public struct CafeoSettings: Equatable, Codable {
+    /// Cherry pick what `PresetSettings` to save to User Defaults
+    public struct PresetSettings: Equatable, Codable {
         var coffeeAmount: Double
         var waterAmount: Double
         var lockedIngredient: CafeoIngredient
@@ -55,7 +66,13 @@ extension AppState {
         }
 
         static var initial: Self {
-            return .init(coffeeAmount: 15.625, waterAmount: 250, lockedIngredient: .coffee, unitConversion: .grams, activeRatioIdx: 15)
+            return .init(
+                coffeeAmount: 15.625,
+                waterAmount: 250,
+                lockedIngredient: .coffee,
+                unitConversion: .grams,
+                activeRatioIdx: 15
+            )
         }
     }
 }
