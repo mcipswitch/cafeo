@@ -25,7 +25,7 @@ struct AppState: Equatable {
 }
 
 extension AppState {
-    
+
     var unitConversionToggleYOffset: CGFloat {
         self.settings.unitConversion.toggleYOffset
     }
@@ -43,7 +43,7 @@ enum AppAction: Equatable {
     case generateImpact(style: UIImpactFeedbackGenerator.FeedbackStyle)
 
     case toggleSavePresetAlert
-    case toggleShowSavedPresetsView
+    case showSavedPresetsView(Bool)
     case setActiveRatioIdx(index: Int)
     case setLockedIngredient(ingredient: CafeoIngredient)
 
@@ -51,15 +51,17 @@ enum AppAction: Equatable {
     case updateWaterAmount(IngredientAction)
     case unitConversionToggled
 
+    // MARK: Ingredient Quantity
     case quantityButtonLongPressed(CafeoIngredient, IngredientAction)
     case quantityLabelDragged(CafeoIngredient, IngredientAction)
     case onRelease
 
-    case newPresetSelected(CafeoPresetDomain.State)
     case updateSettings(CafeoPresetDomain.State)
 
     // MARK: Saved Presets Domain
     case savedPresetsAction(CafeoSavedPresetsDomain.Action)
+
+    case none
 }
 
 struct AppEnvironment {
@@ -95,6 +97,9 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
 
         switch action {
 
+        case .none:
+            return .none
+
         case .generateImpact(let style):
             HapticFeedbackManager.shared.generateImpact(style)
             return .none
@@ -103,8 +108,8 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
             state.showSavePresetAlert.toggle()
             return .none
 
-        case .toggleShowSavedPresetsView:
-            state.showSavedPresetsView.toggle()
+        case .showSavedPresetsView(let value):
+            state.showSavedPresetsView = value
             return .none
 
         case .setActiveRatioIdx(let index):
@@ -115,12 +120,6 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
         case .setLockedIngredient(let ingredient):
             state.settings.lockedIngredient = ingredient
             return Effect(value: .generateImpact(style: .medium))
-
-        case .newPresetSelected(let preset):
-            // Add delay so user can see the settings update.
-            return Effect(value: .updateSettings(preset))
-                .delay(for: 0.350, scheduler: env.mainQueue)
-                .eraseToEffect()
 
         case .updateSettings(let preset):
             state.selectedPreset = preset
@@ -219,6 +218,14 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
         // MARK: SavedPresetsDomain
 
         case let .savedPresetsAction(.savePreset(preset)):
+            // Add delay so user can see the settings update.
+            return Effect(value: .updateSettings(preset))
+                .delay(for: 0.350, scheduler: env.mainQueue)
+                .eraseToEffect()
+
+        case .savedPresetsAction(.newPresetSelected(let preset)):
+            state.showSavedPresetsView = false
+
             // Add delay so user can see the settings update.
             return Effect(value: .updateSettings(preset))
                 .delay(for: 0.350, scheduler: env.mainQueue)

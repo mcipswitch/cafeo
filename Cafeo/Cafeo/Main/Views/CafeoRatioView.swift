@@ -78,7 +78,7 @@ struct CafeoRatioView: View {
 
                     // MARK: Ratio Button
                     Button {
-                        viewStore.send(.toggleShowSavedPresetsView)
+                        viewStore.send(.showSavedPresetsView(true))
                     } label: {
                         Text(viewStore.selectedPreset?.name ?? "Custom".localized)
                             .kerning(.cafeo(.standard))
@@ -88,17 +88,17 @@ struct CafeoRatioView: View {
                         .sheet(
                             isPresented: viewStore.binding(
                                 get: \.showSavedPresetsView,
-                                send: .toggleShowSavedPresetsView
-                            )) {
+                                send: .none
+                            ),
+                            onDismiss: {
+                                viewStore.send(.showSavedPresetsView(false))
+                            }) {
                                 CafeoSavedPresetsView(
                                     store: self.store.scope(
                                         state: \.savedPresetsState,
                                         action: { .savedPresetsAction($0) }
                                     ),
-                                    selectedPreset: viewStore.selectedPreset,
-                                    newPresetSelected: {
-                                        viewStore.send(.newPresetSelected($0))
-                                    }
+                                    selectedPreset: viewStore.selectedPreset
                                 )
                             }
 

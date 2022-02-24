@@ -22,6 +22,7 @@ struct CafeoSavedPresetsDomain {
         case savePreset(CafeoPresetDomain.State)
         case deletePreset(IndexSet)
         case movePreset(IndexSet, Int)
+        case newPresetSelected(preset: CafeoPresetDomain.State)
 
         case presetAction(id: CafeoPresetDomain.State.ID, action: CafeoPresetDomain.Action)
     }
@@ -38,6 +39,7 @@ struct CafeoSavedPresetsDomain {
 
             Reducer.init { state, action, env in
                 switch action {
+
                 case let .movePreset(source, destination):
                     state.savedPresets.move(fromOffsets: source, toOffset: destination)
                     return .none
@@ -50,8 +52,10 @@ struct CafeoSavedPresetsDomain {
                     state.savedPresets.remove(atOffsets: indexSet)
                     return .none
 
+                case .newPresetSelected:
+                    return .none
+
                 case .presetAction:
-                    // There are no actions right now
                     return .none
                 }
             }

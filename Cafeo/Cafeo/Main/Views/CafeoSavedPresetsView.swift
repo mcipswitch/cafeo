@@ -11,16 +11,13 @@ import SwiftUI
 struct CafeoSavedPresetsView: View {
     let store: Store<CafeoSavedPresetsDomain.State, CafeoSavedPresetsDomain.Action>
     var selectedPreset: CafeoPresetDomain.State?
-    var newPresetSelected: (CafeoPresetDomain.State) -> Void
 
-    @Environment(\.presentationMode) var presentation
+    @Environment(\.dismiss) private var dismiss
 
     init(store: Store<CafeoSavedPresetsDomain.State, CafeoSavedPresetsDomain.Action>,
-         selectedPreset: CafeoPresetDomain.State?,
-         newPresetSelected: @escaping (CafeoPresetDomain.State) -> Void) {
+         selectedPreset: CafeoPresetDomain.State?) {
         self.store = store
         self.selectedPreset = selectedPreset
-        self.newPresetSelected = newPresetSelected
 
         // This is required to set up the list background color
         UITableView.appearance().backgroundColor = UIColor(.primaryBackgroundDark)
@@ -36,15 +33,20 @@ struct CafeoSavedPresetsView: View {
                         self.store.scope(
                             state: \.savedPresets,
                             action: CafeoSavedPresetsDomain.Action.presetAction(id:action:))) { presetStore in
-
-                        // TODO: fix the isSelected bool
-                        CafeoPresetLabel(store: presetStore, isSelected: self.selectedPreset == ViewStore(presetStore).state) {
-                            self.presentation.wrappedValue.dismiss()
-                            self.newPresetSelected($0)
-                        }
-                    }
-                    .onMove { viewStore.send(.movePreset($0, $1)) }
-                    .onDelete { viewStore.send(.deletePreset($0)) }
+                                CafeoPresetLabel(
+                                    store: presetStore,
+                                    isSelected: self.selectedPreset == ViewStore(presetStore).state,
+                                    onSelect: { preset in
+                                        viewStore.send(.newPresetSelected(preset: preset))
+                                    }
+                                )
+                            }
+                            .onMove {
+                                viewStore.send(.movePreset($0, $1))
+                            }
+                            .onDelete {
+                                viewStore.send(.deletePreset($0))
+                            }
                 }
             }
             .environment(\.editMode, .constant(self.isEditing ? .active : .inactive))
@@ -78,12 +80,12 @@ struct CafeoSavedPresetsView: View {
     private struct CafeoPresetLabel: View {
         let store: Store<CafeoPresetDomain.State, CafeoPresetDomain.Action>
         var isSelected: Bool
-        var action: (CafeoPresetDomain.State) -> Void
+        var onSelect: (CafeoPresetDomain.State) -> Void
 
         var body: some View {
             WithViewStore(self.store) { viewStore in
                 Button(action: {
-                    self.action(viewStore.state)
+                    self.onSelect(viewStore.state)
                 }) {
                     HStack {
                         VStack(alignment: .leading, spacing: .cafeo(.spacing8)) {
