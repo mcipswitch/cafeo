@@ -3,48 +3,37 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9314108F26A08C7400B48044 /* Font+CafeoExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9314108E26A08C7400B48044 /* Font+CafeoExtensions.swift */; };
 		9314109326A08DC500B48044 /* CafeoFontStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9314109226A08DC500B48044 /* CafeoFontStyle.swift */; };
-		9314109B26A09C2500B48044 /* ButtonStyle+CafeoExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9314109A26A09C2500B48044 /* ButtonStyle+CafeoExtensions.swift */; };
-		9314109F26A0A14C00B48044 /* CafeoSpacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9314109E26A0A14C00B48044 /* CafeoSpacing.swift */; };
-		931410A526A0A2F200B48044 /* Image+CafeoExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931410A426A0A2F200B48044 /* Image+CafeoExtensions.swift */; };
+		9314109B26A09C2500B48044 /* CafeoButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9314109A26A09C2500B48044 /* CafeoButtonStyle.swift */; };
+		931410A526A0A2F200B48044 /* CafeoIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931410A426A0A2F200B48044 /* CafeoIcon.swift */; };
 		931BE97925F7DF030030444F /* CafeoIngredientQuantityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931BE97825F7DF030030444F /* CafeoIngredientQuantityButton.swift */; };
 		932102A4260BDE14001FDE3B /* CafeoUnitConversionViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9382B08926028B7F004DCA4B /* CafeoUnitConversionViewTests.swift */; };
 		932102A5260BDE14001FDE3B /* CafeoCoffeeAmountViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9382B09326028C17004DCA4B /* CafeoCoffeeAmountViewTests.swift */; };
 		932102A7260BDE14001FDE3B /* CafeoWaterAmountViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9382B08F26028BC6004DCA4B /* CafeoWaterAmountViewTests.swift */; };
-		933C9F8126A490A800EDA6B8 /* CafeoTextAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933C9F8026A490A800EDA6B8 /* CafeoTextAlert.swift */; };
-		933C9F8526A4BB4300EDA6B8 /* CafeoPresetDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933C9F8426A4BB4300EDA6B8 /* CafeoPresetDomain.swift */; };
-		933C9F8926A4BB6C00EDA6B8 /* CafeoSavedPresetsDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933C9F8826A4BB6C00EDA6B8 /* CafeoSavedPresetsDomain.swift */; };
-		933E9C68260BE0040029D73D /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 933E9C67260BE0040029D73D /* SnapshotTesting */; };
-		9351034A26156FAA00C8F490 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9351034926156FAA00C8F490 /* String+Extension.swift */; };
 		935103552615711900C8F490 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 935103572615711900C8F490 /* Localizable.strings */; };
+		9369F3332A0818B500858E3F /* CommonStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9369F3322A0818B500858E3F /* CommonStrings.swift */; };
 		936BAAB626A0E9DF0089E43B /* CafeoToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936BAAB526A0E9DF0089E43B /* CafeoToggle.swift */; };
-		936E211D27C6E3C1001830E3 /* CafeoIngredientQuantityButtonDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936E211C27C6E3C1001830E3 /* CafeoIngredientQuantityButtonDomain.swift */; };
 		936E212027C9DDFD001830E3 /* AppState+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936E211E27C9DDE5001830E3 /* AppState+Mock.swift */; };
-		936E212227CA6D5A001830E3 /* CafeoKerning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936E212127CA6D5A001830E3 /* CafeoKerning.swift */; };
 		9375EEE825D1B3900003A323 /* CafeoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9375EEE725D1B3900003A323 /* CafeoApp.swift */; };
 		9375EEEC25D1B3910003A323 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9375EEEB25D1B3910003A323 /* Assets.xcassets */; };
 		9375EEEF25D1B3910003A323 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9375EEEE25D1B3910003A323 /* Preview Assets.xcassets */; };
 		937FD32525D2115E0048C406 /* CafeoLockToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937FD32425D2115E0048C406 /* CafeoLockToggleStyle.swift */; };
 		937FD32B25D216160048C406 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 937FD32A25D216160048C406 /* ComposableArchitecture */; };
 		937FD32E25D216830048C406 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937FD32D25D216830048C406 /* AppState.swift */; };
-		9382B08626013061004DCA4B /* ViewStore+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9382B08526013061004DCA4B /* ViewStore+Extension.swift */; };
 		9382B0AF2603C400004DCA4B /* AppState+UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9382B0AE2603C400004DCA4B /* AppState+UserDefaults.swift */; };
 		938D224F262922F5004EFF8D /* CafeoIngredientAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938D224E262922F5004EFF8D /* CafeoIngredientAmountView.swift */; };
 		938D225F262932B6004EFF8D /* CafeoRatioSnapCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938D225E262932B6004EFF8D /* CafeoRatioSnapCarousel.swift */; };
 		938E9CFF262933DC003FF53A /* CafeoRatioViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9382B09D26029A58004DCA4B /* CafeoRatioViewTests.swift */; };
 		9391338226150FC50077757A /* HapticFeedbackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9391338126150FC50077757A /* HapticFeedbackManager.swift */; };
-		939DEAE526A3D9460030AE15 /* CafeoSavedPresetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 939DEAE426A3D9460030AE15 /* CafeoSavedPresetsView.swift */; };
 		93A9FDEA25F6911D006D5428 /* CafeoMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A9FDE925F6911D006D5428 /* CafeoMainView.swift */; };
-		93B4C76B25F7E53400E479C1 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C76A25F7E53400E479C1 /* Color+Extension.swift */; };
 		93B4C77425F90FC900E479C1 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C77325F90FC900E479C1 /* View+Extension.swift */; };
 		93B4C77D25FA74E900E479C1 /* CafeoUnitConversionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C77C25FA74E900E479C1 /* CafeoUnitConversionView.swift */; };
 		93B4C78225FA752D00E479C1 /* CafeoRatioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C78125FA752D00E479C1 /* CafeoRatioView.swift */; };
-		93B4C78B25FD38D500E479C1 /* Gradient+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C78A25FD38D500E479C1 /* Gradient+Extension.swift */; };
+		93B4C78B25FD38D500E479C1 /* CommonAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C78A25FD38D500E479C1 /* CommonAssets.swift */; };
 		93B4C78F25FD3A8C00E479C1 /* BoundsPreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C78E25FD3A8C00E479C1 /* BoundsPreferenceKey.swift */; };
 		93B4C79725FD3AE300E479C1 /* CafeoWaterAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C79625FD3AE300E479C1 /* CafeoWaterAmountView.swift */; };
 		93B4C79A25FD3B0300E479C1 /* CafeoCoffeeAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C79925FD3B0300E479C1 /* CafeoCoffeeAmountView.swift */; };
@@ -55,6 +44,7 @@
 		93C8399625F6979F00C66710 /* Orbitron-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 93C8399325F6979F00C66710 /* Orbitron-Medium.ttf */; };
 		93C8399725F6979F00C66710 /* Exo2-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 93C8399425F6979F00C66710 /* Exo2-SemiBold.ttf */; };
 		93C8399825F6979F00C66710 /* Exo2-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 93C8399525F6979F00C66710 /* Exo2-MediumItalic.ttf */; };
+		93FC57F12A082927009E3359 /* CommonConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FC57F02A082927009E3359 /* CommonConstants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,33 +58,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		9314108E26A08C7400B48044 /* Font+CafeoExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+CafeoExtensions.swift"; sourceTree = "<group>"; };
 		9314109226A08DC500B48044 /* CafeoFontStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoFontStyle.swift; sourceTree = "<group>"; };
-		9314109A26A09C2500B48044 /* ButtonStyle+CafeoExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ButtonStyle+CafeoExtensions.swift"; sourceTree = "<group>"; };
-		9314109E26A0A14C00B48044 /* CafeoSpacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoSpacing.swift; sourceTree = "<group>"; };
-		931410A426A0A2F200B48044 /* Image+CafeoExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+CafeoExtensions.swift"; sourceTree = "<group>"; };
+		9314109A26A09C2500B48044 /* CafeoButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoButtonStyle.swift; sourceTree = "<group>"; };
+		931410A426A0A2F200B48044 /* CafeoIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoIcon.swift; sourceTree = "<group>"; };
 		931BE97825F7DF030030444F /* CafeoIngredientQuantityButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoIngredientQuantityButton.swift; sourceTree = "<group>"; };
 		93210295260BDDFB001FDE3B /* CafeoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CafeoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		93210299260BDDFB001FDE3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		933C9F8026A490A800EDA6B8 /* CafeoTextAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoTextAlert.swift; sourceTree = "<group>"; };
-		933C9F8426A4BB4300EDA6B8 /* CafeoPresetDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoPresetDomain.swift; sourceTree = "<group>"; };
-		933C9F8826A4BB6C00EDA6B8 /* CafeoSavedPresetsDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoSavedPresetsDomain.swift; sourceTree = "<group>"; };
-		9351034926156FAA00C8F490 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		935103562615711900C8F490 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9351035A2615711E00C8F490 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9351035B2615711F00C8F490 /* fr-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CA"; path = "fr-CA.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		9360DCC42A08301700F3062D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9369F3322A0818B500858E3F /* CommonStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonStrings.swift; sourceTree = "<group>"; };
 		936BAAB526A0E9DF0089E43B /* CafeoToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoToggle.swift; sourceTree = "<group>"; };
-		936E211C27C6E3C1001830E3 /* CafeoIngredientQuantityButtonDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoIngredientQuantityButtonDomain.swift; sourceTree = "<group>"; };
 		936E211E27C9DDE5001830E3 /* AppState+Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppState+Mock.swift"; sourceTree = "<group>"; };
-		936E212127CA6D5A001830E3 /* CafeoKerning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoKerning.swift; sourceTree = "<group>"; };
 		9375EEE425D1B3900003A323 /* Cafeo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cafeo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9375EEE725D1B3900003A323 /* CafeoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoApp.swift; sourceTree = "<group>"; };
 		9375EEEB25D1B3910003A323 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9375EEEE25D1B3910003A323 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		9375EEF025D1B3910003A323 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		937FD32425D2115E0048C406 /* CafeoLockToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoLockToggleStyle.swift; sourceTree = "<group>"; };
 		937FD32D25D216830048C406 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
-		9382B08526013061004DCA4B /* ViewStore+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewStore+Extension.swift"; sourceTree = "<group>"; };
 		9382B08926028B7F004DCA4B /* CafeoUnitConversionViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoUnitConversionViewTests.swift; sourceTree = "<group>"; };
 		9382B08F26028BC6004DCA4B /* CafeoWaterAmountViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoWaterAmountViewTests.swift; sourceTree = "<group>"; };
 		9382B09326028C17004DCA4B /* CafeoCoffeeAmountViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoCoffeeAmountViewTests.swift; sourceTree = "<group>"; };
@@ -103,13 +84,11 @@
 		938D224E262922F5004EFF8D /* CafeoIngredientAmountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoIngredientAmountView.swift; sourceTree = "<group>"; };
 		938D225E262932B6004EFF8D /* CafeoRatioSnapCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoRatioSnapCarousel.swift; sourceTree = "<group>"; };
 		9391338126150FC50077757A /* HapticFeedbackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticFeedbackManager.swift; sourceTree = "<group>"; };
-		939DEAE426A3D9460030AE15 /* CafeoSavedPresetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoSavedPresetsView.swift; sourceTree = "<group>"; };
 		93A9FDE925F6911D006D5428 /* CafeoMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoMainView.swift; sourceTree = "<group>"; };
-		93B4C76A25F7E53400E479C1 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		93B4C77325F90FC900E479C1 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		93B4C77C25FA74E900E479C1 /* CafeoUnitConversionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoUnitConversionView.swift; sourceTree = "<group>"; };
 		93B4C78125FA752D00E479C1 /* CafeoRatioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoRatioView.swift; sourceTree = "<group>"; };
-		93B4C78A25FD38D500E479C1 /* Gradient+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Gradient+Extension.swift"; sourceTree = "<group>"; };
+		93B4C78A25FD38D500E479C1 /* CommonAssets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonAssets.swift; sourceTree = "<group>"; };
 		93B4C78E25FD3A8C00E479C1 /* BoundsPreferenceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundsPreferenceKey.swift; sourceTree = "<group>"; };
 		93B4C79625FD3AE300E479C1 /* CafeoWaterAmountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoWaterAmountView.swift; sourceTree = "<group>"; };
 		93B4C79925FD3B0300E479C1 /* CafeoCoffeeAmountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoCoffeeAmountView.swift; sourceTree = "<group>"; };
@@ -120,6 +99,7 @@
 		93C8399325F6979F00C66710 /* Orbitron-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Orbitron-Medium.ttf"; sourceTree = "<group>"; };
 		93C8399425F6979F00C66710 /* Exo2-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo2-SemiBold.ttf"; sourceTree = "<group>"; };
 		93C8399525F6979F00C66710 /* Exo2-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo2-MediumItalic.ttf"; sourceTree = "<group>"; };
+		93FC57F02A082927009E3359 /* CommonConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,7 +107,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				933E9C68260BE0040029D73D /* SnapshotTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,34 +121,64 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		931BE97B25F7DF090030444F /* UI */ = {
-			isa = PBXGroup;
-			children = (
-				931BE97825F7DF030030444F /* CafeoIngredientQuantityButton.swift */,
-			);
-			path = UI;
-			sourceTree = "<group>";
-		};
 		93210296260BDDFB001FDE3B /* CafeoTests */ = {
 			isa = PBXGroup;
 			children = (
-				936E211E27C9DDE5001830E3 /* AppState+Mock.swift */,
+				9369F3302A08179300858E3F /* Mocks */,
 				9382B09D26029A58004DCA4B /* CafeoRatioViewTests.swift */,
 				9382B09326028C17004DCA4B /* CafeoCoffeeAmountViewTests.swift */,
 				9382B08F26028BC6004DCA4B /* CafeoWaterAmountViewTests.swift */,
 				9382B08926028B7F004DCA4B /* CafeoUnitConversionViewTests.swift */,
-				93210299260BDDFB001FDE3B /* Info.plist */,
 			);
 			path = CafeoTests;
 			sourceTree = "<group>";
 		};
-		936BAAB926A0EA130089E43B /* Components */ = {
+		9360DCCA2A092B2900F3062D /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				936BAAB526A0E9DF0089E43B /* CafeoToggle.swift */,
-				933C9F8026A490A800EDA6B8 /* CafeoTextAlert.swift */,
+				93B4C77325F90FC900E479C1 /* View+Extension.swift */,
 			);
-			path = Components;
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		9369F3302A08179300858E3F /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				936E211E27C9DDE5001830E3 /* AppState+Mock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		9369F3312A0817F700858E3F /* DesignKit */ = {
+			isa = PBXGroup;
+			children = (
+				9314109A26A09C2500B48044 /* CafeoButtonStyle.swift */,
+				9314109226A08DC500B48044 /* CafeoFontStyle.swift */,
+				931410A426A0A2F200B48044 /* CafeoIcon.swift */,
+				9360DCCA2A092B2900F3062D /* Extensions */,
+			);
+			path = DesignKit;
+			sourceTree = "<group>";
+		};
+		9369F3352A081F3000858E3F /* CafeoIngredientAmountView */ = {
+			isa = PBXGroup;
+			children = (
+				938D224E262922F5004EFF8D /* CafeoIngredientAmountView.swift */,
+				93B4C79925FD3B0300E479C1 /* CafeoCoffeeAmountView.swift */,
+				93B4C79625FD3AE300E479C1 /* CafeoWaterAmountView.swift */,
+				931BE97825F7DF030030444F /* CafeoIngredientQuantityButton.swift */,
+				937FD32725D211670048C406 /* ToggleStyle */,
+			);
+			path = CafeoIngredientAmountView;
+			sourceTree = "<group>";
+		};
+		9369F3362A081F4000858E3F /* CafeoRatioView */ = {
+			isa = PBXGroup;
+			children = (
+				938D225E262932B6004EFF8D /* CafeoRatioSnapCarousel.swift */,
+				93B4C78125FA752D00E479C1 /* CafeoRatioView.swift */,
+			);
+			path = CafeoRatioView;
 			sourceTree = "<group>";
 		};
 		9375EEDB25D1B3900003A323 = {
@@ -193,11 +202,15 @@
 		9375EEE625D1B3900003A323 /* Cafeo */ = {
 			isa = PBXGroup;
 			children = (
-				937FD33025D216C00048C406 /* Main */,
-				9375EEEB25D1B3910003A323 /* Assets.xcassets */,
+				93FC57EE2A082888009E3359 /* Common */,
+				9369F3312A0817F700858E3F /* DesignKit */,
+				9376F42226291E1C00BEABAB /* TCA */,
+				93B4C77F25FA751A00E479C1 /* Views */,
+				93B4C76D25F7E53700E479C1 /* Extensions */,
+				9391338526150FC90077757A /* Managers */,
 				93C8399A25F697A400C66710 /* Resources */,
-				9375EEF025D1B3910003A323 /* Info.plist */,
 				9375EEED25D1B3910003A323 /* Preview Content */,
+				9360DCC42A08301700F3062D /* Info.plist */,
 			);
 			path = Cafeo;
 			sourceTree = "<group>";
@@ -214,36 +227,19 @@
 			isa = PBXGroup;
 			children = (
 				937FD32D25D216830048C406 /* AppState.swift */,
-				9382B0AE2603C400004DCA4B /* AppState+UserDefaults.swift */,
 				93B4C7AB25FDC47C00E479C1 /* AppState+Helpers.swift */,
+				9382B0AE2603C400004DCA4B /* AppState+UserDefaults.swift */,
 				93B4C7AE25FDC4A700E479C1 /* Reducer+Extension.swift */,
-				9382B08526013061004DCA4B /* ViewStore+Extension.swift */,
 			);
 			path = TCA;
 			sourceTree = "<group>";
 		};
-		937FD32725D211670048C406 /* Styles */ = {
+		937FD32725D211670048C406 /* ToggleStyle */ = {
 			isa = PBXGroup;
 			children = (
 				937FD32425D2115E0048C406 /* CafeoLockToggleStyle.swift */,
 			);
-			path = Styles;
-			sourceTree = "<group>";
-		};
-		937FD33025D216C00048C406 /* Main */ = {
-			isa = PBXGroup;
-			children = (
-				9376F42226291E1C00BEABAB /* TCA */,
-				9375EEE725D1B3900003A323 /* CafeoApp.swift */,
-				93A9FDE925F6911D006D5428 /* CafeoMainView.swift */,
-				93B4C77F25FA751A00E479C1 /* Views */,
-				93B4C76D25F7E53700E479C1 /* Extensions */,
-				93B4C79125FD3A8F00E479C1 /* Keys */,
-				9391338526150FC90077757A /* Managers */,
-				937FD32725D211670048C406 /* Styles */,
-				931BE97B25F7DF090030444F /* UI */,
-			);
-			path = Main;
+			path = ToggleStyle;
 			sourceTree = "<group>";
 		};
 		9391338526150FC90077757A /* Managers */ = {
@@ -257,18 +253,8 @@
 		93B4C76D25F7E53700E479C1 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				93B4C7A825FDC2BD00E479C1 /* Double+Extension.swift */,
-				9314109A26A09C2500B48044 /* ButtonStyle+CafeoExtensions.swift */,
-				9314109226A08DC500B48044 /* CafeoFontStyle.swift */,
-				9314109E26A0A14C00B48044 /* CafeoSpacing.swift */,
-				936E212127CA6D5A001830E3 /* CafeoKerning.swift */,
-				93B4C76A25F7E53400E479C1 /* Color+Extension.swift */,
 				93B4C7A225FD62E300E479C1 /* Comparable+Extension.swift */,
-				9314108E26A08C7400B48044 /* Font+CafeoExtensions.swift */,
-				93B4C78A25FD38D500E479C1 /* Gradient+Extension.swift */,
-				931410A426A0A2F200B48044 /* Image+CafeoExtensions.swift */,
-				9351034926156FAA00C8F490 /* String+Extension.swift */,
-				93B4C77325F90FC900E479C1 /* View+Extension.swift */,
+				93B4C7A825FDC2BD00E479C1 /* Double+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -276,27 +262,21 @@
 		93B4C77F25FA751A00E479C1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				93B4C78125FA752D00E479C1 /* CafeoRatioView.swift */,
-				939DEAE426A3D9460030AE15 /* CafeoSavedPresetsView.swift */,
-				933C9F8826A4BB6C00EDA6B8 /* CafeoSavedPresetsDomain.swift */,
-				936E211C27C6E3C1001830E3 /* CafeoIngredientQuantityButtonDomain.swift */,
-				933C9F8426A4BB4300EDA6B8 /* CafeoPresetDomain.swift */,
-				938D225E262932B6004EFF8D /* CafeoRatioSnapCarousel.swift */,
-				938D224E262922F5004EFF8D /* CafeoIngredientAmountView.swift */,
-				93B4C79925FD3B0300E479C1 /* CafeoCoffeeAmountView.swift */,
-				93B4C79625FD3AE300E479C1 /* CafeoWaterAmountView.swift */,
-				93B4C77C25FA74E900E479C1 /* CafeoUnitConversionView.swift */,
-				936BAAB926A0EA130089E43B /* Components */,
+				9375EEE725D1B3900003A323 /* CafeoApp.swift */,
+				93A9FDE925F6911D006D5428 /* CafeoMainView.swift */,
+				9369F3352A081F3000858E3F /* CafeoIngredientAmountView */,
+				9369F3362A081F4000858E3F /* CafeoRatioView */,
+				93FC57ED2A082714009E3359 /* CafeoUnitConversionView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		93B4C79125FD3A8F00E479C1 /* Keys */ = {
+		93B4C79125FD3A8F00E479C1 /* PreferenceKey */ = {
 			isa = PBXGroup;
 			children = (
 				93B4C78E25FD3A8C00E479C1 /* BoundsPreferenceKey.swift */,
 			);
-			path = Keys;
+			path = PreferenceKey;
 			sourceTree = "<group>";
 		};
 		93C8399225F6979F00C66710 /* Fonts */ = {
@@ -318,6 +298,27 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		93FC57ED2A082714009E3359 /* CafeoUnitConversionView */ = {
+			isa = PBXGroup;
+			children = (
+				93B4C77C25FA74E900E479C1 /* CafeoUnitConversionView.swift */,
+				936BAAB526A0E9DF0089E43B /* CafeoToggle.swift */,
+				93B4C79125FD3A8F00E479C1 /* PreferenceKey */,
+			);
+			path = CafeoUnitConversionView;
+			sourceTree = "<group>";
+		};
+		93FC57EE2A082888009E3359 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				93B4C78A25FD38D500E479C1 /* CommonAssets.swift */,
+				93FC57F02A082927009E3359 /* CommonConstants.swift */,
+				9369F3322A0818B500858E3F /* CommonStrings.swift */,
+				9375EEEB25D1B3910003A323 /* Assets.xcassets */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -336,7 +337,6 @@
 			);
 			name = CafeoTests;
 			packageProductDependencies = (
-				933E9C67260BE0040029D73D /* SnapshotTesting */,
 			);
 			productName = CafeoTests;
 			productReference = 93210295260BDDFB001FDE3B /* CafeoTests.xctest */;
@@ -381,7 +381,7 @@
 				};
 			};
 			buildConfigurationList = 9375EEDF25D1B3900003A323 /* Build configuration list for PBXProject "Cafeo" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -393,7 +393,6 @@
 			mainGroup = 9375EEDB25D1B3900003A323;
 			packageReferences = (
 				937FD32925D216160048C406 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
-				933E9C66260BE0040029D73D /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
 			);
 			productRefGroup = 9375EEE525D1B3900003A323 /* Products */;
 			projectDirPath = "";
@@ -445,40 +444,31 @@
 			buildActionMask = 2147483647;
 			files = (
 				93B4C7A325FD62E400E479C1 /* Comparable+Extension.swift in Sources */,
-				93B4C78B25FD38D500E479C1 /* Gradient+Extension.swift in Sources */,
+				93B4C78B25FD38D500E479C1 /* CommonAssets.swift in Sources */,
 				931BE97925F7DF030030444F /* CafeoIngredientQuantityButton.swift in Sources */,
 				9382B0AF2603C400004DCA4B /* AppState+UserDefaults.swift in Sources */,
-				93B4C76B25F7E53400E479C1 /* Color+Extension.swift in Sources */,
-				936E211D27C6E3C1001830E3 /* CafeoIngredientQuantityButtonDomain.swift in Sources */,
 				9391338226150FC50077757A /* HapticFeedbackManager.swift in Sources */,
-				939DEAE526A3D9460030AE15 /* CafeoSavedPresetsView.swift in Sources */,
-				9382B08626013061004DCA4B /* ViewStore+Extension.swift in Sources */,
 				93A9FDEA25F6911D006D5428 /* CafeoMainView.swift in Sources */,
 				937FD32525D2115E0048C406 /* CafeoLockToggleStyle.swift in Sources */,
+				93FC57F12A082927009E3359 /* CommonConstants.swift in Sources */,
 				9314109326A08DC500B48044 /* CafeoFontStyle.swift in Sources */,
 				937FD32E25D216830048C406 /* AppState.swift in Sources */,
 				93B4C7AC25FDC47C00E479C1 /* AppState+Helpers.swift in Sources */,
 				938D224F262922F5004EFF8D /* CafeoIngredientAmountView.swift in Sources */,
 				93B4C7A925FDC2BD00E479C1 /* Double+Extension.swift in Sources */,
 				93B4C78F25FD3A8C00E479C1 /* BoundsPreferenceKey.swift in Sources */,
-				936E212227CA6D5A001830E3 /* CafeoKerning.swift in Sources */,
-				933C9F8126A490A800EDA6B8 /* CafeoTextAlert.swift in Sources */,
 				93B4C7AF25FDC4A700E479C1 /* Reducer+Extension.swift in Sources */,
-				9314109B26A09C2500B48044 /* ButtonStyle+CafeoExtensions.swift in Sources */,
+				9314109B26A09C2500B48044 /* CafeoButtonStyle.swift in Sources */,
 				93B4C78225FA752D00E479C1 /* CafeoRatioView.swift in Sources */,
+				9369F3332A0818B500858E3F /* CommonStrings.swift in Sources */,
 				938D225F262932B6004EFF8D /* CafeoRatioSnapCarousel.swift in Sources */,
-				9351034A26156FAA00C8F490 /* String+Extension.swift in Sources */,
 				93B4C79A25FD3B0300E479C1 /* CafeoCoffeeAmountView.swift in Sources */,
 				93B4C77425F90FC900E479C1 /* View+Extension.swift in Sources */,
-				9314109F26A0A14C00B48044 /* CafeoSpacing.swift in Sources */,
 				936BAAB626A0E9DF0089E43B /* CafeoToggle.swift in Sources */,
 				93B4C77D25FA74E900E479C1 /* CafeoUnitConversionView.swift in Sources */,
-				933C9F8926A4BB6C00EDA6B8 /* CafeoSavedPresetsDomain.swift in Sources */,
-				933C9F8526A4BB4300EDA6B8 /* CafeoPresetDomain.swift in Sources */,
 				93B4C79725FD3AE300E479C1 /* CafeoWaterAmountView.swift in Sources */,
-				9314108F26A08C7400B48044 /* Font+CafeoExtensions.swift in Sources */,
 				936E212027C9DDFD001830E3 /* AppState+Mock.swift in Sources */,
-				931410A526A0A2F200B48044 /* Image+CafeoExtensions.swift in Sources */,
+				931410A526A0A2F200B48044 /* CafeoIcon.swift in Sources */,
 				9375EEE825D1B3900003A323 /* CafeoApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -513,7 +503,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A5L5S7CN8F;
-				INFOPLIST_FILE = CafeoTests/Info.plist;
+				INFOPLIST_FILE = Cafeo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -533,7 +523,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A5L5S7CN8F;
-				INFOPLIST_FILE = CafeoTests/Info.plist;
+				INFOPLIST_FILE = Cafeo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -598,7 +588,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -653,7 +643,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -673,7 +663,7 @@
 				DEVELOPMENT_TEAM = A5L5S7CN8F;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Cafeo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -695,7 +685,7 @@
 				DEVELOPMENT_TEAM = A5L5S7CN8F;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Cafeo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -740,14 +730,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		933E9C66260BE0040029D73D /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.8.2;
-			};
-		};
 		937FD32925D216160048C406 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
@@ -759,11 +741,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		933E9C67260BE0040029D73D /* SnapshotTesting */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 933E9C66260BE0040029D73D /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
-			productName = SnapshotTesting;
-		};
 		937FD32A25D216160048C406 /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 937FD32925D216160048C406 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
