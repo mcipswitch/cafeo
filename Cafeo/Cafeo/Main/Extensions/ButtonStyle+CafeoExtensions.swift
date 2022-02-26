@@ -18,9 +18,11 @@ extension CafeoButtonColor {
     // MARK: Label Color
 
     static var quantityStepper: Self {
-        return .init(standard: .cafeoGray,
-                     pressed: .cafeoOrange,
-                     disabled: .cafeoGray)
+        return .init(
+            standard: .cafeoGray,
+            pressed: .cafeoOrange,
+            disabled: .cafeoGray
+        )
     }
 
     // MARK: Background Color

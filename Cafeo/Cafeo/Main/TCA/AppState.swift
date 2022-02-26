@@ -8,6 +8,23 @@
 import SwiftUI
 import ComposableArchitecture
 
+extension AppState {
+
+    static var mock: Self {
+        .init(
+            settings: .initial,
+            ratioDenominators: Array(1...20),
+            currentAction: nil,
+            showSavedPresetsView: false,
+            showSavePresetAlert: false,
+            coffeeAmountState: .mock,
+            waterAmountState: .mock,
+            savedPresetsState: .empty,
+            selectedPreset: nil
+        )
+    }
+}
+
 struct AppState: Equatable {
 
     var settings: AppState.PresetSettings = .initial
@@ -17,11 +34,17 @@ struct AppState: Equatable {
 
     var currentAction: IngredientAction?
 
-    var savedPresetsState: CafeoSavedPresetsDomain.State = .empty
-    var selectedPreset: CafeoPresetDomain.State?
-
     var showSavedPresetsView = false
     var showSavePresetAlert = false
+
+    var coffeeAmountState: CafeoCoffeeAmountDomain.State = .init(amount: 0, isLocked: false)
+    var waterAmountState: CafeoWaterAmountDomain.State = .init(amount: 0, isLocked: false)
+
+    // MARK: CafeoSavedPresetsDomain
+    var savedPresetsState: CafeoSavedPresetsDomain.State = .empty
+
+    // MARK: CafeoPresetDomain
+    var selectedPreset: CafeoPresetDomain.State?
 }
 
 extension AppState {
@@ -58,7 +81,10 @@ enum AppAction: Equatable {
 
     case updateSettings(CafeoPresetDomain.State)
 
-    // MARK: Saved Presets Domain
+    case coffeeAction(CafeoCoffeeAmountDomain.Action)
+    case waterAction(CafeoWaterAmountDomain.Action)
+
+    // MARK: CafeoSavedPresetsDomain
     case savedPresetsAction(CafeoSavedPresetsDomain.Action)
 
     case none
@@ -215,7 +241,7 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
             state.currentAction = nil
             return .cancel(id: TimerID())
 
-        // MARK: SavedPresetsDomain
+            // MARK: - CafeoSavedPresetsDomain
 
         case let .savedPresetsAction(.savePreset(preset)):
             // Add delay so user can see the settings update.
@@ -233,6 +259,58 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
 
         case .savedPresetsAction:
             return .none /* ignore other actions */
+
+            // MARK: - Coffee Domain
+
+        case .coffeeAction(let action):
+            switch action {
+            case .lockAmount:
+                return Effect(value: .setLockedIngredient(ingredient: .coffee))
+
+            case .quantityStepperAction(let action):
+                switch action {
+                case .onPress(step: let step):
+                    return Effect(value: .quantityButtonLongPressed(.coffee, step))
+
+                case .onRelease:
+                    return Effect(value: .onRelease)
+
+                case .onTap(step: let step):
+                    return Effect(value: .updateCoffeeAmount(step))
+                }
+
+            case .amountDragged(let step):
+                return Effect(value: .quantityLabelDragged(.coffee, step))
+
+            case .onDragRelease:
+                return Effect(value: .onRelease)
+            }
+
+            // MARK: - Water Domain
+
+        case .waterAction(let action):
+            switch action {
+            case .lockAmount:
+                return Effect(value: .setLockedIngredient(ingredient: .water))
+
+            case .quantityStepperAction(let action):
+                switch action {
+                case .onPress(step: let step):
+                    return Effect(value: .quantityButtonLongPressed(.water, step))
+
+                case .onRelease:
+                    return Effect(value: .onRelease)
+
+                case .onTap(step: let step):
+                    return Effect(value: .updateWaterAmount(step))
+                }
+
+            case .amountDragged(let step):
+                return Effect(value: .quantityLabelDragged(.water, step))
+
+            case .onDragRelease:
+                return Effect(value: .onRelease)
+            }
         }
     }
 )

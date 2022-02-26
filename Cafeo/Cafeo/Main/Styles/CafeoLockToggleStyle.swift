@@ -11,7 +11,7 @@ struct CafeoLockToggleStyle: ToggleStyle {
     func makeBody(configuration: Configuration) -> some View {
         return
             Image.cafeo(configuration.isOn ? .lock : .lockOpen)
-            .cafeoText(.adjustButtonLabel, color: configuration.isOn ? .cafeoOrange : .cafeoGray)
+            .cafeoText(.quantityStepperLabel, color: configuration.isOn ? .cafeoOrange : .cafeoGray)
             .accessibility(value: configuration.isOn ? Text("locked") : Text("unlocked"))
             .contentShape(Rectangle())
             .onTapGesture {

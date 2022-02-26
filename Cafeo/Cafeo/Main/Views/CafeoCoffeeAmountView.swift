@@ -8,27 +8,61 @@
 import ComposableArchitecture
 import SwiftUI
 
-struct CafeoCoffeeAmountView: View {
-    let store: Store<AppState, AppAction>
-    @ObservedObject var viewStore: ViewStore<AppState, AppAction>
+// MARK: - CafeoCoffeeAmountDomain
 
-    init(store: Store<AppState, AppAction>) {
-        self.store = store
-        self.viewStore = ViewStore(store)
-    }
+struct CafeoCoffeeAmountDomain {
 
-    struct ViewState: Equatable {
-        let settings: AppState.PresetSettings
-        let isCoffeeLocked: Bool
+    struct State: Equatable {
+        var amount: Double
+        var isLocked: Bool
 
-        init(state: AppState) {
-            self.settings = state.settings
-            self.isCoffeeLocked = state.settings.lockedIngredient == .coffee
+        var quantityStepperState: CafeoIngredientQuantityButtonDomain.State = .init()
+
+        static var mock: Self {
+            .init(
+                amount: 15.625,
+                isLocked: false,
+                quantityStepperState: .init()
+            )
         }
     }
 
+    enum Action: Equatable {
+        case lockAmount
+        case amountDragged(IngredientAction)
+        case onDragRelease
+
+        case quantityStepperAction(CafeoIngredientQuantityButtonDomain.Action)
+    }
+
+    struct Environment {}
+
+    static let reducer: Reducer<State, Action, Environment> = {
+        return .combine(
+            CafeoIngredientQuantityButtonDomain.reducer.pullback(
+                state: \CafeoCoffeeAmountDomain.State.quantityStepperState,
+                action: /CafeoCoffeeAmountDomain.Action.quantityStepperAction,
+                environment: { _ in .init() }
+            ),
+
+            Reducer.init { state, action, env in
+                switch action {
+                case .lockAmount,
+                        .amountDragged,
+                        .onDragRelease,
+                        .quantityStepperAction:
+                    return .none
+                }
+            }
+        )
+    }()
+}
+
+struct CafeoCoffeeAmountView: View {
+    let store: Store<CafeoCoffeeAmountDomain.State, CafeoCoffeeAmountDomain.Action>
+
     var body: some View {
-        WithViewStore(self.store.scope(state: ViewState.init)) { viewStore in
+        WithViewStore(self.store) { viewStore in
             VStack(spacing: .cafeo(.spacing16)) {
                 Text(CafeoIngredient.coffee.rawValue.localized)
                     .kerning(.cafeo(.standard))
@@ -36,65 +70,46 @@ struct CafeoCoffeeAmountView: View {
                     .textCase(.uppercase)
 
                 VStack(spacing: .cafeo(.spacing10)) {
-                    Text(viewStore.settings.coffeeAmount.format(to: "%.1f"))
+                    Text(viewStore.amount.format(to: "%.1f"))
                         .kerning(.cafeo(.large))
                         .cafeoText(.digitalLabel, color: .cafeoBeige)
-                        .accessibility(value: Text("\(viewStore.settings.unitConversion.rawValue)"))
+//                        .accessibility(value: Text("\(viewStore.settings.unitConversion.rawValue)"))
                         .gesture(
                             DragGesture(minimumDistance: 0)
-                                .onChanged {
-                                    self.onCoffeeQuantityLabelDrag($0)
+                                .onChanged { drag in
+                                    let dragDistance = drag.translation.width
+                                    if dragDistance == 0 {
+                                        viewStore.send(.onDragRelease)
+                                    } else if dragDistance > 0 {
+                                        viewStore.send(.amountDragged(.increment))
+                                    } else if dragDistance < 0 {
+                                        viewStore.send(.amountDragged(.decrement))
+                                    }
                                 }
                                 .onEnded { _ in
-                                    self.onRelease()
+                                    viewStore.send(.onDragRelease)
                                 }
                         )
 
                     CafeoIngredientQuantityButton(
-                        onPress: self.onPress(_:),
-                        onRelease: self.onRelease,
-                        onTap: self.onTap(_:)
+                        store: self.store.scope(
+                            state: \.quantityStepperState,
+                            action: { .quantityStepperAction($0) }
+                        )
                     )
                 }
 
                 Toggle(isOn: viewStore.binding(
-                    get: \.isCoffeeLocked,
-                    send: .setLockedIngredient(ingredient: .coffee)
+                    get: \.isLocked,
+                    send: .lockAmount
                 ), label: {
-                    Text("Coffee Amount")
+                    Text("Coffee Amount Lock")
                 })
                 .toggleStyle(CafeoLockToggleStyle())
                 .labelsHidden()
                 .padding(.top, .cafeo(.spacing20))
                 .accessibility(label: Text("Coffee Amount"))
             }
-        }
-    }
-}
-
-// MARK: - Helpers
-
-extension CafeoCoffeeAmountView {
-    private func onPress(_ action: IngredientAction) {
-        self.viewStore.send(.quantityButtonLongPressed(.coffee, action))
-    }
-
-    private func onRelease() {
-        self.viewStore.send(.onRelease)
-    }
-
-    private func onTap(_ action: IngredientAction) {
-        self.viewStore.send(.updateCoffeeAmount(action))
-    }
-
-    private func onCoffeeQuantityLabelDrag(_ value: DragGesture.Value) {
-
-        let dragDistance = value.translation.width
-
-        if dragDistance > 0 {
-            self.viewStore.send(.quantityLabelDragged(.coffee, .increment))
-        } else if dragDistance < 0 {
-            self.viewStore.send(.quantityLabelDragged(.coffee, .decrement))
         }
     }
 }

@@ -5,63 +5,66 @@
 //  Created by Priscilla Ip on 2021-03-09.
 //
 
+import ComposableArchitecture
 import SwiftUI
 
 struct CafeoIngredientQuantityButton: View {
-    var onPress: (IngredientAction) -> Void
-    var onRelease: () -> Void
-    var onTap: (IngredientAction) -> Void
+    let store: Store<CafeoIngredientQuantityButtonDomain.State, CafeoIngredientQuantityButtonDomain.Action>
 
     var body: some View {
-
-        ZStack {
-            RoundedRectangle(cornerRadius: .cafeo(.spacing24), style: .continuous)
-                .stroke(LinearGradient.cafeoIngredientAmountButtonStroke, lineWidth: 2)
-                .clipShape(RoundedRectangle(cornerRadius: .cafeo(.spacing24), style: .continuous))
-                .frame(width: 120, height: 44)
-                .background(
-                    RoundedRectangle(cornerRadius: .cafeo(.spacing24), style: .continuous)
-                        .fill(Color.primaryBackgroundLight)
+        WithViewStore(self.store) { viewStore in
+            ZStack {
+                RoundedRectangle(cornerRadius: .cafeo(.spacing24), style: .continuous)
+                    .stroke(LinearGradient.cafeoIngredientAmountButtonStroke, lineWidth: 2)
+                    .clipShape(RoundedRectangle(cornerRadius: .cafeo(.spacing24), style: .continuous))
+                    .frame(width: 120, height: 44)
+                    .background(
+                        RoundedRectangle(cornerRadius: .cafeo(.spacing24), style: .continuous)
+                            .fill(Color.primaryBackgroundLight)
                         // highlight and shadow
-                        .shadow(color: .cafeoHighlight1, radius: 8, x: -4, y: -4)
-                        .shadow(color: .cafeoShadowDark00, radius: 8, x: 4, y: 4)
-                )
-                .overlay(
-                    HStack(spacing: 0) {
-                        CafeoQuantityStepperButton(Image.cafeo(.minus)) {
-                            self.onTap(.decrement)
-                        }
-                        .simultaneousGesture(
-                            LongPressGesture(minimumDuration: 0)
-                                .onEnded { _ in self.onPress(.decrement) }
-                        )
-                        .simultaneousGesture(
-                            DragGesture(minimumDistance: 0)
-                                .onEnded { _ in
-                                    // This is triggered by the end of a long press gesture
-                                    self.onRelease()
-                                }
-                        )
+                            .shadow(color: .cafeoHighlight1, radius: 8, x: -4, y: -4)
+                            .shadow(color: .cafeoShadowDark00, radius: 8, x: 4, y: 4)
+                    )
+                    .overlay(
+                        HStack(spacing: 0) {
+                            CafeoQuantityStepperButton(Image.cafeo(.minus)) {
+                                viewStore.send(.onTap(step: .decrement))
+                            }
+                            .simultaneousGesture(
+                                LongPressGesture(minimumDuration: 0)
+                                    .onEnded { _ in
+                                        viewStore.send(.onPress(step: .decrement))
+                                    }
+                            )
+                            .simultaneousGesture(
+                                DragGesture(minimumDistance: 0)
+                                    .onEnded { _ in
+                                        // This is triggered by the end of a long press gesture
+                                        viewStore.send(.onRelease)
+                                    }
+                            )
 
-                        Spacer()
+                            Spacer()
 
-                        CafeoQuantityStepperButton(Image.cafeo(.plus)) {
-                            self.onTap(.increment)
-                        }
-                        .simultaneousGesture(
-                            LongPressGesture(minimumDuration: 0)
-                                .onEnded { _ in self.onPress(.increment) }
-                        )
-                        .simultaneousGesture(
-                            DragGesture(minimumDistance: 0)
-                                .onEnded { _ in
-                                    // This is triggered by the end of a long press gesture
-                                    self.onRelease()
-                                }
-                        )
-                    }
-                    .padding(.horizontal, .cafeo(.spacing6))
-                )
+                            CafeoQuantityStepperButton(Image.cafeo(.plus)) {
+                                viewStore.send(.onTap(step: .increment))
+                            }
+                            .simultaneousGesture(
+                                LongPressGesture(minimumDuration: 0)
+                                    .onEnded { _ in
+                                        viewStore.send(.onPress(step: .increment))
+                                    }
+                            )
+                            .simultaneousGesture(
+                                DragGesture(minimumDistance: 0)
+                                    .onEnded { _ in
+                                        // This is triggered by the end of a long press gesture
+                                        viewStore.send(.onRelease)
+                                    }
+                            )
+                        }.padding(.horizontal, .cafeo(.spacing6))
+                    )
+            }
         }
     }
 }
@@ -84,7 +87,7 @@ struct CafeoQuantityStepperButton: View {
         .contentShape(Rectangle())
         .cafeoButtonStyle(
             .init(
-                labelFont: .adjustButtonLabel,
+                labelFont: .quantityStepperLabel,
                 labelColor: .quantityStepper,
                 backgroundColor: .clear,
                 size: CGSize(width: 44, height: 44)

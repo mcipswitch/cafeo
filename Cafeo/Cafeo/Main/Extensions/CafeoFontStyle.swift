@@ -117,7 +117,7 @@ extension CafeoFontStyle {
     }
 
     /// +, -
-    static var adjustButtonLabel: Self {
+    static var quantityStepperLabel: Self {
         return .init(font: .orbitronMedium, size: 16, isNumeric: false)
     }
 }

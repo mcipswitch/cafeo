@@ -55,6 +55,8 @@ struct CafeoSavedPresetsDomain {
                 case .newPresetSelected:
                     return .none
 
+                    // MARK: CafeoPresetDomain
+
                 case .presetAction:
                     return .none
                 }

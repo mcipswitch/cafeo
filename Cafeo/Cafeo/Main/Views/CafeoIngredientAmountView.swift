@@ -12,13 +12,35 @@ struct CafeoIngredientAmountView: View {
     let store: Store<AppState, AppAction>
 
     var body: some View {
-        HStack {
-            CafeoCoffeeAmountView(store: self.store)
-                .frame(width: UIScreen.main.bounds.width / 2)
-                .accessibility(sortPriority: 1)
-            CafeoWaterAmountView(store: self.store)
-                .frame(width: UIScreen.main.bounds.width / 2)
-                .accessibility(sortPriority: 0)
+        WithViewStore(self.store) { viewStore in
+            HStack {
+
+                // MARK: Coffee
+                CafeoCoffeeAmountView(
+                    store: self.store.scope(
+                        state: {
+                            .init(
+                                amount: $0.settings.coffeeAmount,
+                                isLocked: $0.settings.lockedIngredient == .coffee
+                            )
+                        },
+                        action: { .coffeeAction($0) }
+                    )
+                ).frame(width: UIScreen.main.bounds.width / 2).accessibility(sortPriority: 1)
+
+                // MARK: Water
+                CafeoWaterAmountView(
+                    store: self.store.scope(
+                        state: {
+                            .init(
+                                amount: $0.settings.waterAmount,
+                                isLocked: $0.settings.lockedIngredient == .water
+                            )
+                        },
+                        action: { .waterAction($0) }
+                    )
+                ).frame(width: UIScreen.main.bounds.width / 2).accessibility(sortPriority: 0)
+            }
         }
     }
 }

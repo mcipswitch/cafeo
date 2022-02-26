@@ -71,7 +71,7 @@ extension AppState {
                 waterAmount: 250,
                 lockedIngredient: .coffee,
                 unitConversion: .grams,
-                activeRatioIdx: 15
+                activeRatioIdx: 16
             )
         }
     }
