@@ -20,10 +20,10 @@ struct CafeoIngredientQuantityButton: View {
                     .frame(width: 120, height: 44)
                     .background(
                         RoundedRectangle(cornerRadius: .cafeo(.spacing24), style: .continuous)
-                            .fill(Color.primaryBackgroundLight)
+                            .fill(Color.cafeoPrimaryBackgroundLight)
                         // highlight and shadow
-                            .shadow(color: .cafeoHighlight1, radius: 8, x: -4, y: -4)
-                            .shadow(color: .cafeoShadowDark00, radius: 8, x: 4, y: 4)
+                            .shadow(color: .cafeoHighlightLight, radius: 8, x: -4, y: -4)
+                            .shadow(color: .cafeoShadowDark, radius: 8, x: 4, y: 4)
                     )
                     .overlay(
                         HStack(spacing: 0) {

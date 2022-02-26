@@ -21,7 +21,7 @@ extension LinearGradient {
     )
 
     static let cafeoIngredientAmountButtonStroke = LinearGradient(
-        gradient: Gradient(colors: [.primaryBackgroundDark, Color(#colorLiteral(red: 0.1960784314, green: 0.2117647059, blue: 0.231372549, alpha: 1))]),
+        gradient: Gradient(colors: [.cafeoPrimaryBackgroundDark, Color(#colorLiteral(red: 0.1960784314, green: 0.2117647059, blue: 0.231372549, alpha: 1))]),
         startPoint: .topLeading,
         endPoint: .bottomTrailing
     )

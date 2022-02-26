@@ -1,5 +1,5 @@
 //
-//  CGFloat+CafeoExtensions.swift
+//  CafeoSpacing.swift
 //  Cafeo
 //
 //  Created by Priscilla Ip on 2021-07-15.
@@ -23,20 +23,9 @@ enum CafeoSpacing: CGFloat, RawRepresentable {
     case spacing48 = 48
 }
 
-/// Represents a kerning constant within the Cafeo iOS design system
-enum CafeoKerning: CGFloat, RawRepresentable {
-    case standard = 1.5
-    case large = 4.0
-}
-
 extension CGFloat {
     /// Returns the corresponding Cafeo spacing
     static func cafeo(_ spacing: CafeoSpacing) -> CGFloat {
         spacing.rawValue
-    }
-
-    /// Returns the corresponding Cafeo kerning
-    static func cafeo(_ kerning: CafeoKerning) -> CGFloat {
-        kerning.rawValue
     }
 }

@@ -9,7 +9,8 @@ import Foundation
 import SwiftUI
 
 extension Font {
-    /// Creates the font corresponding to the Cafeo style
+
+    /// Creates the font corresponding to the Cafeo style.
     static func cafeo(_ style: CafeoFontStyle) -> Font {
         switch style.font {
         case .orbitronMedium:

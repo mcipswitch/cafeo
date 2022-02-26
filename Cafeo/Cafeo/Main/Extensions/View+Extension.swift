@@ -8,7 +8,7 @@
 import SwiftUI
 
 extension View {
-    func cafeoInnerShadow(_ color: Color = .cafeoShadowDark1,
+    func cafeoInnerShadow(_ color: Color = .cafeoShadowLight,
                           lineWidth: CGFloat = 4,
                           blurRadius: CGFloat = 10) -> some View {
         self.overlay(

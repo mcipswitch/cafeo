@@ -33,7 +33,7 @@ struct CafeoRatioView: View {
                 ZStack {
                     GeometryReader { geo in
                         self.ratioBox
-                            .stroke(Color.cafeoShadowDark1, lineWidth: 2)
+                            .stroke(Color.cafeoShadowLight, lineWidth: 2)
                             .background(self.ratioBox.fill(LinearGradient.cafeoChrome))
 
                         Divider()
@@ -151,7 +151,7 @@ extension CafeoRatioView {
                 Spacer()
                 Rectangle()
                     .frame(width: .cafeo(.spacing2))
-                    .foregroundColor(.cafeoShadowDark1)
+                    .foregroundColor(.cafeoShadowLight)
                 Spacer()
             }
         }
@@ -162,12 +162,12 @@ extension CafeoRatioView {
             ZStack {
                 Rectangle()
                     .foregroundColor(.cafeoOrange)
-                    .shadow(color: .black05, radius: 2, x: 0, y: 1)
+                    .shadow(color: .cafeoBlack05, radius: 2, x: 0, y: 1)
 
                 // highlight
                 Rectangle()
                     .frame(height: 1)
-                    .foregroundColor(.white03)
+                    .foregroundColor(.cafeoWhite03)
                     .blur(radius: 1)
             }
             .frame(height: 2)

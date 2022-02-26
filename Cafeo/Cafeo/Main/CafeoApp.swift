@@ -20,7 +20,7 @@ struct CafeoApp: App {
 
     var body: some Scene {
         WindowGroup {
-            Cafeo(store: Store(
+            CafeoMainView(store: Store(
                 initialState: AppState(userDefaults: self.userDefaults),
                 reducer: appReducer
                     .debug()

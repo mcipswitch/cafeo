@@ -63,7 +63,7 @@ struct CafeoAlertWrapper<Content: View>: UIViewControllerRepresentable {
             }
 
             let ac = UIAlertController(alert: alert)
-            ac.view.tintColor = .cafeoOrange
+            ac.view.tintColor = UIColor.cafeoOrange
             ac.overrideUserInterfaceStyle = .dark
             context.coordinator.alertController = ac
 
@@ -77,10 +77,11 @@ struct CafeoAlertWrapper<Content: View>: UIViewControllerRepresentable {
 }
 
 
-// MARK: -
+// MARK: - UIAlertController + Extension
 
 extension UIAlertController {
-    /// Initializes a `UIAlertController` based on the `CafeoTextAlert`
+
+    /// Initializes a `UIAlertController` based on the `CafeoTextAlert`.
     convenience init(alert: CafeoTextAlert) {
         self.init(title: alert.title, message: alert.message, preferredStyle: .alert)
 

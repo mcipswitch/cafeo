@@ -35,7 +35,7 @@ struct CafeoUnitConversionView: View {
                 // MARK: Conversion Label
                 self.conversionLabel
                     .padding(.horizontal, .cafeo(.spacing8))
-                    .background(Color.primaryBackgroundDark)
+                    .background(Color.cafeoPrimaryBackgroundDark)
                     .anchorPreference(
                         key: BoundsPreferenceKey.self,
                         value: .bounds,

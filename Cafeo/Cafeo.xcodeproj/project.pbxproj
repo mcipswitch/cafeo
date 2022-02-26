@@ -10,7 +10,7 @@
 		9314108F26A08C7400B48044 /* Font+CafeoExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9314108E26A08C7400B48044 /* Font+CafeoExtensions.swift */; };
 		9314109326A08DC500B48044 /* CafeoFontStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9314109226A08DC500B48044 /* CafeoFontStyle.swift */; };
 		9314109B26A09C2500B48044 /* ButtonStyle+CafeoExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9314109A26A09C2500B48044 /* ButtonStyle+CafeoExtensions.swift */; };
-		9314109F26A0A14C00B48044 /* CGFloat+CafeoExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9314109E26A0A14C00B48044 /* CGFloat+CafeoExtensions.swift */; };
+		9314109F26A0A14C00B48044 /* CafeoSpacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9314109E26A0A14C00B48044 /* CafeoSpacing.swift */; };
 		931410A526A0A2F200B48044 /* Image+CafeoExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931410A426A0A2F200B48044 /* Image+CafeoExtensions.swift */; };
 		931BE97925F7DF030030444F /* CafeoIngredientQuantityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931BE97825F7DF030030444F /* CafeoIngredientQuantityButton.swift */; };
 		932102A4260BDE14001FDE3B /* CafeoUnitConversionViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9382B08926028B7F004DCA4B /* CafeoUnitConversionViewTests.swift */; };
@@ -24,6 +24,8 @@
 		935103552615711900C8F490 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 935103572615711900C8F490 /* Localizable.strings */; };
 		936BAAB626A0E9DF0089E43B /* CafeoToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936BAAB526A0E9DF0089E43B /* CafeoToggle.swift */; };
 		936E211D27C6E3C1001830E3 /* CafeoIngredientQuantityButtonDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936E211C27C6E3C1001830E3 /* CafeoIngredientQuantityButtonDomain.swift */; };
+		936E212027C9DDFD001830E3 /* AppState+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936E211E27C9DDE5001830E3 /* AppState+Mock.swift */; };
+		936E212227CA6D5A001830E3 /* CafeoKerning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936E212127CA6D5A001830E3 /* CafeoKerning.swift */; };
 		9375EEE825D1B3900003A323 /* CafeoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9375EEE725D1B3900003A323 /* CafeoApp.swift */; };
 		9375EEEC25D1B3910003A323 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9375EEEB25D1B3910003A323 /* Assets.xcassets */; };
 		9375EEEF25D1B3910003A323 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9375EEEE25D1B3910003A323 /* Preview Assets.xcassets */; };
@@ -37,7 +39,7 @@
 		938E9CFF262933DC003FF53A /* CafeoRatioViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9382B09D26029A58004DCA4B /* CafeoRatioViewTests.swift */; };
 		9391338226150FC50077757A /* HapticFeedbackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9391338126150FC50077757A /* HapticFeedbackManager.swift */; };
 		939DEAE526A3D9460030AE15 /* CafeoSavedPresetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 939DEAE426A3D9460030AE15 /* CafeoSavedPresetsView.swift */; };
-		93A9FDEA25F6911D006D5428 /* Cafeo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A9FDE925F6911D006D5428 /* Cafeo.swift */; };
+		93A9FDEA25F6911D006D5428 /* CafeoMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A9FDE925F6911D006D5428 /* CafeoMainView.swift */; };
 		93B4C76B25F7E53400E479C1 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C76A25F7E53400E479C1 /* Color+Extension.swift */; };
 		93B4C77425F90FC900E479C1 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C77325F90FC900E479C1 /* View+Extension.swift */; };
 		93B4C77D25FA74E900E479C1 /* CafeoUnitConversionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B4C77C25FA74E900E479C1 /* CafeoUnitConversionView.swift */; };
@@ -69,7 +71,7 @@
 		9314108E26A08C7400B48044 /* Font+CafeoExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+CafeoExtensions.swift"; sourceTree = "<group>"; };
 		9314109226A08DC500B48044 /* CafeoFontStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoFontStyle.swift; sourceTree = "<group>"; };
 		9314109A26A09C2500B48044 /* ButtonStyle+CafeoExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ButtonStyle+CafeoExtensions.swift"; sourceTree = "<group>"; };
-		9314109E26A0A14C00B48044 /* CGFloat+CafeoExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+CafeoExtensions.swift"; sourceTree = "<group>"; };
+		9314109E26A0A14C00B48044 /* CafeoSpacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoSpacing.swift; sourceTree = "<group>"; };
 		931410A426A0A2F200B48044 /* Image+CafeoExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+CafeoExtensions.swift"; sourceTree = "<group>"; };
 		931BE97825F7DF030030444F /* CafeoIngredientQuantityButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoIngredientQuantityButton.swift; sourceTree = "<group>"; };
 		93210295260BDDFB001FDE3B /* CafeoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CafeoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -83,6 +85,8 @@
 		9351035B2615711F00C8F490 /* fr-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CA"; path = "fr-CA.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		936BAAB526A0E9DF0089E43B /* CafeoToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoToggle.swift; sourceTree = "<group>"; };
 		936E211C27C6E3C1001830E3 /* CafeoIngredientQuantityButtonDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoIngredientQuantityButtonDomain.swift; sourceTree = "<group>"; };
+		936E211E27C9DDE5001830E3 /* AppState+Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppState+Mock.swift"; sourceTree = "<group>"; };
+		936E212127CA6D5A001830E3 /* CafeoKerning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoKerning.swift; sourceTree = "<group>"; };
 		9375EEE425D1B3900003A323 /* Cafeo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cafeo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9375EEE725D1B3900003A323 /* CafeoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoApp.swift; sourceTree = "<group>"; };
 		9375EEEB25D1B3910003A323 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -100,7 +104,7 @@
 		938D225E262932B6004EFF8D /* CafeoRatioSnapCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoRatioSnapCarousel.swift; sourceTree = "<group>"; };
 		9391338126150FC50077757A /* HapticFeedbackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticFeedbackManager.swift; sourceTree = "<group>"; };
 		939DEAE426A3D9460030AE15 /* CafeoSavedPresetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoSavedPresetsView.swift; sourceTree = "<group>"; };
-		93A9FDE925F6911D006D5428 /* Cafeo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cafeo.swift; sourceTree = "<group>"; };
+		93A9FDE925F6911D006D5428 /* CafeoMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoMainView.swift; sourceTree = "<group>"; };
 		93B4C76A25F7E53400E479C1 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		93B4C77325F90FC900E479C1 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		93B4C77C25FA74E900E479C1 /* CafeoUnitConversionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeoUnitConversionView.swift; sourceTree = "<group>"; };
@@ -149,6 +153,7 @@
 		93210296260BDDFB001FDE3B /* CafeoTests */ = {
 			isa = PBXGroup;
 			children = (
+				936E211E27C9DDE5001830E3 /* AppState+Mock.swift */,
 				9382B09D26029A58004DCA4B /* CafeoRatioViewTests.swift */,
 				9382B09326028C17004DCA4B /* CafeoCoffeeAmountViewTests.swift */,
 				9382B08F26028BC6004DCA4B /* CafeoWaterAmountViewTests.swift */,
@@ -230,7 +235,7 @@
 			children = (
 				9376F42226291E1C00BEABAB /* TCA */,
 				9375EEE725D1B3900003A323 /* CafeoApp.swift */,
-				93A9FDE925F6911D006D5428 /* Cafeo.swift */,
+				93A9FDE925F6911D006D5428 /* CafeoMainView.swift */,
 				93B4C77F25FA751A00E479C1 /* Views */,
 				93B4C76D25F7E53700E479C1 /* Extensions */,
 				93B4C79125FD3A8F00E479C1 /* Keys */,
@@ -255,7 +260,8 @@
 				93B4C7A825FDC2BD00E479C1 /* Double+Extension.swift */,
 				9314109A26A09C2500B48044 /* ButtonStyle+CafeoExtensions.swift */,
 				9314109226A08DC500B48044 /* CafeoFontStyle.swift */,
-				9314109E26A0A14C00B48044 /* CGFloat+CafeoExtensions.swift */,
+				9314109E26A0A14C00B48044 /* CafeoSpacing.swift */,
+				936E212127CA6D5A001830E3 /* CafeoKerning.swift */,
 				93B4C76A25F7E53400E479C1 /* Color+Extension.swift */,
 				93B4C7A225FD62E300E479C1 /* Comparable+Extension.swift */,
 				9314108E26A08C7400B48044 /* Font+CafeoExtensions.swift */,
@@ -447,7 +453,7 @@
 				9391338226150FC50077757A /* HapticFeedbackManager.swift in Sources */,
 				939DEAE526A3D9460030AE15 /* CafeoSavedPresetsView.swift in Sources */,
 				9382B08626013061004DCA4B /* ViewStore+Extension.swift in Sources */,
-				93A9FDEA25F6911D006D5428 /* Cafeo.swift in Sources */,
+				93A9FDEA25F6911D006D5428 /* CafeoMainView.swift in Sources */,
 				937FD32525D2115E0048C406 /* CafeoLockToggleStyle.swift in Sources */,
 				9314109326A08DC500B48044 /* CafeoFontStyle.swift in Sources */,
 				937FD32E25D216830048C406 /* AppState.swift in Sources */,
@@ -455,6 +461,7 @@
 				938D224F262922F5004EFF8D /* CafeoIngredientAmountView.swift in Sources */,
 				93B4C7A925FDC2BD00E479C1 /* Double+Extension.swift in Sources */,
 				93B4C78F25FD3A8C00E479C1 /* BoundsPreferenceKey.swift in Sources */,
+				936E212227CA6D5A001830E3 /* CafeoKerning.swift in Sources */,
 				933C9F8126A490A800EDA6B8 /* CafeoTextAlert.swift in Sources */,
 				93B4C7AF25FDC4A700E479C1 /* Reducer+Extension.swift in Sources */,
 				9314109B26A09C2500B48044 /* ButtonStyle+CafeoExtensions.swift in Sources */,
@@ -463,13 +470,14 @@
 				9351034A26156FAA00C8F490 /* String+Extension.swift in Sources */,
 				93B4C79A25FD3B0300E479C1 /* CafeoCoffeeAmountView.swift in Sources */,
 				93B4C77425F90FC900E479C1 /* View+Extension.swift in Sources */,
-				9314109F26A0A14C00B48044 /* CGFloat+CafeoExtensions.swift in Sources */,
+				9314109F26A0A14C00B48044 /* CafeoSpacing.swift in Sources */,
 				936BAAB626A0E9DF0089E43B /* CafeoToggle.swift in Sources */,
 				93B4C77D25FA74E900E479C1 /* CafeoUnitConversionView.swift in Sources */,
 				933C9F8926A4BB6C00EDA6B8 /* CafeoSavedPresetsDomain.swift in Sources */,
 				933C9F8526A4BB4300EDA6B8 /* CafeoPresetDomain.swift in Sources */,
 				93B4C79725FD3AE300E479C1 /* CafeoWaterAmountView.swift in Sources */,
 				9314108F26A08C7400B48044 /* Font+CafeoExtensions.swift in Sources */,
+				936E212027C9DDFD001830E3 /* AppState+Mock.swift in Sources */,
 				931410A526A0A2F200B48044 /* Image+CafeoExtensions.swift in Sources */,
 				9375EEE825D1B3900003A323 /* CafeoApp.swift in Sources */,
 			);

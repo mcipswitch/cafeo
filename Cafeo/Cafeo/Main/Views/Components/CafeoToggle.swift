@@ -15,18 +15,18 @@ struct CafeoToggle: View {
     var body: some View {
         ZStack {
             self.togglePill
-                .stroke(Color.cafeoShadowDark1, lineWidth: 2)
+                .stroke(Color.cafeoShadowLight, lineWidth: 2)
                 .frame(width: 100, height: self.toggleHeight)
                 .background(
                     self.togglePill
-                        .fill(Color.primaryBackgroundLight)
+                        .fill(Color.cafeoPrimaryBackgroundLight)
 
                         // outer shadow and highlight
-                        .shadow(color: .cafeoShadowDark1, radius: 4, x: 2, y: 2)
-                        .shadow(color: .cafeoHighlight00, radius: 4, x: -2, y: -2)
+                        .shadow(color: .cafeoShadowLight, radius: 4, x: 2, y: 2)
+                        .shadow(color: .cafeoHighlightDark, radius: 4, x: -2, y: -2)
                 )
                 // inner shadow
-                .shadow(color: .cafeoShadowDark1, radius: 2, x: 2, y: 2)
+                .shadow(color: .cafeoShadowLight, radius: 2, x: 2, y: 2)
 
             Circle()
                 .stroke(Color.cafeoOrange, lineWidth: 2)
@@ -34,7 +34,7 @@ struct CafeoToggle: View {
                 .background(
                     Circle()
                         .fill(LinearGradient.cafeoOrange)
-                        .shadow(color: Color.cafeoShadowDark00.opacity(0.6), radius: 14, x: 0, y: 0)
+                        .shadow(color: Color.cafeoShadowDark.opacity(0.6), radius: 14, x: 0, y: 0)
                 )
                 .offset(x: self.offset)
                 .animation(Animation.timingCurve(0.60, 0.80, 0, 0.96), value: self.offset)
