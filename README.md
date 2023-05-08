@@ -7,4 +7,5 @@ Cafeo is an open-source coffee ratio calculator designed for iOS. Cafeo makes it
 ![apps_cafeo_mockup_01](https://user-images.githubusercontent.com/54000453/236854380-78c60d94-f937-4bc4-b8aa-6b4f18a146be.jpg)
 
 # Requirements
+- Xcode 14.2 or later
 - iOS 16.2 or later
