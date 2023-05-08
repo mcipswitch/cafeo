@@ -11,36 +11,55 @@ import XCTest
 
 class CafeoRatioViewTests: XCTestCase {
 
-    func testActiveRatioIdxChanged() throws {
-        // Setup
+    func testActiveRatioIdxChangedWithCoffeeLocked() throws {
         let store = TestStore(
-            initialState: .mock,
+            initialState: .mockCoffeeLocked,
             reducer: appReducer,
             environment: AppEnvironment(
                 mainQueue: .failing
             )
         )
-
-        // Test
+        let coffeeAmount = AppState.mockWaterLocked.settings.coffeeAmount
         store.send(.setActiveRatioIdx(index: 15)) {
-            // Validate
             $0.settings.activeRatioIdx = 15
-            $0.settings.waterAmount = $0.settings.coffeeAmount / $0.ratio
-            $0.settings.coffeeAmount = $0.settings.waterAmount * $0.ratio
-            XCTAssertEqual($0.activeRatioDenominator, 16)
+            $0.settings.waterAmount = coffeeAmount / $0.ratio
+            $0.settings.coffeeAmount = coffeeAmount
+            XCTAssertEqual($0.ratio, 1 / 16)
         }
-
         store.receive(.generateImpact(style: .medium))
 
-        // Test
         store.send(.setActiveRatioIdx(index: 19)) {
-            // Validate
             $0.settings.activeRatioIdx = 19
-            $0.settings.waterAmount = $0.settings.coffeeAmount / $0.ratio
-            $0.settings.coffeeAmount = $0.settings.waterAmount * $0.ratio
-            XCTAssertEqual($0.activeRatioDenominator, 20)
+            $0.settings.waterAmount = coffeeAmount / $0.ratio
+            $0.settings.coffeeAmount = coffeeAmount
+            XCTAssertEqual($0.ratio, 1 / 20)
         }
+        store.receive(.generateImpact(style: .medium))
+    }
 
+    func testActiveRatioIdxChangedWithWaterLocked() throws {
+        let store = TestStore(
+            initialState: .mockWaterLocked,
+            reducer: appReducer,
+            environment: AppEnvironment(
+                mainQueue: .failing
+            )
+        )
+        let waterAmount = AppState.mockWaterLocked.settings.waterAmount
+        store.send(.setActiveRatioIdx(index: 15)) {
+            $0.settings.activeRatioIdx = 15
+            $0.settings.waterAmount = waterAmount
+            $0.settings.coffeeAmount = waterAmount * $0.ratio
+            XCTAssertEqual($0.ratio, 1 / 16)
+        }
+        store.receive(.generateImpact(style: .medium))
+
+        store.send(.setActiveRatioIdx(index: 19)) {
+            $0.settings.activeRatioIdx = 19
+            $0.settings.waterAmount = waterAmount
+            $0.settings.coffeeAmount = waterAmount * $0.ratio
+            XCTAssertEqual($0.ratio, 1 / 20)
+        }
         store.receive(.generateImpact(style: .medium))
     }
 }

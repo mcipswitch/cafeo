@@ -6,7 +6,8 @@
   
 */
 
-"ratio" = "ratio";
-"coffee" = "coffee";
-"water" = "water";
-"conversion" = "conversion";
+"CommonStrings.coffee" = "coffee";
+"CommonStrings.water" = "water";
+"CommonStrings.conversion" = "conversion";
+"CommonStrings.abbreviatedGrams" = "gr";
+"CommonStrings.abbreviatedOunces" = "oz";
